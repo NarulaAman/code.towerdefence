@@ -33,7 +33,7 @@ public class LevelRenderer extends JPanel {
 					
 				}
 				else if (tile.getType() == Tile.TileType.ENEMY_PATH) {
-					g.setColor(Color.BLACK);
+					g.setColor(Color.PINK);
 				}
 				g.drawRect(x*TileSize , y*TileSize, TileSize, TileSize);
 			}
