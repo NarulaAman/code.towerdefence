@@ -29,11 +29,11 @@ public class LevelRenderer extends JPanel {
 			for (int y = 0; y < map.getHeight(); ++y) {
 				Tile tile = map.getTile(x, y);
 				if (tile == null) {
-					g.setColor(Color.BLACK);
+					g.setColor(Color.RED);
 					
 				}
 				else if (tile.getType() == Tile.TileType.ENEMY_PATH) {
-					g.setColor(Color.RED);
+					g.setColor(Color.BLACK);
 				}
 				g.drawRect(x*TileSize , y*TileSize, TileSize, TileSize);
 			}
