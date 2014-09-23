@@ -9,8 +9,12 @@ import java.io.ObjectOutputStream;
 
 import ca.concordia.soen6441.logic.Map;
 
-public class MapPersister {
+public class MapPersister implements IMapPersister {
 	
+	/* (non-Javadoc)
+	 * @see ca.concordia.soen6441.io.IMapPersister#save(ca.concordia.soen6441.logic.Map, java.io.File)
+	 */
+	@Override
 	public void save(Map map, File file) throws IOException {
 		FileOutputStream outPut = new FileOutputStream(file);
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
@@ -18,6 +22,10 @@ public class MapPersister {
 		oos.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see ca.concordia.soen6441.io.IMapPersister#load(java.io.File)
+	 */
+	@Override
 	public Map load(File file) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
