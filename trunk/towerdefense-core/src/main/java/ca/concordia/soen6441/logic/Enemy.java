@@ -38,9 +38,7 @@ public class Enemy {
 		movingLogic.update(milisecondsFromLastUpdate);
 	}
 
-	public Coordinate getCoordinate() {
-		return coordinate;
-	}
+
 	
 
 	void setCoordinate(Coordinate coordinate) {
