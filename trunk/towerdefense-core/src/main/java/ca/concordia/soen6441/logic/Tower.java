@@ -42,6 +42,11 @@ public class Tower {
 		return 0; //new Point2d(this.coordinate).distance(new Point2d(coordinate));
 	}
 
+	/**
+	 * Returns the damage done by the tower
+	 * 
+	 * @return the damage done by the tower
+	 */
 	public Damage getDamage() {
 		return damage;
 	}
