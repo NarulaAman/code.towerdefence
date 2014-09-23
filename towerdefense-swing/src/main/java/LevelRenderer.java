@@ -24,7 +24,7 @@ public class LevelRenderer extends JPanel {
 
 	@Override
 	public void paint(Graphics g) {
-		Map map = level.getMap();
+		Map map = level.getMap(); 
 		for (int x = 0; x < map.getWidth(); ++x) {
 			for (int y = 0; y < map.getHeight(); ++y) {
 				Tile tile = map.getTile(x, y);
