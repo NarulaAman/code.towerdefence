@@ -10,6 +10,9 @@ public class GridTiles extends JButton{
 	
 	
 	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private Color pressedTileColor;
 	private GridCoordinates tileCoordinate;
