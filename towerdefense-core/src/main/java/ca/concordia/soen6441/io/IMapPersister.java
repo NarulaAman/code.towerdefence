@@ -7,9 +7,9 @@ import ca.concordia.soen6441.logic.Map;
 
 public interface IMapPersister {
 
-	public abstract void save(Map map, File file) throws IOException;
+	public void save(Map map, File file) throws IOException;
 
-	public abstract Map load(File file) throws IOException,
+	public Map load(File file) throws IOException,
 			ClassNotFoundException;
 
 }

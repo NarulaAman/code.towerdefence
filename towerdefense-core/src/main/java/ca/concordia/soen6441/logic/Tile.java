@@ -9,10 +9,8 @@ public class Tile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public enum TileType {
-		NO_TILE,
 		ENEMY_PATH,
-		TOWER_FREE_SLOT,
-		BLOCKED
+		TOWER_FREE_SLOT
 	}
 	
 	final TileType type;
