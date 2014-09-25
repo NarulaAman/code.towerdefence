@@ -7,16 +7,35 @@ import ca.concordia.soen6441.logic.primitives.Damage;
 public class Tower {
 	
 	 
+	// ths is shown in the tower inspection window
+	
+	int damage;
+	
+	int buyCost;
+	/**
+	 * Percentage of refund rate
+	 */
+	int refundRate;
+	
+	int range;
+
+	// end of what is shown in the tower inspection window
+	
 	final Coordinate coordinate;
 	
-	final Damage damage;
+	public int getX() {
+		return coordinate.getX();
+	}
 	
-	final long shootEveryMiliseconds = 500;
-	long shotMilisecondsAgo = Long.MAX_VALUE / 2;
-	
-	final double rangeRadius = 3f;
+	public int getY() {
+		return coordinate.getX();
+	}
 
-	public Tower(Coordinate coordinate, Damage damage) {
+	public int getRange() {
+		return range;
+	}
+
+	public Tower(Coordinate coordinate, int damage) {
 		super();
 		this.coordinate = coordinate;
 		this.damage = damage;
@@ -27,12 +46,12 @@ public class Tower {
 	}
 
 	public void update(long milisecondsFromLastUpdate) {
-		shotMilisecondsAgo += milisecondsFromLastUpdate;
+//		shotMilisecondsAgo += milisecondsFromLastUpdate;
 	}
 	
-	public boolean inRange(Coordinate otherCoordinate) {
-		return distance(this.coordinate, otherCoordinate) < rangeRadius;
-	}
+//	public boolean inRange(Coordinate otherCoordinate) {
+////		return distance(this.coordinate, otherCoordinate) < rangeRadius;
+//	}
 	
 	public double distanceTo(Coordinate otherCoordinate) {
 		return distance(this.coordinate, otherCoordinate);
@@ -47,24 +66,17 @@ public class Tower {
 	 * 
 	 * @return the damage done by the tower
 	 */
-	public Damage getDamage() {
+	public int getDamage() {
 		return damage;
 	}
 
-	public boolean canShoot() {
-		return shotMilisecondsAgo > shootEveryMiliseconds;
+	public int getBuyCost() {
+		return buyCost;
 	}
 
-	public double getRangeRadius() {
-		return rangeRadius;
+	public int getRefundRate() {
+		return refundRate;
 	}
-
-	public void shoot(Enemy enemy) {
-		shotMilisecondsAgo = 0;
-		enemy.hitWith(getDamage());
-	}
-	
-	
 	
 	
 	
