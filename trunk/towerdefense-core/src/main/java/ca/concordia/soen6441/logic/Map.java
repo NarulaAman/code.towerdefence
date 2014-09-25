@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 public class Map implements Serializable {
@@ -36,6 +37,14 @@ public class Map implements Serializable {
 		for (int i = 0; i < grid.length; ++i) {
 			grid[i] = new Tile[height];
 		}
+		
+		for(int x=0;x< width; x++ )
+        {
+        	for(int y=0;y<height;y++)
+        	{
+        		grid[x][y] = new Tile(Tile.TileType.TOWER_FREE_SLOT);
+        	}
+        }
 	}
 	
 	public void add(Tile tile, Coordinate coordinate) {
@@ -125,6 +134,11 @@ public class Map implements Serializable {
 
 	public int getHeight() {
 		return height;
+	}
+
+	public void setTile(int x, int y, TileType tileType) {
+		grid[x][y] = new Tile(tileType);
+		
 	}
 
 	
