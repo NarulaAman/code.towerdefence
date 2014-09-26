@@ -35,7 +35,7 @@ public class GridPanel extends JPanel implements MouseListener {
 //		setLayout(new GridLayout(8,8));
 //	    gridTiles = new GridTiles[8][8];
 	        
-		GridLayout grid = new GridLayout(map.getWidth(), map.getHeight());
+		GridLayout grid = new GridLayout(map.getWidth(), map.getHeight(),1,1);
 		setLayout(grid);
 		
 		gridTiles = new GridTiles[map.getWidth()][map.getHeight()];
@@ -54,7 +54,7 @@ public class GridPanel extends JPanel implements MouseListener {
 	        		}
 	        		else if (tile.getType() == Tile.TileType.TOWER_FREE_SLOT) 
 	        		{
-	        			gridTiles[x][y].setBackground(SCENERY_COLOR);
+	        			gridTiles[x][y].setIcon(new ImageIcon("grass.jpg"));
 	        		}
 	        		else
 	        		{
@@ -87,9 +87,11 @@ public class GridPanel extends JPanel implements MouseListener {
 		int y = source.getTileYCoordinate();
 		System.out.print(y);
 		
+		
 		map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 		//System.out.print(source.getTileCoordinate().getY());
-       source.setBackground(ENEMY_PATH_COLOR);	
+		
+        source.setIcon(new ImageIcon("tilepath.jpg"));
         //source.setIcon(new ImageIcon("imageicon1.jpg"));
         mouseEnterKill = false;
         
@@ -131,15 +133,15 @@ public class GridPanel extends JPanel implements MouseListener {
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(mouseEnterKill){
-		GridTiles source = (GridTiles)e.getSource();
-	    //System.out.print("X : "+e.   );
-		System.out.print(source.getTileXCoordinate());
-		System.out.print(source.getTileYCoordinate());
-		//System.out.print(source.getTileCoordinate().getY());
-       // source.setBackground(Color.cyan);	
-        source.setIcon(new ImageIcon("imageicon1.jpg"));
-	}
+//		if(mouseEnterKill){
+//		GridTiles source = (GridTiles)e.getSource();
+//	    //System.out.print("X : "+e.   );
+//		System.out.print(source.getTileXCoordinate());
+//		System.out.print(source.getTileYCoordinate());
+//		//System.out.print(source.getTileCoordinate().getY());
+//       // source.setBackground(Color.cyan);	
+//        source.setIcon(new ImageIcon("imageicon1.jpg"));
+//	}
         
 		//System.out.println(source.getText());
 	}
