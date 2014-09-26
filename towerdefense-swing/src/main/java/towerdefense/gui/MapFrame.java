@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -19,13 +20,22 @@ public class MapFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JPanel gridPanel = null;
 	JPanel buttonPanel = null;
+	DialogPanel dialogPanel = null;
 	
 	public MapFrame()
 	{
 		setVisible(true);
 		
+		dialogPanel = new DialogPanel();
+		JOptionPane.showConfirmDialog(null, dialogPanel, 
+	               "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+		 
+		int xVal =  dialogPanel.getXField();
+		int yVal =  dialogPanel.getYField();
+		
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		gridPanel = new GridPanel(new Map(10, 10));
+		gridPanel = new GridPanel(new Map(xVal, yVal));
 		buttonPanel = new ButtonPanel();
 		add(gridPanel,BorderLayout.CENTER);
 		add(buttonPanel,BorderLayout.EAST);
