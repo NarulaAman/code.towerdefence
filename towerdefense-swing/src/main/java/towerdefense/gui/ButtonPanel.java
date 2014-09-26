@@ -35,7 +35,7 @@ public class ButtonPanel extends JPanel {
 		
 		
 		entry_button.setBackground(new Color(215, 19, 19));
-		
+		exit_button.addActionListener(new ExitButton());
 		add(new_button);
 		add(entry_button);
 		add(exit_button);
