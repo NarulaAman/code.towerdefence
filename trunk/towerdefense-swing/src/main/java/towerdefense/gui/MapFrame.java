@@ -1,4 +1,7 @@
 package towerdefense.gui;
+import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -15,13 +18,17 @@ public class MapFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel gridPanel = null;
+	JPanel buttonPanel = null;
 	
 	public MapFrame()
 	{
 		setVisible(true);
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		gridPanel = new GridPanel(new Map(10, 10));
-		add(gridPanel);
+		buttonPanel = new ButtonPanel();
+		add(gridPanel,BorderLayout.CENTER);
+		add(buttonPanel,BorderLayout.EAST);
 		pack();
 	}
 
