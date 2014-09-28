@@ -32,11 +32,11 @@ public class Map implements Serializable {
 		super();
 		this.width = width;
 		this.height = height;
-		this.grid = new Tile[width][];
+		this.grid = new Tile[width][height];
 		
-		for (int i = 0; i < grid.length; ++i) {
-			grid[i] = new Tile[height];
-		}
+//		for (int i = 0; i < grid.length; ++i) {
+//			grid[i] = new Tile[];
+//		}
 		
 		for(int x=0;x< width; x++ )
         {
