@@ -12,22 +12,22 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import ca.concordia.soen6441.io.MapPersister;
+import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 @FixMethodOrder(MethodSorters.JVM)
 public class TestMapPersister {
 	
-	private static final String MAP_DATA_FILENAME = "map.data";
+	private static final String MAP_DATA_FILENAME = "testMapFilename.data";
 	
-	MapPersister mapPersister = new MapPersister();
+	MapJavaSerializationPersister mapPersister = new MapJavaSerializationPersister();
 	static Map map = new Map(32, 32);
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		map.add(new Tile(TileType.ENEMY_PATH), new Coordinate(1, 2));
-		map.add(new Tile(TileType.ENEMY_PATH), new Coordinate(5, 6));
+		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(1, 2));
+		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(5, 6));
 		
 	}
 

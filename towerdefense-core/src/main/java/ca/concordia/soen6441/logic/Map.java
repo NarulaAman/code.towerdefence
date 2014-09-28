@@ -9,77 +9,59 @@ import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 public class Map implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	final Tile grid[][];
-	
+
 	final int width;
 	final int height;
-	
+
 	Coordinate startTile;
 	Coordinate endTile;
-	
-	
+
 	// REMOVE THIS HACK
-	
+
 	public List<Coordinate> pathCoordinates = new ArrayList<Coordinate>();
-	
 
 	public Map(int width, int height) {
 		super();
 		this.width = width;
 		this.height = height;
 		this.grid = new Tile[width][height];
-		
-//		for (int i = 0; i < grid.length; ++i) {
-//			grid[i] = new Tile[];
-//		}
-		
-		for(int x=0;x< width; x++ )
-        {
-        	for(int y=0;y<height;y++)
-        	{
-        		grid[x][y] = new Tile(Tile.TileType.TOWER_FREE_SLOT);
-        	}
-        }
-	}
-	
-	public void add(Tile tile, Coordinate coordinate) {
-		if (tile.getType() == Tile.TileType.ENEMY_PATH)
-		{
-			pathCoordinates.add(coordinate);
+
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				grid[x][y] = new Tile(Tile.TileType.TOWER_FREE_SLOT);
+			}
 		}
+	}
+
+	public void set(Tile tile, Coordinate coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = tile;
-		
+
 	}
-	
-	public boolean hasTile(Coordinate coordinate) {
-		
-		return grid[coordinate.getX()][coordinate.getY()] != null;
-	}
-	
-	
+
 	public Tile getTile(int x, int y) {
 		return grid[x][y];
 	}
-	
-//	public boolean canPlace(Tower tower, Coordinate coordinate) {
-//		Tile tile = grid[coordinate.getX()][coordinate.getY()];
-//		return tile == null ? false :  
-//	}
-	
-	public boolean outOfBounds(Coordinate coordinate) {
-		return coordinate.getX() < 0 || coordinate.getX() > width ||
-			coordinate.getY() < 0 || coordinate.getY() > height;
+
+	public boolean canPlace(Tower tower, int x, int y) {
+		Tile tile = grid[x][y];
+		return tile.getType() == Tile.TileType.TOWER_FREE_SLOT;
 	}
-	
+
+	public boolean outOfBounds(Coordinate coordinate) {
+		return coordinate.getX() < 0 || coordinate.getX() > width
+				|| coordinate.getY() < 0 || coordinate.getY() > height;
+	}
+
 	public void remove(Coordinate coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = null;
 	}
-	
+
 	public boolean isValid() {
 		return true;
 	}
@@ -138,9 +120,7 @@ public class Map implements Serializable {
 
 	public void setTile(int x, int y, TileType tileType) {
 		grid[x][y] = new Tile(tileType);
-		
+
 	}
 
-	
-	
 }
