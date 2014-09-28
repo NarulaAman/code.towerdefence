@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ca.concordia.soen6441.logic.Level;
+import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
@@ -13,9 +13,9 @@ import ca.concordia.soen6441.logic.primitives.Coordinate;
 public class LevelRenderer extends JPanel {
 
 	private static final int TileSize = 10;
-	final Level level;
+	final GamePlay level;
 
-	public LevelRenderer(Level level) {
+	public LevelRenderer(GamePlay level) {
 		super();
 		setVisible(true);
 		this.level = level;
@@ -60,7 +60,7 @@ public class LevelRenderer extends JPanel {
 		for (int x = 0; x < map.getWidth(); ++x) {
 //			if (map.outOfBounds(new Coordinate(x, x)) == false)
 //			{
-				map.add(path, new Coordinate(x, x));
+				map.set(path, new Coordinate(x, x));
 //			}
 //			if (map.outOfBounds(new Coordinate(x+1, x)) == false)
 //			{
@@ -81,7 +81,7 @@ public class LevelRenderer extends JPanel {
 //			}
 //		}
 		
-		Level level = new Level(map);
+		GamePlay level = new GamePlay(map, 1000);
         
         
         JPanel label = new LevelRenderer(level);

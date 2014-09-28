@@ -16,9 +16,10 @@ public class GamePlay implements Serializable {
 
 	int currency;
 
-	public GamePlay(Map map) {
+	public GamePlay(Map map, int currency) {
 		super();
 		this.map = map;
+		this.currency = currency;
 	}
 
 	boolean buy(Tower tower) {
@@ -32,11 +33,21 @@ public class GamePlay implements Serializable {
 		}
 	}
 
+	
+	
+
+	public int getCurrency() {
+		return currency;
+	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
+	}
+	
+	public int totalTowers() {
+		return towers.size();
 	}
 
 	public Map getMap() {
