@@ -2,15 +2,17 @@ package towerdefense.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
-import ca.concordia.soen6441.logic.Tile.TileType;
 
 
 public class GridPanel extends JPanel implements MouseListener {
@@ -19,10 +21,12 @@ public class GridPanel extends JPanel implements MouseListener {
 	 * 
 	 */
 	
-	private static Color ENEMY_PATH_COLOR = Color.RED;
-	private static Color SCENERY_COLOR = Color.green;
+	private static final Icon ENEMY_PATH_ICON = new ImageIcon("grass.jpg");
+	private static final Icon SCENERY_ICON = new ImageIcon("tilepath.jpg");
+	
 	private static final long serialVersionUID = 1L;
 	private GridTiles[][] gridTiles;
+	
 	private boolean mouseEnterKill = true;
 	
 	Map map;
@@ -32,16 +36,14 @@ public class GridPanel extends JPanel implements MouseListener {
 		this.map = map;
 		setPreferredSize(new Dimension(480, 640));
 		setVisible(true);
-//		setLayout(new GridLayout(8,8));
-//	    gridTiles = new GridTiles[8][8];
 	        
 		GridLayout grid = new GridLayout(map.getWidth(), map.getHeight(),1,1);
 		setLayout(grid);
 		
 		gridTiles = new GridTiles[map.getWidth()][map.getHeight()];
-	        for(int x=0;x< gridTiles.length; x++ )
+	        for(int x = 0; x < map.getWidth(); x++)
 	        {
-	        	for(int y=0;y<gridTiles.length;y++)
+	        	for(int y = 0; y < map.getHeight(); y++)
 	        	{
 	        		gridTiles[x][y] = new GridTiles();
 	        		gridTiles[x][y].setOpaque(true);
@@ -50,11 +52,11 @@ public class GridPanel extends JPanel implements MouseListener {
 	        		Tile tile = map.getTile(x, y);
 	        		if (tile.getType() == Tile.TileType.ENEMY_PATH)
 	        		{
-	        			gridTiles[x][y].setForeground(ENEMY_PATH_COLOR);
+	        			gridTiles[x][y].setIcon(SCENERY_ICON);
 	        		}
 	        		else if (tile.getType() == Tile.TileType.TOWER_FREE_SLOT) 
 	        		{
-	        			gridTiles[x][y].setIcon(new ImageIcon("grass.jpg"));
+	        			gridTiles[x][y].setIcon(ENEMY_PATH_ICON);
 	        		}
 	        		else
 	        		{
@@ -81,22 +83,20 @@ public class GridPanel extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		GridTiles source = (GridTiles)e.getSource();
-	    //System.out.print("X : "+e.   );
+
 		int x = source.getTileXCoordinate();
-		System.out.print(x);
 		int y = source.getTileYCoordinate();
-		System.out.print(y);
+		System.out.println("Grid was clicked on [ X: "+x+" ][ Y: "+y+ " ] with event: " + e.toString());
 		
 		
 		map.setTile(x, y, Tile.TileType.ENEMY_PATH);
-		//System.out.print(source.getTileCoordinate().getY());
+
 		
-        source.setIcon(new ImageIcon("tilepath.jpg"));
-        //source.setIcon(new ImageIcon("imageicon1.jpg"));
+        source.setIcon(SCENERY_ICON);
+
         mouseEnterKill = false;
         
-        
-		//System.out.println(source.getText());
+   
 		
 	}
 
