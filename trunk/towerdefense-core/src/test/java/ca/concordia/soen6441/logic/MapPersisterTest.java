@@ -17,7 +17,7 @@ import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 @FixMethodOrder(MethodSorters.JVM)
-public class TestMapPersister {
+public class MapPersisterTest {
 	
 	private static final String MAP_DATA_FILENAME = "testMapFilename.data";
 	
