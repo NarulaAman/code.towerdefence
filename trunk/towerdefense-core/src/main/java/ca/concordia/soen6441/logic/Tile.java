@@ -24,10 +24,6 @@ public class Tile implements Serializable {
 		return type;
 	}
 
-	public boolean canHave(Enemy enemy) {
-		return getType() == TileType.ENEMY_PATH;
-	}
-
 
 
 
