@@ -26,8 +26,13 @@ public class TestMapPersister {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(1, 2));
 		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(5, 6));
+		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(2, 27));
+		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(5, 8));
+		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(3, 13));
+		map.set(new Tile(TileType.ENEMY_PATH), new Coordinate(15, 26));
 		
 	}
 
