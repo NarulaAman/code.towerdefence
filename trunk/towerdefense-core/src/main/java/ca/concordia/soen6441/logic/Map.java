@@ -19,9 +19,9 @@ public class Map implements Serializable {
 	final int width;
 	final int height;
 
-	Coordinate startTile;
-	Coordinate endTile;
-
+	private Coordinate startTile;
+	private Coordinate endTile;
+	
 	// REMOVE THIS HACK
 
 	public List<Coordinate> pathCoordinates = new ArrayList<Coordinate>();
