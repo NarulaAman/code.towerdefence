@@ -19,7 +19,7 @@ import ca.concordia.soen6441.logic.primitives.Coordinate;
 @FixMethodOrder(MethodSorters.JVM)
 public class MapPersisterTest {
 	
-	private static final String MAP_DATA_FILENAME = "testMapFilename.data";
+	private static final String MAP_DATA_FILENAME = "testMapName";
 	
 	MapJavaSerializationPersister mapPersister = new MapJavaSerializationPersister();
 	static Map map = new Map(32, 32);
@@ -52,18 +52,18 @@ public class MapPersisterTest {
 	
 	@Test(expected=IOException.class)
 	public final void testLoadWithNoExistantFile() throws ClassNotFoundException, IOException {
-		Map map2 = mapPersister.load(new File(MAP_DATA_FILENAME));
+		Map map2 = mapPersister.load(MAP_DATA_FILENAME);
 		Assert.assertTrue(map2.equals(map));
 	}
 
 	@Test
 	public final void testSave() throws IOException, ClassNotFoundException {
-		mapPersister.save(map, new File(MAP_DATA_FILENAME));
+		mapPersister.save(map, MAP_DATA_FILENAME);
 	}
 
 	@Test
 	public final void testLoad() throws ClassNotFoundException, IOException {
-		Map map2 = mapPersister.load(new File(MAP_DATA_FILENAME));
+		Map map2 = mapPersister.load(MAP_DATA_FILENAME);
 		Assert.assertTrue(map2.equals(map));
 	}
 
