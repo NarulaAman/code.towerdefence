@@ -22,19 +22,28 @@ public class GamePlay implements Serializable {
 		this.currency = currency;
 	}
 
-	boolean buy(Tower tower) {
+	public boolean buy(Tower tower) {
 		if (tower.getBuyCost() <= currency) {
 			currency -= tower.getBuyCost();
 			towers.add(tower);
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
 
-	
-	
+	/**
+	 * Tries to upgrade the tower. Returns true if the upgrade happened, false
+	 * if not
+	 * 
+	 * @param tower
+	 *            to be upgraded
+	 * @return true if the upgrade happened, false if not
+	 */
+	public boolean upgrade(Tower tower) {
+		// implement upgrade logic here
+		return false;
+	}
 
 	public int getCurrency() {
 		return currency;
@@ -45,7 +54,7 @@ public class GamePlay implements Serializable {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
-	
+
 	public int totalTowers() {
 		return towers.size();
 	}
