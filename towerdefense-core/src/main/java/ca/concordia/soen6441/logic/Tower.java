@@ -8,10 +8,11 @@ public class Tower {
 	
 	 
 	// ths is shown in the tower inspection window
-	
+
 	int damage;
 	
 	int buyCost;
+	
 	/**
 	 * Percentage of refund rate
 	 */
@@ -78,7 +79,26 @@ public class Tower {
 		return refundRate;
 	}
 	
+	public int getUpgradeCost() {
+		return 100;
+	}
 	
+	/**
+	 * Returns true if the tower can be upgraded, false if not
+	 * 
+	 * @return true if the tower can be upgraded, false if not
+	 */
+	public boolean canUpgrade() {
+		return true;
+	}
+	
+	public boolean doUpgrade() {
+		return true;
+	}
+	
+	public int getLevel() {
+		return 0;
+	}
 	
 	
 }

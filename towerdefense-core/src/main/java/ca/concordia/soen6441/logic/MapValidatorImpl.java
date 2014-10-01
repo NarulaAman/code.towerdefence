@@ -3,7 +3,7 @@ package ca.concordia.soen6441.logic;
 public class MapValidatorImpl implements MapValidator {
 
 	@Override
-	public boolean isValid(Map map) {
+	public boolean isValid(Map map, StringBuilder messageIfNotValid) {
 		
 		
 		if (mapHasNoEnd(map))
