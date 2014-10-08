@@ -26,14 +26,27 @@ public class MapFrame extends JFrame {
 	public MapFrame()
 	{
 		setVisible(true);
+		int xVal;
+		int yVal;
 		
 		dialogPanel = new DialogPanel();
 		JOptionPane.showConfirmDialog(null, dialogPanel, 
 	               "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
 		 
-		int xVal =  dialogPanel.getXField();
-		int yVal =  dialogPanel.getYField();
+		 xVal =  dialogPanel.getXField();
+		 yVal =  dialogPanel.getYField();
 		
+		while(xVal < 10 || yVal < 10 || xVal > 20 || yVal > 20)
+		{
+		
+			JOptionPane.showMessageDialog(null, "Please enter values between 5 and 20", "Warning", JOptionPane.OK_OPTION);
+		
+			JOptionPane.showConfirmDialog(null, dialogPanel, 
+            "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+			
+			 xVal =  dialogPanel.getXField();
+			 yVal =  dialogPanel.getYField();
+		}
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		gridPanel = new GridPanel(new Map(xVal, yVal));
