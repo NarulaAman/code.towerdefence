@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -19,12 +20,22 @@ public class ButtonPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JButton new_button;
 	private JButton entry_button;
 	private JButton exit_button;
 	private JButton path_button;
 	private JButton scenery_button;
 	private JButton save_button;
+	
+	private static final Icon NEW_ICON = new ImageIcon("newb.png");
+	private static final Icon ENTRY_ICON = new ImageIcon("entry.png");
+	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
+	private static final Icon PATH_ICON = new ImageIcon("path.png");
+	private static final Icon SCENERY_BUTTON_ICON = new ImageIcon("scenery.png");
+	private static final Icon SAVE_ICON = new ImageIcon("save.png");
+	
+	
 	public static boolean path = false;
 	public static boolean scenery = false;
 
@@ -35,12 +46,12 @@ public class ButtonPanel extends JPanel {
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		new_button = new JButton(new ImageIcon("newb.png"));
-		entry_button = new JButton(new ImageIcon("entry.png"));
-		exit_button = new JButton(new ImageIcon("exit.png"));
-		path_button = new JButton(new ImageIcon("path.png"));
-		scenery_button = new JButton(new ImageIcon("scenery.png"));
-		save_button = new JButton(new ImageIcon("save.png"));
+		new_button = new JButton(NEW_ICON);
+		entry_button = new JButton(ENTRY_ICON );
+		exit_button = new JButton(EXIT_ICON);
+		path_button = new JButton(PATH_ICON);
+		scenery_button = new JButton(SCENERY_BUTTON_ICON);
+		save_button = new JButton(SAVE_ICON);
 		
 		
 		new_button.addActionListener(new ActionListener() {
