@@ -21,6 +21,7 @@ public class MapFrame extends JFrame {
 	JPanel gridPanel = null;
 	JPanel buttonPanel = null;
 	DialogPanel dialogPanel = null;
+	TowerPanel towerPanel = null;
 	
 	public MapFrame()
 	{
@@ -37,8 +38,13 @@ public class MapFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		gridPanel = new GridPanel(new Map(xVal, yVal));
 		buttonPanel = new ButtonPanel();
+		
+		
+		
 		add(gridPanel,BorderLayout.CENTER);
 		add(buttonPanel,BorderLayout.EAST);
+		
+		//add(towerPanel,BorderLayout.SOUTH);
 		pack();
 	}
 

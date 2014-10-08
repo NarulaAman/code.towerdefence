@@ -21,13 +21,13 @@ public class GridPanel extends JPanel implements MouseListener {
 	 * 
 	 */
 	
-	private static final Icon ENEMY_PATH_ICON = new ImageIcon("grass.jpg");
-	private static final Icon SCENERY_ICON = new ImageIcon("tilepath.jpg");
+	private static final Icon ENEMY_PATH_ICON = new ImageIcon("tilepath.jpg");
+	private static final Icon SCENERY_ICON = new ImageIcon("grass.jpg");
 	
 	private static final long serialVersionUID = 1L;
 	private GridTiles[][] gridTiles;
 	
-	private boolean mouseEnterKill = true;
+	//private boolean mouseEnterKill = true;
 	
 	Map map;
 	
@@ -52,11 +52,11 @@ public class GridPanel extends JPanel implements MouseListener {
 	        		Tile tile = map.getTile(x, y);
 	        		if (tile.getType() == Tile.TileType.ENEMY_PATH)
 	        		{
-	        			gridTiles[x][y].setIcon(SCENERY_ICON);
+	        			gridTiles[x][y].setIcon(ENEMY_PATH_ICON);
 	        		}
 	        		else if (tile.getType() == Tile.TileType.TOWER_FREE_SLOT) 
 	        		{
-	        			gridTiles[x][y].setIcon(ENEMY_PATH_ICON);
+	        			gridTiles[x][y].setIcon(SCENERY_ICON);
 	        		}
 	        		else
 	        		{
@@ -88,13 +88,21 @@ public class GridPanel extends JPanel implements MouseListener {
 		int y = source.getTileYCoordinate();
 		System.out.println("Grid was clicked on [ X: "+x+" ][ Y: "+y+ " ] with event: " + e.toString());
 		
-		
+		if(ButtonPanel.path){
 		map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 
 		
-        source.setIcon(SCENERY_ICON);
+        source.setIcon(ENEMY_PATH_ICON);}
+		
+		if(ButtonPanel.scenery)
+		{
+			map.setTile(x, y, Tile.TileType.TOWER_FREE_SLOT);
 
-        mouseEnterKill = false;
+			
+	        source.setIcon(SCENERY_ICON);
+		}
+
+        //mouseEnterKill = false;
         
    
 		
