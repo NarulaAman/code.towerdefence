@@ -10,7 +10,7 @@ public class Tile implements Serializable {
 
 	public enum TileType {
 		ENEMY_PATH,
-		TOWER_FREE_SLOT
+		SCENERY
 	}
 	
 	final TileType type;
