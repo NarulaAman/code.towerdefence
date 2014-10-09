@@ -42,7 +42,7 @@ public class Map extends Observable implements Serializable {
 
 	public void set(Tile tile, Coordinate coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = tile;
-		notifyObservers();
+// TODO: remove this method
 
 	}
 
@@ -122,6 +122,8 @@ public class Map extends Observable implements Serializable {
 
 	public void setTile(int x, int y, TileType tileType) {
 		grid[x][y] = new Tile(tileType);
+		setChanged();
+		notifyObservers();
 
 	}
 
