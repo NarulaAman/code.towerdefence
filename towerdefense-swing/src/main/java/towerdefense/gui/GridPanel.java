@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -15,7 +17,7 @@ import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 
 
-public class GridPanel extends JPanel implements MouseListener {
+public abstract class GridPanel extends JPanel implements Observer, MouseListener {
 
 	/**
 	 * 
@@ -34,6 +36,7 @@ public class GridPanel extends JPanel implements MouseListener {
 	public GridPanel(Map map)
 	{
 		this.map = map;
+		map.addObserver(this);
 		setPreferredSize(new Dimension(480, 640));
 		setVisible(true);
 	        
@@ -54,7 +57,7 @@ public class GridPanel extends JPanel implements MouseListener {
 	        		{
 	        			gridTiles[x][y].setIcon(ENEMY_PATH_ICON);
 	        		}
-	        		else if (tile.getType() == Tile.TileType.TOWER_FREE_SLOT) 
+	        		else if (tile.getType() == Tile.TileType.SCENERY) 
 	        		{
 	        			gridTiles[x][y].setIcon(SCENERY_ICON);
 	        		}
@@ -78,6 +81,9 @@ public class GridPanel extends JPanel implements MouseListener {
 		
 	}
 
+	
+	
+	abstract public void coordinatesClicked(int x, int y);
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -86,21 +92,23 @@ public class GridPanel extends JPanel implements MouseListener {
 
 		int x = source.getTileXCoordinate();
 		int y = source.getTileYCoordinate();
-		System.out.println("Grid was clicked on [ X: "+x+" ][ Y: "+y+ " ] with event: " + e.toString());
 		
-		if(ButtonPanel.path){
-		map.setTile(x, y, Tile.TileType.ENEMY_PATH);
-
-		
-        source.setIcon(ENEMY_PATH_ICON);}
-		
-		if(ButtonPanel.scenery)
-		{
-			map.setTile(x, y, Tile.TileType.TOWER_FREE_SLOT);
-
-			
-	        source.setIcon(SCENERY_ICON);
-		}
+		coordinatesClicked(x, y);
+//		System.out.println("Grid was clicked on [ X: "+x+" ][ Y: "+y+ " ] with event: " + e.toString());
+//		
+//		if(ButtonPanel.path){
+//		map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+//
+//		
+//        source.setIcon(ENEMY_PATH_ICON);}
+//		
+//		if(ButtonPanel.scenery)
+//		{
+//			map.setTile(x, y, Tile.TileType.TOWER_FREE_SLOT);
+//
+//			
+//	        source.setIcon(SCENERY_ICON);
+//		}
 
         //mouseEnterKill = false;
         
@@ -161,7 +169,31 @@ public class GridPanel extends JPanel implements MouseListener {
 		
 	}
 
-	
+	@Override
+	public void update(Observable o, Object arg) {
+        for(int x = 0; x < map.getWidth(); x++)
+        {
+        	for(int y = 0; y < map.getHeight(); y++)
+        	{
+        		Tile tile = map.getTile(x, y);
+        		if (tile.getType() == Tile.TileType.ENEMY_PATH)
+        		{
+        			gridTiles[x][y].setIcon(ENEMY_PATH_ICON);
+        		}
+        		else if (tile.getType() == Tile.TileType.SCENERY) 
+        		{
+        			gridTiles[x][y].setIcon(SCENERY_ICON);
+        		}
+        		else
+        		{
+        			gridTiles[x][y].setForeground(Color.BLACK);
+        		}
+        		gridTiles[x][y].addMouseListener(this);
+        		add(gridTiles[x][y]);
+        	}
+        }
+		
+	}
 
 	
 	
