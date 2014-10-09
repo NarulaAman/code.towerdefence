@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Observable;
 
 import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class Map implements Serializable {
+public class Map extends Observable implements Serializable {
 
 	/**
 	 * 
@@ -34,13 +35,14 @@ public class Map implements Serializable {
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				grid[x][y] = new Tile(Tile.TileType.TOWER_FREE_SLOT);
+				grid[x][y] = new Tile(Tile.TileType.SCENERY);
 			}
 		}
 	}
 
 	public void set(Tile tile, Coordinate coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = tile;
+		notifyObservers();
 
 	}
 
@@ -50,7 +52,7 @@ public class Map implements Serializable {
 
 	public boolean canPlace(Tower tower, int x, int y) {
 		Tile tile = grid[x][y];
-		return tile.getType() == Tile.TileType.TOWER_FREE_SLOT;
+		return tile.getType() == Tile.TileType.SCENERY;
 	}
 
 	public boolean outOfBounds(Coordinate coordinate) {
