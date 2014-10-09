@@ -3,7 +3,7 @@ package ca.concordia.soen6441.logic;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
 import org.junit.After;
@@ -13,6 +13,13 @@ import org.junit.Test;
 
 
 public class GamePlayTest {
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	private static final int START_CURRENCY = 200;
@@ -75,5 +82,29 @@ public class GamePlayTest {
 		
 	}
 	
-
+	
+	
+   @Test
+   
+    public void testUpgrade(){
+	   when(tower.getUpgradeCost()).thenReturn(START_CURRENCY /2); 
+	   when(tower.canUpgrade()).thenReturn(true);
+	   assertTrue(gamePlay.upgrade(tower));
+	   verify(tower).doUpgrade();
+   }
+   
+   @Test
+   public void testUpgradeFailed(){
+	   when(tower.getUpgradeCost()).thenReturn(START_CURRENCY +50);
+	   assertFalse(gamePlay.upgrade(tower));
+	   verify(tower, never()).doUpgrade();
+   }
+   
+   
+   @Test
+   public void testUpgradeDintHappenCanUpgradeFalse(){
+	   when(tower.canUpgrade()).thenReturn(false);
+	   assertFalse(gamePlay.upgrade(tower));
+	   verify(tower, never()).doUpgrade();
+   }
 }
