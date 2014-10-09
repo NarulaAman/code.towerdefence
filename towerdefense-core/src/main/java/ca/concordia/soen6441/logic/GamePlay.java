@@ -13,6 +13,7 @@ public class GamePlay implements Serializable {
 
 	final Map map;
 	final List<Tower> towers = new ArrayList<Tower>();
+	
 
 	int currency;
 
@@ -20,6 +21,7 @@ public class GamePlay implements Serializable {
 		super();
 		this.map = map;
 		this.currency = currency;
+		
 	}
 
 	public boolean buy(Tower tower) {
@@ -42,7 +44,16 @@ public class GamePlay implements Serializable {
 	 */
 	public boolean upgrade(Tower tower) {
 		// implement upgrade logic here
+		if (tower.canUpgrade()){
+	        if (currency-tower.getUpgradeCost()>=0){
+	            currency=-tower.getUpgradeCost();
+	            tower.doUpgrade();}
+	
+			return true;
+		}else{
+		
 		return false;
+		}
 	}
 
 	public int getCurrency() {
