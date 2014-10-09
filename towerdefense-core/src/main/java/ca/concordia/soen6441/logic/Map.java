@@ -103,14 +103,26 @@ public class Map extends Observable implements Serializable {
 	public void setStartTile(Coordinate startTile) {
 		this.startTile = startTile;
 	}
+	
+	
+	public void setStartTile(int x, int y) {
+		this.startTile = new Coordinate(x, y);
+	}
+	
+	
 
 	public Coordinate getEndTile() {
 		return endTile;
 	}
 
+	public void setEndTile(int x, int y) {
+		this.endTile = new Coordinate(x, y);
+	}
+	
 	public void setEndTile(Coordinate endTile) {
 		this.endTile = endTile;
 	}
+	
 
 	public int getWidth() {
 		return width;
@@ -121,10 +133,13 @@ public class Map extends Observable implements Serializable {
 	}
 
 	public void setTile(int x, int y, TileType tileType) {
-		grid[x][y] = new Tile(tileType);
-		setChanged();
-		notifyObservers();
-
+		
+		if (grid[x][y].type != tileType) {
+			grid[x][y] = new Tile(tileType);
+			
+			setChanged();
+			notifyObservers();
+		}
 	}
 
 }
