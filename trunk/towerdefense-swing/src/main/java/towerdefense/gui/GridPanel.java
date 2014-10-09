@@ -188,8 +188,6 @@ public abstract class GridPanel extends JPanel implements Observer, MouseListene
         		{
         			gridTiles[x][y].setForeground(Color.BLACK);
         		}
-        		gridTiles[x][y].addMouseListener(this);
-        		add(gridTiles[x][y]);
         	}
         }
 		
