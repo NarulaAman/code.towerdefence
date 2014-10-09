@@ -18,57 +18,68 @@ public class MapFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JPanel gridPanel = null;
-	JPanel buttonPanel = null;
-	DialogPanel dialogPanel = null;
-	TowerPanel towerPanel = null;
-	
+	private JPanel gridPanel = null;
+	private JPanel buttonPanel = null;
+	private DialogPanel dialogPanel = null;
+	private Map map = null;
+
+	private final int xyMin = 10;
+	private final int xyMax = 20;
+
+
 	public MapFrame()
 	{
 		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		int xVal;
 		int yVal;
-		
+
 		dialogPanel = new DialogPanel();
 		JOptionPane.showConfirmDialog(null, dialogPanel, 
-	               "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
-		 
-		 xVal =  dialogPanel.getXField();
-		 yVal =  dialogPanel.getYField();
-		
-		while(xVal < 10 || yVal < 10 || xVal > 20 || yVal > 20)
-		{
-		
-			JOptionPane.showMessageDialog(null, "Please enter values between 5 and 20", "Warning", JOptionPane.OK_OPTION);
-		
+				"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+
+		xVal =  dialogPanel.getXField();
+		yVal =  dialogPanel.getYField();
+
+		while(xVal < xyMin || yVal < xyMin || xVal > xyMax || yVal > xyMax) {
+
+			JOptionPane.showMessageDialog(null, "Please enter values between 10 and 20", "Warning", JOptionPane.OK_OPTION);
+
 			JOptionPane.showConfirmDialog(null, dialogPanel, 
-            "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
-			
-			 xVal =  dialogPanel.getXField();
-			 yVal =  dialogPanel.getYField();
+					"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+
+			xVal =  dialogPanel.getXField();
+			yVal =  dialogPanel.getYField();
 		}
-		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		gridPanel = new GridPanel(new Map(xVal, yVal));
+
+
+		map = new Map(xVal, yVal);
+		gridPanel = new GridPanel(map);
 		buttonPanel = new ButtonPanel();
-		
-		
-		
+
+
 		add(gridPanel,BorderLayout.CENTER);
 		add(buttonPanel,BorderLayout.EAST);
-		
-		//add(towerPanel,BorderLayout.SOUTH);
+
 		pack();
+		
 	}
 
-	
-	 public static void main(String[] args) {
-	        SwingUtilities.invokeLater(new Runnable() {
-	            @Override
-	            public void run() {
-	                new MapFrame();
-	            }
-	        });
+    public Map getMap()
+    {
+    	return map;
+    }
+    
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new MapFrame();
+				
+				
+			}
+		});
 
-	    }
+	}
 }
