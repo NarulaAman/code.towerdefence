@@ -55,7 +55,7 @@ public class MapFrame extends JFrame {
 
 
 		map = new Map(xVal, yVal);
-		gridPanel = new GridPanel(map);
+//		gridPanel = new GridPanel(map);
 		buttonPanel = new ButtonPanel();
 
 
