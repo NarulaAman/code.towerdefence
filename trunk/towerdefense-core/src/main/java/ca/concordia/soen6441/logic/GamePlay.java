@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.concordia.soen6441.logic.primitives.Coordinate;
+
 public class GamePlay implements Serializable {
 
 	/**
@@ -32,6 +34,14 @@ public class GamePlay implements Serializable {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean hasTower(int x, int y) {
+		return true;
+	}
+	
+	public Tower getTower(int x, int y) {
+		return new Tower(new Coordinate(x, y), 100);
 	}
 
 	/**
