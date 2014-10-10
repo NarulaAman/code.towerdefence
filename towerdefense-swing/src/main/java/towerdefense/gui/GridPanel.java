@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
+import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 
 public abstract class GridPanel extends JPanel implements Observer, MouseListener {
@@ -25,6 +26,9 @@ public abstract class GridPanel extends JPanel implements Observer, MouseListene
 	
 	private static final Icon ENEMY_PATH_ICON = new ImageIcon("tilepath.jpg");
 	private static final Icon SCENERY_ICON = new ImageIcon("grass.jpg");
+	private static final Icon START_ICON = new ImageIcon("tilepath-start.jpg");
+	private static final Icon EXIT_ICON = new ImageIcon("tilepath-exit.jpg");
+	
 	
 	private static final long serialVersionUID = 1L;
 	private GridTiles[][] gridTiles;
@@ -52,32 +56,13 @@ public abstract class GridPanel extends JPanel implements Observer, MouseListene
 	        		gridTiles[x][y].setOpaque(true);
 	        		gridTiles[x][y].setText(null);
 	        		gridTiles[x][y].setTileCoordinate(x, y);
-	        		Tile tile = map.getTile(x, y);
-	        		if (tile.getType() == Tile.TileType.ENEMY_PATH)
-	        		{
-	        			gridTiles[x][y].setIcon(ENEMY_PATH_ICON);
-	        		}
-	        		else if (tile.getType() == Tile.TileType.SCENERY) 
-	        		{
-	        			gridTiles[x][y].setIcon(SCENERY_ICON);
-	        		}
-	        		else
-	        		{
-	        			gridTiles[x][y].setForeground(Color.BLACK);
-	        		}
-	        		
-	        		//gridTiles[x][y].addActionListener(this);
-	        		
-	        		
-	        		
-	        		
 	        		gridTiles[x][y].addMouseListener(this);
 	        		add(gridTiles[x][y]);
 	        	}
 	        }
 	        
 		
-		
+		update(null, null);
 		
 	}
 
@@ -190,7 +175,16 @@ public abstract class GridPanel extends JPanel implements Observer, MouseListene
         		}
         	}
         }
+        
+        if (map.hasStartTile()) {
+        	Coordinate start = map.getStartTile();
+        	gridTiles[start.getX()][start.getY()].setIcon(START_ICON);
+        }
 		
+        if (map.hasEndTile()) {
+        	Coordinate start = map.getEndTile();
+        	gridTiles[start.getX()][start.getY()].setIcon(EXIT_ICON);
+        }
 	}
 
 	
