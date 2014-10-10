@@ -2,7 +2,23 @@ package ca.concordia.soen6441.logic;
 
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
+/**
+ * @author Golnoush
+ *
+ */
+
 public class MapValidator {
+	
+	/**
+	 * check  validation of the map 
+	 * 
+	 * @param map
+	 *            map to be checked
+	 *        message 
+	 *            deal with inconsistency in the map   
+	 *            
+	 * @return false if the map is not valid
+	 */
 
 	public boolean isValid(Map map, StringBuilder messageIfNotValid) {
 
@@ -53,8 +69,10 @@ public class MapValidator {
 
 	
 	/**
-	 * @param map
-	 * @return
+	 * Returns 0 if the map has only one start
+	 * @param map  
+	 *            map to be checked
+	 * @return 0 if the map has only one start
 	 */
 	public int mapStartPositionCount(Map map) {
 		if (map.getStartTile() == null) {
@@ -66,11 +84,23 @@ public class MapValidator {
 		// }
 	}
 
+	/**
+	 * Returns false if map has no start
+	 * @param map  
+	 *            map to be checked
+	 * @return false if map has no start
+	 */
 	public boolean mapHasNoStart(Map map) {
 
 		return map.hasStartTile() == false;
 	}
 
+	/**
+	 *  Returns false if map has no end
+	 * @param map
+	 *            map to be checked
+	 * @return false if map has no end
+	 */
 	public boolean mapHasNoEnd(Map map) {
 		return map.hasEndTile() == false;
 	}
