@@ -13,15 +13,23 @@ import ca.concordia.soen6441.logic.Map;
 
 public class MapJavaSerializationPersister implements MapPersister {
 	
-	/* (non-Javadoc)
-	 * @see ca.concordia.soen6441.io.IMapPersister#save(ca.concordia.soen6441.logic.Map, java.io.File)
-	 */
+
 	
 	public static final String MAP_FILENAME_EXTENSION = ".map";
 	
+	/**
+	 * Do a boo
+	 */
+	public void boo() {
+		
+	}
+	
+	/* (non-Javadoc)
+	 * @see ca.concordia.soen6441.io.MapPersister#save(ca.concordia.soen6441.logic.Map, java.lang.String)
+	 */
 	@Override
 	public void save(Map map, String mapname) throws IOException {
-		File file = new File("." + File.pathSeparator + mapname + MAP_FILENAME_EXTENSION);
+		File file = new File("." + File.separator + mapname + MAP_FILENAME_EXTENSION);
 		FileOutputStream outPut = new FileOutputStream(file);
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
 		oos.writeObject(map);
@@ -33,14 +41,18 @@ public class MapJavaSerializationPersister implements MapPersister {
 	 */
 	@Override
 	public Map load(String mapname) throws IOException, ClassNotFoundException {
-		File file = new File("." + File.pathSeparator + mapname + MAP_FILENAME_EXTENSION);
+		File file = new File("." + File.separator + mapname + MAP_FILENAME_EXTENSION);
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Map map = (Map) ois.readObject();
 		ois.close();
+		fis.close();
 		return map;
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.concordia.soen6441.io.MapPersister#listAllNames()
+	 */
 	@Override
 	public List<String> listAllNames() throws IOException {
 		File directory = new File(".");

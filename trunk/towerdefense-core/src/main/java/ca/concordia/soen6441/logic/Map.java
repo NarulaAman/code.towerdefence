@@ -107,8 +107,9 @@ public class Map extends Observable implements Serializable {
 	}
 	
 	
-	public void setStartTile(int x, int y) {
+	public boolean setStartTile(int x, int y) {
 		this.startTile = new Coordinate(x, y);
+		return true;
 	}
 	
 	
@@ -117,8 +118,9 @@ public class Map extends Observable implements Serializable {
 		return endTile;
 	}
 
-	public void setEndTile(int x, int y) {
+	public boolean setEndTile(int x, int y) {
 		this.endTile = new Coordinate(x, y);
+		return true;
 	}
 	
 	public void setEndTile(Coordinate endTile) {
