@@ -40,34 +40,44 @@ public abstract class GridPanel extends JPanel implements Observer, MouseListene
 	public GridPanel(Map map)
 	{
 		this.map = map;
-		map.addObserver(this);
+
 		setPreferredSize(new Dimension(480, 640));
 		setVisible(true);
 	        
-		GridLayout grid = new GridLayout(map.getWidth(), map.getHeight(),1,1);
-		setLayout(grid);
 		
-		gridTiles = new GridTiles[map.getWidth()][map.getHeight()];
-	        for(int x = 0; x < map.getWidth(); x++)
-	        {
-	        	for(int y = 0; y < map.getHeight(); y++)
-	        	{
-	        		gridTiles[x][y] = new GridTiles();
-	        		gridTiles[x][y].setOpaque(true);
-	        		gridTiles[x][y].setText(null);
-	        		gridTiles[x][y].setTileCoordinate(x, y);
-	        		gridTiles[x][y].addMouseListener(this);
-	        		add(gridTiles[x][y]);
-	        	}
-	        }
+		
+		readMap();
 	        
 		
-		update(null, null);
+
 		
 	}
 
 	
 	
+	private void readMap() {
+		GridLayout grid = new GridLayout(map.getWidth(), map.getHeight(),1,1);
+		setLayout(grid);
+		gridTiles = new GridTiles[map.getWidth()][map.getHeight()];
+        for(int x = 0; x < map.getWidth(); x++)
+        {
+        	for(int y = 0; y < map.getHeight(); y++)
+        	{
+        		gridTiles[x][y] = new GridTiles();
+        		gridTiles[x][y].setOpaque(true);
+        		gridTiles[x][y].setText(null);
+        		gridTiles[x][y].setTileCoordinate(x, y);
+        		gridTiles[x][y].addMouseListener(this);
+        		add(gridTiles[x][y]);
+        	}
+        }
+		map.addObserver(this);
+		update(null, null);
+		
+	}
+
+
+
 	abstract public void coordinatesClicked(int x, int y);
 
 	@Override
@@ -192,10 +202,22 @@ public abstract class GridPanel extends JPanel implements Observer, MouseListene
 	public void setMap(Map map) {
 		if (this.map != null) {
 			this.map.deleteObserver(this);
+			 for(int x = 0; x < this.map.getWidth(); x++)
+		        {
+		        	for(int y = 0; y < this.map.getHeight(); y++)
+		        	{
+		        		gridTiles[x][y].removeMouseListener(this);
+		        		remove(gridTiles[x][y]);
+		        	}
+		        }
+			 this.map = null;
 		}
+		removeAll();
+		revalidate();
+		repaint();
 		this.map = map;
-		map.addObserver(this);
-		
+		readMap();
+		revalidate();
 	}
 
 	

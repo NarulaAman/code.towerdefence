@@ -3,6 +3,7 @@ package towerdefense.gui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -12,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import ca.concordia.soen6441.io.MapJavaSerializationPersister;
+import ca.concordia.soen6441.io.MapPersister;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.Tile.TileType;
@@ -25,7 +28,7 @@ public class MapEditionPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	GridPanel gridPanel;
-    //Map map;
+    Map map;
 
 	enum SelectedButton {
 		SCENERY,
@@ -49,13 +52,14 @@ public class MapEditionPanel extends JPanel {
 	private static final Icon SCENERY_BUTTON_ICON = new ImageIcon("scenery.png");
 	private static final Icon SAVE_ICON = new ImageIcon("save.png");
 
-
+	private final MapPersister mapPersister;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
-	public MapEditionPanel(Map map) {
-		// TODO Auto-generated constructor stub
+	public MapEditionPanel(Map map, MapPersister persister) {
+		this.map = map;
 		setLayout(new GridLayout(2,2,1,1));
 
+		this.mapPersister = persister;
 		gridPanel = new GridPanel(map) {
 
 			/**
@@ -150,6 +154,19 @@ public class MapEditionPanel extends JPanel {
 				
 			}
 		});
+		
+		save_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					mapPersister.save(map, "SomeMap");
+				} catch (IOException e1) {
+					throw new RuntimeException(e1);
+				}
+				
+			}
+		});
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -179,7 +196,7 @@ public class MapEditionPanel extends JPanel {
 
 		//Add the ubiquitous "Hello World" label.
 		Map map = new Map(4, 4);
-		MapEditionPanel mapEditionPanel = new MapEditionPanel(map);
+		MapEditionPanel mapEditionPanel = new MapEditionPanel(map, new MapJavaSerializationPersister());
 		frame.getContentPane().add(mapEditionPanel);
 
 		//Display the window.
