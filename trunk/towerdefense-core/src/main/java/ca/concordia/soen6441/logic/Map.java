@@ -102,6 +102,8 @@ public class Map extends Observable implements Serializable {
 
 	public void setStartTile(Coordinate startTile) {
 		this.startTile = startTile;
+		setChanged();
+		notifyObservers();
 	}
 	
 	
@@ -121,6 +123,8 @@ public class Map extends Observable implements Serializable {
 	
 	public void setEndTile(Coordinate endTile) {
 		this.endTile = endTile;
+		setChanged();
+		notifyObservers();
 	}
 	
 
@@ -140,6 +144,14 @@ public class Map extends Observable implements Serializable {
 			setChanged();
 			notifyObservers();
 		}
+	}
+	
+	public boolean hasStartTile() {
+		return startTile != null;
+	}
+	
+	public boolean hasEndTile() {
+		return endTile != null;
 	}
 
 }
