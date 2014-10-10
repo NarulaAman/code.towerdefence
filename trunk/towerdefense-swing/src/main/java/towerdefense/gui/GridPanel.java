@@ -187,6 +187,17 @@ public abstract class GridPanel extends JPanel implements Observer, MouseListene
         }
 	}
 
+
+
+	public void setMap(Map map) {
+		if (this.map != null) {
+			this.map.deleteObserver(this);
+		}
+		this.map = map;
+		map.addObserver(this);
+		
+	}
+
 	
 	
 }
