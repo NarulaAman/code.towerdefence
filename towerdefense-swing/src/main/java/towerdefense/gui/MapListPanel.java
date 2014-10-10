@@ -1,5 +1,6 @@
 package towerdefense.gui;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class MapListPanel extends JPanel {
 	public MapListPanel(MapPersister mapPersister) {
 		this.mapPersister = mapPersister;
 		setLayout(new GridBagLayout());
+		setMinimumSize(new Dimension(150, 100));
 		final MapListModel mapListModel = new MapListModel(mapPersister);
 		mapList = new JList<String>(mapListModel);
 		GridBagConstraints constraints = new GridBagConstraints();
@@ -74,6 +76,13 @@ public class MapListPanel extends JPanel {
 
 	MapPersister getMapPersister() {
 		return mapPersister;
+	}
+
+
+
+	public void setMapSelectionListerner(MapSelectionListener listener) {
+		mapSelectionListener = listener;
+		
 	}
 
 
