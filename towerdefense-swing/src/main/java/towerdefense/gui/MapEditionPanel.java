@@ -1,6 +1,7 @@
 package towerdefense.gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +12,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.io.MapPersister;
@@ -52,12 +55,16 @@ public class MapEditionPanel extends JPanel {
 	private static final Icon SCENERY_BUTTON_ICON = new ImageIcon("scenery.png");
 	private static final Icon SAVE_ICON = new ImageIcon("save.png");
 
+
+	JTextField nameMapText = new JTextField("DefaultMap");
+	
 	private final MapPersister mapPersister;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
 	public MapEditionPanel(Map map, MapPersister persister) {
 		this.map = map;
 		setLayout(new BorderLayout());
+		
 		this.mapPersister = persister;
 		gridPanel = new MapPanel(map) {
 
@@ -96,6 +103,13 @@ public class MapEditionPanel extends JPanel {
 
 		add(gridPanel,BorderLayout.CENTER);
 		setuButtons();
+		
+		JPanel nameMapPanel = new JPanel(new GridLayout(1,2,2,2));
+		JLabel nameMapLabel = new JLabel("Please Enter the Map Name");
+		
+		nameMapPanel.add(nameMapLabel);
+		nameMapPanel.add(nameMapText);
+		add(nameMapPanel,BorderLayout.SOUTH);
 
 
 	}
@@ -103,6 +117,8 @@ public class MapEditionPanel extends JPanel {
 
 	private void setuButtons() {
 
+		
+		
 
 
 		newButton.addActionListener(new ActionListener() {
@@ -159,14 +175,15 @@ public class MapEditionPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					mapPersister.save(map, "SomeMap");
+					
+					mapPersister.save(map, nameMapText.getText());
 				} catch (IOException e1) {
 					throw new RuntimeException(e1);
 				}
 				
 			}
 		});
-
+		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 		buttonPanel.add(newButton);
@@ -177,6 +194,15 @@ public class MapEditionPanel extends JPanel {
 		buttonPanel.add(save_button);
 
 		add(buttonPanel,BorderLayout.EAST);
+		
+		
+		
+		
+		
+		if(nameMapText.getText()!=null)
+		{
+			save_button.setVisible(true);
+		}
 
 
 	}
