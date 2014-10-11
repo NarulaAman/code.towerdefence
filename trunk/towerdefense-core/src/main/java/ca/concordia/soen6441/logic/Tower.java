@@ -1,28 +1,42 @@
 package ca.concordia.soen6441.logic;
 
+import java.util.Observable;
+
+import javax.vecmath.Point2d;
+
 import ca.concordia.soen6441.logic.primitives.Coordinate;
-import ca.concordia.soen6441.logic.primitives.Damage;
 
 
-public class Tower {
+public class Tower extends Observable {
 	
 	 
 	// ths is shown in the tower inspection window
 
-	int damage;
+//	int damage;
+//	
+//	int buyCost;
+//	
+//	/**
+//	 * Percentage of refund rate
+//	 */
+//	int refundRate;
+//	
+//	int range;
+//	
+//	int level;
 	
-	int buyCost;
+	int level;
 	
-	/**
-	 * Percentage of refund rate
-	 */
-	int refundRate;
+	final Coordinate coordinate;
 	
-	int range;
+	final TowerFactory towerFactory;
+	
 
 	// end of what is shown in the tower inspection window
 	
-	final Coordinate coordinate;
+	
+	
+	
 	
 	public int getX() {
 		return coordinate.getX();
@@ -33,13 +47,14 @@ public class Tower {
 	}
 
 	public int getRange() {
-		return range;
+		return getTowerLevelCharacteristic().getRange();
 	}
 
-	public Tower(Coordinate coordinate, int damage) {
+	public Tower(int level, Coordinate coordinate, TowerFactory towerFactory) {
 		super();
 		this.coordinate = coordinate;
-		this.damage = damage;
+		this.level = level;
+		this.towerFactory = towerFactory;
 	}
 
 	public Coordinate getCoordinate() {
@@ -50,16 +65,16 @@ public class Tower {
 //		shotMilisecondsAgo += milisecondsFromLastUpdate;
 	}
 	
-//	public boolean inRange(Coordinate otherCoordinate) {
-////		return distance(this.coordinate, otherCoordinate) < rangeRadius;
-//	}
+	public boolean inRange(Coordinate otherCoordinate) {
+		return distance(this.coordinate, otherCoordinate) < getRange();
+	}
 	
 	public double distanceTo(Coordinate otherCoordinate) {
 		return distance(this.coordinate, otherCoordinate);
 	}
 	
 	public double distance(Coordinate p0, Coordinate p1) {
-		return 0; //new Point2d(this.coordinate).distance(new Point2d(coordinate));
+		return new Point2d(this.coordinate).distance(new Point2d(coordinate));
 	}
 
 	/**
@@ -68,19 +83,19 @@ public class Tower {
 	 * @return the damage done by the tower
 	 */
 	public int getDamage() {
-		return damage;
+		return getTowerLevelCharacteristic().getDamage();
 	}
 
 	public int getBuyCost() {
-		return buyCost;
+		return getTowerLevelCharacteristic().getBuyCost();
 	}
 
 	public int getRefundRate() {
-		return refundRate;
+		return getTowerLevelCharacteristic().getRefundRate();
 	}
 	
 	public int getUpgradeCost() {
-		return 100;
+		return getTowerFactory().getLevelInformation(this.getClass(), level).getBuyCost();
 	}
 	
 	/**
@@ -89,15 +104,24 @@ public class Tower {
 	 * @return true if the tower can be upgraded, false if not
 	 */
 	public boolean canUpgrade() {
-		return true;
+		return level < getTowerFactory().maxLevel(this.getClass());
 	}
 	
 	public boolean doUpgrade() {
+		level = level + 1;
 		return true;
 	}
 	
 	public int getLevel() {
-		return 0;
+		return level;
+	}
+	
+	private TowerLevelCaracteristic getTowerLevelCharacteristic() {
+		return getTowerFactory().getLevelInformation(this.getClass(), level);
+	}
+	
+	private TowerFactory getTowerFactory() {
+		return towerFactory;
 	}
 	
 	

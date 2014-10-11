@@ -9,6 +9,9 @@ import java.util.Observable;
 import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
+/**
+ * This class represents the Tower Defense playable Map. 
+ */
 public class Map extends Observable implements Serializable {
 
 	/**
@@ -155,5 +158,4 @@ public class Map extends Observable implements Serializable {
 	public boolean hasEndTile() {
 		return endTile != null;
 	}
-
 }

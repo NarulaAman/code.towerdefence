@@ -17,7 +17,6 @@ import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.io.MapPersister;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
-import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 public class MapEditionPanel extends JPanel {
@@ -27,7 +26,7 @@ public class MapEditionPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	GridPanel gridPanel;
+	MapPanel gridPanel;
     Map map;
 
 	enum SelectedButton {
@@ -60,7 +59,7 @@ public class MapEditionPanel extends JPanel {
 		setLayout(new GridLayout(2,2,1,1));
 
 		this.mapPersister = persister;
-		gridPanel = new GridPanel(map) {
+		gridPanel = new MapPanel(map) {
 
 			/**
 			 * 

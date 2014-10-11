@@ -2,7 +2,12 @@ package ca.concordia.soen6441.logic.primitives;
 
 import java.io.Serializable;
 
-public class Coordinate /*extends Vector2d*/ implements Serializable {
+import javax.vecmath.Vector2d;
+
+/**
+ * This class represents and X and Y coordinate formed by integers
+ */
+public class Coordinate extends Vector2d implements Serializable {
 
 	/**
 	 * 
@@ -12,7 +17,7 @@ public class Coordinate /*extends Vector2d*/ implements Serializable {
 	final int y;
 
 	public Coordinate(int x, int y) {
-		//super(x, y);
+		super(x, y);
 		this.x = x;
 		this.y = y;
 	}
@@ -28,7 +33,7 @@ public class Coordinate /*extends Vector2d*/ implements Serializable {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + x;
 		result = prime * result + y;
 		return result;
@@ -38,7 +43,7 @@ public class Coordinate /*extends Vector2d*/ implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -49,6 +54,8 @@ public class Coordinate /*extends Vector2d*/ implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	

@@ -1,129 +1,126 @@
 package towerdefense.gui;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class TowerPanel extends JPanel implements MouseMotionListener,MouseListener{
+import ca.concordia.soen6441.logic.Tower;
+
+public class TowerPanel extends JPanel implements Observer{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private JButton[][] towers;
-	private volatile int screenX = 0;
-	private volatile int screenY = 0;
-	private volatile int myX = 0;
-	private volatile int myY = 0;
+	
+	
+	private final JLabel costLbl = new JLabel("Buying cost:");
+	private final JLabel damageLbl = new JLabel("Damage:");
+	private final JLabel rangeLbl = new JLabel("Range:");
+	private final JLabel levelLbl = new JLabel("Level:");
+	private final JLabel refundLbl = new JLabel("Refund %:");
+	private final JLabel upgradeCostLbl = new JLabel("Upgrade cost:");
+	
+	private final JTextField costTxtFld = new JTextField("");
+	private final JTextField damageTxtFld = new JTextField("");
+	private final JTextField rangeTxtFld = new JTextField("");
+	private final JTextField levelTxtFld = new JTextField("");
+	private final JTextField refundTxtFld = new JTextField("");
+	private final JTextField upgradeCostTxtFld = new JTextField("");
+	
+	private final JButton upgradeBtn = new JButton("Upgrade");
+	private final JButton sellBtn = new JButton("Sell");
+	
+	private Tower shownTower = null;
+
 
 	public TowerPanel()
 	{
-		setVisible(true);
-		GridLayout grid = new GridLayout(3, 3,1,1);
-		setLayout(grid);
-		towers = new JButton[3][3];
-		for(int t=0;t<3;t++)
-		{
-			for(int k=0;k<3;k++)
-			{
-				towers[t][k]= new JButton();
-				towers[t][k].setSize(15, 15);
-				towers[t][k].setBackground(Color.black);
-				towers[t][k].addMouseMotionListener(new MouseMotionListener() {
-					
-					@Override
-					public void mouseMoved(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void mouseDragged(MouseEvent e) {
-						// TODO Auto-generated method stub
-						int deltaX = e.getXOnScreen() - screenX;
-						int deltaY = e.getYOnScreen() - screenY;
-
-						setLocation(myX + deltaX, myY + deltaY);
-
-						
-					}
-				});
-                
-				add(towers[t][k]);
-			}
-		}
-
-
-
-
-	}
-
-
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		super(new GridLayout(7, 2));
+		setMinimumSize(new Dimension(200, 350));
+		setMaximumSize(new Dimension(200, 350));
+		add(costLbl);
+		add(costTxtFld);
+		add(damageLbl);
+		add(damageTxtFld);
+		add(rangeLbl);
+		add(rangeTxtFld);
+		add(levelLbl);
+		add(levelTxtFld);
+		add(refundLbl);
+		add(refundTxtFld);
+		add(upgradeCostLbl);
+		add(upgradeCostTxtFld);
+		add(upgradeBtn);
+		add(sellBtn);
 		
-
-
+		 costTxtFld.setEditable(false);
+		damageTxtFld.setEditable(false);
+		rangeTxtFld .setEditable(false);
+		levelTxtFld .setEditable(false);
+		refundTxtFld .setEditable(false);
+		upgradeCostTxtFld .setEditable(false);
 	}
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void update(Observable o, Object arg) {
+		
+		
+	}
+	
+	public void show(Tower tower) {
+		if (shownTower != null) {
+			shownTower.deleteObserver(this);
+		}
+		shownTower = tower;
+		tower.addObserver(this);
+		read(tower);
 	}
 
-
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-		screenX = e.getXOnScreen();
-		screenY = e.getYOnScreen();
-
-		myX = getX();
-		myY = getY();
-
+	private void read(Tower tower) {
+		costTxtFld.setText("" + tower.getBuyCost());
+		damageTxtFld.setText("" + tower.getDamage());
+		rangeTxtFld .setText("" + tower.getRange());
+		levelTxtFld .setText("" + tower.getLevel());
+		refundTxtFld.setText("" + tower.getRefundRate());
+		if (tower.canUpgrade()) {
+			upgradeCostTxtFld .setText("" + tower.getBuyCost());
+			upgradeBtn.setEnabled(true);
+		}
+		else {
+			upgradeCostTxtFld .setText("N/A");
+			upgradeBtn.setEnabled(false);
+		}
 	}
 
-
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public JButton getUpgradeBtn() {
+		return upgradeBtn;
 	}
 
-
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public JButton getSellBtn() {
+		return sellBtn;
 	}
 
-
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public Tower getShownTower() {
+		return shownTower;
 	}
+
+	public void setShownTower(Tower shownTower) {
+		this.shownTower = shownTower;
+	}
+	
+	
+
+
+
+
+
+
 
 
 
