@@ -74,7 +74,7 @@ public class Tower extends Observable {
 	}
 	
 	public double distance(Coordinate p0, Coordinate p1) {
-		return new Point2d(this.coordinate).distance(new Point2d(coordinate));
+		return new Point2d(p0).distance(new Point2d(p1));
 	}
 
 	/**
