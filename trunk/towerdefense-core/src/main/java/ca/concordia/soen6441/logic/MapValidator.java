@@ -36,7 +36,12 @@ public class MapValidator {
 			messageIfNotValid.append("Map has more than one start position\n");
 			mapInconsistent = true;
 		}
-		if (mapStartIsNotInTheSides(map)) {
+		if (coordinateIsNotInTheSides(map, map.getStartTile())) {
+			messageIfNotValid.append("Map start position must be on the edges\n");
+			mapInconsistent = true;
+		}
+		if (coordinateIsNotInTheSides(map, map.getEndTile())) {
+			messageIfNotValid.append("Map exit position must be on the edges\n");
 			mapInconsistent = true;
 
 		}
@@ -54,12 +59,10 @@ public class MapValidator {
 	 *            map to be checked
 	 * @return true if the start of the map is not on one of its sides
 	 */
-	public boolean mapStartIsNotInTheSides(Map map) {
-		Coordinate startTile = map.getStartTile();
-
-		if (startTile.getX() == 0 || startTile.getY() == 0
-				|| startTile.getX() == map.getWidth() - 1
-				|| startTile.getY() == map.getHeight() - 1) {
+	public boolean coordinateIsNotInTheSides(Map map, Coordinate coordinate) {
+		if (coordinate.getX() == 0 || coordinate.getY() == 0
+				|| coordinate.getX() == map.getWidth() - 1
+				|| coordinate.getY() == map.getHeight() - 1) {
 
 			return false;
 		} else {
