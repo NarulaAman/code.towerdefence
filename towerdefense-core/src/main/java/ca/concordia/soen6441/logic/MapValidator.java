@@ -1,9 +1,12 @@
 package ca.concordia.soen6441.logic;
 
+import java.awt.geom.Point2D;
+
+import javax.vecmath.Point2d;
+
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 /**
- * @author Golnoush
  *
  */
 
@@ -45,7 +48,27 @@ public class MapValidator {
 			mapInconsistent = true;
 
 		}
+			
+		if (distanceBtwnCoordinates(map.getStartTile(), map.getEndTile())) {
+			messageIfNotValid.append("Map must have distance between start and exit\n");
+			mapInconsistent = true;
+
+		}
+		
+
 		if (mapInconsistent) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean distanceBtwnCoordinates(Coordinate d1,Coordinate d2) {
+		
+		double coordinateDistance = Math.sqrt((d1.getX()-d2.getX())*(d1.getX()-d2.getX()) + (d1.getY()-d2.getY())*(d1.getY()-d2.getY()));
+		
+		if (coordinateDistance<2) {
+
 			return false;
 		} else {
 			return true;
