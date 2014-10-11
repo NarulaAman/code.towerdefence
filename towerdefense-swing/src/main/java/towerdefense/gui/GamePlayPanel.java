@@ -2,8 +2,6 @@ package towerdefense.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,46 +12,43 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTextField;
 
-import towerdefense.gui.MapEditionPanel.SelectedButton;
-import towerdefense.gui.MapListPanel.MapSelectionListener;
-import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.logic.Map;
-import ca.concordia.soen6441.logic.Tile;
+import ca.concordia.soen6441.logic.Tower;
+import ca.concordia.soen6441.logic.TowerFactory;
+import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 public class GamePlayPanel extends JPanel implements MouseListener{
 
-	static GridPanel gridPanel;
-	static JPanel panelLabel;
-	static JPanel buttonPanel; 
+	MapPanel gridPanel;
+	JPanel panelLabel;
+	JPanel buttonPanel; 
 
 
-	private JLabel label1;
-	private JLabel label2;
-	private JLabel label3;
-	private JLabel label4;
+	private JLabel livesLbl = new JLabel("Lives");
+	private JLabel scoreLbl = new JLabel("Scores");
+	private JLabel levelsLbl = new JLabel("Levels");
+	private JLabel banksLbl = new JLabel("Banks");
 
-	private JTextField TextField1;
-	private JTextField TextField2;
-
-	private JTextField TextField3;
-	private JTextField TextField4;
-
-	private JButton tower1Button;
-	private JButton tower2Button;
+	private JTextField livesTxtFld = new JTextField("8");
+	private JTextField scoreTxtFld = new JTextField("540");
+	private JTextField levelsTxtFld = new JTextField("2");
+	private JTextField banksTxtFld = new JTextField("34");
+	
+	private TowerPanel towerInspectionPanel = new TowerPanel();
+	
+	private JButton buyTower1Btn = new JButton("Tower1");
+	private JButton tower2Button = new JButton("BUY");
 
 	JPanel inspectionWindow;
-	static GamePlayPanel GamePlayPanel;
 
 	public GamePlayPanel(Map map) {
 		// TODO Auto-generated constructor stub
-		setLayout(new GridLayout(2,2,1,1));
+		setLayout(new BorderLayout());
 
-		gridPanel = new GridPanel(map) {
+		gridPanel = new MapPanel(map) {
 
 			@Override
 			public void coordinatesClicked(int x, int y) {
@@ -63,48 +58,88 @@ public class GamePlayPanel extends JPanel implements MouseListener{
 		};
 
 		add(gridPanel, BorderLayout.CENTER);
-		setuButtons();
+		setupSidebar();
 
 
 	}
 
-	private void setuButtons() {
+	private void setupSidebar() {
+		
+		
+		JPanel sideBar = new JPanel();
+		sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
+		
+		setupGamePlayAttributes(sideBar);
+		
+		setupTowerAvailableToBuyPanel(sideBar);
 
+		setupInspectionWindow(sideBar);
         inspectionWindow = new JPanel(new GridLayout(1,2));
 		//inspectionWindow = new JPanel(new GridBagLayout());
-		
-		JPanel labelContainer = new JPanel(new GridLayout(4,1));
-		
-		//JPanel labelContainer = new JPanel();
-		label1 = new JLabel("Lives");
-		label2 = new JLabel("Scores");
-		label3 = new JLabel("Levels");
-		label4 = new JLabel("Banks");
 	
-		labelContainer.add(label1);
-		labelContainer.add(label2);
-		labelContainer.add(label3);
-		labelContainer.add(label4);
 		
-		inspectionWindow.add(labelContainer);
-		TextField1 = new JTextField("8");
-		TextField2 = new JTextField("540");
-		TextField3 = new JTextField("2");
-		TextField4 = new JTextField("34");
-		
-		this.add(inspectionWindow);
-		
-		tower1Button = new JButton("Tower1");
-		tower2Button = new JButton("BUY");
 
-		buttonPanel = new JPanel();
-		buttonPanel.add(tower1Button);		
+		
 
+		
+		
+		
+//		this.add(inspectionWindow);
+	
+
+		
+		
 		//		add(panelLabel,BorderLayout.EAST);
-		add(buttonPanel);	
-		tower1Button.addMouseListener(this);
+//		add(buttonPanel);	
+		buyTower1Btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
+		
+		add(sideBar, BorderLayout.EAST);
 	}	
+
+	private void setupInspectionWindow(JPanel sideBar) {
+		sideBar.add(towerInspectionPanel);
+		towerInspectionPanel.show(new TowerFactory().towerOnCoordinate(Tower.class, new Coordinate(0,0)));
+	}
+
+	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
+		JPanel towersToBuyPanel = new JPanel();
+		towersToBuyPanel.add(buyTower1Btn);
+		buyTower1Btn.setToolTipText("<html>Range: 4<br>Damage: 10<br>Refund rate: 90</html>" );
+		sideBar.add(towersToBuyPanel);
+		
+	}
+
+	private void setupGamePlayAttributes(JPanel sideBar) {
+
+		JPanel gamePlayAttributes = new JPanel(new GridLayout(2,4));
+		gamePlayAttributes.setPreferredSize(new Dimension(200, 50));
+		gamePlayAttributes.setMaximumSize(new Dimension(250, 50));
+
+		livesTxtFld.setEditable(false);
+		scoreTxtFld.setEditable(false);
+		levelsTxtFld.setEditable(false);
+		banksTxtFld.setEditable(false);
+	
+		gamePlayAttributes.add(livesLbl);
+		gamePlayAttributes.add(livesTxtFld);
+		gamePlayAttributes.add(scoreLbl);
+		gamePlayAttributes.add(scoreTxtFld);
+		gamePlayAttributes.add(levelsLbl);
+		gamePlayAttributes.add(levelsTxtFld);
+		gamePlayAttributes.add(banksLbl);
+		gamePlayAttributes.add(banksTxtFld);
+		
+		sideBar.add(gamePlayAttributes);
+		
+	}
 
 	private static void createAndShowGUI() {
 		//Create and set up the window.
@@ -112,8 +147,8 @@ public class GamePlayPanel extends JPanel implements MouseListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Map map = new Map(10,10);
-		GamePlayPanel = new GamePlayPanel(map);
-		frame.setContentPane(GamePlayPanel);
+		GamePlayPanel gamePlayPanel = new GamePlayPanel(map);
+		frame.setContentPane(gamePlayPanel);
 
 		//Display the window.
 		frame.pack();
@@ -154,13 +189,13 @@ public class GamePlayPanel extends JPanel implements MouseListener{
 //		JPanel textContainer = new JPanel();
 		JPanel textContainer = new JPanel(new GridLayout(4,1));
 		
-		textContainer.add(TextField1);
+		textContainer.add(livesTxtFld);
 	    
-		textContainer.add(TextField2);
+		textContainer.add(scoreTxtFld);
 	
-		textContainer.add(TextField3);
+		textContainer.add(levelsTxtFld);
 		
-		textContainer.add(TextField4);
+		textContainer.add(banksTxtFld);
 
  //       textContainer.setVisible(true);
 		inspectionWindow.add(textContainer);

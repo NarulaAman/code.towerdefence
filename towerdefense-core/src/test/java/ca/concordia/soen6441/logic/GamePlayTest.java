@@ -33,13 +33,6 @@ public class GamePlayTest {
 		tower = mock(Tower.class);
 		gamePlay = new GamePlay(map, 200);
 	}
-
-	@After
-	public void tearDown() throws Exception {
-		map = null;
-		tower = null;
-		gamePlay = null;
-	}
 	
 	@Test
 	public void testStartWithNoTowers() {

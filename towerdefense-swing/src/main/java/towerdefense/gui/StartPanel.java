@@ -23,7 +23,7 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	GridPanel gridPanel;
+	MapPanel gridPanel;
 	JPanel sideBar;
 	
 	
@@ -41,7 +41,22 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 	
 	public StartPanel(Map map) {
 		setLayout(new BorderLayout());
-		gridPanel = new GridPanel(map) {
+		map = null;
+		setGridPanel(map);
+		setButtons();
+		
+	
+	}
+	
+	
+	private void setGridPanel(Map map) {
+//		if (gridPanel != null) {
+//			getLayout().removeLayoutComponent(gridPanel);
+//			remove(gridPanel);
+//			revalidate();
+//			repaint();
+//		}
+		gridPanel = new MapPanel(map) {
 			
 			@Override
 			public void coordinatesClicked(int x, int y) {				
@@ -50,12 +65,10 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 		};
 		
 		add(gridPanel, BorderLayout.CENTER);
-		setButtons();
 		
-	
 	}
-	
-	
+
+
 	private void setButtons() {
 		
 		startButton = new JButton(START_ICON );
@@ -117,8 +130,8 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 
 	@Override
 	public void mapSelected(Map map) {
+		System.out.println("Seletec map: " + map);
 		gridPanel.setMap(map);
-		
 	}
 
 }

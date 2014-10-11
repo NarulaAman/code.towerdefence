@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 import ca.concordia.soen6441.logic.Map;
 
@@ -16,6 +18,7 @@ public class MapJavaSerializationPersister implements MapPersister {
 
 	
 	public static final String MAP_FILENAME_EXTENSION = ".map";
+	public static final String FILENAME_STRING_FORMAT = "." + File.separator + "%s" + MAP_FILENAME_EXTENSION;
 	
 	/**
 	 * Do a boo
@@ -29,7 +32,7 @@ public class MapJavaSerializationPersister implements MapPersister {
 	 */
 	@Override
 	public void save(Map map, String mapname) throws IOException {
-		File file = new File("." + File.separator + mapname + MAP_FILENAME_EXTENSION);
+		File file = new File(String.format(FILENAME_STRING_FORMAT, mapname));
 		FileOutputStream outPut = new FileOutputStream(file);
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
 		oos.writeObject(map);
@@ -41,7 +44,7 @@ public class MapJavaSerializationPersister implements MapPersister {
 	 */
 	@Override
 	public Map load(String mapname) throws IOException, ClassNotFoundException {
-		File file = new File("." + File.separator + mapname + MAP_FILENAME_EXTENSION);
+		File file = new File(String.format(FILENAME_STRING_FORMAT, mapname));
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Map map = (Map) ois.readObject();

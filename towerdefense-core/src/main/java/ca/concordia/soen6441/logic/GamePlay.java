@@ -16,7 +16,6 @@ public class GamePlay implements Serializable {
 	final Map map;
 	final List<Tower> towers = new ArrayList<Tower>();
 	
-
 	int currency;
 
 	public GamePlay(Map map, int currency) {
@@ -37,11 +36,21 @@ public class GamePlay implements Serializable {
 	}
 	
 	public boolean hasTower(int x, int y) {
-		return true;
+		for (Tower tower : towers) {
+			if (tower.getCoordinate().equals(new Coordinate(x, y))) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Tower getTower(int x, int y) {
-		return new Tower(new Coordinate(x, y), 100);
+		for (Tower tower : towers) {
+			if (tower.getCoordinate().equals(new Coordinate(x, y))) {
+				return tower;
+			}
+		}
+		return null;
 	}
 
 	/**
