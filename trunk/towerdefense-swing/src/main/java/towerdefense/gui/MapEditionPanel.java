@@ -57,8 +57,7 @@ public class MapEditionPanel extends JPanel {
 
 	public MapEditionPanel(Map map, MapPersister persister) {
 		this.map = map;
-		//setLayout(new GridLayout(2,2,1,1));
-
+		setLayout(new BorderLayout());
 		this.mapPersister = persister;
 		gridPanel = new MapPanel(map) {
 
@@ -124,7 +123,7 @@ public class MapEditionPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.exit(0);
+				selectedButton = SelectedButton.EXIT;
 
 			}
 		});
