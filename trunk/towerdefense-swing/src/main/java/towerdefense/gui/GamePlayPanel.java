@@ -1,6 +1,9 @@
 package towerdefense.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,143 +16,162 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextField;
 
 import towerdefense.gui.MapEditionPanel.SelectedButton;
+import towerdefense.gui.MapListPanel.MapSelectionListener;
+import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 
-public class GamePlayPanel extends JPanel{
-	
+public class GamePlayPanel extends JPanel implements MouseListener{
+
 	static GridPanel gridPanel;
 	static JPanel panelLabel;
 	static JPanel buttonPanel; 
-	
-	
-	private JLabel Label1;
-	private JLabel Label2;
-	private JLabel Label3;
-	private JLabel Label4;
-	
-	private JButton Tower1Button;
-	private JButton Tower2Button;
-	private JButton Tower3Button;
-	private JButton Tower4Button;
-	private JButton Tower5Button;
-	
+
+
+	private JLabel label1;
+	private JLabel label2;
+	private JLabel label3;
+	private JLabel label4;
+
+	private JTextField TextField1;
+	private JTextField TextField2;
+
+	private JTextField TextField3;
+	private JTextField TextField4;
+
+	private JButton tower1Button;
+	private JButton tower2Button;
+
+	JPanel inspectionWindow;
+	static GamePlayPanel GamePlayPanel;
+
 	public GamePlayPanel(Map map) {
 		// TODO Auto-generated constructor stub
 		setLayout(new GridLayout(2,2,1,1));
-		
+
 		gridPanel = new GridPanel(map) {
-			
+
 			@Override
 			public void coordinatesClicked(int x, int y) {
-				map.setTile(x, y, Tile.TileType.SCENERY);
+				// do nothing, really
+				//				map.setTile(x, y, Tile.TileType.SCENERY);
 			}
 		};
-		
-		//add(gridPanel);
+
+		add(gridPanel, BorderLayout.CENTER);
 		setuButtons();
-		
-	
+
+
 	}
-	
-private void setuButtons() {
-	
-	Label1 = new JLabel("Lives");
-	Label2 = new JLabel("Scores");
-	Label3 = new JLabel("Levels");
-	Label4 = new JLabel("Banks");
-	
-	Tower1Button = new JButton("Tower1");
-	Tower2Button = new JButton("Tower2");
-	Tower3Button = new JButton("Tower3");
-	Tower4Button = new JButton("Tower4");
-	Tower5Button = new JButton("Tower5");
+
+	private void setuButtons() {
+
+        inspectionWindow = new JPanel(new GridLayout(1,2));
+		//inspectionWindow = new JPanel(new GridBagLayout());
 		
+		JPanel labelContainer = new JPanel(new GridLayout(4,1));
 		
-	Tower1Button.addMouseListener(new MouseListener() {
-			
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			 JOptionPane.showConfirmDialog (null, "Would You Like to Save your Game?","Warning",JOptionPane.YES_NO_OPTION);
-			
-		}
+		//JPanel labelContainer = new JPanel();
+		label1 = new JLabel("Lives");
+		label2 = new JLabel("Scores");
+		label3 = new JLabel("Levels");
+		label4 = new JLabel("Banks");
+	
+		labelContainer.add(label1);
+		labelContainer.add(label2);
+		labelContainer.add(label3);
+		labelContainer.add(label4);
+		
+		inspectionWindow.add(labelContainer);
+		TextField1 = new JTextField("8");
+		TextField2 = new JTextField("540");
+		TextField3 = new JTextField("2");
+		TextField4 = new JTextField("34");
+		
+		this.add(inspectionWindow);
+		
+		tower1Button = new JButton("Tower1");
+		tower2Button = new JButton("BUY");
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		});
-	    
-	    panelLabel=new JPanel();
-	    panelLabel.setLayout(new GridLayout(1,4));
-	    
-	    JLabel Label1 = new JLabel("Lives");	
-        JLabel Label2 = new JLabel("Scores");
-        JLabel Label3 = new JLabel("Level");
-        JLabel Label4 = new JLabel("Banks");
-        
-        panelLabel.add(Label1);
-        panelLabel.add(Label2);
-        panelLabel.add(Label3);
-        panelLabel.add(Label4);
-        	
 		buttonPanel = new JPanel();
-//		buttonPanel.setLayout(new GridLayout(2,3));
-		buttonPanel.add(Tower1Button);
-		buttonPanel.add(Tower2Button);
-		buttonPanel.add(Tower3Button);
-		buttonPanel.add(Tower4Button);
-		buttonPanel.add(Tower5Button);		
-		
-		
-		
-}	
+		buttonPanel.add(tower1Button);		
 
+		//		add(panelLabel,BorderLayout.EAST);
+		add(buttonPanel);	
+		tower1Button.addMouseListener(this);
+		
+	}	
+
+	private static void createAndShowGUI() {
+		//Create and set up the window.
+		JFrame frame = new JFrame("GamePlayPanel");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		Map map = new Map(10,10);
+		GamePlayPanel = new GamePlayPanel(map);
+		frame.setContentPane(GamePlayPanel);
+
+		//Display the window.
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+
+//		JPanel textContainer = new JPanel();
+		JPanel textContainer = new JPanel(new GridLayout(4,1));
+		
+		textContainer.add(TextField1);
+	    
+		textContainer.add(TextField2);
 	
+		textContainer.add(TextField3);
+		
+		textContainer.add(TextField4);
 
-		private static void createAndShowGUI() {
+ //       textContainer.setVisible(true);
+		inspectionWindow.add(textContainer);
+		revalidate();
 
-        JFrame frame = new JFrame("GamePlayPanel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
 
-        Map map = new Map(10,10);
-        GamePlayPanel GamePlayPanel = new GamePlayPanel(map);
-        frame.getContentPane().add(GamePlayPanel);
-        frame.add(gridPanel,BorderLayout.CENTER);
-        frame.add(panelLabel,BorderLayout.NORTH);
-        frame.add(buttonPanel,BorderLayout.EAST);
- 
-       frame.pack();
-        frame.setVisible(true);
-    }
- 
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
