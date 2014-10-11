@@ -45,17 +45,16 @@ public class MapListPanel extends JPanel {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = constraints.weighty = 1.0;
-//		constraints.anchor = GridBagConstraints.EAST;
 		add(scrollPane, constraints);
 		
-		DefaultListSelectionModel defaultListSelectionModel = new DefaultListSelectionModel();
-		defaultListSelectionModel.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-		defaultListSelectionModel.addListSelectionListener(new ListSelectionListener() {
+		final DefaultListSelectionModel selectionModel = new DefaultListSelectionModel();
+		selectionModel.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (e.getValueIsAdjusting() == false) {
-					int selectedIndex = e.getFirstIndex();
+					int selectedIndex = selectionModel.isSelectedIndex(e.getFirstIndex()) ? e.getFirstIndex() : e.getLastIndex();
 					if (selectedIndex >= 0) {
 						String mapName = mapListModel.getElementAt(selectedIndex);
 						try {
@@ -69,7 +68,7 @@ public class MapListPanel extends JPanel {
 				}
 			}
 		});
-		mapList.setSelectionModel(defaultListSelectionModel);
+		mapList.setSelectionModel(selectionModel);
 	}
 	
 	
