@@ -1,5 +1,6 @@
 package towerdefense.gui;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,7 +57,7 @@ public class MapEditionPanel extends JPanel {
 
 	public MapEditionPanel(Map map, MapPersister persister) {
 		this.map = map;
-		setLayout(new GridLayout(2,2,1,1));
+		//setLayout(new GridLayout(2,2,1,1));
 
 		this.mapPersister = persister;
 		gridPanel = new MapPanel(map) {
@@ -82,19 +83,19 @@ public class MapEditionPanel extends JPanel {
 				if(selectedButton == SelectedButton.ENTRY) {
 					
 					map.setStartTile(new Coordinate(x, y));
-					map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+					//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 					
 				}
 				
 				if(selectedButton == SelectedButton.EXIT) {
 					map.setEndTile(new Coordinate(x, y));
-					map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+					//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 				}
 
 			}
 		};
 
-		add(gridPanel);
+		add(gridPanel,BorderLayout.CENTER);
 		setuButtons();
 
 
@@ -176,7 +177,7 @@ public class MapEditionPanel extends JPanel {
 		buttonPanel.add(scenery_button);		
 		buttonPanel.add(save_button);
 
-		add(buttonPanel);
+		add(buttonPanel,BorderLayout.EAST);
 
 
 	}
