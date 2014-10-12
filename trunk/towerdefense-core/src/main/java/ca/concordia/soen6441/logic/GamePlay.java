@@ -3,10 +3,11 @@ package ca.concordia.soen6441.logic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class GamePlay implements Serializable {
+public class GamePlay extends Observable implements Serializable {
 
 	/**
 	 * 
@@ -15,26 +16,27 @@ public class GamePlay implements Serializable {
 
 	final Map map;
 	final List<Tower> towers = new ArrayList<Tower>();
-	
+
 	int currency;
 
 	public GamePlay(Map map, int currency) {
 		super();
 		this.map = map;
 		this.currency = currency;
-		
+
 	}
 
 	public boolean buy(Tower tower) {
 		if (tower.getBuyCost() <= currency) {
-			currency -= tower.getBuyCost();
+			currency = currency - tower.getBuyCost();
 			towers.add(tower);
+			notifyWithChange();
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public boolean hasTower(int x, int y) {
 		for (Tower tower : towers) {
 			if (tower.getCoordinate().equals(new Coordinate(x, y))) {
@@ -43,7 +45,7 @@ public class GamePlay implements Serializable {
 		}
 		return false;
 	}
-	
+
 	public Tower getTower(int x, int y) {
 		for (Tower tower : towers) {
 			if (tower.getCoordinate().equals(new Coordinate(x, y))) {
@@ -63,15 +65,14 @@ public class GamePlay implements Serializable {
 	 */
 	public boolean upgrade(Tower tower) {
 		// implement upgrade logic here
-		if (tower.canUpgrade()){
-	        if (currency-tower.getUpgradeCost()>=0){
-	            currency=-tower.getUpgradeCost();
-	            tower.doUpgrade();}
-	
+		if (tower.canUpgrade() && currency >= tower.getUpgradeCost()) {
+			currency = currency - tower.getUpgradeCost();
+			tower.doUpgrade();
+			notifyWithChange();
 			return true;
-		}else{
-		
-		return false;
+		} else {
+
+			return false;
 		}
 	}
 
@@ -92,5 +93,21 @@ public class GamePlay implements Serializable {
 	public Map getMap() {
 		return map;
 	}
+
+	public List<Tower> getTowers() {
+		return new ArrayList<>(towers);
+	}
+	
+	private void notifyWithChange() {
+		setChanged();
+		notifyObservers();
+	}
+
+	public void sell(Tower tower) {
+		currency = currency + tower.getRefundRate();
+		towers.remove(tower);
+		notifyWithChange();
+	}
+	
 
 }
