@@ -18,11 +18,14 @@ public class GamePlay extends Observable implements Serializable {
 	final List<Tower> towers = new ArrayList<Tower>();
 
 	int currency;
+	
+	int lives;
 
 	public GamePlay(Map map, int currency) {
 		super();
 		this.map = map;
 		this.currency = currency;
+		this.lives = 3;
 
 	}
 
@@ -38,7 +41,7 @@ public class GamePlay extends Observable implements Serializable {
 	}
 	
 	public boolean canPlace(Tower tower) {
-		return getMap().canPlace(tower, tower.getX(), tower.getY());
+		return getMap().canPlace(tower);
 	}
 
 	public boolean hasTower(int x, int y) {
@@ -103,9 +106,15 @@ public class GamePlay extends Observable implements Serializable {
 	public Map getMap() {
 		return map;
 	}
+	
+	
 
 	public List<Tower> getTowers() {
 		return new ArrayList<>(towers);
+	}
+
+	public int getLives() {
+		return lives;
 	}
 	
 }
