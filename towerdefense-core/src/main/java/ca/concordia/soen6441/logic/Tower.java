@@ -9,35 +9,13 @@ import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 public class Tower extends Observable {
 	
-	 
-	// ths is shown in the tower inspection window
-
-//	int damage;
-//	
-//	int buyCost;
-//	
-//	/**
-//	 * Percentage of refund rate
-//	 */
-//	int refundRate;
-//	
-//	int range;
-//	
-//	int level;
 	
 	int level;
 	
 	final Coordinate coordinate;
 	
 	final TowerFactory towerFactory;
-	
 
-	// end of what is shown in the tower inspection window
-	
-	
-	
-	
-	
 	public int getX() {
 		return coordinate.getX();
 	}
@@ -95,7 +73,7 @@ public class Tower extends Observable {
 	}
 	
 	public int getUpgradeCost() {
-		return getTowerFactory().getLevelInformation(this.getClass(), level).getBuyCost();
+		return getTowerFactory().getLevelInformation(this.getClass(), level+1).getBuyCost();
 	}
 	
 	/**
