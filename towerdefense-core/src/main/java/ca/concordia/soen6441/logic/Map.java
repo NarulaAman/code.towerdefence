@@ -53,7 +53,19 @@ public class Map extends Observable implements Serializable {
 		return grid[x][y];
 	}
 
-	public boolean canPlace(Tower tower, int x, int y) {
+	public boolean canPlace(Tower tower) {
+		if (hasStartTile()) {
+			if (tower.getCoordinate().equals(getStartTile())) {
+				return false;
+			}
+		}
+		if (hasEndTile()) {
+			if (tower.getCoordinate().equals(getEndTile())) {
+				return false;
+			}
+		}
+		int x = tower.getCoordinate().getX();
+		int y = tower.getCoordinate().getY();
 		Tile tile = grid[x][y];
 		return tile.getType() == Tile.TileType.SCENERY;
 	}
