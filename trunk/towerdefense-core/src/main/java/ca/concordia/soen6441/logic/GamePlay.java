@@ -27,7 +27,7 @@ public class GamePlay extends Observable implements Serializable {
 	}
 
 	public boolean buy(Tower tower) {
-		if (tower.getBuyCost() <= currency) {
+		if (canPlace(tower) && tower.getBuyCost() <= currency) {
 			currency = currency - tower.getBuyCost();
 			towers.add(tower);
 			notifyWithChange();
@@ -35,6 +35,10 @@ public class GamePlay extends Observable implements Serializable {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean canPlace(Tower tower) {
+		return getMap().canPlace(tower, tower.getX(), tower.getY());
 	}
 
 	public boolean hasTower(int x, int y) {
@@ -76,28 +80,6 @@ public class GamePlay extends Observable implements Serializable {
 		}
 	}
 
-	public int getCurrency() {
-		return currency;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-
-	public int totalTowers() {
-		return towers.size();
-	}
-
-	public Map getMap() {
-		return map;
-	}
-
-	public List<Tower> getTowers() {
-		return new ArrayList<>(towers);
-	}
-	
 	private void notifyWithChange() {
 		setChanged();
 		notifyObservers();
@@ -110,4 +92,20 @@ public class GamePlay extends Observable implements Serializable {
 	}
 	
 
+	public int totalTowers() {
+		return towers.size();
+	}
+	
+	public int getCurrency() {
+		return currency;
+	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public List<Tower> getTowers() {
+		return new ArrayList<>(towers);
+	}
+	
 }
