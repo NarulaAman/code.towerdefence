@@ -89,7 +89,7 @@ public class TowerPanel extends JPanel implements Observer{
 		levelTxtFld .setText("" + tower.getLevel());
 		refundTxtFld.setText("" + tower.getRefundRate());
 		if (tower.canUpgrade()) {
-			upgradeCostTxtFld .setText("" + tower.getBuyCost());
+			upgradeCostTxtFld .setText("" + tower.getUpgradeCost());
 			upgradeBtn.setEnabled(true);
 		}
 		else {
