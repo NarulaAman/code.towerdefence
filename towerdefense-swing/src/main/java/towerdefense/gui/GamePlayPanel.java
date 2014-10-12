@@ -125,7 +125,7 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
 		towersToBuyPanel.add(buyTowerBtn);
-		buyTowerBtn.setToolTipText("<html>Range: 4<br>Damage: 10<br>Refund rate: 90</html>" );
+		buyTowerBtn.setToolTipText(towerFactory.getLevelInformation(Tower.class, 1).toHtmlString());
 		sideBar.add(towersToBuyPanel);
 		
 	}
