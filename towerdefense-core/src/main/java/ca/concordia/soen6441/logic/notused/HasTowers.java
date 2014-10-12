@@ -1,4 +1,6 @@
-package ca.concordia.soen6441.logic;
+package ca.concordia.soen6441.logic.notused;
+
+import ca.concordia.soen6441.logic.Tower;
 
 
 public interface HasTowers {
