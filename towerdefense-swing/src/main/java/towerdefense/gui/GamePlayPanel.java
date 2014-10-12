@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,14 +15,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import towerdefense.gui.GamePanel.TowerSelectedListener;
+import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class GamePlayPanel extends JPanel implements MouseListener{
+public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
 
-	MapPanel gridPanel;
+	
+	
+	private enum State {
+		NOTHING,
+		BUYING_TOWER
+	}
+	GamePanel gridPanel;
 	JPanel panelLabel;
 	JPanel buttonPanel; 
 
@@ -32,34 +41,33 @@ public class GamePlayPanel extends JPanel implements MouseListener{
 	private JLabel levelsLbl = new JLabel("Levels");
 	private JLabel banksLbl = new JLabel("Banks");
 
-	private JTextField livesTxtFld = new JTextField("8");
-	private JTextField scoreTxtFld = new JTextField("540");
-	private JTextField levelsTxtFld = new JTextField("2");
-	private JTextField banksTxtFld = new JTextField("34");
+	private JTextField livesTxtFld = new JTextField("");
+	private JTextField scoreTxtFld = new JTextField("");
+	private JTextField levelsTxtFld = new JTextField("");
+	private JTextField banksTxtFld = new JTextField("");
 	
-	private TowerPanel towerInspectionPanel = new TowerPanel();
+	private final TowerPanel towerInspectionPanel = new TowerPanel();
 	
-	private JButton buyTower1Btn = new JButton("Tower1");
-	private JButton tower2Button = new JButton("BUY");
+	private JButton buyTowerBtn = new JButton("Buy Tower");
+	private TowerFactory towerFactory = new TowerFactory();
+	private Class<? extends Tower> towerToBuy = null;
+	private Tower selectedTower = null;
+	
+	private State state = State.NOTHING;
 
-	JPanel inspectionWindow;
-
-	public GamePlayPanel(Map map) {
-		// TODO Auto-generated constructor stub
-		setLayout(new BorderLayout());
-
-		gridPanel = new MapPanel(map) {
-
-			@Override
-			public void coordinatesClicked(int x, int y) {
-				// do nothing, really
-				//				map.setTile(x, y, Tile.TileType.SCENERY);
-			}
-		};
+	private GamePlay gamePlay;
+	public GamePlayPanel(GamePlay gamePlay) {
+		super(new BorderLayout());
+		this.gamePlay = gamePlay;
+		gamePlay.addObserver(this);
+		gridPanel = new GamePanel(gamePlay);
+		gridPanel.setMapGridCoordinateClickedListener(this);
+		gridPanel.setTowerSelectedListener(this);
 
 		add(gridPanel, BorderLayout.CENTER);
 		setupSidebar();
-
+		towerInspectionPanel.setVisible(false);
+		update(null, null);
 
 	}
 
@@ -74,45 +82,50 @@ public class GamePlayPanel extends JPanel implements MouseListener{
 		setupTowerAvailableToBuyPanel(sideBar);
 
 		setupInspectionWindow(sideBar);
-        inspectionWindow = new JPanel(new GridLayout(1,2));
-		//inspectionWindow = new JPanel(new GridBagLayout());
-	
-		
 
-		
-
-		
-		
-		
-//		this.add(inspectionWindow);
-	
-
-		
-		
-		//		add(panelLabel,BorderLayout.EAST);
-//		add(buttonPanel);	
-		buyTower1Btn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		setupButtons();
 		
 		
 		add(sideBar, BorderLayout.EAST);
 	}	
 
+	private void setupButtons() {
+		buyTowerBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				state = State.BUYING_TOWER;
+				towerToBuy = Tower.class;
+				towerInspectionPanel.setVisible(false);
+			}
+		});
+		
+	}
+
 	private void setupInspectionWindow(JPanel sideBar) {
 		sideBar.add(towerInspectionPanel);
-		towerInspectionPanel.show(new TowerFactory().towerOnCoordinate(Tower.class, new Coordinate(0,0)));
+		
+		towerInspectionPanel.getSellBtn().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gamePlay.sell(selectedTower);
+				towerInspectionPanel.setVisible(false);
+			}
+		});
+		
+		towerInspectionPanel.getUpgradeBtn().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gamePlay.upgrade(selectedTower);
+			}
+		});
 	}
 
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
-		towersToBuyPanel.add(buyTower1Btn);
-		buyTower1Btn.setToolTipText("<html>Range: 4<br>Damage: 10<br>Refund rate: 90</html>" );
+		towersToBuyPanel.add(buyTowerBtn);
+		buyTowerBtn.setToolTipText("<html>Range: 4<br>Damage: 10<br>Refund rate: 90</html>" );
 		sideBar.add(towersToBuyPanel);
 		
 	}
@@ -147,7 +160,8 @@ public class GamePlayPanel extends JPanel implements MouseListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Map map = new Map(10,10);
-		GamePlayPanel gamePlayPanel = new GamePlayPanel(map);
+		GamePlay gamePlay = new GamePlay(map, 1000);
+		GamePlayPanel gamePlayPanel = new GamePlayPanel(gamePlay);
 		frame.setContentPane(gamePlayPanel);
 
 		//Display the window.
@@ -163,50 +177,31 @@ public class GamePlayPanel extends JPanel implements MouseListener{
 		});
 	}
 
+
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mapGridCoordinateClicked(Coordinate gridCoordinate) {
+		if (state == State.BUYING_TOWER) {
+			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, gridCoordinate);
+			getGamePlay().buy(tower);
+			state = State.NOTHING;
+		}
 		
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void towerSelected(Tower tower) {
+		selectedTower = tower;
+		towerInspectionPanel.show(selectedTower);
+		towerInspectionPanel.setVisible(true);
 	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-
-//		JPanel textContainer = new JPanel();
-		JPanel textContainer = new JPanel(new GridLayout(4,1));
-		
-		textContainer.add(livesTxtFld);
-	    
-		textContainer.add(scoreTxtFld);
 	
-		textContainer.add(levelsTxtFld);
-		
-		textContainer.add(banksTxtFld);
-
- //       textContainer.setVisible(true);
-		inspectionWindow.add(textContainer);
-		revalidate();
-
-		
+	public GamePlay getGamePlay() {
+		return gamePlay;
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void update(Observable o, Object arg) {
+		banksTxtFld.setText("" + gamePlay.getCurrency());
 		
 	}
 }

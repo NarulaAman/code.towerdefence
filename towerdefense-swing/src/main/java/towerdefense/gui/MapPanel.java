@@ -19,6 +19,10 @@ import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 public abstract class MapPanel extends JPanel implements Observer{
 
+	public interface MapGridCoordinateClickedListener {
+		void mapGridCoordinateClicked(Coordinate gridCoordinate);
+	}
+	
 	private static final Image ENEMY_PATH_ICON = new ImageIcon("tilepath.jpg")
 			.getImage();
 	private static final Image SCENERY_ICON = new ImageIcon("grass.jpg")
@@ -29,6 +33,8 @@ public abstract class MapPanel extends JPanel implements Observer{
 			.getImage();
 
 	Map map;
+	
+	
 
 	public MapPanel(Map map) {
 		super();

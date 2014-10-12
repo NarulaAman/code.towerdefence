@@ -109,6 +109,8 @@ public class Tower extends Observable {
 	
 	public boolean doUpgrade() {
 		level = level + 1;
+		setChanged();
+		notifyObservers();
 		return true;
 	}
 	
