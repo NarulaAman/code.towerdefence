@@ -38,9 +38,9 @@ public class TowerLevelCaracteristic {
 	}
 
 	public String toHtmlString() {
-		return "TowerLevelCaracteristic [damage=" + damage + ", buyCost="
-				+ buyCost + ", refundRate=" + refundRate + ", range=" + range
-				+ "]";
+		return "<html>Damage: " + damage + "<br>Buy cost: "
+				+ buyCost + "<br>Refund: " + refundRate + "<br>Range: " + range
+				+ "</html>";
 	}
 	
 	

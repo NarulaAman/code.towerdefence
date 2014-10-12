@@ -23,7 +23,7 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JLabel damageLbl = new JLabel("Damage:");
 	private final JLabel rangeLbl = new JLabel("Range:");
 	private final JLabel levelLbl = new JLabel("Level:");
-	private final JLabel refundLbl = new JLabel("Refund %:");
+	private final JLabel refundLbl = new JLabel("Refund:");
 	private final JLabel upgradeCostLbl = new JLabel("Upgrade cost:");
 	
 	private final JTextField costTxtFld = new JTextField("");
