@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Observer {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = constraints.weighty = 1.0;
-		mapPanel = new MapPanel(gamePlay.getMap()) {
+		mapPanel = new MapPanel() {
 			@Override
 			public void coordinatesClicked(int x, int y) {
 				if (getGamePlay().hasTower(x, y))
@@ -50,6 +50,7 @@ public class GamePanel extends JPanel implements Observer {
 					
 			}
 		};
+		mapPanel.setMap(gamePlay.getMap());
 		add(mapPanel, constraints);
 	}
 	

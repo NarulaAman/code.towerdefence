@@ -1,9 +1,10 @@
 package towerdefense.gui;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JList;
@@ -31,9 +32,9 @@ public class MapListPanel extends JPanel {
 	
 	private final JList<String> mapList;
 	
-	final MapListModel mapListModel;
+	private final MapListModel mapListModel;
 	
-	MapSelectionListener mapSelectionListener = null;
+	private final List<MapSelectionListener> mapSelectionListenerList = new ArrayList<>();
 	
 	public MapListPanel(MapPersister mapPersister) {
 		this.mapPersister = mapPersister;
@@ -74,7 +75,7 @@ public class MapListPanel extends JPanel {
 	
 	
 	void fireMapSelectedListeners(Map map) {
-		if (mapSelectionListener != null) {
+		for (MapSelectionListener mapSelectionListener : mapSelectionListenerList) {
 			mapSelectionListener.mapSelected(map);
 		}
 	}
@@ -87,8 +88,8 @@ public class MapListPanel extends JPanel {
 
 
 
-	public void setMapSelectionListerner(MapSelectionListener listener) {
-		mapSelectionListener = listener;
+	public void addMapSelectionListerner(MapSelectionListener listener) {
+		mapSelectionListenerList.add(listener);
 		
 	}
 
