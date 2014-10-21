@@ -23,35 +23,22 @@ public class StartPanel extends JDialog implements MapListPanel.MapSelectionList
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	MapPanel gridPanel;
-	JPanel sideBar;
-	
-	
+	private final MapPanel gridPanel = new MapPanel();
+	private JPanel sideBar;
 	
 	private JButton startButton;
 	private JButton editButton;
 	private JButton exitButton;
 	
-	
 	private static final Icon START_ICON = new ImageIcon("start.png");
 	private static final Icon EDIT_ICON = new ImageIcon("edit.png");
 	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
-	
-	
 	
 	public StartPanel() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setButtons();
-		
-		gridPanel = new MapPanel() {
-			
-			@Override
-			public void coordinatesClicked(int x, int y) {				
-				// do nothing, really
-			}
-		};
-		
+
 		add(gridPanel, BorderLayout.CENTER);
 	
 	}

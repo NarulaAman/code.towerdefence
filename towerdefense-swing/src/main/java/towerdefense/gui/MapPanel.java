@@ -145,7 +145,6 @@ public class MapPanel extends JPanel implements Observer{
 		JFrame frame = new JFrame("HelloWorldSwing");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// Add the ubiquitous "Hello World" label.
 
 		Map map = new Map(9, 9);
 
@@ -184,12 +183,8 @@ public class MapPanel extends JPanel implements Observer{
 		if (this.map != null) {
 			this.map.deleteObserver(this);
 		}
-		this.map = null;
-		if (map != null)
-		{
-			this.map = map;
-			map.addObserver(this);
-		}
-		update(null, null);
+		this.map = map;
+		map.addObserver(this);
+		repaint();
 	}
 }

@@ -67,9 +67,10 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 		
 		this.mapPersister = persister;
 		
-
+		
 		add(gridPanel,BorderLayout.CENTER);
-		setuButtons();
+		gridPanel.addMapGridCoordinateClickedListener(this);
+		setupButtons();
 		
 		JPanel nameMapPanel = new JPanel(new GridLayout(1,2,2,2));
 		JLabel nameMapLabel = new JLabel("Please Enter the Map Name");
@@ -82,17 +83,10 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 	}
 
 
-	private void setuButtons() {
-
-		
-		
-
-
+	private void setupButtons() {
 		newButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Save your Game?","Warning",JOptionPane.YES_NO_OPTION);
 				if(dialogResult == JOptionPane.YES_OPTION);
 				{
@@ -105,9 +99,7 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				selectedButton = SelectedButton.EXIT;
-
 			}
 		});
 
@@ -176,7 +168,8 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 
 
 	public void setMap(final Map map) {
-//TODO : Update the map for the game play panel
+		this.map = map;
+		gridPanel.setMap(map);
 
 	}
 
@@ -189,6 +182,7 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 		//Add the ubiquitous "Hello World" label.
 		Map map = new Map(4, 4);
 		MapEditionPanel mapEditionPanel = new MapEditionPanel(new MapJavaSerializationPersister());
+		mapEditionPanel.setMap(map);
 		frame.getContentPane().add(mapEditionPanel);
 
 		//Display the window.
