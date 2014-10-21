@@ -33,7 +33,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		NOTHING,
 		BUYING_TOWER
 	}
-	private final GamePanel gridPanel;
+	private final GamePanel gamePlayPanel;
 
 	private final JLabel livesLbl = new JLabel("Lives");
 	private final JLabel scoreLbl = new JLabel("Scores");
@@ -60,14 +60,15 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setLayout(new BorderLayout());
 		this.gamePlay = gamePlay;
 		gamePlay.addObserver(this);
-		gridPanel = new GamePanel(gamePlay);
-		gridPanel.setMapGridCoordinateClickedListener(this);
-		gridPanel.setTowerSelectedListener(this);
+		gamePlayPanel = new GamePanel(gamePlay);
+		gamePlayPanel.setMapGridCoordinateClickedListener(this);
+		gamePlayPanel.setTowerSelectedListener(this);
 
-		add(gridPanel, BorderLayout.CENTER);
+		add(gamePlayPanel, BorderLayout.CENTER);
 		setupSidebar();
 		towerInspectionPanel.setVisible(false);
-		update(null, null);
+		readGamePlay();
+		pack();
 	}
 
 	private void setupSidebar() {

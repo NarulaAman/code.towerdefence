@@ -10,10 +10,12 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import towerdefense.gui.actions.MapEditAction;
+import towerdefense.gui.actions.StartGamePlayAction;
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
+import ca.concordia.soen6441.io.MapPersister;
 import ca.concordia.soen6441.logic.Map;
 
 public class StartGameDialog extends JDialog implements MapListPanel.MapSelectionListener{
@@ -26,33 +28,33 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private final MapPanel gridPanel = new MapPanel();
 	private JPanel sideBar;
 	
-	private JButton startButton;
-	private JButton editButton;
-	private JButton exitButton;
+	private final JButton startBtn = new JButton();
+	private final JButton editBtn = new JButton(EDIT_ICON);	
+	private final JButton exitBtn = new JButton(EXIT_ICON);
 	
-	private static final Icon START_ICON = new ImageIcon("start.png");
+	
+	private final MapListPanel mapListPanel;
+	
 	private static final Icon EDIT_ICON = new ImageIcon("edit.png");
 	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
 	
-	public StartGameDialog() {
+	public StartGameDialog(MapPersister mapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setupButtons();
-
+		startBtn.setAction(startGamePlayAction);
+		editBtn.setAction(mapEditAction);
+		mapListPanel = new MapListPanel(mapDao);
+		mapListPanel.addMapSelectionListerner(this);
+		mapListPanel.addMapSelectionListerner(mapEditAction);
+		mapListPanel.addMapSelectionListerner(startGamePlayAction);
 		add(gridPanel, BorderLayout.CENTER);
-		
+		setupSideBar(mapDao);
 		pack();
 	}
 
 
-	private void setupButtons() {
-		
-		startButton = new JButton(START_ICON );
-		exitButton = new JButton(EXIT_ICON);
-		editButton = new JButton(EDIT_ICON);		
-		
-		
-		exitButton.addActionListener(new ActionListener() {
+	private void setupSideBar(MapPersister mapDao) {
+		exitBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -64,14 +66,12 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		sideBar = new JPanel();
 		sideBar.setPreferredSize(new Dimension(100, 600));
 		sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
-		sideBar.add(startButton);		
-		sideBar.add(editButton);
-		sideBar.add(exitButton);
+		sideBar.add(startBtn);		
+		sideBar.add(editBtn);
+		sideBar.add(exitBtn);
 		
-		MapJavaSerializationPersister persister = new MapJavaSerializationPersister();
 		
-		MapListPanel mapListPanel = new MapListPanel(persister);
-		mapListPanel.addMapSelectionListerner(this);
+		
 		sideBar.add(mapListPanel);
 		add(sideBar,BorderLayout.EAST);
 
@@ -80,10 +80,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 
 	
 	private static void createAndShowGUI() {
-        //Create and set up the window.
-//        JFrame frame = new JFrame("StartPanel");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        StartGameDialog startPanel = new StartGameDialog();
+        StartGameDialog startPanel = new StartGameDialog(new MapJavaSerializationPersister(), null, null);
         
         startPanel.setVisible(true);
     }
