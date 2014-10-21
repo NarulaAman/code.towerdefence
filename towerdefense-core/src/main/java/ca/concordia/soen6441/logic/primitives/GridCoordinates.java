@@ -1,4 +1,4 @@
-package towerdefense.gui;
+package ca.concordia.soen6441.logic.primitives;
 
 public class GridCoordinates {
 
