@@ -19,10 +19,10 @@ import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public abstract class MapPanel extends JPanel implements Observer{
+public class MapPanel extends JPanel implements Observer{
 
 	public interface MapGridCoordinateClickedListener {
-		void mapGridCoordinateClicked(Coordinate gridCoordinate);
+		void mapGridCoordinateClicked(int x, int y);
 	}
 	
 	private static final Image ENEMY_PATH_ICON = new ImageIcon("tilepath.jpg")
@@ -44,17 +44,29 @@ public abstract class MapPanel extends JPanel implements Observer{
 
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				if (map == null) {
+					return;
+				}
 				int x = e.getX();
 				int y = e.getY();
 //				System.out.println(screenToTileX(x) + "," + screenToTileY(y));// these co-ords are relative to
 												// the component
-				coordinatesClicked(screenToTileX(x), screenToTileY(y));
+//				coordinatesClicked(screenToTileX(x), screenToTileY(y));
+				fireMapGridCoordinateClickedListener(screenToTileX(x), screenToTileY(y));
 				
 			};
 		});
 	}
-
-	abstract public void coordinatesClicked(int x, int y);
+	
+	private void fireMapGridCoordinateClickedListener(int x, int y) {
+		for (MapGridCoordinateClickedListener listener : clickListenerList) {
+			listener.mapGridCoordinateClicked(x, y);
+		}
+	}
+	
+	public void addMapGridCoordinateClickedListener(MapGridCoordinateClickedListener listener) {
+		clickListenerList.add(listener);
+	}
 	
 	
 	
