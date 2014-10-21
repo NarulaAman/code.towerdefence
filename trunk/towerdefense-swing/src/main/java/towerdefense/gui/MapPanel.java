@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -32,9 +34,9 @@ public abstract class MapPanel extends JPanel implements Observer{
 	private static final Image EXIT_ICON = new ImageIcon("tilepath-exit.jpg")
 			.getImage();
 
-	Map map = null;
+	private Map map = null;
 	
-	
+	private final List<MapGridCoordinateClickedListener> clickListenerList = new ArrayList<>();
 
 	public MapPanel() {
 		super();
