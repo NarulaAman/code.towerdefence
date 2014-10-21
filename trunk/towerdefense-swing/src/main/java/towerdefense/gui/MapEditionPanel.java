@@ -17,21 +17,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.io.MapPersister;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class MapEditionPanel extends JPanel {
+public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	MapPanel gridPanel;
-    Map map;
+	private final MapPanel gridPanel = new MapPanel();
+    private Map map;
 
 	enum SelectedButton {
 		SCENERY,
@@ -42,11 +43,11 @@ public class MapEditionPanel extends JPanel {
 
 
 	private JButton newButton = new JButton(NEW_ICON);;
-	private JButton entry_button = new JButton(ENTRY_ICON);
-	private JButton exit_button= new JButton(EXIT_ICON);
-	private JButton path_button = new JButton(PATH_ICON);
-	private JButton scenery_button = new JButton(SCENERY_BUTTON_ICON);
-	private JButton save_button = new JButton(SAVE_ICON);
+	private JButton entryButton = new JButton(ENTRY_ICON);
+	private JButton exitButton= new JButton(EXIT_ICON);
+	private JButton pathButton = new JButton(PATH_ICON);
+	private JButton sceneryButton = new JButton(SCENERY_BUTTON_ICON);
+	private JButton saveButton = new JButton(SAVE_ICON);
 
 	private static final Icon NEW_ICON = new ImageIcon("newb.png");
 	private static final Icon ENTRY_ICON = new ImageIcon("entry.png");
@@ -61,40 +62,11 @@ public class MapEditionPanel extends JPanel {
 	private final MapPersister mapPersister;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
-	public MapEditionPanel(final Map map, MapPersister persister) {
-		this.map = map;
+	public MapEditionPanel(MapPersister persister) {
 		setLayout(new BorderLayout());
 		
 		this.mapPersister = persister;
-		gridPanel = new MapPanel() {
-
-			@Override
-			public void coordinatesClicked(int x, int y) {
-				System.out.println("Grid was clicked on [ X: "+x+" ][ Y: "+y+ " ] ");
-				//				
-
-				if (selectedButton == SelectedButton.ENEMY_PATH) {
-					map.setTile(x, y, Tile.TileType.ENEMY_PATH);
-				}
-
-				if(selectedButton == SelectedButton.SCENERY) {
-					map.setTile(x, y, Tile.TileType.SCENERY);
-				}
-				
-				if(selectedButton == SelectedButton.ENTRY) {
-					
-					map.setStartTile(new Coordinate(x, y));
-					//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
-					
-				}
-				
-				if(selectedButton == SelectedButton.EXIT) {
-					map.setEndTile(new Coordinate(x, y));
-					//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
-				}
-
-			}
-		};
+		
 
 		add(gridPanel,BorderLayout.CENTER);
 		setuButtons();
@@ -129,7 +101,7 @@ public class MapEditionPanel extends JPanel {
 			}
 		});
 
-		exit_button.addActionListener(new ActionListener() {
+		exitButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -139,7 +111,7 @@ public class MapEditionPanel extends JPanel {
 			}
 		});
 
-		path_button.addActionListener(new ActionListener() {
+		pathButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -147,7 +119,7 @@ public class MapEditionPanel extends JPanel {
 			}
 		});
 
-		scenery_button.addActionListener(new ActionListener() {
+		sceneryButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -155,7 +127,7 @@ public class MapEditionPanel extends JPanel {
 			}
 		});
 		
-		entry_button.addActionListener(new ActionListener() {
+		entryButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -165,7 +137,7 @@ public class MapEditionPanel extends JPanel {
 			}
 		});
 		
-		save_button.addActionListener(new ActionListener() {
+		saveButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -182,11 +154,11 @@ public class MapEditionPanel extends JPanel {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 		buttonPanel.add(newButton);
-		buttonPanel.add(entry_button);
-		buttonPanel.add(exit_button);
-		buttonPanel.add(path_button);
-		buttonPanel.add(scenery_button);		
-		buttonPanel.add(save_button);
+		buttonPanel.add(entryButton);
+		buttonPanel.add(exitButton);
+		buttonPanel.add(pathButton);
+		buttonPanel.add(sceneryButton);		
+		buttonPanel.add(saveButton);
 
 		add(buttonPanel,BorderLayout.EAST);
 		
@@ -196,7 +168,7 @@ public class MapEditionPanel extends JPanel {
 		
 		if(nameMapText.getText()!=null)
 		{
-			save_button.setVisible(true);
+			saveButton.setVisible(true);
 		}
 
 
@@ -216,7 +188,7 @@ public class MapEditionPanel extends JPanel {
 
 		//Add the ubiquitous "Hello World" label.
 		Map map = new Map(4, 4);
-		MapEditionPanel mapEditionPanel = new MapEditionPanel(map, new MapJavaSerializationPersister());
+		MapEditionPanel mapEditionPanel = new MapEditionPanel(new MapJavaSerializationPersister());
 		frame.getContentPane().add(mapEditionPanel);
 
 		//Display the window.
@@ -232,6 +204,34 @@ public class MapEditionPanel extends JPanel {
 				createAndShowGUI();
 			}
 		});
+	}
+
+
+	@Override
+	public void mapGridCoordinateClicked(int x, int y) {
+		System.out.println("Grid was clicked on [ X: "+x+" ][ Y: "+y+ " ] ");
+		//				
+
+		if (selectedButton == SelectedButton.ENEMY_PATH) {
+			map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+		}
+
+		if(selectedButton == SelectedButton.SCENERY) {
+			map.setTile(x, y, Tile.TileType.SCENERY);
+		}
+		
+		if(selectedButton == SelectedButton.ENTRY) {
+			
+			map.setStartTile(new Coordinate(x, y));
+			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+			
+		}
+		
+		if(selectedButton == SelectedButton.EXIT) {
+			map.setEndTile(new Coordinate(x, y));
+			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+		}
+		
 	}
 
 }
