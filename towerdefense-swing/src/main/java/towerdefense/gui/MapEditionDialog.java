@@ -42,7 +42,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	}
 
 
-	private JButton newButton = new JButton(NEW_ICON);;
+	private JButton newMapButton = new JButton(NEW_ICON);;
 	private JButton entryButton = new JButton(ENTRY_ICON);
 	private JButton exitButton= new JButton(EXIT_ICON);
 	private JButton pathButton = new JButton(PATH_ICON);
@@ -85,13 +85,39 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 
 	private void setupButtons() {
-		newButton.addActionListener(new ActionListener() {
+		layoutButtons();
+		addBehaviorToButtons();
+		
+
+
+	}
+
+
+	private void layoutButtons() {
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+		buttonPanel.add(newMapButton);
+		buttonPanel.add(entryButton);
+		buttonPanel.add(exitButton);
+		buttonPanel.add(pathButton);
+		buttonPanel.add(sceneryButton);		
+		buttonPanel.add(saveButton);
+		add(buttonPanel,BorderLayout.EAST);
+		if(nameMapText.getText()!=null)
+		{
+			saveButton.setVisible(true);
+		}
+	}
+
+
+	private void addBehaviorToButtons() {
+		newMapButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Save your Game?","Warning",JOptionPane.YES_NO_OPTION);
 				if(dialogResult == JOptionPane.YES_OPTION);
 				{
-
+						// TODO: complete this!
 				}
 			}
 		});
@@ -135,7 +161,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
 					mapPersister.save(map, nameMapText.getText());
 				} catch (IOException e1) {
 					throw new RuntimeException(e1);
@@ -144,27 +169,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			}
 		});
 		
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-		buttonPanel.add(newButton);
-		buttonPanel.add(entryButton);
-		buttonPanel.add(exitButton);
-		buttonPanel.add(pathButton);
-		buttonPanel.add(sceneryButton);		
-		buttonPanel.add(saveButton);
-
-		add(buttonPanel,BorderLayout.EAST);
-		
-		
-		
-		
-		
-		if(nameMapText.getText()!=null)
-		{
-			saveButton.setVisible(true);
-		}
-
-
 	}
 
 
