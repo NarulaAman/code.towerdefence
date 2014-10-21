@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,6 +18,8 @@ import javax.swing.JTextField;
 
 import towerdefense.gui.GamePanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import ca.concordia.soen6441.io.MapJavaSerializationPersister;
+import ca.concordia.soen6441.io.MapPersister;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tower;
@@ -24,8 +27,6 @@ import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
-
-	
 	
 	private enum State {
 		NOTHING,
@@ -68,7 +69,6 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 		setupSidebar();
 		towerInspectionPanel.setVisible(false);
 		update(null, null);
-
 	}
 
 	private void setupSidebar() {
@@ -154,12 +154,13 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 		
 	}
 
-	private static void createAndShowGUI() {
+	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
 		//Create and set up the window.
 		JFrame frame = new JFrame("GamePlayPanel");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Map map = new Map(10,10);
+		MapPersister mapPersister = new MapJavaSerializationPersister();
+		Map map = mapPersister.load("DefaultMap");
 		GamePlay gamePlay = new GamePlay(map, 1000);
 		GamePlayPanel gamePlayPanel = new GamePlayPanel(gamePlay);
 		frame.setContentPane(gamePlayPanel);
@@ -172,16 +173,24 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createAndShowGUI();
+				try {
+					createAndShowGUI();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
 
 
 	@Override
-	public void mapGridCoordinateClicked(Coordinate gridCoordinate) {
+	public void mapGridCoordinateClicked(int x, int y) {
 		if (state == State.BUYING_TOWER) {
-			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, gridCoordinate);
+			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, new Coordinate(x, y));
 			getGamePlay().buy(tower);
 			state = State.NOTHING;
 		}

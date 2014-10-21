@@ -17,7 +17,7 @@ import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class GamePanel extends JPanel implements Observer {
+public class GamePanel extends JPanel implements Observer, MapGridCoordinateClickedListener {
 	
 	public interface TowerSelectedListener {
 		void towerSelected(Tower tower);
@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Observer {
 	private static final Image TOWER_ICON = new ImageIcon("tower.png")
 	
 	.getImage();
-	private final MapPanel mapPanel;
+	private final MapPanel mapPanel = new MapPanel();
 	private final GamePlay gamePlay;
 	private MapGridCoordinateClickedListener mapGridCoordinateClickedListener;
 	private TowerSelectedListener towerSelectedListener;
@@ -37,19 +37,6 @@ public class GamePanel extends JPanel implements Observer {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = constraints.weighty = 1.0;
-		mapPanel = new MapPanel() {
-			@Override
-			public void coordinatesClicked(int x, int y) {
-				if (getGamePlay().hasTower(x, y))
-				{
-					fireTowerSelected(getGamePlay().getTower(x, y));
-				}
-				else {
-					fireMapGridCoordinateClickedListener(new Coordinate(x, y));
-				}
-					
-			}
-		};
 		mapPanel.setMap(gamePlay.getMap());
 		add(mapPanel, constraints);
 	}
@@ -66,6 +53,17 @@ public class GamePanel extends JPanel implements Observer {
 		
 		
 		
+	}
+	
+	@Override
+	public void mapGridCoordinateClicked(int x, int y) {
+		if (getGamePlay().hasTower(x, y))
+		{
+			fireTowerSelected(getGamePlay().getTower(x, y));
+		}
+		else {
+			fireMapGridCoordinateClickedListener(new Coordinate(x, y));
+		}
 	}
 	
 	
@@ -126,7 +124,7 @@ public class GamePanel extends JPanel implements Observer {
 	
 	private void fireMapGridCoordinateClickedListener(Coordinate coord) {
 		if (mapGridCoordinateClickedListener != null) {
-			mapGridCoordinateClickedListener.mapGridCoordinateClicked(coord);
+			mapGridCoordinateClickedListener.mapGridCoordinateClicked(coord.getX(), coord.getY());
 		}
 	}
 
@@ -146,6 +144,4 @@ public class GamePanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		repaint();
 	}
-	
-	
 }
