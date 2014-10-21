@@ -1,9 +1,5 @@
 package ca.concordia.soen6441.logic;
 
-import java.awt.geom.Point2D;
-
-import javax.vecmath.Point2d;
-
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
 /**
