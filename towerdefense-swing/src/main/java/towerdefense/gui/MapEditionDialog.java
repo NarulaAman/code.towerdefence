@@ -87,9 +87,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private void setupButtons() {
 		layoutButtons();
 		addBehaviorToButtons();
-		
-
-
 	}
 
 
