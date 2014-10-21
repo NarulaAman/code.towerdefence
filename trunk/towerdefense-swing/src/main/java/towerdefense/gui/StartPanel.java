@@ -4,19 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.logic.Map;
 
-public class StartPanel extends JPanel implements MapListPanel.MapSelectionListener{
+public class StartPanel extends JDialog implements MapListPanel.MapSelectionListener{
 	
 	/**
 	 * 
@@ -39,24 +39,12 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 	
 	
 	
-	public StartPanel(Map map) {
+	public StartPanel() {
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
-		map = null;
-		setGridPanel(map);
 		setButtons();
 		
-	
-	}
-	
-	
-	private void setGridPanel(Map map) {
-//		if (gridPanel != null) {
-//			getLayout().removeLayoutComponent(gridPanel);
-//			remove(gridPanel);
-//			revalidate();
-//			repaint();
-//		}
-		gridPanel = new MapPanel(map) {
+		gridPanel = new MapPanel() {
 			
 			@Override
 			public void coordinatesClicked(int x, int y) {				
@@ -65,7 +53,7 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 		};
 		
 		add(gridPanel, BorderLayout.CENTER);
-		
+	
 	}
 
 
@@ -80,9 +68,7 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.exit(0);
-				
+				dispose();
 			}
 		});
 		
@@ -97,7 +83,7 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 		MapJavaSerializationPersister persister = new MapJavaSerializationPersister();
 		
 		MapListPanel mapListPanel = new MapListPanel(persister);
-		mapListPanel.setMapSelectionListerner(this);
+		mapListPanel.addMapSelectionListerner(this);
 		sideBar.add(mapListPanel);
 		add(sideBar,BorderLayout.EAST);
 
@@ -107,14 +93,15 @@ public class StartPanel extends JPanel implements MapListPanel.MapSelectionListe
 	
 	private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("StartPanel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        JFrame frame = new JFrame("StartPanel");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Map map = new Map(10, 10);
-        StartPanel startPanel = new StartPanel(map);
-        frame.setContentPane(startPanel);
+        StartPanel startPanel = new StartPanel();
+        
+//        frame.setContentPane(startPanel);
         //Display the window.
-        frame.pack();
-        frame.setVisible(true);
+        startPanel.pack();
+        startPanel.setVisible(true);
     }
  
     public static void main(String[] args) {

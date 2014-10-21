@@ -66,7 +66,7 @@ public class MapEditionPanel extends JPanel {
 		setLayout(new BorderLayout());
 		
 		this.mapPersister = persister;
-		gridPanel = new MapPanel(map) {
+		gridPanel = new MapPanel() {
 
 			/**
 			 * 

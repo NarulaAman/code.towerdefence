@@ -32,20 +32,19 @@ public abstract class MapPanel extends JPanel implements Observer{
 	private static final Image EXIT_ICON = new ImageIcon("tilepath-exit.jpg")
 			.getImage();
 
-	Map map;
+	Map map = null;
 	
 	
 
-	public MapPanel(Map map) {
+	public MapPanel() {
 		super();
 		setPreferredSize(new Dimension(640, 480));
-		setMap(map);
 
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				System.out.println(screenToTileX(x) + "," + screenToTileY(y));// these co-ords are relative to
+//				System.out.println(screenToTileX(x) + "," + screenToTileY(y));// these co-ords are relative to
 												// the component
 				coordinatesClicked(screenToTileX(x), screenToTileY(y));
 				
@@ -138,11 +137,13 @@ public abstract class MapPanel extends JPanel implements Observer{
 
 		GamePlay level = new GamePlay(map, 1000);
 
-		JPanel label = new MapPanel(new Map(10, 10)) {
+		MapPanel label = new MapPanel() {
 			public void coordinatesClicked(int x, int y) {
 				
 			}
 		};
+		
+		label.setMap(new Map(10, 10));
 		frame.getContentPane().add(label);
 
 		// Display the window.
