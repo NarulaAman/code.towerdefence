@@ -22,10 +22,8 @@ public class GamePanel extends JPanel implements Observer, MapGridCoordinateClic
 	public interface TowerSelectedListener {
 		void towerSelected(Tower tower);
 	}
-	
-	private static final Image TOWER_ICON = new ImageIcon("tower.png")
-	
-	.getImage();
+
+	private static final Image TOWER_ICON = new ImageIcon("tower.png").getImage();
 	private final MapPanel mapPanel = new MapPanel();
 	private final GamePlay gamePlay;
 	private MapGridCoordinateClickedListener mapGridCoordinateClickedListener;
