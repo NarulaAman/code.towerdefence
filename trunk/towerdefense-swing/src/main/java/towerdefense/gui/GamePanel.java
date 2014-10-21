@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Observer, MapGridCoordinateClic
 		super(new GridBagLayout());
 		this.gamePlay = gamePlay;
 		gamePlay.addObserver(this);
+		mapPanel.addMapGridCoordinateClickedListener(this);
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = constraints.weighty = 1.0;
