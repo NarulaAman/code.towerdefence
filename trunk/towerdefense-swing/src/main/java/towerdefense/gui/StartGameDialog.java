@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.logic.Map;
 
-public class StartPanel extends JDialog implements MapListPanel.MapSelectionListener{
+public class StartGameDialog extends JDialog implements MapListPanel.MapSelectionListener{
 	
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class StartPanel extends JDialog implements MapListPanel.MapSelectionList
 	private static final Icon EDIT_ICON = new ImageIcon("edit.png");
 	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
 	
-	public StartPanel() {
+	public StartGameDialog() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setButtons();
@@ -83,7 +83,7 @@ public class StartPanel extends JDialog implements MapListPanel.MapSelectionList
 //        JFrame frame = new JFrame("StartPanel");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Map map = new Map(10, 10);
-        StartPanel startPanel = new StartPanel();
+        StartGameDialog startPanel = new StartGameDialog();
         
 //        frame.setContentPane(startPanel);
         //Display the window.
