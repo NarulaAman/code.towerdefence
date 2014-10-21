@@ -37,14 +37,15 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	public StartGameDialog() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setButtons();
+		setupButtons();
 
 		add(gridPanel, BorderLayout.CENTER);
-	
+		
+		pack();
 	}
 
 
-	private void setButtons() {
+	private void setupButtons() {
 		
 		startButton = new JButton(START_ICON );
 		exitButton = new JButton(EXIT_ICON);
@@ -82,12 +83,8 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
         //Create and set up the window.
 //        JFrame frame = new JFrame("StartPanel");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Map map = new Map(10, 10);
         StartGameDialog startPanel = new StartGameDialog();
         
-//        frame.setContentPane(startPanel);
-        //Display the window.
-        startPanel.pack();
         startPanel.setVisible(true);
     }
  
