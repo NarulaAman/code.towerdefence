@@ -61,17 +61,12 @@ public class MapEditionPanel extends JPanel {
 	private final MapPersister mapPersister;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
-	public MapEditionPanel(Map map, MapPersister persister) {
+	public MapEditionPanel(final Map map, MapPersister persister) {
 		this.map = map;
 		setLayout(new BorderLayout());
 		
 		this.mapPersister = persister;
 		gridPanel = new MapPanel() {
-
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void coordinatesClicked(int x, int y) {
