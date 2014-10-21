@@ -32,25 +32,23 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 		NOTHING,
 		BUYING_TOWER
 	}
-	GamePanel gridPanel;
-	JPanel panelLabel;
-	JPanel buttonPanel; 
+	private final GamePanel gridPanel;
 
+	private final JLabel livesLbl = new JLabel("Lives");
+	private final JLabel scoreLbl = new JLabel("Scores");
+	private final JLabel levelsLbl = new JLabel("Levels");
+	private final JLabel banksLbl = new JLabel("Banks");
 
-	private JLabel livesLbl = new JLabel("Lives");
-	private JLabel scoreLbl = new JLabel("Scores");
-	private JLabel levelsLbl = new JLabel("Levels");
-	private JLabel banksLbl = new JLabel("Banks");
-
-	private JTextField livesTxtFld = new JTextField("");
-	private JTextField scoreTxtFld = new JTextField("");
-	private JTextField levelsTxtFld = new JTextField("");
-	private JTextField banksTxtFld = new JTextField("");
+	private final JTextField livesTxtFld = new JTextField("");
+	private final JTextField scoreTxtFld = new JTextField("");
+	private final JTextField levelsTxtFld = new JTextField("");
+	private final JTextField banksTxtFld = new JTextField("");
 	
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 	
-	private JButton buyTowerBtn = new JButton("Buy Tower");
-	private TowerFactory towerFactory = new TowerFactory();
+	private final JButton buyTowerBtn = new JButton("Buy Tower");
+	private final TowerFactory towerFactory = new TowerFactory();
+	
 	private Class<? extends Tower> towerToBuy = null;
 	private Tower selectedTower = null;
 	
