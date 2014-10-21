@@ -11,6 +11,7 @@ import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,7 +27,7 @@ import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
+public class GamePlayDialog extends JDialog implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
 	
 	private enum State {
 		NOTHING,
@@ -55,8 +56,8 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 	private State state = State.NOTHING;
 
 	private GamePlay gamePlay;
-	public GamePlayPanel(GamePlay gamePlay) {
-		super(new BorderLayout());
+	public GamePlayDialog(GamePlay gamePlay) {
+		setLayout(new BorderLayout());
 		this.gamePlay = gamePlay;
 		gamePlay.addObserver(this);
 		gridPanel = new GamePanel(gamePlay);
@@ -160,7 +161,7 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 		MapPersister mapPersister = new MapJavaSerializationPersister();
 		Map map = mapPersister.load("DefaultMap");
 		GamePlay gamePlay = new GamePlay(map, 1000);
-		GamePlayPanel gamePlayPanel = new GamePlayPanel(gamePlay);
+		GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
 		frame.setContentPane(gamePlayPanel);
 
 		//Display the window.
@@ -190,7 +191,7 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 		if (state == State.BUYING_TOWER) {
 			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, new Coordinate(x, y));
 			getGamePlay().buy(tower);
-			state = State.NOTHING;
+//			state = State.NOTHING;
 		}
 		
 	}
@@ -205,10 +206,14 @@ public class GamePlayPanel extends JPanel implements TowerSelectedListener, MapG
 	public GamePlay getGamePlay() {
 		return gamePlay;
 	}
+	
+	private void readGamePlay() {
+		banksTxtFld.setText("" + gamePlay.getCurrency());
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		banksTxtFld.setText("" + gamePlay.getCurrency());
+		readGamePlay();
 		
 	}
 }
