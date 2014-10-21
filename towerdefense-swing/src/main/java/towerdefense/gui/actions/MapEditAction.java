@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import towerdefense.gui.MapEditionDialog;
-import towerdefense.gui.MapListPanel;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
 import ca.concordia.soen6441.logic.Map;
 
