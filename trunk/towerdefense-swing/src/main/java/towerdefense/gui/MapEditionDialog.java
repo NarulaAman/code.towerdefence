@@ -1,7 +1,6 @@
 package towerdefense.gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,7 +24,7 @@ import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedListener {
+public class MapEditionDialog extends JDialog implements MapGridCoordinateClickedListener {
 
 	/**
 	 * 
@@ -62,7 +62,7 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 	private final MapPersister mapPersister;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
-	public MapEditionPanel(MapPersister persister) {
+	public MapEditionDialog(MapPersister persister) {
 		setLayout(new BorderLayout());
 		
 		this.mapPersister = persister;
@@ -78,8 +78,9 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 		nameMapPanel.add(nameMapLabel);
 		nameMapPanel.add(nameMapText);
 		add(nameMapPanel,BorderLayout.SOUTH);
-
-
+		
+		
+		pack();
 	}
 
 
@@ -175,19 +176,10 @@ public class MapEditionPanel extends JPanel implements MapGridCoordinateClickedL
 
 
 	private static void createAndShowGUI() {
-		//Create and set up the window.
-		JFrame frame = new JFrame("Tower Defense :: APP");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		//Add the ubiquitous "Hello World" label.
 		Map map = new Map(4, 4);
-		MapEditionPanel mapEditionPanel = new MapEditionPanel(new MapJavaSerializationPersister());
+		MapEditionDialog mapEditionPanel = new MapEditionDialog(new MapJavaSerializationPersister());
 		mapEditionPanel.setMap(map);
-		frame.getContentPane().add(mapEditionPanel);
-
-		//Display the window.
-		frame.pack();
-		frame.setVisible(true);
+		mapEditionPanel.setVisible(true);
 	}
 
 	public static void main(String[] args) {
