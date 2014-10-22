@@ -40,7 +40,7 @@ public class MapListPanel extends JPanel {
 		this.gameMapDao = gameMapDao;
 		setLayout(new GridBagLayout());
 		mapListModel = new MapListModel(gameMapDao);
-		mapListModel.readDirectory();
+		mapListModel.refreshPersistedMapList();
 		mapList = new JList<String>(mapListModel);
 		scrollPane.setViewportView(mapList);
 		GridBagConstraints constraints = new GridBagConstraints();
