@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.vecmath.Vector2d;
 
 /**
- * This class represents and X and Y coordinate formed by integers
+ * This class represents and X and Y gridPosition formed by integers
  */
 public class GridPosition implements Serializable {
 

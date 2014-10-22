@@ -26,7 +26,7 @@ public class MapListPanel extends JPanel {
 		void mapSelected(GameMap gameMap);
 	}
 	
-	private final GameMapDao mapPersister;
+	private final GameMapDao gameMapDao;
 	
 	private final JScrollPane scrollPane = new JScrollPane();
 	
@@ -36,10 +36,10 @@ public class MapListPanel extends JPanel {
 	
 	private final List<MapSelectionListener> mapSelectionListenerList = new ArrayList<>();
 	
-	public MapListPanel(GameMapDao mapPersister) {
-		this.mapPersister = mapPersister;
+	public MapListPanel(GameMapDao gameMapDao) {
+		this.gameMapDao = gameMapDao;
 		setLayout(new GridBagLayout());
-		mapListModel = new MapListModel(mapPersister);
+		mapListModel = new MapListModel(gameMapDao);
 		mapListModel.readDirectory();
 		mapList = new JList<String>(mapListModel);
 		scrollPane.setViewportView(mapList);
@@ -59,7 +59,7 @@ public class MapListPanel extends JPanel {
 					if (selectedIndex >= 0) {
 						String mapName = mapListModel.getElementAt(selectedIndex);
 						try {
-							GameMap gameMap = getMapPersister().load(mapName);
+							GameMap gameMap = getgameMapDao().load(mapName);
 							fireMapSelectedListeners(gameMap);
 						} catch (ClassNotFoundException | IOException e1) {
 							throw new RuntimeException(e1);
@@ -82,8 +82,8 @@ public class MapListPanel extends JPanel {
 
 
 
-	GameMapDao getMapPersister() {
-		return mapPersister;
+	GameMapDao getgameMapDao() {
+		return gameMapDao;
 	}
 
 

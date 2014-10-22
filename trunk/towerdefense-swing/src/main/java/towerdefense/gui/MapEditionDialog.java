@@ -58,13 +58,13 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 	JTextField nameMapText = new JTextField("DefaultMap");
 	
-	private final GameMapDao mapPersister;
+	private final GameMapDao gameMapDao;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
-	public MapEditionDialog(GameMapDao persister) {
+	public MapEditionDialog(GameMapDao gameMapDao) {
 		setLayout(new BorderLayout());
 		
-		this.mapPersister = persister;
+		this.gameMapDao = gameMapDao;
 		
 		
 		add(gridPanel,BorderLayout.CENTER);
@@ -157,7 +157,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					mapPersister.save(gameMap, nameMapText.getText());
+					gameMapDao.save(gameMap, nameMapText.getText());
 				} catch (IOException e1) {
 					throw new RuntimeException(e1);
 				}
