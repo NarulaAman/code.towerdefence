@@ -9,9 +9,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.logic.GameMap;
 
-public class MapJavaSerializationDao implements MapDao {
+public class GameMapJavaSerializationDao implements GameMapDao {
 	
 
 	
@@ -26,14 +26,14 @@ public class MapJavaSerializationDao implements MapDao {
 	}
 	
 	/* (non-Javadoc)
-	 * @see ca.concordia.soen6441.io.MapPersister#save(ca.concordia.soen6441.logic.Map, java.lang.String)
+	 * @see ca.concordia.soen6441.io.MapPersister#save(ca.concordia.soen6441.logic.GameMap, java.lang.String)
 	 */
 	@Override
-	public void save(Map map, String mapname) throws IOException {
+	public void save(GameMap gameMap, String mapname) throws IOException {
 		File file = new File(String.format(FILENAME_STRING_FORMAT, mapname));
 		FileOutputStream outPut = new FileOutputStream(file);
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
-		oos.writeObject(map);
+		oos.writeObject(gameMap);
 		oos.close();
 	}
 	
@@ -41,14 +41,14 @@ public class MapJavaSerializationDao implements MapDao {
 	 * @see ca.concordia.soen6441.io.IMapPersister#load(java.io.File)
 	 */
 	@Override
-	public Map load(String mapname) throws IOException, ClassNotFoundException {
+	public GameMap load(String mapname) throws IOException, ClassNotFoundException {
 		File file = new File(String.format(FILENAME_STRING_FORMAT, mapname));
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
-		Map map = (Map) ois.readObject();
+		GameMap gameMap = (GameMap) ois.readObject();
 		ois.close();
 		fis.close();
-		return map;
+		return gameMap;
 	}
 
 	/* (non-Javadoc)

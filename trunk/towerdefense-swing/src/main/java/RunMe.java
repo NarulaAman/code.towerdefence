@@ -2,8 +2,8 @@ import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.StartGameDialog;
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.StartGamePlayAction;
-import ca.concordia.soen6441.io.MapJavaSerializationDao;
-import ca.concordia.soen6441.io.MapDao;
+import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
+import ca.concordia.soen6441.io.GameMapDao;
 
 
 
@@ -11,12 +11,12 @@ public class RunMe {
 
 
 	private static void createAndShowGUI() {
-		MapDao mapDao = new MapJavaSerializationDao(); 
-		MapEditionDialog mapEditionDialog = new MapEditionDialog(mapDao);
+		GameMapDao gameMapDao = new GameMapJavaSerializationDao(); 
+		MapEditionDialog mapEditionDialog = new MapEditionDialog(gameMapDao);
 		mapEditionDialog.setVisible(false);
 		MapEditAction mapEditAction = new MapEditAction(mapEditionDialog);
 		StartGamePlayAction startGamePlayAction = new StartGamePlayAction();
-        StartGameDialog startPanel = new StartGameDialog(mapDao, mapEditAction, startGamePlayAction);
+        StartGameDialog startPanel = new StartGameDialog(gameMapDao, mapEditAction, startGamePlayAction);
         startPanel.setVisible(true);
     }
  

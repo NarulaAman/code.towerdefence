@@ -13,8 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import ca.concordia.soen6441.io.MapDao;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.io.GameMapDao;
+import ca.concordia.soen6441.logic.GameMap;
 
 /**
  * This Panel lists the available maps to play (if any)
@@ -23,10 +23,10 @@ public class MapListPanel extends JPanel {
 	
 	
 	public interface MapSelectionListener {
-		void mapSelected(Map map);
+		void mapSelected(GameMap gameMap);
 	}
 	
-	private final MapDao mapPersister;
+	private final GameMapDao mapPersister;
 	
 	private final JScrollPane scrollPane = new JScrollPane();
 	
@@ -36,7 +36,7 @@ public class MapListPanel extends JPanel {
 	
 	private final List<MapSelectionListener> mapSelectionListenerList = new ArrayList<>();
 	
-	public MapListPanel(MapDao mapPersister) {
+	public MapListPanel(GameMapDao mapPersister) {
 		this.mapPersister = mapPersister;
 		setLayout(new GridBagLayout());
 		mapListModel = new MapListModel(mapPersister);
@@ -59,8 +59,8 @@ public class MapListPanel extends JPanel {
 					if (selectedIndex >= 0) {
 						String mapName = mapListModel.getElementAt(selectedIndex);
 						try {
-							Map map = getMapPersister().load(mapName);
-							fireMapSelectedListeners(map);
+							GameMap gameMap = getMapPersister().load(mapName);
+							fireMapSelectedListeners(gameMap);
 						} catch (ClassNotFoundException | IOException e1) {
 							throw new RuntimeException(e1);
 						}
@@ -74,15 +74,15 @@ public class MapListPanel extends JPanel {
 	
 	
 	
-	void fireMapSelectedListeners(Map map) {
+	void fireMapSelectedListeners(GameMap gameMap) {
 		for (MapSelectionListener mapSelectionListener : mapSelectionListenerList) {
-			mapSelectionListener.mapSelected(map);
+			mapSelectionListener.mapSelected(gameMap);
 		}
 	}
 
 
 
-	MapDao getMapPersister() {
+	GameMapDao getMapPersister() {
 		return mapPersister;
 	}
 

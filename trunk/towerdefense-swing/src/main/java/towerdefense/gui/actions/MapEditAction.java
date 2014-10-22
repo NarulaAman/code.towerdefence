@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.logic.GameMap;
 
 public class MapEditAction extends AbstractAction implements MapSelectionListener {
 	
@@ -19,7 +19,7 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	
 	private static final long serialVersionUID = 7403090617352119267L;
 	private final MapEditionDialog mapEditionDialog;
-	private Map selectedMap = null;
+	private GameMap selectedMap = null;
 	
 	public MapEditAction(MapEditionDialog mapEditionDialog) {
 		super(null, EDIT_ICON);
@@ -34,8 +34,8 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	}
 
 	@Override
-	public void mapSelected(Map map) {
-		selectedMap = map;
+	public void mapSelected(GameMap gameMap) {
+		selectedMap = gameMap;
 		setEnabled(selectedMap != null);
 		
 	}

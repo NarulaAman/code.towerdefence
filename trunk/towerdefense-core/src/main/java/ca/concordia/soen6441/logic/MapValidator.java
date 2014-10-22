@@ -9,44 +9,44 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
 public class MapValidator {
 	
 	/**
-	 * check  validation of the map 
+	 * check  validation of the gameMap 
 	 * 
-	 * @param map
-	 *            map to be checked
+	 * @param gameMap
+	 *            gameMap to be checked
 	 *        message 
-	 *            deal with inconsistency in the map   
+	 *            deal with inconsistency in the gameMap   
 	 *            
-	 * @return false if the map is not valid
+	 * @return false if the gameMap is not valid
 	 */
 
-	public boolean isValid(Map map, StringBuilder messageIfNotValid) {
+	public boolean isValid(GameMap gameMap, StringBuilder messageIfNotValid) {
 
 		boolean mapInconsistent = false;
 
-		if (mapHasNoEnd(map)) {
-			messageIfNotValid.append("Map has no end\n");
+		if (mapHasNoEnd(gameMap)) {
+			messageIfNotValid.append("GameMap has no end\n");
 			mapInconsistent = true;
 		}
-		if (mapHasNoStart(map)) {
-			messageIfNotValid.append("Map has no end\n");
+		if (mapHasNoStart(gameMap)) {
+			messageIfNotValid.append("GameMap has no end\n");
 			mapInconsistent = true;
 		}
-		if (mapStartPositionCount(map) > 1) {
-			messageIfNotValid.append("Map has more than one start position\n");
+		if (mapStartPositionCount(gameMap) > 1) {
+			messageIfNotValid.append("GameMap has more than one start position\n");
 			mapInconsistent = true;
 		}
-		if (coordinateIsNotInTheSides(map, map.getStartGridPosition())) {
-			messageIfNotValid.append("Map start position must be on the edges\n");
+		if (coordinateIsNotInTheSides(gameMap, gameMap.getStartGridPosition())) {
+			messageIfNotValid.append("GameMap start position must be on the edges\n");
 			mapInconsistent = true;
 		}
-		if (coordinateIsNotInTheSides(map, map.getEndGridPosition())) {
-			messageIfNotValid.append("Map exit position must be on the edges\n");
+		if (coordinateIsNotInTheSides(gameMap, gameMap.getEndGridPosition())) {
+			messageIfNotValid.append("GameMap exit position must be on the edges\n");
 			mapInconsistent = true;
 
 		}
 			
-		if (distanceBtwnCoordinates(map.getStartGridPosition(), map.getEndGridPosition())) {
-			messageIfNotValid.append("Map must have distance between start and exit\n");
+		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition())) {
+			messageIfNotValid.append("GameMap must have distance between start and exit\n");
 			mapInconsistent = true;
 
 		}
@@ -72,16 +72,16 @@ public class MapValidator {
 	}
 
 	/**
-	 * Returns true if the start of the map is not on one of its sides
+	 * Returns true if the start of the gameMap is not on one of its sides
 	 * 
-	 * @param map
-	 *            map to be checked
-	 * @return true if the start of the map is not on one of its sides
+	 * @param gameMap
+	 *            gameMap to be checked
+	 * @return true if the start of the gameMap is not on one of its sides
 	 */
-	public boolean coordinateIsNotInTheSides(Map map, GridPosition coordinate) {
+	public boolean coordinateIsNotInTheSides(GameMap gameMap, GridPosition coordinate) {
 		if (coordinate.getX() == 0 || coordinate.getY() == 0
-				|| coordinate.getX() == map.getWidth() - 1
-				|| coordinate.getY() == map.getHeight() - 1) {
+				|| coordinate.getX() == gameMap.getWidth() - 1
+				|| coordinate.getY() == gameMap.getHeight() - 1) {
 
 			return false;
 		} else {
@@ -91,40 +91,40 @@ public class MapValidator {
 
 	
 	/**
-	 * Returns 0 if the map has only one start
-	 * @param map  
-	 *            map to be checked
-	 * @return 0 if the map has only one start
+	 * Returns 0 if the gameMap has only one start
+	 * @param gameMap  
+	 *            gameMap to be checked
+	 * @return 0 if the gameMap has only one start
 	 */
-	public int mapStartPositionCount(Map map) {
-		if (map.getStartGridPosition() == null) {
+	public int mapStartPositionCount(GameMap gameMap) {
+		if (gameMap.getStartGridPosition() == null) {
 			return 0;
 		}
-		// else if (map.getStartTile() != null)
+		// else if (gameMap.getStartTile() != null)
 		// {
 		return 1;
 		// }
 	}
 
 	/**
-	 * Returns false if map has no start
-	 * @param map  
-	 *            map to be checked
-	 * @return false if map has no start
+	 * Returns false if gameMap has no start
+	 * @param gameMap  
+	 *            gameMap to be checked
+	 * @return false if gameMap has no start
 	 */
-	public boolean mapHasNoStart(Map map) {
+	public boolean mapHasNoStart(GameMap gameMap) {
 
-		return map.hasStartTile() == false;
+		return gameMap.hasStartTile() == false;
 	}
 
 	/**
-	 *  Returns false if map has no end
-	 * @param map
-	 *            map to be checked
-	 * @return false if map has no end
+	 *  Returns false if gameMap has no end
+	 * @param gameMap
+	 *            gameMap to be checked
+	 * @return false if gameMap has no end
 	 */
-	public boolean mapHasNoEnd(Map map) {
-		return map.hasEndTile() == false;
+	public boolean mapHasNoEnd(GameMap gameMap) {
+		return gameMap.hasEndTile() == false;
 	}
 
 }

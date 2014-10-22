@@ -16,7 +16,7 @@ import org.junit.Test;
 public class GamePlayTest {
 	
 	private static final int START_CURRENCY = 200;
-	private Map map;
+	private GameMap gameMap;
 	private Tower tower1;
 	private Tower tower2;
 	private Tower tower3;
@@ -24,11 +24,11 @@ public class GamePlayTest {
 
 	@Before
 	public void setUp() throws Exception {
-		map = mock(Map.class);
+		gameMap = mock(GameMap.class);
 		tower1 = mock(Tower.class);
 		tower2 = mock(Tower.class);
 		tower3 = mock(Tower.class);
-		gamePlay = new GamePlay(map, 200);
+		gamePlay = new GamePlay(gameMap, 200);
 	}
 	
 	@Test

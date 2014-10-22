@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.StartGamePlayAction;
-import ca.concordia.soen6441.io.MapJavaSerializationDao;
-import ca.concordia.soen6441.io.MapDao;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
+import ca.concordia.soen6441.io.GameMapDao;
+import ca.concordia.soen6441.logic.GameMap;
 
 public class StartGameDialog extends JDialog implements MapListPanel.MapSelectionListener{
 	
@@ -37,22 +37,22 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	
 	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
 	
-	public StartGameDialog(MapDao mapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
+	public StartGameDialog(GameMapDao gameMapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		startBtn.setAction(startGamePlayAction);
 		editBtn.setAction(mapEditAction);
-		mapListPanel = new MapListPanel(mapDao);
+		mapListPanel = new MapListPanel(gameMapDao);
 		mapListPanel.addMapSelectionListerner(this);
 		mapListPanel.addMapSelectionListerner(mapEditAction);
 		mapListPanel.addMapSelectionListerner(startGamePlayAction);
 		add(gridPanel, BorderLayout.CENTER);
-		setupSideBar(mapDao);
+		setupSideBar(gameMapDao);
 		pack();
 	}
 
 
-	private void setupSideBar(MapDao mapDao) {
+	private void setupSideBar(GameMapDao gameMapDao) {
 		exitBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -95,8 +95,8 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 
 
 	@Override
-	public void mapSelected(Map map) {
-		gridPanel.setMap(map);
+	public void mapSelected(GameMap gameMap) {
+		gridPanel.setMap(gameMap);
 	}
 
 }

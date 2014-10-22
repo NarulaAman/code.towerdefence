@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
@@ -34,7 +34,7 @@ public class MapPanel extends JPanel implements Observer{
 	private static final Image EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/tilepath_exit.jpg"))
 			.getImage();
 
-	private Map map = null;
+	private GameMap gameMap = null;
 	
 	private final List<MapGridCoordinateClickedListener> clickListenerList = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class MapPanel extends JPanel implements Observer{
 
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if (map == null) {
+				if (gameMap == null) {
 					return;
 				}
 				int x = e.getX();
@@ -108,8 +108,8 @@ public class MapPanel extends JPanel implements Observer{
 		}
 	}
 
-	Map getMap() {
-		return map;
+	GameMap getMap() {
+		return gameMap;
 	}
 
 	int tileToScreenX(int x) {
@@ -146,13 +146,13 @@ public class MapPanel extends JPanel implements Observer{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-		Map map = new Map(9, 9);
+		GameMap gameMap = new GameMap(9, 9);
 
-		GamePlay level = new GamePlay(map, 1000);
+		GamePlay level = new GamePlay(gameMap, 1000);
 
 		MapPanel label = new MapPanel();
 		
-		label.setMap(new Map(10, 10));
+		label.setMap(new GameMap(10, 10));
 		frame.getContentPane().add(label);
 
 		// Display the window.
@@ -175,12 +175,12 @@ public class MapPanel extends JPanel implements Observer{
 		repaint();
 	}
 	
-	public void setMap(Map map) {
-		if (this.map != null) {
-			this.map.deleteObserver(this);
+	public void setMap(GameMap gameMap) {
+		if (this.gameMap != null) {
+			this.gameMap.deleteObserver(this);
 		}
-		this.map = map;
-		map.addObserver(this);
+		this.gameMap = gameMap;
+		gameMap.addObserver(this);
 		repaint();
 	}
 }
