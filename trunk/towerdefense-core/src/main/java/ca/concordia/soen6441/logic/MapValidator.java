@@ -1,6 +1,6 @@
 package ca.concordia.soen6441.logic;
 
-import ca.concordia.soen6441.logic.primitives.Coordinate;
+import ca.concordia.soen6441.logic.primitives.IntCoordinate;
 
 /**
  *
@@ -59,7 +59,7 @@ public class MapValidator {
 		}
 	}
 	
-	public boolean distanceBtwnCoordinates(Coordinate d1,Coordinate d2) {
+	public boolean distanceBtwnCoordinates(IntCoordinate d1,IntCoordinate d2) {
 		
 		double coordinateDistance = Math.sqrt((d1.getX()-d2.getX())*(d1.getX()-d2.getX()) + (d1.getY()-d2.getY())*(d1.getY()-d2.getY()));
 		
@@ -78,7 +78,7 @@ public class MapValidator {
 	 *            map to be checked
 	 * @return true if the start of the map is not on one of its sides
 	 */
-	public boolean coordinateIsNotInTheSides(Map map, Coordinate coordinate) {
+	public boolean coordinateIsNotInTheSides(Map map, IntCoordinate coordinate) {
 		if (coordinate.getX() == 0 || coordinate.getY() == 0
 				|| coordinate.getX() == map.getWidth() - 1
 				|| coordinate.getY() == map.getHeight() - 1) {

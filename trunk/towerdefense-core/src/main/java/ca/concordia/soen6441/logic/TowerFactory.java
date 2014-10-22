@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import ca.concordia.soen6441.logic.primitives.Coordinate;
+import ca.concordia.soen6441.logic.primitives.IntCoordinate;
 
 public class TowerFactory {
 	
@@ -25,7 +25,7 @@ public class TowerFactory {
 		return towerTypeInformation.get(type).get(level-1);
 	}
 	
-	public Tower towerOnCoordinate(Class<? extends Tower> type, Coordinate coordinate) {
+	public Tower towerOnCoordinate(Class<? extends Tower> type, IntCoordinate coordinate) {
 		return new Tower(1, coordinate, this); // new Tower(coordinate, new TowerInformation(0, 0, 0, 0));
 	}
 	
