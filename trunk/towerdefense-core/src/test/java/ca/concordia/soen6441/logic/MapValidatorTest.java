@@ -10,51 +10,55 @@ import org.junit.Test;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 public class MapValidatorTest {
-	
-//	static GameMap gameMap = new GameMap(32, 32);
+
 
 	private MapValidator mapValidator;
 	
 	private GameMap gameMap;
-//	
-//	@BeforeClass
-//	public static void setUpBeforeClass() throws Exception {
-//		gameMap.set(Tile.ENEMY_PATH, new GridPosition(0, 0));
-//		gameMap.set(Tile.ENEMY_PATH, new GridPosition(2, 4));
-//		gameMap.set(Tile.ENEMY_PATH, new GridPosition(4, 27));
-//		gameMap.set(Tile.ENEMY_PATH, new GridPosition(5, 8));
-//		gameMap.set(Tile.ENEMY_PATH, new GridPosition(7, 14));
-//		gameMap.set(Tile.ENEMY_PATH, new GridPosition(12, 26));
-//		gameMap.set(Tile.ENEMY_PATH, new GridPosition(32, 32));
-//		
-//	}
 
 
 	@Before
 	public void setUp() throws Exception {
 		mapValidator = new MapValidator();
-		gameMap = new GameMap(32, 32);
+		gameMap = new GameMap(7, 7);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		
-	}
 
 	@Test
 	public void testIsValid() {
-		fail("Not yet implemented");
+		gameMap.setStartGridPosition(new GridPosition(0, 0));
+		gameMap.setEndGridPosition(new GridPosition(6, 6));
+		gameMap.setTile(new GridPosition(0, 1), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(1, 1), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(1, 2), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(2, 2), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(2, 3), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(3, 3), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(3, 4), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(4, 4), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(4, 5), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(5, 5), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(5, 6), Tile.ENEMY_PATH);
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		assertTrue(mapValidator.isValid(gameMap, stringBuilder));
+//		mapValidator.isValid(gameMap, stringBuilder);
+//		System.err.println(stringBuilder.toString());
 	}
 
 	@Test
 	public void testDistanceBtwnCoordinates() {
-		fail("Not yet implemented");
+		gameMap.setStartGridPosition(new GridPosition(0, 0));
+		gameMap.setEndGridPosition(new GridPosition(0, 2));
+		double distance = mapValidator.distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition());
+		assertTrue(distance > (2 - 0.1));
+		assertTrue(distance < (2 + 0.1));
 	}
 
 	@Test
 	public void testCoordinateIsNotInTheSides() {
-		
-		assertFalse(mapValidator.coordinateOnTheEdge(gameMap, new GridPosition(0, 0)));
+		assertTrue(mapValidator.coordinateOnTheEdge(gameMap, new GridPosition(0, 0)));
+		assertTrue(mapValidator.coordinateOnTheEdge(gameMap, new GridPosition(gameMap.getWidth()-1, gameMap.getHeight() - 1)));
 		assertFalse(mapValidator.coordinateOnTheEdge(gameMap, new GridPosition(1, 1)));
 	}
 
@@ -69,24 +73,41 @@ public class MapValidatorTest {
 
 	@Test
 	public void testMapHasNoStart() {
-		assertTrue(mapValidator.mapMustHaveStart(gameMap));
+		assertFalse(mapValidator.mapMustHaveStart(gameMap));
 	}
 	
 	@Test
 	public void testMapHasNoStartWithAStart() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
-		assertFalse(mapValidator.mapMustHaveStart(gameMap));
+		assertTrue(mapValidator.mapMustHaveStart(gameMap));
 	}
 
 	@Test
 	public void testMapHasNoEnd() {
-		assertTrue(mapValidator.mapMustHaveEnd(gameMap));
+		assertFalse(mapValidator.mapMustHaveEnd(gameMap));
 	}
 	
 	@Test
 	public void testMapHasNoEndWithAnEnd() {
 		gameMap.setEndGridPosition(new GridPosition(0, 0));
-		assertFalse(mapValidator.mapMustHaveEnd(gameMap));
+		assertTrue(mapValidator.mapMustHaveEnd(gameMap));
+	}
+	
+	@Test
+	public void testMapHStartReachesTheEnd() {
+		gameMap.setStartGridPosition(new GridPosition(0, 0));
+		gameMap.setEndGridPosition(new GridPosition(5, 5));
+		assertFalse(mapValidator.mapStartMustReachEnd(gameMap));
+		gameMap.setTile(new GridPosition(0, 1), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(1, 1), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(1, 2), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(2, 2), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(2, 3), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(3, 3), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(3, 4), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(4, 4), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(4, 5), Tile.ENEMY_PATH);
+		assertTrue(mapValidator.mapStartMustReachEnd(gameMap));
 	}
 
 }

@@ -32,11 +32,11 @@ public class MapValidator {
 
 		boolean mapInconsistent = false;
 
-		if (mapMustHaveEnd(gameMap)) {
+		if (! mapMustHaveEnd(gameMap)) {
 			messageIfNotValid.append("GameMap must have one end\n");
 			mapInconsistent = true;
 		}
-		if (mapMustHaveStart(gameMap)) {
+		if (! mapMustHaveStart(gameMap)) {
 			messageIfNotValid.append("GameMap must have one start\n");
 			mapInconsistent = true;
 		}
@@ -63,7 +63,7 @@ public class MapValidator {
 			mapInconsistent = true;			
 		}
 			
-		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition()) > MIN_DISTANCE_FROM_START_TO_EXIT) {
+		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition()) < MIN_DISTANCE_FROM_START_TO_EXIT) {
 			messageIfNotValid.append("GameMap must have a distance between start and exit\n");
 			mapInconsistent = true;
 		}
@@ -76,6 +76,9 @@ public class MapValidator {
 	}
 	
 	public double distanceBtwnCoordinates(GridPosition positionA,GridPosition positionB) {
+		if (positionA == null || positionB == null) {
+			return 0;
+		}
 		return  Math.sqrt((positionA.getX()-positionB.getX())*(positionA.getX()-positionB.getX()) + (positionA.getY()-positionB.getY())*(positionA.getY()-positionB.getY()));
 	}
 
@@ -91,14 +94,10 @@ public class MapValidator {
 			return false;
 		}
 			
-		if (coordinate.getX() == 0 || coordinate.getY() == 0
+		return coordinate.getX() == 0 
+				|| coordinate.getY() == 0
 				|| coordinate.getX() == gameMap.getWidth() - 1
-				|| coordinate.getY() == gameMap.getHeight() - 1) {
-
-			return false;
-		} else {
-			return true;
-		}
+				|| coordinate.getY() == gameMap.getHeight() - 1;
 	}
 
 	
@@ -132,6 +131,7 @@ public class MapValidator {
 			positionQueue.addFirst(gameMap.getStartGridPosition());
 			while (!positionQueue.isEmpty()) {
 				GridPosition currentPosition = positionQueue.getFirst();
+				positionQueue.removeFirst();
 				visitedPositions.add(currentPosition);
 				if (currentPosition.distance(gameMap.getEndGridPosition()) < 1.1) {
 					return true;
@@ -139,7 +139,7 @@ public class MapValidator {
 				List<GridPosition> walkableFromHere = gameMap.getAdjacentWalkablePositions(currentPosition);
 				for (GridPosition gridPosition : walkableFromHere) {					
 					if (! visitedPositions.contains(gridPosition)) {
-						positionQueue.addFirst(currentPosition);
+						positionQueue.addFirst(gridPosition);
 					}
 				}
 				
