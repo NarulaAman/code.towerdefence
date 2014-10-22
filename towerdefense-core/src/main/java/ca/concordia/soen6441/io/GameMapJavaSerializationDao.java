@@ -11,27 +11,35 @@ import java.util.List;
 
 import ca.concordia.soen6441.logic.GameMap;
 
+/**
+ * This class saves and loads the {@link GameMap} to a file given the
+ * map name.
+ *
+ */
 public class GameMapJavaSerializationDao implements GameMapDao {
 	
-
-	
+	/**
+	 * This is the extension used in the filename
+	 */
 	public static final String MAP_FILENAME_EXTENSION = ".map";
+	
+	/**
+	 * This is the name of the file
+	 */
 	public static final String FILENAME_STRING_FORMAT = "." + File.separator + "%s" + MAP_FILENAME_EXTENSION;
 	
 
-	/* (non-Javadoc)
+	/* Save the {@link GameMap} to the file.
 	 * @see ca.concordia.soen6441.io.gameMapDao#save(ca.concordia.soen6441.logic.GameMap, java.lang.String)
 	 */
 	@Override
-	public void save(GameMap gameMap, String mapname) throws IOException {
-		File file = new File(String.format(FILENAME_STRING_FORMAT, mapname));
-		FileOutputStream outPut = new FileOutputStream(file);
+	public void save(GameMap gameMap, String mapname) throws IOException { File file = new File(String.format(FILENAME_STRING_FORMAT, mapname)); FileOutputStream outPut = new FileOutputStream(file); 
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
 		oos.writeObject(gameMap);
 		oos.close();
 	}
 	
-	/* (non-Javadoc)
+	/* Load the {@link GameMap} from the file.
 	 * @see ca.concordia.soen6441.io.IgameMapDao#load(java.io.File)
 	 */
 	@Override
@@ -45,7 +53,7 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 		return gameMap;
 	}
 
-	/* (non-Javadoc)
+	/* List the name of all the saved {@link GameMap}.
 	 * @see ca.concordia.soen6441.io.gameMapDao#listAllNames()
 	 */
 	@Override
