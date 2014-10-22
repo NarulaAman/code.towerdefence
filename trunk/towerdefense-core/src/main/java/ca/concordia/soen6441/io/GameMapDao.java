@@ -29,6 +29,12 @@ public interface GameMapDao {
 	public GameMap load(String name) throws IOException,
 			ClassNotFoundException;
 	
+	
+	/**
+	 * List the name of all the saved {@link GameMap}
+	 * @return The list of saved maps
+	 * @throws IOException
+	 */
 	public List<String> listAllNames() throws IOException;
 
 }
