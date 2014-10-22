@@ -7,9 +7,15 @@ import ca.concordia.soen6441.io.GameMapDao;
 
 
 
+/**
+ * This is the class to be Run to start our TowerDefense game
+ */
 public class RunMe {
 
 
+	/**
+	 * Created the GUI, this should be run in the EDT
+	 */
 	private static void createAndShowGUI() {
 		GameMapDao gameMapDao = new GameMapJavaSerializationDao(); 
 		MapEditionDialog mapEditionDialog = new MapEditionDialog(gameMapDao);
@@ -20,6 +26,10 @@ public class RunMe {
         startPanel.setVisible(true);
     }
  
+    /**
+     * main method our application
+     * @param args arguments passed by the environment, they are ignored
+     */
     public static void main(String[] args) {
     	// Run the GUI in the EDT thread
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
