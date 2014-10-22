@@ -8,6 +8,7 @@ import java.util.Set;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
+ * This class validate the gameMap before saving it
  *
  */
 
@@ -17,17 +18,14 @@ public class MapValidator {
 	private static final int END_POSITION_COUNT = 1;
 	private static final int MIN_DISTANCE_FROM_START_TO_EXIT = 2;
 
+
+
 	/**
-	 * check  validation of the gameMap 
-	 * 
-	 * @param gameMap
-	 *            gameMap to be checked
-	 *        message 
-	 *            deal with inconsistency in the gameMap   
-	 *            
+	 * Check  validation of the gameMap along with the error message to be display 
+	 * @param gameMap to be checked
+	 * @param messageIfNotValid the error message to be displayed
 	 * @return false if the gameMap is not valid
 	 */
-
 	public boolean isValid(GameMap gameMap, StringBuilder messageIfNotValid) {
 
 		boolean mapInconsistent = false;
@@ -75,19 +73,22 @@ public class MapValidator {
 		}
 	}
 	
-	public double distanceBtwnCoordinates(GridPosition positionA,GridPosition positionB) {
-		if (positionA == null || positionB == null) {
+	/**
+	 * Check the distance between start and exit position 
+	 * @param positionA The start position coordinate
+	 * @param positionB The exit position coordinate
+	 * @return distance between positionA and positionB if positions are not null else return 0
+	 */
+	public double distanceBtwnCoordinates(GridPosition positionA,GridPosition positionB) { if (positionA == null || positionB == null) {
 			return 0;
 		}
 		return  Math.sqrt((positionA.getX()-positionB.getX())*(positionA.getX()-positionB.getX()) + (positionA.getY()-positionB.getY())*(positionA.getY()-positionB.getY()));
 	}
 
 	/**
-	 * Returns true if the start of the gameMap is not on one of its sides
-	 * 
-	 * @param gameMap
-	 *            gameMap to be checked
-	 * @return true if the start of the gameMap is not on one of its sides
+	 * Check true if the coordinates are on edges of the gameMap else false
+	 * @param gameMap to be checked            
+	 * @return true if the coordinates are on edges of the gameMap 
 	 */
 	public boolean coordinateOnTheEdge(GameMap gameMap, GridPosition coordinate) {
 		if (coordinate == null) {
@@ -101,6 +102,11 @@ public class MapValidator {
 	}
 
 	
+	/**
+	 * Return 0 if there is no start position on Map else 1
+	 * @param gameMap to be checked
+	 * @return 0 if there is no start position on Map 
+	 */
 	public int mapStartPositionCount(GameMap gameMap) {
 		if (gameMap.getStartGridPosition() == null) {
 			return 0;
@@ -108,6 +114,11 @@ public class MapValidator {
 		return 1;
 	}
 	
+	/**
+	 * Return 0 if there is no end position on Map else 1
+	 * @param gameMap to be checked
+	 * @return 0 if there is no end position on Map
+	 */
 	public int mapEndPositionCount(GameMap gameMap) {
 		if (gameMap.getEndGridPosition() == null) {
 			return 0;
@@ -116,14 +127,29 @@ public class MapValidator {
 	}
 	
 
+	/**
+	 * Return true if start tile is present on gameMap else false
+	 * @param gameMap to be checked
+	 * @return true if start tile is present on gameMap
+	 */
 	public boolean mapMustHaveStart(GameMap gameMap) {
 		return gameMap.hasStartTile();
 	}
 
+	/**
+	 * Return true if end tile is present on gameMap else false
+	 * @param gameMap to be checked
+	 * @return true if end tile is present on gameMap
+	 */
 	public boolean mapMustHaveEnd(GameMap gameMap) {
 		return gameMap.hasEndTile();
 	}
 	
+	/**
+	 * Check the correctness of path between start and exit point on Map
+	 * @param gameMap to be checked
+	 * @return true if the path between start point and exit point exist 
+	 */
 	public boolean mapStartMustReachEnd(GameMap gameMap) {
 		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
 			ArrayDeque<GridPosition> positionQueue = new ArrayDeque<GridPosition>();
@@ -147,7 +173,5 @@ public class MapValidator {
 		}
 		return false;
 	}
-	
-
 
 }
