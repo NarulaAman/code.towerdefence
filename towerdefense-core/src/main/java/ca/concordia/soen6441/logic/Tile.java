@@ -3,7 +3,7 @@ package ca.concordia.soen6441.logic;
 import java.io.Serializable;
 
 /**
- * This class represents a {@link Tile} of the {@link Map}
+ * This class represents a {@link Tile} of the {@link GameMap}
  */
 public class Tile implements Serializable {
 
@@ -13,7 +13,7 @@ public class Tile implements Serializable {
 	private static final long serialVersionUID = -7952947752607673719L;
 
 	/**
-	 * Types of {@link Tile} that a {@link Map} can have
+	 * Types of {@link Tile} that a {@link GameMap} can have
 	 *
 	 */
 	public enum TileType {

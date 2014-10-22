@@ -14,16 +14,16 @@ public class GamePlay extends Observable implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	final Map map;
+	final GameMap gameMap;
 	final List<Tower> towers = new ArrayList<Tower>();
 
 	int currency;
 	
 	int lives;
 
-	public GamePlay(Map map, int currency) {
+	public GamePlay(GameMap gameMap, int currency) {
 		super();
-		this.map = map;
+		this.gameMap = gameMap;
 		this.currency = currency;
 		this.lives = 3;
 
@@ -103,8 +103,8 @@ public class GamePlay extends Observable implements Serializable {
 		return currency;
 	}
 
-	public Map getMap() {
-		return map;
+	public GameMap getMap() {
+		return gameMap;
 	}
 	
 	

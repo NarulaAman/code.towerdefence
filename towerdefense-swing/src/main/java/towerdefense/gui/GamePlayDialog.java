@@ -19,10 +19,10 @@ import javax.swing.JTextField;
 
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
-import ca.concordia.soen6441.io.MapJavaSerializationDao;
-import ca.concordia.soen6441.io.MapDao;
+import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
+import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
@@ -159,9 +159,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		JFrame frame = new JFrame("GamePlayPanel");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		MapDao mapPersister = new MapJavaSerializationDao();
-		Map map = mapPersister.load("DefaultMap");
-		GamePlay gamePlay = new GamePlay(map, 1000);
+		GameMapDao mapPersister = new GameMapJavaSerializationDao();
+		GameMap gameMap = mapPersister.load("DefaultMap");
+		GamePlay gamePlay = new GamePlay(gameMap, 1000);
 		GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
 		frame.setContentPane(gamePlayPanel);
 

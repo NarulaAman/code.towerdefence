@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import towerdefense.gui.GamePlayDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.logic.GameMap;
 
 public class StartGamePlayAction extends AbstractAction implements MapSelectionListener {
 	
@@ -18,7 +18,7 @@ public class StartGamePlayAction extends AbstractAction implements MapSelectionL
 	 */
 	private static final long serialVersionUID = 7403090617352119267L;
 	private static final Icon START_ICON = new ImageIcon(Object.class.getResource("/icons/start.png"));
-	private Map selectedMap = null;
+	private GameMap selectedMap = null;
 	
 	public StartGamePlayAction() {
 		super(null, START_ICON);
@@ -33,8 +33,8 @@ public class StartGamePlayAction extends AbstractAction implements MapSelectionL
 	}
 
 	@Override
-	public void mapSelected(Map map) {
-		selectedMap = map;
+	public void mapSelected(GameMap gameMap) {
+		selectedMap = gameMap;
 		setEnabled(selectedMap != null);
 		
 	}

@@ -10,9 +10,9 @@ import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
- * This class represents the Tower Defense playable Map. 
+ * This class represents the Tower Defense playable GameMap. 
  */
-public class Map extends Observable implements Serializable {
+public class GameMap extends Observable implements Serializable {
 
 	/**
 	 * 
@@ -30,7 +30,7 @@ public class Map extends Observable implements Serializable {
 
 	public List<GridPosition> pathCoordinates = new ArrayList<GridPosition>();
 
-	public Map(int width, int height) {
+	public GameMap(int width, int height) {
 		super();
 		this.width = width;
 		this.height = height;
@@ -101,7 +101,7 @@ public class Map extends Observable implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Map other = (Map) obj;
+		GameMap other = (GameMap) obj;
 		if (height != other.height)
 			return false;
 		if (width != other.width)

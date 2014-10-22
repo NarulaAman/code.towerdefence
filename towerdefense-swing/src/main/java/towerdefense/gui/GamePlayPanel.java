@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
@@ -93,9 +93,9 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 
 		// Add the ubiquitous "Hello World" label.
 
-		Map map = new Map(9, 9);
+		GameMap gameMap = new GameMap(9, 9);
 
-		GamePlay level = new GamePlay(map, 1000);
+		GamePlay level = new GamePlay(gameMap, 1000);
 		GamePlayPanel gamePanel = new GamePlayPanel(level);
 
 		frame.getContentPane().add(gamePanel);

@@ -12,7 +12,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import ca.concordia.soen6441.io.MapJavaSerializationDao;
+import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
@@ -21,18 +21,18 @@ public class MapDaoTest {
 	
 	private static final String MAP_DATA_FILENAME = "testMapName";
 	
-	MapJavaSerializationDao mapPersister = new MapJavaSerializationDao();
-	static Map map = new Map(32, 32);
+	GameMapJavaSerializationDao mapPersister = new GameMapJavaSerializationDao();
+	static GameMap gameMap = new GameMap(32, 32);
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		
-		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(1, 2));
-		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(5, 6));
-		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(2, 27));
-		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(5, 8));
-		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(3, 13));
-		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(15, 26));
+		gameMap.set(new Tile(TileType.ENEMY_PATH), new GridPosition(1, 2));
+		gameMap.set(new Tile(TileType.ENEMY_PATH), new GridPosition(5, 6));
+		gameMap.set(new Tile(TileType.ENEMY_PATH), new GridPosition(2, 27));
+		gameMap.set(new Tile(TileType.ENEMY_PATH), new GridPosition(5, 8));
+		gameMap.set(new Tile(TileType.ENEMY_PATH), new GridPosition(3, 13));
+		gameMap.set(new Tile(TileType.ENEMY_PATH), new GridPosition(15, 26));
 		
 	}
 
@@ -52,19 +52,19 @@ public class MapDaoTest {
 	
 	@Test(expected=IOException.class)
 	public final void testLoadWithNoExistantFile() throws ClassNotFoundException, IOException {
-		Map map2 = mapPersister.load(MAP_DATA_FILENAME);
-		Assert.assertTrue(map2.equals(map));
+		GameMap map2 = mapPersister.load(MAP_DATA_FILENAME);
+		Assert.assertTrue(map2.equals(gameMap));
 	}
 
 	@Test
 	public final void testSave() throws IOException, ClassNotFoundException {
-		mapPersister.save(map, MAP_DATA_FILENAME);
+		mapPersister.save(gameMap, MAP_DATA_FILENAME);
 	}
 
 	@Test
 	public final void testLoad() throws ClassNotFoundException, IOException {
-		Map map2 = mapPersister.load(MAP_DATA_FILENAME);
-		Assert.assertTrue(map2.equals(map));
+		GameMap map2 = mapPersister.load(MAP_DATA_FILENAME);
+		Assert.assertTrue(map2.equals(gameMap));
 	}
 
 }

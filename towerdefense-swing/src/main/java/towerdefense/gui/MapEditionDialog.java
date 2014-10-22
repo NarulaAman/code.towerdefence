@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
-import ca.concordia.soen6441.io.MapJavaSerializationDao;
-import ca.concordia.soen6441.io.MapDao;
-import ca.concordia.soen6441.logic.Map;
+import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
+import ca.concordia.soen6441.io.GameMapDao;
+import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
@@ -31,7 +31,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private static final long serialVersionUID = 1L;
 
 	private final MapPanel gridPanel = new MapPanel();
-    private Map map;
+    private GameMap gameMap;
 
 	enum SelectedButton {
 		SCENERY,
@@ -58,10 +58,10 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 	JTextField nameMapText = new JTextField("DefaultMap");
 	
-	private final MapDao mapPersister;
+	private final GameMapDao mapPersister;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
-	public MapEditionDialog(MapDao persister) {
+	public MapEditionDialog(GameMapDao persister) {
 		setLayout(new BorderLayout());
 		
 		this.mapPersister = persister;
@@ -72,7 +72,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		setupButtons();
 		
 		JPanel nameMapPanel = new JPanel(new GridLayout(1,2,2,2));
-		JLabel nameMapLabel = new JLabel("Please Enter the Map Name");
+		JLabel nameMapLabel = new JLabel("Please Enter the GameMap Name");
 		
 		nameMapPanel.add(nameMapLabel);
 		nameMapPanel.add(nameMapText);
@@ -157,7 +157,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					mapPersister.save(map, nameMapText.getText());
+					mapPersister.save(gameMap, nameMapText.getText());
 				} catch (IOException e1) {
 					throw new RuntimeException(e1);
 				}
@@ -168,17 +168,17 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	}
 
 
-	public void setMap(final Map map) {
-		this.map = map;
-		gridPanel.setMap(map);
+	public void setMap(final GameMap gameMap) {
+		this.gameMap = gameMap;
+		gridPanel.setMap(gameMap);
 
 	}
 
 
 	private static void createAndShowGUI() {
-		Map map = new Map(4, 4);
-		MapEditionDialog mapEditionPanel = new MapEditionDialog(new MapJavaSerializationDao());
-		mapEditionPanel.setMap(map);
+		GameMap gameMap = new GameMap(4, 4);
+		MapEditionDialog mapEditionPanel = new MapEditionDialog(new GameMapJavaSerializationDao());
+		mapEditionPanel.setMap(gameMap);
 		mapEditionPanel.setVisible(true);
 	}
 
@@ -198,23 +198,23 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		//				
 
 		if (selectedButton == SelectedButton.ENEMY_PATH) {
-			map.setTile(gridPosition, Tile.TileType.ENEMY_PATH);
+			gameMap.setTile(gridPosition, Tile.TileType.ENEMY_PATH);
 		}
 
 		if(selectedButton == SelectedButton.SCENERY) {
-			map.setTile(gridPosition, Tile.TileType.SCENERY);
+			gameMap.setTile(gridPosition, Tile.TileType.SCENERY);
 		}
 		
 		if(selectedButton == SelectedButton.ENTRY) {
 			
-			map.setStartGridPosition(gridPosition);
-			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+			gameMap.setStartGridPosition(gridPosition);
+			//gameMap.setTile(x, y, Tile.TileType.ENEMY_PATH);
 			
 		}
 		
 		if(selectedButton == SelectedButton.EXIT) {
-			map.setEndGridPosition(gridPosition);
-			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+			gameMap.setEndGridPosition(gridPosition);
+			//gameMap.setTile(x, y, Tile.TileType.ENEMY_PATH);
 		}
 		
 	}
