@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 
-import ca.concordia.soen6441.io.MapPersister;
+import ca.concordia.soen6441.io.MapDao;
 
 public class MapListModel extends AbstractListModel<String> {
 
@@ -17,9 +17,9 @@ public class MapListModel extends AbstractListModel<String> {
 
 	private final List<String> fileList = new ArrayList<String>();
 	
-	private final MapPersister mapPersister;
+	private final MapDao mapPersister;
 	
-	public MapListModel(MapPersister mapPersister) {
+	public MapListModel(MapDao mapPersister) {
 		this.mapPersister = mapPersister;
 	}
 	

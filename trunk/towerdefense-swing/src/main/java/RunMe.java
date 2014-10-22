@@ -3,7 +3,7 @@ import towerdefense.gui.StartGameDialog;
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.StartGamePlayAction;
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
-import ca.concordia.soen6441.io.MapPersister;
+import ca.concordia.soen6441.io.MapDao;
 
 
 
@@ -11,7 +11,7 @@ public class RunMe {
 
 
 	private static void createAndShowGUI() {
-		MapPersister mapDao = new MapJavaSerializationPersister(); 
+		MapDao mapDao = new MapJavaSerializationPersister(); 
 		MapEditionDialog mapEditionDialog = new MapEditionDialog(mapDao);
 		mapEditionDialog.setVisible(false);
 		MapEditAction mapEditAction = new MapEditAction(mapEditionDialog);

@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import ca.concordia.soen6441.io.MapPersister;
+import ca.concordia.soen6441.io.MapDao;
 import ca.concordia.soen6441.logic.Map;
 
 /**
@@ -26,7 +26,7 @@ public class MapListPanel extends JPanel {
 		void mapSelected(Map map);
 	}
 	
-	private final MapPersister mapPersister;
+	private final MapDao mapPersister;
 	
 	private final JScrollPane scrollPane = new JScrollPane();
 	
@@ -36,7 +36,7 @@ public class MapListPanel extends JPanel {
 	
 	private final List<MapSelectionListener> mapSelectionListenerList = new ArrayList<>();
 	
-	public MapListPanel(MapPersister mapPersister) {
+	public MapListPanel(MapDao mapPersister) {
 		this.mapPersister = mapPersister;
 		setLayout(new GridBagLayout());
 		mapListModel = new MapListModel(mapPersister);
@@ -82,7 +82,7 @@ public class MapListPanel extends JPanel {
 
 
 
-	MapPersister getMapPersister() {
+	MapDao getMapPersister() {
 		return mapPersister;
 	}
 
