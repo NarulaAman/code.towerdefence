@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import ca.concordia.soen6441.logic.primitives.Coordinate;
+import ca.concordia.soen6441.logic.primitives.IntCoordinate;
 
 public class GamePlay extends Observable implements Serializable {
 
@@ -46,7 +46,7 @@ public class GamePlay extends Observable implements Serializable {
 
 	public boolean hasTower(int x, int y) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(new Coordinate(x, y))) {
+			if (tower.getCoordinate().equals(new IntCoordinate(x, y))) {
 				return true;
 			}
 		}
@@ -55,7 +55,7 @@ public class GamePlay extends Observable implements Serializable {
 
 	public Tower getTower(int x, int y) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(new Coordinate(x, y))) {
+			if (tower.getCoordinate().equals(new IntCoordinate(x, y))) {
 				return tower;
 			}
 		}

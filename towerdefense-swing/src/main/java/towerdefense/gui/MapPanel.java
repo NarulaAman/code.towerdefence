@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
-import ca.concordia.soen6441.logic.primitives.Coordinate;
+import ca.concordia.soen6441.logic.primitives.IntCoordinate;
 
 public class MapPanel extends JPanel implements Observer{
 
@@ -94,14 +94,14 @@ public class MapPanel extends JPanel implements Observer{
 		}
 		
 		if (getMap().hasStartTile()) {
-			Coordinate start = getMap().getStartTile();
+			IntCoordinate start = getMap().getStartTile();
 			g.drawImage(START_ICON, tileToScreenX(start.getX()),
 					tileToScreenY(start.getY()), getTileWidth(), getTileHeight(),
 					this);
 		}
 		
 		if (getMap().hasEndTile()) {
-			Coordinate end = getMap().getEndTile();
+			IntCoordinate end = getMap().getEndTile();
 			g.drawImage(EXIT_ICON, tileToScreenX(end.getX()),
 					tileToScreenY(end.getY()), getTileWidth(), getTileHeight(),
 					this);

@@ -21,7 +21,7 @@ import ca.concordia.soen6441.io.MapJavaSerializationDao;
 import ca.concordia.soen6441.io.MapDao;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
-import ca.concordia.soen6441.logic.primitives.Coordinate;
+import ca.concordia.soen6441.logic.primitives.IntCoordinate;
 
 public class MapEditionDialog extends JDialog implements MapGridCoordinateClickedListener {
 
@@ -208,13 +208,13 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		
 		if(selectedButton == SelectedButton.ENTRY) {
 			
-			map.setStartTile(new Coordinate(x, y));
+			map.setStartTile(new IntCoordinate(x, y));
 			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 			
 		}
 		
 		if(selectedButton == SelectedButton.EXIT) {
-			map.setEndTile(new Coordinate(x, y));
+			map.setEndTile(new IntCoordinate(x, y));
 			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 		}
 		

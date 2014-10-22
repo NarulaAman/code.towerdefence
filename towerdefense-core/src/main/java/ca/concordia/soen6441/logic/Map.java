@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Observable;
 
 import ca.concordia.soen6441.logic.Tile.TileType;
-import ca.concordia.soen6441.logic.primitives.Coordinate;
+import ca.concordia.soen6441.logic.primitives.IntCoordinate;
 
 /**
  * This class represents the Tower Defense playable Map. 
@@ -23,12 +23,12 @@ public class Map extends Observable implements Serializable {
 	final int width;
 	final int height;
 
-	private Coordinate startTile;
-	private Coordinate endTile;
+	private IntCoordinate startTile;
+	private IntCoordinate endTile;
 	
 	// REMOVE THIS HACK
 
-	public List<Coordinate> pathCoordinates = new ArrayList<Coordinate>();
+	public List<IntCoordinate> pathCoordinates = new ArrayList<IntCoordinate>();
 
 	public Map(int width, int height) {
 		super();
@@ -43,7 +43,7 @@ public class Map extends Observable implements Serializable {
 		}
 	}
 
-	public void set(Tile tile, Coordinate coordinate) {
+	public void set(Tile tile, IntCoordinate coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = tile;
 // TODO: remove this method
 
@@ -70,12 +70,12 @@ public class Map extends Observable implements Serializable {
 		return tile.getType() == Tile.TileType.SCENERY;
 	}
 
-	public boolean outOfBounds(Coordinate coordinate) {
+	public boolean outOfBounds(IntCoordinate coordinate) {
 		return coordinate.getX() < 0 || coordinate.getX() > width
 				|| coordinate.getY() < 0 || coordinate.getY() > height;
 	}
 
-	public void remove(Coordinate coordinate) {
+	public void remove(IntCoordinate coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = null;
 	}
 
@@ -111,11 +111,11 @@ public class Map extends Observable implements Serializable {
 		return true;
 	}
 
-	public Coordinate getStartTile() {
+	public IntCoordinate getStartTile() {
 		return startTile;
 	}
 
-	public void setStartTile(Coordinate startTile) {
+	public void setStartTile(IntCoordinate startTile) {
 		this.startTile = startTile;
 		setChanged();
 		notifyObservers();
@@ -123,22 +123,22 @@ public class Map extends Observable implements Serializable {
 	
 	
 	public boolean setStartTile(int x, int y) {
-		this.startTile = new Coordinate(x, y);
+		this.startTile = new IntCoordinate(x, y);
 		return true;
 	}
 	
 	
 
-	public Coordinate getEndTile() {
+	public IntCoordinate getEndTile() {
 		return endTile;
 	}
 
 	public boolean setEndTile(int x, int y) {
-		this.endTile = new Coordinate(x, y);
+		this.endTile = new IntCoordinate(x, y);
 		return true;
 	}
 	
-	public void setEndTile(Coordinate endTile) {
+	public void setEndTile(IntCoordinate endTile) {
 		this.endTile = endTile;
 		setChanged();
 		notifyObservers();
