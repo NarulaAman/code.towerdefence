@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 public class MapPanel extends JPanel implements Observer{
 
 	public interface MapGridCoordinateClickedListener {
-		void mapGridCoordinateClicked(IntCoordinate intCoordinate);
+		void mapGridCoordinateClicked(GridPosition gridPosition);
 	}
 	
 	private static final Image ENEMY_PATH_ICON = new ImageIcon("tilepath.jpg")
@@ -52,15 +52,15 @@ public class MapPanel extends JPanel implements Observer{
 //				System.out.println(screenToTileX(x) + "," + screenToTileY(y));// these co-ords are relative to
 												// the component
 //				coordinatesClicked(screenToTileX(x), screenToTileY(y));
-				fireMapGridCoordinateClickedListener(new IntCoordinate(screenToTileX(x), screenToTileY(y)));
+				fireMapGridCoordinateClickedListener(new GridPosition(screenToTileX(x), screenToTileY(y)));
 				
 			};
 		});
 	}
 	
-	private void fireMapGridCoordinateClickedListener(IntCoordinate intCoordinate) {
+	private void fireMapGridCoordinateClickedListener(GridPosition gridPosition) {
 		for (MapGridCoordinateClickedListener listener : clickListenerList) {
-			listener.mapGridCoordinateClicked(intCoordinate);
+			listener.mapGridCoordinateClicked(gridPosition);
 		}
 	}
 	
@@ -94,14 +94,14 @@ public class MapPanel extends JPanel implements Observer{
 		}
 		
 		if (getMap().hasStartTile()) {
-			IntCoordinate start = getMap().getStartTile();
+			GridPosition start = getMap().getStartGridPosition();
 			g.drawImage(START_ICON, tileToScreenX(start.getX()),
 					tileToScreenY(start.getY()), getTileWidth(), getTileHeight(),
 					this);
 		}
 		
 		if (getMap().hasEndTile()) {
-			IntCoordinate end = getMap().getEndTile();
+			GridPosition end = getMap().getEndGridPosition();
 			g.drawImage(EXIT_ICON, tileToScreenX(end.getX()),
 					tileToScreenY(end.getY()), getTileWidth(), getTileHeight(),
 					this);

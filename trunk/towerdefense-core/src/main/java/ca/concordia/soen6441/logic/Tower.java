@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import javax.vecmath.Point2d;
 
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 
 public class Tower extends Observable {
@@ -12,7 +12,7 @@ public class Tower extends Observable {
 	
 	int level;
 	
-	final IntCoordinate coordinate;
+	final GridPosition coordinate;
 	
 	final TowerFactory towerFactory;
 
@@ -28,14 +28,14 @@ public class Tower extends Observable {
 		return getTowerLevelCharacteristic().getRange();
 	}
 
-	public Tower(int level, IntCoordinate coordinate, TowerFactory towerFactory) {
+	public Tower(int level, GridPosition coordinate, TowerFactory towerFactory) {
 		super();
 		this.coordinate = coordinate;
 		this.level = level;
 		this.towerFactory = towerFactory;
 	}
 
-	public IntCoordinate getCoordinate() {
+	public GridPosition getCoordinate() {
 		return coordinate;
 	}
 
@@ -43,15 +43,15 @@ public class Tower extends Observable {
 //		shotMilisecondsAgo += milisecondsFromLastUpdate;
 	}
 	
-	public boolean inRange(IntCoordinate otherCoordinate) {
+	public boolean inRange(GridPosition otherCoordinate) {
 		return distance(this.coordinate, otherCoordinate) < getRange();
 	}
 	
-	public double distanceTo(IntCoordinate otherCoordinate) {
+	public double distanceTo(GridPosition otherCoordinate) {
 		return distance(this.coordinate, otherCoordinate);
 	}
 	
-	public double distance(IntCoordinate p0, IntCoordinate p1) {
+	public double distance(GridPosition p0, GridPosition p1) {
 		return new Point2d(p0.getX(), p0.getY()).distance(new Point2d(p1.getX(), p1.getY()));
 	}
 

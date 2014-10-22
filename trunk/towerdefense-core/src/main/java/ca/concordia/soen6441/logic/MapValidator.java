@@ -1,6 +1,6 @@
 package ca.concordia.soen6441.logic;
 
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
  *
@@ -35,17 +35,17 @@ public class MapValidator {
 			messageIfNotValid.append("Map has more than one start position\n");
 			mapInconsistent = true;
 		}
-		if (coordinateIsNotInTheSides(map, map.getStartTile())) {
+		if (coordinateIsNotInTheSides(map, map.getStartGridPosition())) {
 			messageIfNotValid.append("Map start position must be on the edges\n");
 			mapInconsistent = true;
 		}
-		if (coordinateIsNotInTheSides(map, map.getEndTile())) {
+		if (coordinateIsNotInTheSides(map, map.getEndGridPosition())) {
 			messageIfNotValid.append("Map exit position must be on the edges\n");
 			mapInconsistent = true;
 
 		}
 			
-		if (distanceBtwnCoordinates(map.getStartTile(), map.getEndTile())) {
+		if (distanceBtwnCoordinates(map.getStartGridPosition(), map.getEndGridPosition())) {
 			messageIfNotValid.append("Map must have distance between start and exit\n");
 			mapInconsistent = true;
 
@@ -59,7 +59,7 @@ public class MapValidator {
 		}
 	}
 	
-	public boolean distanceBtwnCoordinates(IntCoordinate d1,IntCoordinate d2) {
+	public boolean distanceBtwnCoordinates(GridPosition d1,GridPosition d2) {
 		
 		double coordinateDistance = Math.sqrt((d1.getX()-d2.getX())*(d1.getX()-d2.getX()) + (d1.getY()-d2.getY())*(d1.getY()-d2.getY()));
 		
@@ -78,7 +78,7 @@ public class MapValidator {
 	 *            map to be checked
 	 * @return true if the start of the map is not on one of its sides
 	 */
-	public boolean coordinateIsNotInTheSides(Map map, IntCoordinate coordinate) {
+	public boolean coordinateIsNotInTheSides(Map map, GridPosition coordinate) {
 		if (coordinate.getX() == 0 || coordinate.getY() == 0
 				|| coordinate.getX() == map.getWidth() - 1
 				|| coordinate.getY() == map.getHeight() - 1) {
@@ -97,7 +97,7 @@ public class MapValidator {
 	 * @return 0 if the map has only one start
 	 */
 	public int mapStartPositionCount(Map map) {
-		if (map.getStartTile() == null) {
+		if (map.getStartGridPosition() == null) {
 			return 0;
 		}
 		// else if (map.getStartTile() != null)
