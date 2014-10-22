@@ -19,7 +19,13 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 	final Tile grid[][];
 
+	/**
+	 * Number of tiles in X-Coordinate
+	 */
 	final int width;
+	/**
+	 * Number of tiles in Y-Coordinate
+	 */
 	final int height;
 
 	private GridPosition startGridPosition;
@@ -29,6 +35,11 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 
 	public List<GridPosition> pathCoordinates = new ArrayList<GridPosition>();
 
+	/**
+	 * Display the {@link GameMap} with scenery at all the {@link Tile}
+	 * @param width Number of tiles in X-Coordinate
+	 * @param height Number of tiles in Y-Coordinate
+	 */
 	public GameMap(int width, int height) {
 		super();
 		this.width = width;
@@ -42,16 +53,32 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		}
 	}
 
+	/**
+	 * Set the {@link Tile} of the {@link GameMap} to user selected tile type
+	 * @param tile tile type 
+	 * @param coordinate The X and Y coordinate on the {@link GameMap}
+	 */
 	public void set(Tile tile, GridPosition coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = tile;
 // TODO: remove this method
 
 	}
 
+	/**
+	 * Get the {@link Tile} type at X and Y coordinate on {@link GameMap}
+	 * @param x 
+	 * @param y
+	 * @return Tile type at X and Y coordinate on Map
+	 */
 	public Tile getTile(int x, int y) {
 		return grid[x][y];
 	}
 
+	/**
+	 * Validate the correct position of tower at {@link GameMap}
+	 * @param tower The position of tower on {@link GameMap}
+	 * @return True or False if the position of the Tower is correct or incorrect
+	 */
 	public boolean canPlace(Tower tower) {
 		if (hasStartTile()) {
 			if (tower.getGridPosition().equals(getStartGridPosition())) {
@@ -69,11 +96,20 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		return tile == Tile.SCENERY;
 	}
 
+	/**
+	 * Validate the position of the {@link Tile} should within the {@link GameMap}
+	 * @param coordinate The X and Y coordinate on {@link GameMap}
+	 * @return True or False if the position of the tile is within the {@link GameMap} or not
+	 */
 	public boolean outOfBounds(GridPosition coordinate) {
 		return coordinate.getX() < 0 || coordinate.getX() > width
 				|| coordinate.getY() < 0 || coordinate.getY() > height;
 	}
 
+	/**
+	 * Remove the tile type assigned to {@link Tile} on the {@link GameMap}
+	 * @param coordinate The X and Y coordinate on @link GameMap
+	 */
 	public void remove(GridPosition coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = null;
 	}
@@ -109,21 +145,35 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 			return false;
 		return true;
 	}
-
+	/**
+	 * Returns the coordinates of Start Tile
+	 * @return The X and Y coordinate of Start {@link Tile} on {@link GameMap}
+	 */
 	public GridPosition getStartGridPosition() {
 		return startGridPosition;
 	}
-
+	/**
+	 * Set the position of Start Tile on {@link GameMap}
+	 * @param startTile The X and Y coordinate of Start {@link Tile} on {@link GameMap}
+	 */
 	public void setStartGridPosition(GridPosition startTile) {
 		this.startGridPosition = startTile;
 		setChanged();
 		notifyObservers();
 	}
 
+	/**
+	 * Returns the coordinates of End Tile
+	 * @return The X and Y coordinate of End {@link Tile} on {@link GameMap}
+	 */
 	public GridPosition getEndGridPosition() {
 		return endGridPosition;
 	}
 	
+	/**
+	 * Set the position of End Tile on {@link GameMap}
+	 * @param endTile The X and Y coordinate of End {@link Tile} on {@link GameMap}
+	 */
 	public void setEndGridPosition(GridPosition endTile) {
 		this.endGridPosition = endTile;
 		setChanged();
@@ -139,6 +189,11 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		return height;
 	}
 
+	/**
+	 * Set the {@link Tile} of the {@link GameMap} to user selected tile type 
+	 * @param gridPosition The X and Y coordinate on {@link GameMap}
+	 * @param tile The type of {@link Tile}
+	 */
 	public void setTile(GridPosition gridPosition, Tile tile) {
 		
 		if (grid[gridPosition.getX()][gridPosition.getY()] != tile) {
@@ -148,10 +203,17 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		}
 	}
 	
+	/**
+	 * Validate the presence of Start {@link Tile} on {@link GameMap}
+	 * @return True or False if the Start {@link Tile} is present or not
+	 */
 	public boolean hasStartTile() {
 		return startGridPosition != null;
 	}
-	
+	/**
+	 * Validate the presence of End {@link Tile} on {@link GameMap}
+	 * @return True or False if the End {@link Tile} is present or not
+	 */
 	public boolean hasEndTile() {
 		return endGridPosition != null;
 	}
