@@ -8,10 +8,6 @@ import javax.vecmath.Vector2d;
 /**
  * This class represents and X and Y gridPosition formed by integers
  */
-/**
- * @author discipline
- *
- */
 public class GridPosition implements Serializable {
 
 	/**
@@ -21,23 +17,44 @@ public class GridPosition implements Serializable {
 	final int x;
 	final int y;
 
+	/**
+	 * Creates a GridPosition with a given X and Y coordinates
+	 * @param x X coordinate of the {@link GridPosition}
+	 * @param y Y coordinate of the {@link GridPosition}
+	 */
 	public GridPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Returns the X coordinate of this {@link GridPosition}
+	 * @return the X coordinate of this {@link GridPosition}
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * Returns the Y coordinate of this {@link GridPosition}
+	 * @return the Y coordinate of this {@link GridPosition}
+	 */
 	public int getY() {
 		return y;
 	}
 	
+	/**
+	 * Returns the distance between this {@link GridPosition} and a given second one passed by argument
+	 * @param other other {@link GridPosition} to be measured the distance to 
+	 * @return the distance between this {@link GridPosition} and a given second one passed by argument
+	 */
 	public double distance(GridPosition other) {
 		return new Point2d(getX(), getY()).distance(new Point2d(other.getX(), other.getY()));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,6 +64,9 @@ public class GridPosition implements Serializable {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
