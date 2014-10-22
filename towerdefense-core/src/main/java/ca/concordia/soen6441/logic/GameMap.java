@@ -60,17 +60,6 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	}
 
 	/**
-	 * Set the {@link Tile} of the {@link GameMap} to user selected tile type
-	 * @param tile tile type 
-	 * @param coordinate The X and Y coordinate on the {@link GameMap}
-	 */
-	public void set(Tile tile, GridPosition coordinate) {
-		grid[coordinate.getX()][coordinate.getY()] = tile;
-// TODO: remove this method
-
-	}
-
-	/**
 	 * Get the {@link Tile} type at X and Y coordinate on {@link GameMap}
 	 * @param x 
 	 * @param y
