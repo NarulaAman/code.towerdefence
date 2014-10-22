@@ -17,7 +17,7 @@ import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
-public class GamePanel extends JPanel implements Observer, MapGridCoordinateClickedListener {
+public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinateClickedListener {
 	
 	public interface TowerSelectedListener {
 		void towerSelected(Tower tower);
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Observer, MapGridCoordinateClic
 	private final GamePlay gamePlay;
 	private MapGridCoordinateClickedListener mapGridCoordinateClickedListener;
 	private TowerSelectedListener towerSelectedListener;
-	public GamePanel(GamePlay gamePlay) {
+	public GamePlayPanel(GamePlay gamePlay) {
 		super(new GridBagLayout());
 		this.gamePlay = gamePlay;
 		gamePlay.addObserver(this);
@@ -96,7 +96,7 @@ public class GamePanel extends JPanel implements Observer, MapGridCoordinateClic
 		Map map = new Map(9, 9);
 
 		GamePlay level = new GamePlay(map, 1000);
-		GamePanel gamePanel = new GamePanel(level);
+		GamePlayPanel gamePanel = new GamePlayPanel(level);
 
 		frame.getContentPane().add(gamePanel);
 
