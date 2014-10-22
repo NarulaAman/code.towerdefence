@@ -1,5 +1,10 @@
 package ca.concordia.soen6441.logic;
 
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
@@ -52,6 +57,11 @@ public class MapValidator {
 			messageIfNotValid.append("GameMap exit position must be on the edges\n");
 			mapInconsistent = true;
 		}
+		
+		if (! mapStartMustReachEnd(gameMap)) {
+			messageIfNotValid.append("Map start should reach the end\n");
+			mapInconsistent = true;			
+		}
 			
 		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition()) > MIN_DISTANCE_FROM_START_TO_EXIT) {
 			messageIfNotValid.append("GameMap must have a distance between start and exit\n");
@@ -77,6 +87,10 @@ public class MapValidator {
 	 * @return true if the start of the gameMap is not on one of its sides
 	 */
 	public boolean coordinateOnTheEdge(GameMap gameMap, GridPosition coordinate) {
+		if (coordinate == null) {
+			return false;
+		}
+			
 		if (coordinate.getX() == 0 || coordinate.getY() == 0
 				|| coordinate.getX() == gameMap.getWidth() - 1
 				|| coordinate.getY() == gameMap.getHeight() - 1) {
@@ -110,5 +124,30 @@ public class MapValidator {
 	public boolean mapMustHaveEnd(GameMap gameMap) {
 		return gameMap.hasEndTile();
 	}
+	
+	public boolean mapStartMustReachEnd(GameMap gameMap) {
+		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
+			ArrayDeque<GridPosition> positionQueue = new ArrayDeque<GridPosition>();
+			Set<GridPosition> visitedPositions = new HashSet<>();
+			positionQueue.addFirst(gameMap.getStartGridPosition());
+			while (!positionQueue.isEmpty()) {
+				GridPosition currentPosition = positionQueue.getFirst();
+				visitedPositions.add(currentPosition);
+				if (currentPosition.distance(gameMap.getEndGridPosition()) < 1.1) {
+					return true;
+				}
+				List<GridPosition> walkableFromHere = gameMap.getAdjacentWalkablePositions(currentPosition);
+				for (GridPosition gridPosition : walkableFromHere) {					
+					if (! visitedPositions.contains(gridPosition)) {
+						positionQueue.addFirst(currentPosition);
+					}
+				}
+				
+			}
+		}
+		return false;
+	}
+	
+
 
 }

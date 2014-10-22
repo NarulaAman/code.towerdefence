@@ -2,6 +2,7 @@ package ca.concordia.soen6441.logic.primitives;
 
 import java.io.Serializable;
 
+import javax.vecmath.Point2d;
 import javax.vecmath.Vector2d;
 
 /**
@@ -27,6 +28,10 @@ public class GridPosition implements Serializable {
 
 	public int getY() {
 		return y;
+	}
+	
+	public double distance(GridPosition other) {
+		return new Point2d(getX(), getY()).distance(new Point2d(other.getX(), other.getY()));
 	}
 
 	@Override
