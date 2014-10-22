@@ -178,6 +178,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private static void createAndShowGUI() {
 		GameMap gameMap = new GameMap(4, 4);
 		MapEditionDialog mapEditionPanel = new MapEditionDialog(new GameMapJavaSerializationDao());
+		mapEditionPanel.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mapEditionPanel.setMap(gameMap);
 		mapEditionPanel.setVisible(true);
 	}
