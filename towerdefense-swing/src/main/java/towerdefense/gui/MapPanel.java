@@ -81,11 +81,11 @@ public class MapPanel extends JPanel implements Observer{
 		for (int x = 0; x < getMap().getWidth(); ++x) {
 			for (int y = 0; y < getMap().getHeight(); ++y) {
 				Tile tile = getMap().getTile(x, y);
-				if (tile.getType() == Tile.TileType.SCENERY) {
+				if (tile == Tile.SCENERY) {
 					g.drawImage(SCENERY_ICON, tileToScreenX(x),
 							tileToScreenY(y), getTileWidth(), getTileHeight(),
 							this);
-				} else if (tile.getType() == Tile.TileType.ENEMY_PATH) {
+				} else if (tile == Tile.ENEMY_PATH) {
 					g.drawImage(ENEMY_PATH_ICON, tileToScreenX(x),
 							tileToScreenY(y), getTileWidth(), getTileHeight(),
 							this);

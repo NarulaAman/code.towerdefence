@@ -11,12 +11,15 @@ public class Tile implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7952947752607673719L;
+	
+	public static final Tile ENEMY_PATH = new Tile(TileType.ENEMY_PATH);
+	public static final Tile SCENERY = new Tile(TileType.SCENERY);
 
 	/**
 	 * Types of {@link Tile} that a {@link GameMap} can have
 	 *
 	 */
-	public enum TileType {
+	private enum TileType {
 		ENEMY_PATH, SCENERY
 	}
 
@@ -28,7 +31,7 @@ public class Tile implements Serializable {
 	 * @param type
 	 *            type of the tile to be created
 	 */
-	public Tile(TileType type) {
+	protected Tile(TileType type) {
 		super();
 		this.type = type;
 	}

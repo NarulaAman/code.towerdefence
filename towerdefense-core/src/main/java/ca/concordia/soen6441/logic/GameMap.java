@@ -6,13 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 
-import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
  * This class represents the Tower Defense playable GameMap. 
  */
-public class GameMap extends Observable implements Serializable {
+public class GameMap extends Observable implements Serializable, Cloneable {
 
 	/**
 	 * 
@@ -38,7 +37,7 @@ public class GameMap extends Observable implements Serializable {
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				grid[x][y] = new Tile(Tile.TileType.SCENERY);
+				grid[x][y] = Tile.SCENERY;
 			}
 		}
 	}
@@ -67,7 +66,7 @@ public class GameMap extends Observable implements Serializable {
 		int x = tower.getGridPosition().getX();
 		int y = tower.getGridPosition().getY();
 		Tile tile = grid[x][y];
-		return tile.getType() == Tile.TileType.SCENERY;
+		return tile == Tile.SCENERY;
 	}
 
 	public boolean outOfBounds(GridPosition coordinate) {
@@ -140,11 +139,10 @@ public class GameMap extends Observable implements Serializable {
 		return height;
 	}
 
-	public void setTile(GridPosition gridPosition, TileType tileType) {
+	public void setTile(GridPosition gridPosition, Tile tile) {
 		
-		if (grid[gridPosition.getX()][gridPosition.getY()].type != tileType) {
-			grid[gridPosition.getX()][gridPosition.getY()] = new Tile(tileType);
-			
+		if (grid[gridPosition.getX()][gridPosition.getY()] != tile) {
+			grid[gridPosition.getX()][gridPosition.getY()] = tile;
 			setChanged();
 			notifyObservers();
 		}
@@ -157,4 +155,15 @@ public class GameMap extends Observable implements Serializable {
 	public boolean hasEndTile() {
 		return endGridPosition != null;
 	}
+	
+//	public GameMap clone() {
+//		try {
+//			GameMap clone = new GameMap(getWidth(), getWidth());
+//			
+//			
+//		} catch (CloneNotSupportedException ex) {
+//			ex.printStackTrace();
+//			return null;
+//		}
+//	}
 }
