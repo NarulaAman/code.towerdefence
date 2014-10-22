@@ -7,7 +7,7 @@ import javax.vecmath.Vector2d;
 /**
  * This class represents and X and Y coordinate formed by integers
  */
-public class Coordinate extends Vector2d implements Serializable {
+public class Coordinate /*extends Vector2d*/ implements Serializable {
 
 	/**
 	 * 
@@ -17,7 +17,6 @@ public class Coordinate extends Vector2d implements Serializable {
 	final int y;
 
 	public Coordinate(int x, int y) {
-		super(x, y);
 		this.x = x;
 		this.y = y;
 	}
@@ -43,8 +42,6 @@ public class Coordinate extends Vector2d implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Coordinate other = (Coordinate) obj;

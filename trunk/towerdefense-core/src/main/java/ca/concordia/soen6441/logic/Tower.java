@@ -52,7 +52,7 @@ public class Tower extends Observable {
 	}
 	
 	public double distance(Coordinate p0, Coordinate p1) {
-		return new Point2d(p0).distance(new Point2d(p1));
+		return new Point2d(p0.getX(), p0.getY()).distance(new Point2d(p1.getX(), p1.getY()));
 	}
 
 	/**
