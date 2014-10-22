@@ -2,6 +2,7 @@ package towerdefense.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.TextField;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,13 +13,15 @@ import javax.swing.JTextField;
 
 import ca.concordia.soen6441.logic.Tower;
 
+/**
+ * This is the TowerInspectionWindow, it shows the current tower attributes
+ */
 public class TowerPanel extends JPanel implements Observer{
 
 	/**
 	 * 
 	 */
-	
-	
+	private static final long serialVersionUID = 2846743688938454973L;
 	private final JLabel costLbl = new JLabel("Buying cost:");
 	private final JLabel damageLbl = new JLabel("Damage:");
 	private final JLabel rangeLbl = new JLabel("Range:");
@@ -39,6 +42,9 @@ public class TowerPanel extends JPanel implements Observer{
 	private Tower shownTower = null;
 
 
+	/**
+	 * Constructs a {@link TowerPanel}
+	 */
 	public TowerPanel()
 	{
 		super(new GridLayout(7, 2));
@@ -67,12 +73,19 @@ public class TowerPanel extends JPanel implements Observer{
 		upgradeCostTxtFld .setEditable(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		read(shownTower);
 		
 	}
 	
+	/**
+	 * Sets the {@link Tower} to have its information displayed
+	 * @param tower {@link Tower} to have its information displayed
+	 */
 	public void show(Tower tower) {
 		if (shownTower != null) {
 			shownTower.deleteObserver(this);
@@ -82,6 +95,10 @@ public class TowerPanel extends JPanel implements Observer{
 		read(tower);
 	}
 
+	/**
+	 * Reads into the {@link TextField}s the {@link Tower}'s information
+	 * @param tower {@link Tower} to have its information read
+	 */
 	private void read(Tower tower) {
 		costTxtFld.setText("" + tower.getBuyCost());
 		damageTxtFld.setText("" + tower.getDamage());
@@ -98,18 +115,26 @@ public class TowerPanel extends JPanel implements Observer{
 		}
 	}
 
+	/**
+	 * Returns the upgrade button
+	 * @return the upgrade button
+	 */
 	public JButton getUpgradeBtn() {
 		return upgradeBtn;
 	}
 
+	/**
+	 * Returns the sell button
+	 * @return the sell button
+	 */
 	public JButton getSellBtn() {
 		return sellBtn;
 	}
 
-	public Tower getShownTower() {
-		return shownTower;
-	}
-
+	/**
+	 * Sets the {@link Tower} to be shown by this {@link TowerPanel}
+	 * @param shownTower {@link Tower} to be shown by this {@link TowerPanel}
+	 */
 	public void setShownTower(Tower shownTower) {
 		this.shownTower = shownTower;
 	}
