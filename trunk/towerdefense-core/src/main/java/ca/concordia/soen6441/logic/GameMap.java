@@ -165,4 +165,42 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		}
 		return clone;
 	}
+	
+	public List<GridPosition> getAdjacentWalkablePositions(GridPosition gridPosition) {
+		int xLeft = gridPosition.getX() - 1;
+		int xRight = gridPosition.getX() + 1;
+		int yBottom = gridPosition.getY() - 1;
+		int yTop = gridPosition.getY() + 1;
+		
+		List<GridPosition> result = new ArrayList<>();
+		if (xLeft >= 0 ) {
+			GridPosition adjacent = new GridPosition(xLeft, gridPosition.getY());
+			if (isEnemyWalkable(adjacent)) {
+				result.add(adjacent);
+			}
+		}
+		if (xRight < getWidth()) {
+			GridPosition adjacent = new GridPosition(xRight, gridPosition.getY());
+			if (isEnemyWalkable(adjacent)) {
+				result.add(adjacent);
+			}
+		}
+		if (yBottom >= 0) {
+			GridPosition adjacent = new GridPosition(gridPosition.getX(), yBottom);
+			if (isEnemyWalkable(adjacent)) {
+				result.add(adjacent);
+			}
+		}
+		if (yTop < getHeight()) {
+			GridPosition adjacent = new GridPosition(gridPosition.getX(), yTop);
+			if (isEnemyWalkable(adjacent)) {
+				result.add(adjacent);
+			}
+		}
+		return result;
+	}
+	
+	public boolean isEnemyWalkable(GridPosition gridPosition) {
+		return grid[gridPosition.getX()][gridPosition.getY()] == Tile.ENEMY_PATH;
+	}
 }
