@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import towerdefense.gui.GamePanel.TowerSelectedListener;
+import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
 import ca.concordia.soen6441.io.MapPersister;
@@ -33,7 +33,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		NOTHING,
 		BUYING_TOWER
 	}
-	private final GamePanel gamePlayPanel;
+	private final GamePlayPanel gamePlayPanel;
 
 	private final JLabel livesLbl = new JLabel("Lives");
 	private final JLabel scoreLbl = new JLabel("Scores");
@@ -60,7 +60,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setLayout(new BorderLayout());
 		this.gamePlay = gamePlay;
 		gamePlay.addObserver(this);
-		gamePlayPanel = new GamePanel(gamePlay);
+		gamePlayPanel = new GamePlayPanel(gamePlay);
 		gamePlayPanel.setMapGridCoordinateClickedListener(this);
 		gamePlayPanel.setTowerSelectedListener(this);
 
