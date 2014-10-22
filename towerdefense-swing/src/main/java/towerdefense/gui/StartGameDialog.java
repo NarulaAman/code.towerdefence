@@ -96,7 +96,6 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 
 	@Override
 	public void mapSelected(Map map) {
-		System.out.println("Seletec map: " + map);
 		gridPanel.setMap(map);
 	}
 

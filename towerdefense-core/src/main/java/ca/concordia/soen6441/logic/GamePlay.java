@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 public class GamePlay extends Observable implements Serializable {
 
@@ -44,18 +44,18 @@ public class GamePlay extends Observable implements Serializable {
 		return getMap().canPlace(tower);
 	}
 
-	public boolean hasTower(IntCoordinate intCoordinate) {
+	public boolean hasTower(GridPosition gridPosition) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(intCoordinate)) {
+			if (tower.getCoordinate().equals(gridPosition)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public Tower getTower(IntCoordinate intCoordinate) {
+	public Tower getTower(GridPosition gridPosition) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(intCoordinate)) {
+			if (tower.getCoordinate().equals(gridPosition)) {
 				return tower;
 			}
 		}

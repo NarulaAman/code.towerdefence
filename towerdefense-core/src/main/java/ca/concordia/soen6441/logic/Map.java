@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Observable;
 
 import ca.concordia.soen6441.logic.Tile.TileType;
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
  * This class represents the Tower Defense playable Map. 
@@ -23,12 +23,12 @@ public class Map extends Observable implements Serializable {
 	final int width;
 	final int height;
 
-	private IntCoordinate startTile;
-	private IntCoordinate endTile;
+	private GridPosition startGridPosition;
+	private GridPosition endGridPosition;
 	
 	// REMOVE THIS HACK
 
-	public List<IntCoordinate> pathCoordinates = new ArrayList<IntCoordinate>();
+	public List<GridPosition> pathCoordinates = new ArrayList<GridPosition>();
 
 	public Map(int width, int height) {
 		super();
@@ -43,7 +43,7 @@ public class Map extends Observable implements Serializable {
 		}
 	}
 
-	public void set(Tile tile, IntCoordinate coordinate) {
+	public void set(Tile tile, GridPosition coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = tile;
 // TODO: remove this method
 
@@ -55,12 +55,12 @@ public class Map extends Observable implements Serializable {
 
 	public boolean canPlace(Tower tower) {
 		if (hasStartTile()) {
-			if (tower.getCoordinate().equals(getStartTile())) {
+			if (tower.getCoordinate().equals(getStartGridPosition())) {
 				return false;
 			}
 		}
 		if (hasEndTile()) {
-			if (tower.getCoordinate().equals(getEndTile())) {
+			if (tower.getCoordinate().equals(getEndGridPosition())) {
 				return false;
 			}
 		}
@@ -70,12 +70,12 @@ public class Map extends Observable implements Serializable {
 		return tile.getType() == Tile.TileType.SCENERY;
 	}
 
-	public boolean outOfBounds(IntCoordinate coordinate) {
+	public boolean outOfBounds(GridPosition coordinate) {
 		return coordinate.getX() < 0 || coordinate.getX() > width
 				|| coordinate.getY() < 0 || coordinate.getY() > height;
 	}
 
-	public void remove(IntCoordinate coordinate) {
+	public void remove(GridPosition coordinate) {
 		grid[coordinate.getX()][coordinate.getY()] = null;
 	}
 
@@ -111,22 +111,22 @@ public class Map extends Observable implements Serializable {
 		return true;
 	}
 
-	public IntCoordinate getStartTile() {
-		return startTile;
+	public GridPosition getStartGridPosition() {
+		return startGridPosition;
 	}
 
-	public void setStartTile(IntCoordinate startTile) {
-		this.startTile = startTile;
+	public void setStartGridPosition(GridPosition startTile) {
+		this.startGridPosition = startTile;
 		setChanged();
 		notifyObservers();
 	}
 
-	public IntCoordinate getEndTile() {
-		return endTile;
+	public GridPosition getEndGridPosition() {
+		return endGridPosition;
 	}
 	
-	public void setEndTile(IntCoordinate endTile) {
-		this.endTile = endTile;
+	public void setEndGridPosition(GridPosition endTile) {
+		this.endGridPosition = endTile;
 		setChanged();
 		notifyObservers();
 	}
@@ -140,10 +140,10 @@ public class Map extends Observable implements Serializable {
 		return height;
 	}
 
-	public void setTile(IntCoordinate intCoordinate, TileType tileType) {
+	public void setTile(GridPosition gridPosition, TileType tileType) {
 		
-		if (grid[intCoordinate.getX()][intCoordinate.getY()].type != tileType) {
-			grid[intCoordinate.getX()][intCoordinate.getY()] = new Tile(tileType);
+		if (grid[gridPosition.getX()][gridPosition.getY()].type != tileType) {
+			grid[gridPosition.getX()][gridPosition.getY()] = new Tile(tileType);
 			
 			setChanged();
 			notifyObservers();
@@ -151,10 +151,10 @@ public class Map extends Observable implements Serializable {
 	}
 	
 	public boolean hasStartTile() {
-		return startTile != null;
+		return startGridPosition != null;
 	}
 	
 	public boolean hasEndTile() {
-		return endTile != null;
+		return endGridPosition != null;
 	}
 }

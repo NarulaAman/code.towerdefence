@@ -15,7 +15,7 @@ import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tower;
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinateClickedListener {
 	
@@ -55,13 +55,13 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 	
 	@Override
-	public void mapGridCoordinateClicked(IntCoordinate intCoordinate) {
-		if (getGamePlay().hasTower(intCoordinate))
+	public void mapGridCoordinateClicked(GridPosition gridPosition) {
+		if (getGamePlay().hasTower(gridPosition))
 		{
-			fireTowerSelected(getGamePlay().getTower(intCoordinate));
+			fireTowerSelected(getGamePlay().getTower(gridPosition));
 		}
 		else {
-			fireMapGridCoordinateClickedListener(intCoordinate);
+			fireMapGridCoordinateClickedListener(gridPosition);
 		}
 	}
 	
@@ -121,7 +121,7 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		}
 	}
 	
-	private void fireMapGridCoordinateClickedListener(IntCoordinate coord) {
+	private void fireMapGridCoordinateClickedListener(GridPosition coord) {
 		if (mapGridCoordinateClickedListener != null) {
 			mapGridCoordinateClickedListener.mapGridCoordinateClicked(coord);
 		}

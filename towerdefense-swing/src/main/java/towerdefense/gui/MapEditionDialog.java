@@ -21,7 +21,7 @@ import ca.concordia.soen6441.io.MapJavaSerializationDao;
 import ca.concordia.soen6441.io.MapDao;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 public class MapEditionDialog extends JDialog implements MapGridCoordinateClickedListener {
 
@@ -194,26 +194,26 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 
 	@Override
-	public void mapGridCoordinateClicked(IntCoordinate intCoordinate) {
+	public void mapGridCoordinateClicked(GridPosition gridPosition) {
 		//				
 
 		if (selectedButton == SelectedButton.ENEMY_PATH) {
-			map.setTile(intCoordinate, Tile.TileType.ENEMY_PATH);
+			map.setTile(gridPosition, Tile.TileType.ENEMY_PATH);
 		}
 
 		if(selectedButton == SelectedButton.SCENERY) {
-			map.setTile(intCoordinate, Tile.TileType.SCENERY);
+			map.setTile(gridPosition, Tile.TileType.SCENERY);
 		}
 		
 		if(selectedButton == SelectedButton.ENTRY) {
 			
-			map.setStartTile(intCoordinate);
+			map.setStartGridPosition(gridPosition);
 			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 			
 		}
 		
 		if(selectedButton == SelectedButton.EXIT) {
-			map.setEndTile(intCoordinate);
+			map.setEndGridPosition(gridPosition);
 			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 		}
 		

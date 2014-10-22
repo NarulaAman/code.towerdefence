@@ -25,7 +25,7 @@ import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.TowerFactory;
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 public class GamePlayDialog extends JDialog implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
 	
@@ -188,9 +188,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 
 	@Override
-	public void mapGridCoordinateClicked(IntCoordinate intCoordinate) {
+	public void mapGridCoordinateClicked(GridPosition gridPosition) {
 		if (state == State.BUYING_TOWER) {
-			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, intCoordinate);
+			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, gridPosition);
 			getGamePlay().buy(tower);
 //			state = State.NOTHING;
 		}

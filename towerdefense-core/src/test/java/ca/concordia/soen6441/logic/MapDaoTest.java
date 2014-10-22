@@ -14,7 +14,7 @@ import org.junit.runners.MethodSorters;
 
 import ca.concordia.soen6441.io.MapJavaSerializationDao;
 import ca.concordia.soen6441.logic.Tile.TileType;
-import ca.concordia.soen6441.logic.primitives.IntCoordinate;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 @FixMethodOrder(MethodSorters.JVM)
 public class MapDaoTest {
@@ -27,12 +27,12 @@ public class MapDaoTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		
-		map.set(new Tile(TileType.ENEMY_PATH), new IntCoordinate(1, 2));
-		map.set(new Tile(TileType.ENEMY_PATH), new IntCoordinate(5, 6));
-		map.set(new Tile(TileType.ENEMY_PATH), new IntCoordinate(2, 27));
-		map.set(new Tile(TileType.ENEMY_PATH), new IntCoordinate(5, 8));
-		map.set(new Tile(TileType.ENEMY_PATH), new IntCoordinate(3, 13));
-		map.set(new Tile(TileType.ENEMY_PATH), new IntCoordinate(15, 26));
+		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(1, 2));
+		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(5, 6));
+		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(2, 27));
+		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(5, 8));
+		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(3, 13));
+		map.set(new Tile(TileType.ENEMY_PATH), new GridPosition(15, 26));
 		
 	}
 

@@ -7,7 +7,7 @@ import javax.vecmath.Vector2d;
 /**
  * This class represents and X and Y coordinate formed by integers
  */
-public class IntCoordinate implements Serializable {
+public class GridPosition implements Serializable {
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class IntCoordinate implements Serializable {
 	final int x;
 	final int y;
 
-	public IntCoordinate(int x, int y) {
+	public GridPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -44,7 +44,7 @@ public class IntCoordinate implements Serializable {
 			return true;
 		if (getClass() != obj.getClass())
 			return false;
-		IntCoordinate other = (IntCoordinate) obj;
+		GridPosition other = (GridPosition) obj;
 		if (x != other.x)
 			return false;
 		if (y != other.y)
