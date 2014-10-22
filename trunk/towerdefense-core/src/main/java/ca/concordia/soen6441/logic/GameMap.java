@@ -28,7 +28,13 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 */
 	final int height;
 
+	/**
+	 * The position of Entry Tile
+	 */
 	private GridPosition startGridPosition;
+	/**
+	 * The position of Exit Tile
+	 */
 	private GridPosition endGridPosition;
 	
 	// REMOVE THIS HACK
@@ -146,15 +152,15 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		return true;
 	}
 	/**
-	 * Returns the coordinates of Start Tile
-	 * @return The X and Y coordinate of Start {@link Tile} on {@link GameMap}
+	 * Returns the coordinates of Entry {@link Tile}
+	 * @return The X and Y coordinate of Entry {@link Tile} on {@link GameMap}
 	 */
 	public GridPosition getStartGridPosition() {
 		return startGridPosition;
 	}
 	/**
-	 * Set the position of Start Tile on {@link GameMap}
-	 * @param startTile The X and Y coordinate of Start {@link Tile} on {@link GameMap}
+	 * Set the position of Entry Tile on {@link GameMap}
+	 * @param startTile The X and Y coordinate of Entry {@link Tile} on {@link GameMap}
 	 */
 	public void setStartGridPosition(GridPosition startTile) {
 		this.startGridPosition = startTile;
@@ -163,16 +169,16 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	}
 
 	/**
-	 * Returns the coordinates of End Tile
-	 * @return The X and Y coordinate of End {@link Tile} on {@link GameMap}
+	 * Returns the coordinates of Exit {@link Tile}
+	 * @return The X and Y coordinate of Exit {@link Tile} on {@link GameMap}
 	 */
 	public GridPosition getEndGridPosition() {
 		return endGridPosition;
 	}
 	
 	/**
-	 * Set the position of End Tile on {@link GameMap}
-	 * @param endTile The X and Y coordinate of End {@link Tile} on {@link GameMap}
+	 * Set the position of Exit {@link Tile} on {@link GameMap}
+	 * @param endTile The X and Y coordinate of Exit {@link Tile} on {@link GameMap}
 	 */
 	public void setEndGridPosition(GridPosition endTile) {
 		this.endGridPosition = endTile;
@@ -190,7 +196,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	}
 
 	/**
-	 * Set the {@link Tile} of the {@link GameMap} to user selected tile type 
+	 * Set the {@link Tile} on the {@link GameMap} to user selected tile type 
 	 * @param gridPosition The X and Y coordinate on {@link GameMap}
 	 * @param tile The type of {@link Tile}
 	 */
@@ -204,19 +210,20 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	}
 	
 	/**
-	 * Validate the presence of Start {@link Tile} on {@link GameMap}
-	 * @return True or False if the Start {@link Tile} is present or not
+	 * Validate the presence of Entry {@link Tile} on {@link GameMap}
+	 * @return True or False if the Entry {@link Tile} is present or not
 	 */
 	public boolean hasStartTile() {
 		return startGridPosition != null;
 	}
 	/**
-	 * Validate the presence of End {@link Tile} on {@link GameMap}
-	 * @return True or False if the End {@link Tile} is present or not
+	 * Validate the presence of Exit {@link Tile} on {@link GameMap}
+	 * @return True or False if the Exit {@link Tile} is present or not
 	 */
 	public boolean hasEndTile() {
 		return endGridPosition != null;
 	}
+	
 	
 	public GameMap clone() {
 		GameMap clone = new GameMap(getWidth(), getWidth());
@@ -228,6 +235,11 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		return clone;
 	}
 	
+	/**
+	 * Get the list of {@link Tile} positions where Enemy can walk
+	 * @param gridPosition The X and Y coordinate on {@link GameMap}
+	 * @return The list of {@link Tile} positions where Enemy can walk on {@link GameMap}
+	 */
 	public List<GridPosition> getAdjacentWalkablePositions(GridPosition gridPosition) {
 		int xLeft = gridPosition.getX() - 1;
 		int xRight = gridPosition.getX() + 1;
@@ -262,6 +274,12 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		return result;
 	}
 	
+	
+	/**
+	 * Validate if the {@link Tile} type is Enemy Path 
+	 * @param gridPosition The X and Y coordinate on {@link GameMap}
+	 * @return True if the  {@link Tile} type at given position is Enemy Path
+	 */
 	public boolean isEnemyWalkable(GridPosition gridPosition) {
 		return grid[gridPosition.getX()][gridPosition.getY()] == Tile.ENEMY_PATH;
 	}
