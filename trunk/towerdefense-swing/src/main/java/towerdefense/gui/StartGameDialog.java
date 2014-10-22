@@ -18,15 +18,19 @@ import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
 
+/**
+ * This is the Dialog that will be displayed when the user starts our game application
+ *
+ */
 public class StartGameDialog extends JDialog implements MapListPanel.MapSelectionListener{
 	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -5034183610861487619L;
 	private final MapPanel gridPanel = new MapPanel();
-	private JPanel sideBar;
+	private final JPanel sideBar = new JPanel();
 	
 	private final JButton startBtn = new JButton();
 	private final JButton editBtn = new JButton();	
@@ -37,6 +41,12 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	
 	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
 	
+	/**
+	 * Creates a {@link StartGameDialog} with a given {@link GameMapDao}, {@link MapEditAction}, {@link StartGamePlayAction}
+	 * @param gameMapDao 
+	 * @param mapEditAction
+	 * @param startGamePlayAction
+	 */
 	public StartGameDialog(GameMapDao gameMapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
@@ -52,6 +62,10 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	}
 
 
+	/**
+	 * Setup the {@link StartGameDialog}'s side bar
+	 * @param gameMapDao {@link GameMapDao} to be used by panels in the Sidebar
+	 */
 	private void setupSideBar(GameMapDao gameMapDao) {
 		exitBtn.addActionListener(new ActionListener() {
 			
@@ -61,15 +75,11 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 			}
 		});
 		
-		
-		sideBar = new JPanel();
 		sideBar.setPreferredSize(new Dimension(100, 600));
 		sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
 		sideBar.add(startBtn);		
 		sideBar.add(editBtn);
 		sideBar.add(exitBtn);
-		
-		
 		
 		sideBar.add(mapListPanel);
 		add(sideBar,BorderLayout.EAST);
@@ -94,6 +104,9 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 //    }
 
 
+	/* (non-Javadoc)
+	 * @see towerdefense.gui.MapListPanel.MapSelectionListener#mapSelected(ca.concordia.soen6441.logic.GameMap)
+	 */
 	@Override
 	public void mapSelected(GameMap gameMap) {
 		gridPanel.setMap(gameMap);
