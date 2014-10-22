@@ -19,9 +19,26 @@ import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
+/**
+ * This class is responsible for painting the {@link GameMap}'s {@link Tile}s and Start and End position
+ *
+ */
 public class MapPanel extends JPanel implements Observer{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6093261930596167143L;
+
+	/**
+	 * This is a Listener that will be notified when a position is clicked on the {@link MapPanel}
+	 *
+	 */
 	public interface MapGridCoordinateClickedListener {
+		/**
+		 * This method gets invoked when a {@link GridPosition} is clicked on the {@link MapPanel}
+		 * @param gridPosition {@link GridPosition} clicked on the {@link MapPanel}
+		 */
 		void mapGridCoordinateClicked(GridPosition gridPosition);
 	}
 	
@@ -33,11 +50,16 @@ public class MapPanel extends JPanel implements Observer{
 			.getImage();
 	private static final Image EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/tilepath_exit.jpg"))
 			.getImage();
-
-	private GameMap gameMap = null;
 	
 	private final List<MapGridCoordinateClickedListener> clickListenerList = new ArrayList<>();
 
+	private GameMap gameMap = null;
+	
+
+
+	/**
+	 * Created a {@link MapPanel} with no {@link GameMap} associated with it. It will be painted grey.
+	 */
 	public MapPanel() {
 		super();
 		setPreferredSize(new Dimension(640, 480));
@@ -49,28 +71,33 @@ public class MapPanel extends JPanel implements Observer{
 				}
 				int x = e.getX();
 				int y = e.getY();
-//				System.out.println(screenToTileX(x) + "," + screenToTileY(y));// these co-ords are relative to
-												// the component
-//				coordinatesClicked(screenToTileX(x), screenToTileY(y));
 				fireMapGridCoordinateClickedListener(new GridPosition(screenToTileX(x), screenToTileY(y)));
 				
 			};
 		});
 	}
 	
+	/**
+	 * Invoke the {@link MapGridCoordinateClickedListener} on a clicked {@link GridPosition}
+	 * @param gridPosition {@link GridPosition} that was clicked on the {@link MapPanel}
+	 */
 	private void fireMapGridCoordinateClickedListener(GridPosition gridPosition) {
 		for (MapGridCoordinateClickedListener listener : clickListenerList) {
 			listener.mapGridCoordinateClicked(gridPosition);
 		}
 	}
 	
+	/**
+	 * Adds a {@link MapGridCoordinateClickedListener} to this {@link MapPanel}
+	 * @param listener {@link MapGridCoordinateClickedListener} to be added
+	 */
 	public void addMapGridCoordinateClickedListener(MapGridCoordinateClickedListener listener) {
 		clickListenerList.add(listener);
 	}
 	
-	
-	
-	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
+	 */
 	@Override
 	public void paint(Graphics g) {
 		if (getMap() == null) {
@@ -92,14 +119,12 @@ public class MapPanel extends JPanel implements Observer{
 				}
 			}
 		}
-		
 		if (getMap().hasStartTile()) {
 			GridPosition start = getMap().getStartGridPosition();
 			g.drawImage(START_ICON, tileToScreenX(start.getX()),
 					tileToScreenY(start.getY()), getTileWidth(), getTileHeight(),
 					this);
 		}
-		
 		if (getMap().hasEndTile()) {
 			GridPosition end = getMap().getEndGridPosition();
 			g.drawImage(EXIT_ICON, tileToScreenX(end.getX()),
@@ -108,34 +133,88 @@ public class MapPanel extends JPanel implements Observer{
 		}
 	}
 
-	GameMap getMap() {
+	/**
+	 * Returns the current {@link GameMap} being displayed on this {@link MapPanel}
+	 * @return the current {@link GameMap} being displayed on this {@link MapPanel}
+	 */
+	private GameMap getMap() {
 		return gameMap;
 	}
 
-	int tileToScreenX(int x) {
+	
+	/**
+	 * Converts from {@link GridPosition} coordinate to a screen coordinate
+	 * @param x {@link GridPosition} X coordinate to be converted
+	 * @return screen coordinate of the {@link GridPosition} X coordinate
+	 */
+	public int tileToScreenX(int x) {
 		return x * getTileWidth();
 	}
 
+	/**
+	 * Converts from {@link GridPosition} coordinate to a screen coordinate
+	 * @param y {@link GridPosition} Y coordinate to be converted
+	 * @return screen coordinate of the {@link GridPosition} Y coordinate
+	 */
 	int tileToScreenY(int y) {
 		return y * getTileHeight();
 	}
-	
-	int screenToTileX(int x) {
+
+	/**
+	 * Convert from screen X coordinate to a {@link GridPosition} X coordinate
+	 * @param x to be converted
+	 * @return the {@link GridPosition} X coordinate
+	 */
+	private int screenToTileX(int x) {
 		return x / getTileWidth();
 	}
 
-	int screenToTileY(int y) {
+	/**
+	 * Convert from screen Y coordinate to a {@link GridPosition} Y coordinate
+	 * @param y to be converted
+	 * @return the {@link GridPosition} Y coordinate
+	 */
+	private int screenToTileY(int y) {
 		return y / getTileHeight();
 	}
 
+	/**
+	 * Returns the width of the tile
+	 * @return the width of the tile
+	 */
 	int getTileWidth() {
 		return getWidth() / getMap().getWidth();
 	}
 
+	/**
+	 * Returns the height of the tile
+	 * @return the height of the tile
+	 */
 	int getTileHeight() {
 		return getHeight() / getMap().getHeight();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
+	}
+	
+	/**
+	 * Sets a map to be displayed by this {@link MapPanel}
+	 * @param gameMap
+	 */
+	public void setMap(GameMap gameMap) {
+		if (this.gameMap != null) {
+			this.gameMap.deleteObserver(this);
+		}
+		this.gameMap = gameMap;
+		gameMap.addObserver(this);
+		repaint();
+	}
+	
 	/**
 	 * Create the GUI and show it. For thread safety, this method should be
 	 * invoked from the event-dispatching thread.
@@ -145,11 +224,8 @@ public class MapPanel extends JPanel implements Observer{
 		JFrame frame = new JFrame("HelloWorldSwing");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
 		GameMap gameMap = new GameMap(9, 9);
-
 		GamePlay level = new GamePlay(gameMap, 1000);
-
 		MapPanel label = new MapPanel();
 		
 		label.setMap(new GameMap(10, 10));
@@ -160,6 +236,10 @@ public class MapPanel extends JPanel implements Observer{
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Main method used for testing the GUI
+	 * @param args arguments are ignored by this method
+	 */
 	public static void main(String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
@@ -168,19 +248,5 @@ public class MapPanel extends JPanel implements Observer{
 				createAndShowGUI();
 			}
 		});
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		repaint();
-	}
-	
-	public void setMap(GameMap gameMap) {
-		if (this.gameMap != null) {
-			this.gameMap.deleteObserver(this);
-		}
-		this.gameMap = gameMap;
-		gameMap.addObserver(this);
-		repaint();
 	}
 }
