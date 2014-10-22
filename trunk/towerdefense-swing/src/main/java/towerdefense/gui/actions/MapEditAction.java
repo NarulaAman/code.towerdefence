@@ -3,6 +3,8 @@ package towerdefense.gui.actions;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
@@ -13,11 +15,14 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	/**
 	 * 
 	 */
+	private static final Icon EDIT_ICON = new ImageIcon("edit.png");
+	
 	private static final long serialVersionUID = 7403090617352119267L;
 	private final MapEditionDialog mapEditionDialog;
 	private Map selectedMap = null;
 	
 	public MapEditAction(MapEditionDialog mapEditionDialog) {
+		super(null, EDIT_ICON);
 		this.mapEditionDialog = mapEditionDialog;
 		setEnabled(false);
 	}

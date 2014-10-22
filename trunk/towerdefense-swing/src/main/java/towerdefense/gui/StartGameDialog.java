@@ -29,13 +29,12 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private JPanel sideBar;
 	
 	private final JButton startBtn = new JButton();
-	private final JButton editBtn = new JButton(EDIT_ICON);	
+	private final JButton editBtn = new JButton();	
 	private final JButton exitBtn = new JButton(EXIT_ICON);
 	
 	
 	private final MapListPanel mapListPanel;
 	
-	private static final Icon EDIT_ICON = new ImageIcon("edit.png");
 	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
 	
 	public StartGameDialog(MapPersister mapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
