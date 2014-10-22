@@ -55,17 +55,17 @@ public class GameMap extends Observable implements Serializable {
 
 	public boolean canPlace(Tower tower) {
 		if (hasStartTile()) {
-			if (tower.getCoordinate().equals(getStartGridPosition())) {
+			if (tower.getGridPosition().equals(getStartGridPosition())) {
 				return false;
 			}
 		}
 		if (hasEndTile()) {
-			if (tower.getCoordinate().equals(getEndGridPosition())) {
+			if (tower.getGridPosition().equals(getEndGridPosition())) {
 				return false;
 			}
 		}
-		int x = tower.getCoordinate().getX();
-		int y = tower.getCoordinate().getY();
+		int x = tower.getGridPosition().getX();
+		int y = tower.getGridPosition().getY();
 		Tile tile = grid[x][y];
 		return tile.getType() == Tile.TileType.SCENERY;
 	}

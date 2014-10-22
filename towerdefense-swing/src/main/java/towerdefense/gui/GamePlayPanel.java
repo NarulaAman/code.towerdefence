@@ -45,8 +45,8 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		super.paint(g);
 		
 		for (Tower tower : getGamePlay().getTowers()) {
-			g.drawImage(TOWER_ICON, tileToScreenX(tower.getCoordinate().getX()),
-					tileToScreenY(tower.getCoordinate().getY()), getTileWidth(), getTileHeight(),
+			g.drawImage(TOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
+					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(),
 					this);
 		}
 		

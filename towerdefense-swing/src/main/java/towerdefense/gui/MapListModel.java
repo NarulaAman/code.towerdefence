@@ -17,10 +17,10 @@ public class MapListModel extends AbstractListModel<String> {
 
 	private final List<String> fileList = new ArrayList<String>();
 	
-	private final GameMapDao mapPersister;
+	private final GameMapDao gameMapDao;
 	
-	public MapListModel(GameMapDao mapPersister) {
-		this.mapPersister = mapPersister;
+	public MapListModel(GameMapDao gameMapDao) {
+		this.gameMapDao = gameMapDao;
 	}
 	
 	
@@ -37,7 +37,7 @@ public class MapListModel extends AbstractListModel<String> {
 	public void readDirectory() {
 		fileList.clear();
 		try {
-			fileList.addAll(mapPersister.listAllNames());
+			fileList.addAll(gameMapDao.listAllNames());
 		} catch (IOException e) {
 			fileList.add("ERROR loading existing maps");
 		}

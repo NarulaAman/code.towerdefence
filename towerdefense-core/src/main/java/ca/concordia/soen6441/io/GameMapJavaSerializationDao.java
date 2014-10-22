@@ -18,15 +18,9 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	public static final String MAP_FILENAME_EXTENSION = ".map";
 	public static final String FILENAME_STRING_FORMAT = "." + File.separator + "%s" + MAP_FILENAME_EXTENSION;
 	
-	/**
-	 * Do a boo
-	 */
-	public void boo() {
-		
-	}
-	
+
 	/* (non-Javadoc)
-	 * @see ca.concordia.soen6441.io.MapPersister#save(ca.concordia.soen6441.logic.GameMap, java.lang.String)
+	 * @see ca.concordia.soen6441.io.gameMapDao#save(ca.concordia.soen6441.logic.GameMap, java.lang.String)
 	 */
 	@Override
 	public void save(GameMap gameMap, String mapname) throws IOException {
@@ -38,7 +32,7 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	}
 	
 	/* (non-Javadoc)
-	 * @see ca.concordia.soen6441.io.IMapPersister#load(java.io.File)
+	 * @see ca.concordia.soen6441.io.IgameMapDao#load(java.io.File)
 	 */
 	@Override
 	public GameMap load(String mapname) throws IOException, ClassNotFoundException {
@@ -52,7 +46,7 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.concordia.soen6441.io.MapPersister#listAllNames()
+	 * @see ca.concordia.soen6441.io.gameMapDao#listAllNames()
 	 */
 	@Override
 	public List<String> listAllNames() throws IOException {

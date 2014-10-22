@@ -12,43 +12,33 @@ public class Tower extends Observable {
 	
 	int level;
 	
-	final GridPosition coordinate;
+	final GridPosition gridPosition;
 	
 	final TowerFactory towerFactory;
 
-	public int getX() {
-		return coordinate.getX();
-	}
-	
-	public int getY() {
-		return coordinate.getX();
-	}
-
-	public int getRange() {
-		return getTowerLevelCharacteristic().getRange();
-	}
-
-	public Tower(int level, GridPosition coordinate, TowerFactory towerFactory) {
+	public Tower(int level, GridPosition gridPosition, TowerFactory towerFactory) {
 		super();
-		this.coordinate = coordinate;
+		this.gridPosition = gridPosition;
 		this.level = level;
 		this.towerFactory = towerFactory;
 	}
 
-	public GridPosition getCoordinate() {
-		return coordinate;
+	public GridPosition getGridPosition() {
+		return gridPosition;
 	}
 
-	public void update(long milisecondsFromLastUpdate) {
-//		shotMilisecondsAgo += milisecondsFromLastUpdate;
+
+	
+	public int getRange() {
+		return getTowerLevelCharacteristic().getRange();
 	}
 	
 	public boolean inRange(GridPosition otherCoordinate) {
-		return distance(this.coordinate, otherCoordinate) < getRange();
+		return distance(this.gridPosition, otherCoordinate) < getRange();
 	}
 	
 	public double distanceTo(GridPosition otherCoordinate) {
-		return distance(this.coordinate, otherCoordinate);
+		return distance(this.gridPosition, otherCoordinate);
 	}
 	
 	public double distance(GridPosition p0, GridPosition p1) {
@@ -104,5 +94,8 @@ public class Tower extends Observable {
 		return towerFactory;
 	}
 	
+	public void update(long milisecondsFromLastUpdate) {
+//		shotMilisecondsAgo += milisecondsFromLastUpdate;
+	}
 	
 }

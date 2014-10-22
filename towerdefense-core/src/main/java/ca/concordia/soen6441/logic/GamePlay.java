@@ -46,7 +46,7 @@ public class GamePlay extends Observable implements Serializable {
 
 	public boolean hasTower(GridPosition gridPosition) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(gridPosition)) {
+			if (tower.getGridPosition().equals(gridPosition)) {
 				return true;
 			}
 		}
@@ -55,7 +55,7 @@ public class GamePlay extends Observable implements Serializable {
 
 	public Tower getTower(GridPosition gridPosition) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(gridPosition)) {
+			if (tower.getGridPosition().equals(gridPosition)) {
 				return tower;
 			}
 		}

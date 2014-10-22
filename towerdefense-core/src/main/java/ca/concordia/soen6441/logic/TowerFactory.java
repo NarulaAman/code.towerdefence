@@ -26,7 +26,7 @@ public class TowerFactory {
 	}
 	
 	public Tower towerOnCoordinate(Class<? extends Tower> type, GridPosition coordinate) {
-		return new Tower(1, coordinate, this); // new Tower(coordinate, new TowerInformation(0, 0, 0, 0));
+		return new Tower(1, coordinate, this); // new Tower(gridPosition, new TowerInformation(0, 0, 0, 0));
 	}
 	
 }

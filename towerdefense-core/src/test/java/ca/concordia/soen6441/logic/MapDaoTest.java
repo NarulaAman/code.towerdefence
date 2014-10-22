@@ -21,7 +21,7 @@ public class MapDaoTest {
 	
 	private static final String MAP_DATA_FILENAME = "testMapName";
 	
-	GameMapJavaSerializationDao mapPersister = new GameMapJavaSerializationDao();
+	GameMapJavaSerializationDao gameMapDao = new GameMapJavaSerializationDao();
 	static GameMap gameMap = new GameMap(32, 32);
 
 	@BeforeClass
@@ -52,18 +52,18 @@ public class MapDaoTest {
 	
 	@Test(expected=IOException.class)
 	public final void testLoadWithNoExistantFile() throws ClassNotFoundException, IOException {
-		GameMap map2 = mapPersister.load(MAP_DATA_FILENAME);
+		GameMap map2 = gameMapDao.load(MAP_DATA_FILENAME);
 		Assert.assertTrue(map2.equals(gameMap));
 	}
 
 	@Test
 	public final void testSave() throws IOException, ClassNotFoundException {
-		mapPersister.save(gameMap, MAP_DATA_FILENAME);
+		gameMapDao.save(gameMap, MAP_DATA_FILENAME);
 	}
 
 	@Test
 	public final void testLoad() throws ClassNotFoundException, IOException {
-		GameMap map2 = mapPersister.load(MAP_DATA_FILENAME);
+		GameMap map2 = gameMapDao.load(MAP_DATA_FILENAME);
 		Assert.assertTrue(map2.equals(gameMap));
 	}
 

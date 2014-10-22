@@ -159,8 +159,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		JFrame frame = new JFrame("GamePlayPanel");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		GameMapDao mapPersister = new GameMapJavaSerializationDao();
-		GameMap gameMap = mapPersister.load("DefaultMap");
+		GameMapDao gameMapDao = new GameMapJavaSerializationDao();
+		GameMap gameMap = gameMapDao.load("DefaultMap");
 		GamePlay gamePlay = new GamePlay(gameMap, 1000);
 		GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
 		frame.setContentPane(gamePlayPanel);
