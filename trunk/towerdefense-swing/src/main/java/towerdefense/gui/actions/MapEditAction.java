@@ -15,7 +15,7 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	/**
 	 * 
 	 */
-	private static final Icon EDIT_ICON = new ImageIcon("edit.png");
+	private static final Icon EDIT_ICON = new ImageIcon(Object.class.getResource("/icons/edit.png"));
 	
 	private static final long serialVersionUID = 7403090617352119267L;
 	private final MapEditionDialog mapEditionDialog;

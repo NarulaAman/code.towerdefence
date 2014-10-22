@@ -25,13 +25,13 @@ public class MapPanel extends JPanel implements Observer{
 		void mapGridCoordinateClicked(GridPosition gridPosition);
 	}
 	
-	private static final Image ENEMY_PATH_ICON = new ImageIcon("tilepath.jpg")
+	private static final Image ENEMY_PATH_ICON = new ImageIcon(Object.class.getResource("/icons/tilepath.jpg"))
 			.getImage();
-	private static final Image SCENERY_ICON = new ImageIcon("grass.jpg")
+	private static final Image SCENERY_ICON = new ImageIcon(Object.class.getResource("/icons/grass.jpg"))
 			.getImage();
-	private static final Image START_ICON = new ImageIcon("tilepath-start.jpg")
+	private static final Image START_ICON = new ImageIcon(Object.class.getResource("/icons/tilepath_start.jpg"))
 			.getImage();
-	private static final Image EXIT_ICON = new ImageIcon("tilepath-exit.jpg")
+	private static final Image EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/tilepath_exit.jpg"))
 			.getImage();
 
 	private Map map = null;

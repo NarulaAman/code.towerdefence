@@ -35,7 +35,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	
 	private final MapListPanel mapListPanel;
 	
-	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
+	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
 	
 	public StartGameDialog(MapDao mapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
