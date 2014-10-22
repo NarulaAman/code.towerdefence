@@ -29,7 +29,7 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		mapEditionDialog.setMap(selectedMap);
+		mapEditionDialog.setMap(selectedMap.clone());
 		mapEditionDialog.setVisible(true);
 	}
 
