@@ -12,7 +12,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import ca.concordia.soen6441.io.MapJavaSerializationPersister;
+import ca.concordia.soen6441.io.MapJavaSerializationDao;
 import ca.concordia.soen6441.logic.Tile.TileType;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
 
@@ -21,7 +21,7 @@ public class MapDaoTest {
 	
 	private static final String MAP_DATA_FILENAME = "testMapName";
 	
-	MapJavaSerializationPersister mapPersister = new MapJavaSerializationPersister();
+	MapJavaSerializationDao mapPersister = new MapJavaSerializationDao();
 	static Map map = new Map(32, 32);
 
 	@BeforeClass

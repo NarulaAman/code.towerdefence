@@ -11,7 +11,7 @@ import java.util.List;
 
 import ca.concordia.soen6441.logic.Map;
 
-public class MapJavaSerializationPersister implements MapDao {
+public class MapJavaSerializationDao implements MapDao {
 	
 
 	

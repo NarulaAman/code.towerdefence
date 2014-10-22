@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
-import ca.concordia.soen6441.io.MapJavaSerializationPersister;
+import ca.concordia.soen6441.io.MapJavaSerializationDao;
 import ca.concordia.soen6441.io.MapDao;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
@@ -177,7 +177,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 	private static void createAndShowGUI() {
 		Map map = new Map(4, 4);
-		MapEditionDialog mapEditionPanel = new MapEditionDialog(new MapJavaSerializationPersister());
+		MapEditionDialog mapEditionPanel = new MapEditionDialog(new MapJavaSerializationDao());
 		mapEditionPanel.setMap(map);
 		mapEditionPanel.setVisible(true);
 	}
