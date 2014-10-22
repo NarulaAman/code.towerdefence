@@ -37,7 +37,6 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	public void mapSelected(GameMap gameMap) {
 		selectedMap = gameMap;
 		setEnabled(selectedMap != null);
-		
 	}
 
 }

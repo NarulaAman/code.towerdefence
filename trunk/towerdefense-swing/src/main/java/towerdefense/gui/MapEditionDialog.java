@@ -198,11 +198,11 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		//				
 
 		if (selectedButton == SelectedButton.ENEMY_PATH) {
-			gameMap.setTile(gridPosition, Tile.TileType.ENEMY_PATH);
+			gameMap.setTile(gridPosition, Tile.ENEMY_PATH);
 		}
 
 		if(selectedButton == SelectedButton.SCENERY) {
-			gameMap.setTile(gridPosition, Tile.TileType.SCENERY);
+			gameMap.setTile(gridPosition, Tile.SCENERY);
 		}
 		
 		if(selectedButton == SelectedButton.ENTRY) {
