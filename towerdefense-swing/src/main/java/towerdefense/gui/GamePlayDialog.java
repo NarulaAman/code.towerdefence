@@ -188,9 +188,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 
 	@Override
-	public void mapGridCoordinateClicked(int x, int y) {
+	public void mapGridCoordinateClicked(IntCoordinate intCoordinate) {
 		if (state == State.BUYING_TOWER) {
-			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, new IntCoordinate(x, y));
+			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, intCoordinate);
 			getGamePlay().buy(tower);
 //			state = State.NOTHING;
 		}

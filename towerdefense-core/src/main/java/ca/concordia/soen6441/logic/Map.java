@@ -120,22 +120,9 @@ public class Map extends Observable implements Serializable {
 		setChanged();
 		notifyObservers();
 	}
-	
-	
-	public boolean setStartTile(int x, int y) {
-		this.startTile = new IntCoordinate(x, y);
-		return true;
-	}
-	
-	
 
 	public IntCoordinate getEndTile() {
 		return endTile;
-	}
-
-	public boolean setEndTile(int x, int y) {
-		this.endTile = new IntCoordinate(x, y);
-		return true;
 	}
 	
 	public void setEndTile(IntCoordinate endTile) {
@@ -153,10 +140,10 @@ public class Map extends Observable implements Serializable {
 		return height;
 	}
 
-	public void setTile(int x, int y, TileType tileType) {
+	public void setTile(IntCoordinate intCoordinate, TileType tileType) {
 		
-		if (grid[x][y].type != tileType) {
-			grid[x][y] = new Tile(tileType);
+		if (grid[intCoordinate.getX()][intCoordinate.getY()].type != tileType) {
+			grid[intCoordinate.getX()][intCoordinate.getY()] = new Tile(tileType);
 			
 			setChanged();
 			notifyObservers();

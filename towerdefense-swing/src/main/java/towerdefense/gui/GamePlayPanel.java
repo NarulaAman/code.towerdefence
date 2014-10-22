@@ -55,13 +55,13 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 	
 	@Override
-	public void mapGridCoordinateClicked(int x, int y) {
-		if (getGamePlay().hasTower(x, y))
+	public void mapGridCoordinateClicked(IntCoordinate intCoordinate) {
+		if (getGamePlay().hasTower(intCoordinate))
 		{
-			fireTowerSelected(getGamePlay().getTower(x, y));
+			fireTowerSelected(getGamePlay().getTower(intCoordinate));
 		}
 		else {
-			fireMapGridCoordinateClickedListener(new IntCoordinate(x, y));
+			fireMapGridCoordinateClickedListener(intCoordinate);
 		}
 	}
 	
@@ -123,7 +123,7 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	
 	private void fireMapGridCoordinateClickedListener(IntCoordinate coord) {
 		if (mapGridCoordinateClickedListener != null) {
-			mapGridCoordinateClickedListener.mapGridCoordinateClicked(coord.getX(), coord.getY());
+			mapGridCoordinateClickedListener.mapGridCoordinateClicked(coord);
 		}
 	}
 

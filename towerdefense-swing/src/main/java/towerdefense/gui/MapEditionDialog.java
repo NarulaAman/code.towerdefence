@@ -194,27 +194,26 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 
 	@Override
-	public void mapGridCoordinateClicked(int x, int y) {
-		System.out.println("Grid was clicked on [ X: "+x+" ][ Y: "+y+ " ] ");
+	public void mapGridCoordinateClicked(IntCoordinate intCoordinate) {
 		//				
 
 		if (selectedButton == SelectedButton.ENEMY_PATH) {
-			map.setTile(x, y, Tile.TileType.ENEMY_PATH);
+			map.setTile(intCoordinate, Tile.TileType.ENEMY_PATH);
 		}
 
 		if(selectedButton == SelectedButton.SCENERY) {
-			map.setTile(x, y, Tile.TileType.SCENERY);
+			map.setTile(intCoordinate, Tile.TileType.SCENERY);
 		}
 		
 		if(selectedButton == SelectedButton.ENTRY) {
 			
-			map.setStartTile(new IntCoordinate(x, y));
+			map.setStartTile(intCoordinate);
 			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 			
 		}
 		
 		if(selectedButton == SelectedButton.EXIT) {
-			map.setEndTile(new IntCoordinate(x, y));
+			map.setEndTile(intCoordinate);
 			//map.setTile(x, y, Tile.TileType.ENEMY_PATH);
 		}
 		
