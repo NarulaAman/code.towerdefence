@@ -12,9 +12,14 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
+/**
+ * Test cases for the {@link GameMapDao}
+ *
+ */
 @FixMethodOrder(MethodSorters.JVM)
 public class MapDaoTest {
 	
@@ -26,12 +31,12 @@ public class MapDaoTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		new File(MAP_DATA_FILENAME).delete();		
-		gameMap.set(Tile.ENEMY_PATH, new GridPosition(1, 2));
-		gameMap.set(Tile.ENEMY_PATH, new GridPosition(5, 6));
-		gameMap.set(Tile.ENEMY_PATH, new GridPosition(2, 27));
-		gameMap.set(Tile.ENEMY_PATH, new GridPosition(5, 8));
-		gameMap.set(Tile.ENEMY_PATH, new GridPosition(3, 13));
-		gameMap.set(Tile.ENEMY_PATH, new GridPosition(15, 26));
+		gameMap.setTile(new GridPosition(1, 2), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(5, 6), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(2, 27), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(5, 8), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(3, 13), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(15, 26), Tile.ENEMY_PATH);
 		
 	}
 
