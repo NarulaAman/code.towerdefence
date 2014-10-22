@@ -17,7 +17,7 @@ public class StartGamePlayAction extends AbstractAction implements MapSelectionL
 	 * 
 	 */
 	private static final long serialVersionUID = 7403090617352119267L;
-	private static final Icon START_ICON = new ImageIcon("start.png");
+	private static final Icon START_ICON = new ImageIcon(Object.class.getResource("/icons/start.png"));
 	private Map selectedMap = null;
 	
 	public StartGamePlayAction() {

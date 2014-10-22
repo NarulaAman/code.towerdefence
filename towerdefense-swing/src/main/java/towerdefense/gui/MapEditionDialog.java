@@ -48,12 +48,12 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private JButton sceneryButton = new JButton(SCENERY_BUTTON_ICON);
 	private JButton saveButton = new JButton(SAVE_ICON);
 
-	private static final Icon NEW_ICON = new ImageIcon("newb.png");
-	private static final Icon ENTRY_ICON = new ImageIcon("entry.png");
-	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
-	private static final Icon PATH_ICON = new ImageIcon("path.png");
-	private static final Icon SCENERY_BUTTON_ICON = new ImageIcon("scenery.png");
-	private static final Icon SAVE_ICON = new ImageIcon("save.png");
+	private static final Icon NEW_ICON = new ImageIcon(Object.class.getResource("/icons/newb.png"));
+	private static final Icon ENTRY_ICON = new ImageIcon(Object.class.getResource("/icons/entry.png"));
+	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
+	private static final Icon PATH_ICON = new ImageIcon(Object.class.getResource("/icons/path.png"));
+	private static final Icon SCENERY_BUTTON_ICON = new ImageIcon(Object.class.getResource("/icons/scenery.png"));
+	private static final Icon SAVE_ICON = new ImageIcon(Object.class.getResource("/icons/save.png"));
 
 
 	JTextField nameMapText = new JTextField("DefaultMap");
