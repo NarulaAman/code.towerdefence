@@ -58,7 +58,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				System.exit(0);
 			}
 		});
 		
