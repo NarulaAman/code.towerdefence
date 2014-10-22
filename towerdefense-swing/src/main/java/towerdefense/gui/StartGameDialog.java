@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.StartGamePlayAction;
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
-import ca.concordia.soen6441.io.MapPersister;
+import ca.concordia.soen6441.io.MapDao;
 import ca.concordia.soen6441.logic.Map;
 
 public class StartGameDialog extends JDialog implements MapListPanel.MapSelectionListener{
@@ -37,7 +37,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	
 	private static final Icon EXIT_ICON = new ImageIcon("exit.png");
 	
-	public StartGameDialog(MapPersister mapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
+	public StartGameDialog(MapDao mapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		startBtn.setAction(startGamePlayAction);
@@ -52,7 +52,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	}
 
 
-	private void setupSideBar(MapPersister mapDao) {
+	private void setupSideBar(MapDao mapDao) {
 		exitBtn.addActionListener(new ActionListener() {
 			
 			@Override

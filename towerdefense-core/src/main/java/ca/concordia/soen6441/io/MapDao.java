@@ -9,7 +9,7 @@ import ca.concordia.soen6441.logic.Map;
  * Interface used to persist and load a map
  *
  */
-public interface MapPersister {
+public interface MapDao {
 
 	/**
 	 * Saves a map by its name

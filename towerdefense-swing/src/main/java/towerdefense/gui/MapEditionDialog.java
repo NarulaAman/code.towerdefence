@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.io.MapJavaSerializationPersister;
-import ca.concordia.soen6441.io.MapPersister;
+import ca.concordia.soen6441.io.MapDao;
 import ca.concordia.soen6441.logic.Map;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.Coordinate;
@@ -58,10 +58,10 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 	JTextField nameMapText = new JTextField("DefaultMap");
 	
-	private final MapPersister mapPersister;
+	private final MapDao mapPersister;
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
-	public MapEditionDialog(MapPersister persister) {
+	public MapEditionDialog(MapDao persister) {
 		setLayout(new BorderLayout());
 		
 		this.mapPersister = persister;
