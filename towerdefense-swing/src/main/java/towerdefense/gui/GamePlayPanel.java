@@ -17,9 +17,21 @@ import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
+/**
+ * This class is responsible for painting the {@link GamePlay} action, like enemies moving and towers 
+ *
+ */
 public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinateClickedListener {
 	
+	/**
+	 * This is a listener for selected {@link Tower} in the {@link GamePlayPanel}
+	 *
+	 */
 	public interface TowerSelectedListener {
+		/**
+		 * Indicates that a tower has been selected in the {@link GamePlayPanel}
+		 * @param tower tower selected in the {@link GamePlayPanel}
+		 */
 		void towerSelected(Tower tower);
 	}
 
@@ -28,6 +40,11 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	private final GamePlay gamePlay;
 	private MapGridCoordinateClickedListener mapGridCoordinateClickedListener;
 	private TowerSelectedListener towerSelectedListener;
+	
+	/**
+	 * Constructs a {@link GamePlayPanel} to show an instance of a {@link GamePlay}
+	 * @param gamePlay to be displayed
+	 */
 	public GamePlayPanel(GamePlay gamePlay) {
 		super(new GridBagLayout());
 		this.gamePlay = gamePlay;
@@ -40,20 +57,23 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		add(mapPanel, constraints);
 	}
 	
+	/**
+	 * Constructs a {@link GamePlayPanel} to show an instance of a {@link GamePlay}
+	 * @param g {@link Graphics} instance to paint to
+	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		
 		for (Tower tower : getGamePlay().getTowers()) {
 			g.drawImage(TOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
 					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(),
 					this);
 		}
-		
-		
-		
 	}
 	
+	/* (non-Javadoc)
+	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
+	 */
 	@Override
 	public void mapGridCoordinateClicked(GridPosition gridPosition) {
 		if (getGamePlay().hasTower(gridPosition))
@@ -66,18 +86,37 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 	
 	
+	/**
+	 * Transforms from grid coordinates to screen coordinates
+	 * @param x the grid coordinate
+	 * @return the screen coordinate
+	 */
 	int tileToScreenX(int x) {
 		return mapPanel.tileToScreenX(x);
 	}
 
+	/**
+	 * Transforms from grid coordinates to screen coordinates
+	 * @param y the grid coordinate
+	 * @return the screen coordinate
+	 */
 	int tileToScreenY(int y) {
 		return mapPanel.tileToScreenY(y);
 	}
 	
+	
+	/**
+	 * Returns the width of the tiles in the {@link MapPanel}
+	 * @return the width of the tiles in the {@link MapPanel}
+	 */
 	int getTileWidth() {
 		return mapPanel.getTileWidth();
 	}
 
+	/**
+	 * Returns the height of the tiles in the {@link MapPanel}
+	 * @return the height of the tiles in the {@link MapPanel}
+	 */
 	int getTileHeight() {
 		return mapPanel.getTileHeight();
 	}
@@ -115,30 +154,56 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		});
 	}
 	
+	/**
+	 * Invoke the {@link TowerSelectedListener} with a selected {@link Tower}
+	 * @param tower {@link Tower} selected with a click
+	 */
 	private void fireTowerSelected(Tower tower) {
 		if (towerSelectedListener != null) {
 			towerSelectedListener.towerSelected(tower);
 		}
 	}
 	
-	private void fireMapGridCoordinateClickedListener(GridPosition coord) {
+	/**
+	 * Invoke the {@link MapGridCoordinateClickedListener} with {@link GridPosition} clicked on the {@link MapPanel}. 
+	 * This method will only be called when not clicked on a {@link Tower}
+	 * @param gridPosition {@link GridPosition} clicked in the {@link MapPanel}
+	 */
+	private void fireMapGridCoordinateClickedListener(GridPosition gridPosition) {
 		if (mapGridCoordinateClickedListener != null) {
-			mapGridCoordinateClickedListener.mapGridCoordinateClicked(coord);
+			mapGridCoordinateClickedListener.mapGridCoordinateClicked(gridPosition);
 		}
 	}
 
-	public GamePlay getGamePlay() {
+	/**
+	 * Returns the current {@link GamePlay}
+	 * @return the current {@link GamePlay}
+	 */
+	private GamePlay getGamePlay() {
 		return gamePlay;
 	}
 	
+	
+	/**
+	 * Sets the {@link MapGridCoordinateClickedListener}, this listener will be invoked when the {@link GamePlayPanel} is clicked and the object clicked is not a {@link Tower}
+	 * @param listener {@link MapGridCoordinateClickedListener} to be set
+	 */
 	public void setMapGridCoordinateClickedListener(MapGridCoordinateClickedListener listener) {
 		this.mapGridCoordinateClickedListener = listener;
 	}
 	
+	
+	/**
+	 * Sets the {@link TowerSelectedListener}, this listener will be invoked when a {@link Tower} is clicked on the {@link GamePlayPanel}
+	 * @param listener
+	 */
 	public void setTowerSelectedListener(TowerSelectedListener listener) {
 		this.towerSelectedListener = listener;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		repaint();
