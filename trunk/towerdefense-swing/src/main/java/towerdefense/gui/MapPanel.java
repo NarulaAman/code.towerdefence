@@ -22,7 +22,7 @@ import ca.concordia.soen6441.logic.primitives.IntCoordinate;
 public class MapPanel extends JPanel implements Observer{
 
 	public interface MapGridCoordinateClickedListener {
-		void mapGridCoordinateClicked(int x, int y);
+		void mapGridCoordinateClicked(IntCoordinate intCoordinate);
 	}
 	
 	private static final Image ENEMY_PATH_ICON = new ImageIcon("tilepath.jpg")
@@ -52,15 +52,15 @@ public class MapPanel extends JPanel implements Observer{
 //				System.out.println(screenToTileX(x) + "," + screenToTileY(y));// these co-ords are relative to
 												// the component
 //				coordinatesClicked(screenToTileX(x), screenToTileY(y));
-				fireMapGridCoordinateClickedListener(screenToTileX(x), screenToTileY(y));
+				fireMapGridCoordinateClickedListener(new IntCoordinate(screenToTileX(x), screenToTileY(y)));
 				
 			};
 		});
 	}
 	
-	private void fireMapGridCoordinateClickedListener(int x, int y) {
+	private void fireMapGridCoordinateClickedListener(IntCoordinate intCoordinate) {
 		for (MapGridCoordinateClickedListener listener : clickListenerList) {
-			listener.mapGridCoordinateClicked(x, y);
+			listener.mapGridCoordinateClicked(intCoordinate);
 		}
 	}
 	
@@ -150,11 +150,7 @@ public class MapPanel extends JPanel implements Observer{
 
 		GamePlay level = new GamePlay(map, 1000);
 
-		MapPanel label = new MapPanel() {
-			public void coordinatesClicked(int x, int y) {
-				
-			}
-		};
+		MapPanel label = new MapPanel();
 		
 		label.setMap(new Map(10, 10));
 		frame.getContentPane().add(label);

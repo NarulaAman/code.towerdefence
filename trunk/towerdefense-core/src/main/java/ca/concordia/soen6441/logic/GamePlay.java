@@ -44,18 +44,18 @@ public class GamePlay extends Observable implements Serializable {
 		return getMap().canPlace(tower);
 	}
 
-	public boolean hasTower(int x, int y) {
+	public boolean hasTower(IntCoordinate intCoordinate) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(new IntCoordinate(x, y))) {
+			if (tower.getCoordinate().equals(intCoordinate)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public Tower getTower(int x, int y) {
+	public Tower getTower(IntCoordinate intCoordinate) {
 		for (Tower tower : towers) {
-			if (tower.getCoordinate().equals(new IntCoordinate(x, y))) {
+			if (tower.getCoordinate().equals(intCoordinate)) {
 				return tower;
 			}
 		}
