@@ -27,6 +27,10 @@ import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
+/**
+ * This is the dialog which will show the {@link GamePlay}. Here the user will be able to play the game
+ *
+ */
 public class GamePlayDialog extends JDialog implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
 	
 	private enum State {
@@ -56,6 +60,12 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private State state = State.NOTHING;
 
 	private GamePlay gamePlay;
+	
+	
+	/**
+	 * Constructs a {@link GamePlayDialog} to play an instance of {@link GamePlay}
+	 * @param gamePlay {@link GamePlay} to be played in this dialog
+	 */
 	public GamePlayDialog(GamePlay gamePlay) {
 		setLayout(new BorderLayout());
 		this.gamePlay = gamePlay;
@@ -63,7 +73,6 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayPanel = new GamePlayPanel(gamePlay);
 		gamePlayPanel.setMapGridCoordinateClickedListener(this);
 		gamePlayPanel.setTowerSelectedListener(this);
-
 		add(gamePlayPanel, BorderLayout.CENTER);
 		setupSidebar();
 		towerInspectionPanel.setVisible(false);
@@ -71,9 +80,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		pack();
 	}
 
+	/**
+	 * Sets up the sidebar of the dialog
+	 */
 	private void setupSidebar() {
-		
-		
 		JPanel sideBar = new JPanel();
 		sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
 		
@@ -83,13 +93,16 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 		setupInspectionWindow(sideBar);
 
-		setupButtons();
+		setupBuyTowerButton();
 		
 		
 		add(sideBar, BorderLayout.EAST);
 	}	
 
-	private void setupButtons() {
+	/**
+	 * Setup the BuyTower button
+	 */
+	private void setupBuyTowerButton() {
 		buyTowerBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -101,6 +114,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 
+	/**
+	 * Sets up the TowerInspectionWindow on the SideBar
+	 * @param sideBar side bar to have the tower inspection window added to
+	 */
 	private void setupInspectionWindow(JPanel sideBar) {
 		sideBar.add(towerInspectionPanel);
 		
@@ -122,6 +139,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		});
 	}
 
+	/**
+	 * Setup the panel with towers that can be bought
+	 * @param sideBar sidebar to have the the panel added to
+	 */
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
 		towersToBuyPanel.add(buyTowerBtn);
@@ -130,6 +151,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 
+	/**
+	 * Sets up the {@link GamePlay} attributes
+	 * @param sideBar sidebar to have the attributes added to
+	 */
 	private void setupGamePlayAttributes(JPanel sideBar) {
 
 		JPanel gamePlayAttributes = new JPanel(new GridLayout(2,4));
@@ -154,6 +179,11 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 
+	/**
+	 * Creates the Gui for testing purposes
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
 		//Create and set up the window.
 		JFrame frame = new JFrame("GamePlayPanel");
@@ -170,6 +200,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Main method used for testing the GUI
+	 * @param args arguments are ignored by this method
+	 */
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -187,6 +221,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	}
 
 
+	/* (non-Javadoc)
+	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
+	 */
 	@Override
 	public void mapGridCoordinateClicked(GridPosition gridPosition) {
 		if (state == State.BUYING_TOWER) {
@@ -197,6 +234,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see towerdefense.gui.GamePlayPanel.TowerSelectedListener#towerSelected(ca.concordia.soen6441.logic.Tower)
+	 */
 	@Override
 	public void towerSelected(Tower tower) {
 		selectedTower = tower;
@@ -204,14 +244,24 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towerInspectionPanel.setVisible(true);
 	}
 	
+	/**
+	 * Returns the current {@link GamePlay} instance 
+	 * @return the current {@link GamePlay} instance 
+	 */
 	public GamePlay getGamePlay() {
 		return gamePlay;
 	}
 	
+	/**
+	 * Reads the current {@link GamePlay} attributes
+	 */
 	private void readGamePlay() {
 		banksTxtFld.setText("" + gamePlay.getCurrency());
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		readGamePlay();
