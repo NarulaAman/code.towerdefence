@@ -62,7 +62,7 @@ public class MapValidator {
 		}
 			
 		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition()) < MIN_DISTANCE_FROM_START_TO_EXIT) {
-			messageIfNotValid.append("GameMap must have a distance between start and exit\n");
+			messageIfNotValid.append("GameMap's start should have a path to reach the end\n");
 			mapInconsistent = true;
 		}
 
