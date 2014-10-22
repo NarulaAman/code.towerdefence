@@ -28,7 +28,7 @@ public class MapValidator {
 			mapInconsistent = true;
 		}
 		if (mapHasNoStart(gameMap)) {
-			messageIfNotValid.append("GameMap has no end\n");
+			messageIfNotValid.append("GameMap has no start\n");
 			mapInconsistent = true;
 		}
 		if (mapStartPositionCount(gameMap) > 1) {
@@ -42,15 +42,12 @@ public class MapValidator {
 		if (coordinateIsNotInTheSides(gameMap, gameMap.getEndGridPosition())) {
 			messageIfNotValid.append("GameMap exit position must be on the edges\n");
 			mapInconsistent = true;
-
 		}
 			
 		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition())) {
 			messageIfNotValid.append("GameMap must have distance between start and exit\n");
 			mapInconsistent = true;
-
 		}
-		
 
 		if (mapInconsistent) {
 			return false;
@@ -59,12 +56,11 @@ public class MapValidator {
 		}
 	}
 	
-	public boolean distanceBtwnCoordinates(GridPosition d1,GridPosition d2) {
+	public boolean distanceBtwnCoordinates(GridPosition positionA,GridPosition positionB) {
 		
-		double coordinateDistance = Math.sqrt((d1.getX()-d2.getX())*(d1.getX()-d2.getX()) + (d1.getY()-d2.getY())*(d1.getY()-d2.getY()));
+		double gridPositionDistance = Math.sqrt((positionA.getX()-positionB.getX())*(positionA.getX()-positionB.getX()) + (positionA.getY()-positionB.getY())*(positionA.getY()-positionB.getY()));
 		
-		if (coordinateDistance<2) {
-
+		if (gridPositionDistance<2) {
 			return false;
 		} else {
 			return true;
