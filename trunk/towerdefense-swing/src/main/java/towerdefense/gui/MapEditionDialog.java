@@ -17,9 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import towerdefense.gui.actions.NewMapAction;
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.MapValidator;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
@@ -63,6 +65,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		EXIT
 	}
 
+	private final MapValidator mapValidator = new MapValidator();
 	SelectedButton selectedButton = SelectedButton.SCENERY;
 
 	/**
@@ -112,21 +115,35 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		}
 	}
 
+	public boolean saveMap() {
+		try {
+			
+			StringBuilder incorrectMap = new StringBuilder("");
+			Boolean mapValidate = mapValidator.isValid(gameMap, incorrectMap);
 
+
+			if(mapValidate) {
+				gameMapDao.save(gameMap, nameMapText.getText());
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, incorrectMap);
+				return false;
+			}
+		
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;	
+		}
+		
+	}
+	
 	/**
 	 * Add the action listeners to the buttons
 	 */
 	private void addBehaviorToButtons() {
-		newMapButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Save your Game?","Warning",JOptionPane.YES_NO_OPTION);
-				if(dialogResult == JOptionPane.YES_OPTION);
-				{
-						// TODO: complete this!
-				}
-			}
-		});
+		
+		newMapButton.addActionListener(new NewMapAction(this));
 
 		exitButton.addActionListener(new ActionListener() {
 
@@ -164,12 +181,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					gameMapDao.save(gameMap, nameMapText.getText());
-				} catch (IOException e1) {
-					throw new RuntimeException(e1);
-				}
-				
+				saveMap();
 			}
 		});
 		
@@ -186,7 +198,10 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 	}
 
-
+    public GameMap getMap() {
+    	return gameMap;
+    }
+	
 	/* (non-Javadoc)
 	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
 	 */
