@@ -82,7 +82,7 @@ public class GamePlayTest {
 	
 	
 	/**
-	 * Test if the currency to buy tower is decreasing
+	 * Test if the currency amount decreases on buy of tower 
 	 */
 	@Test
 	public void testBuyFailedOnThirdBuy() {
@@ -93,6 +93,9 @@ public class GamePlayTest {
 		assertEquals(2, gamePlay.totalTowers());
 	}
 	
+   /**
+    * Test if the tower level gets upgrade on sufficient funds 
+    */
    @Test
     public void testUpgrade(){
 	   when(tower1.getUpgradeCost()).thenReturn(START_CURRENCY /2); 
@@ -101,6 +104,9 @@ public class GamePlayTest {
 	   verify(tower1).doUpgrade();
    }
    
+   /**
+	* Test if the tower upgrade fails due to insufficient funds
+    */
    @Test
    public void testUpgradeFailed(){
 	   when(tower1.getUpgradeCost()).thenReturn(START_CURRENCY + 1);
@@ -108,6 +114,9 @@ public class GamePlayTest {
 	   verify(tower1, never()).doUpgrade();
    }
    
+   /**
+	* Test if the tower upgrade did not happen
+	*/
    @Test
    public void testUpgradeDintHappenCanUpgradeFalse(){
 	   when(tower1.canUpgrade()).thenReturn(false);
