@@ -8,7 +8,7 @@ import java.io.Serializable;
 public enum Tile implements Serializable {
 
 	/**
-	 * 
+	 * Possible tile types
 	 */
 	ENEMY_PATH,
 	SCENERY;
