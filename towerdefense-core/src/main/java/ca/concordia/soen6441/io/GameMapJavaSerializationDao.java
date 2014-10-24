@@ -35,10 +35,14 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	 * @param mapName name of the map
 	 */
 	@Override
-	public void save(GameMap gameMap, String mapName) throws IOException { File file = new File(String.format(FILENAME_STRING_FORMAT, mapName)); FileOutputStream outPut = new FileOutputStream(file); 
+	public void save(GameMap gameMap, String mapName) throws IOException { 
+		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName)); 
+		FileOutputStream outPut = new FileOutputStream(file); 
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
 		oos.writeObject(gameMap);
 		oos.close();
+		outPut.close();
+		
 	}
 	
 	/**

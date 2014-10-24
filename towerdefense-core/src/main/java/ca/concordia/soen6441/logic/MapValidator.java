@@ -80,8 +80,8 @@ public class MapValidator {
 	
 	/**
 	 * Tests if the start {@link GridPosition} of the {@link GameMap} is the same {@link GridPosition} as the end
-	 * @param gameMap
-	 * @return
+	 * @param gameMap {@link GameMap} to be checked if the {@link GridPosition} of the start is the same as the end
+	 * @return trus if the {@link GridPosition} of the start is the same as the end
 	 */
 	public boolean mapStartSamePositionAsEnd(GameMap gameMap) {
 		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
