@@ -4,16 +4,13 @@ package ca.concordia.soen6441.logic;
  * This class contain the characteristics of Tower as per level
  *
  */
-public class TowerLevelCaracteristic {
+public class TowerLevelCharacteristic {
 
 	final int damage;
 	
 	final int buyCost;
-	
-	/**
-	 * Percentage of refund rate
-	 */
-	final int refundRate;
+
+	final int refund;
 	
 	final int range;
 
@@ -21,14 +18,14 @@ public class TowerLevelCaracteristic {
 	 * Construct the tower characteristics
 	 * @param damage caused by the tower
 	 * @param buyCost of the tower
-	 * @param refundRate of the tower
+	 * @param refund of the tower
 	 * @param range of the tower
 	 */
-	public TowerLevelCaracteristic(int damage, int buyCost, int refundRate, int range) {
+	public TowerLevelCharacteristic(int damage, int buyCost, int refundRate, int range) {
 		super();
 		this.damage = damage;
 		this.buyCost = buyCost;
-		this.refundRate = refundRate;
+		this.refund = refundRate;
 		this.range = range;
 	}
 
@@ -49,11 +46,11 @@ public class TowerLevelCaracteristic {
 	}
 
 	/**
-	 * Returns the refundRate cost of this tower
-	 * @return the refundRate cost of this tower
+	 * Returns the refund cost of this tower
+	 * @return the refund cost of this tower
 	 */
-	public int getRefundRate() {
-		return refundRate;
+	public int getRefund() {
+		return refund;
 	}
 
 	/**
@@ -64,12 +61,13 @@ public class TowerLevelCaracteristic {
 		return range;
 	}
 
-	/** Returns the damage, buyCost, refundRate and range of tower
-	 * @return the damage, buyCost, refundRate and range of tower
+	/** 
+	 * Returns the damage, buyCost, refund and range of tower
+	 * @return the damage, buyCost, refund and range of tower
 	 */
 	public String toHtmlString() {
 		return "<html>Damage: " + damage + "<br>Buy cost: "
-				+ buyCost + "<br>Refund: " + refundRate + "<br>Range: " + range
+				+ buyCost + "<br>Refund: " + refund + "<br>Range: " + range
 				+ "</html>";
 	}
 	

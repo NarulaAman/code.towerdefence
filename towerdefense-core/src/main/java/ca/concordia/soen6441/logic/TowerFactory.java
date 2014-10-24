@@ -12,15 +12,15 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class TowerFactory {
 	
-	HashMap<Class<? extends Tower>, List<TowerLevelCaracteristic>> towerTypeInformation = new HashMap<>();
+	HashMap<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
 	
 	/**
 	 * Create towers
 	 */
 	public TowerFactory() {
-		List<TowerLevelCaracteristic> towerLevelCharacteristic  = new ArrayList<>();
-		towerLevelCharacteristic.add(new TowerLevelCaracteristic(10, 100, 75, 2));
-		towerLevelCharacteristic.add(new TowerLevelCaracteristic(15, 70, 75, 3));
+		List<TowerLevelCharacteristic> towerLevelCharacteristic  = new ArrayList<>();
+		towerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2));
+		towerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 70, 75, 3));
 		towerTypeInformation.put(Tower.class, towerLevelCharacteristic);
 	}
 	
@@ -34,12 +34,12 @@ public class TowerFactory {
 	}
 	
 	/**
-	 * Return the object of {@link TowerLevelCaracteristic} based on tower type and level
+	 * Return the object of {@link TowerLevelCharacteristic} based on tower type and level
 	 * @param type The type of the tower
 	 * @param level The level of the tower
-	 * @return The {@link TowerLevelCaracteristic}
+	 * @return The {@link TowerLevelCharacteristic}
 	 */
-	public TowerLevelCaracteristic getLevelInformation(Class<? extends Tower> type, int level) {
+	public TowerLevelCharacteristic getLevelInformation(Class<? extends Tower> type, int level) {
 		return towerTypeInformation.get(type).get(level-1);
 	}
 	
