@@ -1,6 +1,7 @@
 package ca.concordia.soen6441.logic;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -10,6 +11,8 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 
 
@@ -91,6 +94,18 @@ public class GamePlayTest {
 		assertTrue(gamePlay.buy(tower2));	
 		assertFalse(gamePlay.buy(tower3));
 		assertEquals(2, gamePlay.totalTowers());
+	}
+	
+	/**
+	 * Test prevent buying two towers in the same position
+	 */
+	@Test
+	public void testPreventPlacingTwoTowersInTheSamePosition() {
+		when(tower1.getGridPosition()).thenReturn(new GridPosition(1, 1));
+		when(tower2.getGridPosition()).thenReturn(new GridPosition(1, 1));
+		when(gameMap.getTile(new GridPosition(1, 1))).thenReturn(Tile.SCENERY);
+		assertTrue(gamePlay.buy(tower1));
+		assertFalse(gamePlay.buy(tower2));				
 	}
 	
    /**
