@@ -101,7 +101,7 @@ public class Tower extends Observable {
 	 * @return The Refund Rate for the Tower
 	 */
 	public int getRefundRate() {
-		return getTowerLevelCharacteristic().getRefundRate();
+		return getTowerLevelCharacteristic().getRefund();
 	}
 	
 	/**
@@ -141,10 +141,10 @@ public class Tower extends Observable {
 	}
 	
 	/**
-	 * Returns the {@link TowerLevelCaracteristic}
-	 * @return The {@link TowerLevelCaracteristic}
+	 * Returns the {@link TowerLevelCharacteristic}
+	 * @return The {@link TowerLevelCharacteristic}
 	 */
-	private TowerLevelCaracteristic getTowerLevelCharacteristic() {
+	private TowerLevelCharacteristic getTowerLevelCharacteristic() {
 		return getTowerFactory().getLevelInformation(this.getClass(), level);
 	}
 	
