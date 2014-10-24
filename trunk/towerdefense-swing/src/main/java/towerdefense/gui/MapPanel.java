@@ -249,4 +249,15 @@ public class MapPanel extends JPanel implements Observer{
 			}
 		});
 	}
+
+	/**
+	 * Method to be called as this panel is disposed
+	 */
+	public void dispose() {
+		if (gameMap != null) {
+			gameMap.deleteObserver(this);
+		}
+			
+		
+	}
 }

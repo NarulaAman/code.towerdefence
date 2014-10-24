@@ -111,5 +111,14 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	public void mapSelected(GameMap gameMap) {
 		gridPanel.setMap(gameMap);
 	}
+	
+	
+	/**
+	 * Method to be called when this window is disposed 
+	 */
+	@Override
+	public void dispose() {
+		gridPanel.dispose();
+	}
 
 }
