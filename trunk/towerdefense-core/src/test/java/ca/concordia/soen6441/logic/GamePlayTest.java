@@ -13,6 +13,10 @@ import org.junit.Test;
 
 
 
+/**
+ * This class will do unit testing of GamePlay
+ *
+ */
 public class GamePlayTest {
 	
 	private static final int START_CURRENCY = 200;
@@ -22,6 +26,10 @@ public class GamePlayTest {
 	private Tower tower3;
 	private GamePlay gamePlay;
 
+	/**
+	 * Setup pre-condition for all the test 
+	 * @throws Exception 
+	 */
 	@Before
 	public void setUp() throws Exception {
 		gameMap = mock(GameMap.class);
@@ -31,11 +39,17 @@ public class GamePlayTest {
 		gamePlay = new GamePlay(gameMap, 200);
 	}
 	
+	/**
+	 * Test the gamePlay start with total number of tower as 0  
+	 */
 	@Test
 	public void testStartWithNoTowers() {
 		assertEquals(0, gamePlay.totalTowers());
 	}
 
+	/**
+	 * Test if it is possible to buy tower  
+	 */
 	@Test
 	public void testBuySuccess() {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY / 2);		
@@ -43,6 +57,9 @@ public class GamePlayTest {
 		assertEquals(1, gamePlay.totalTowers());
 	}
 	
+	/**
+	 * Test if it is possible to buy tower after total cost to buy is 0. 
+	 */
 	@Test
 	public void testBuySuccessEndedWithNoCurrency() {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY / 2);
@@ -53,6 +70,9 @@ public class GamePlayTest {
 		assertEquals(0, gamePlay.getCurrency());
 	}
 	
+	/**
+	 * Test if there is sufficient amount to buy tower
+	 */
 	@Test
 	public void testBuyFailed() {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY + 50);		
@@ -61,6 +81,9 @@ public class GamePlayTest {
 	}
 	
 	
+	/**
+	 * Test if the currency to buy tower is decreasing
+	 */
 	@Test
 	public void testBuyFailedOnThirdBuy() {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY / 2);	
