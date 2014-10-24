@@ -16,12 +16,12 @@ public class GamePlay extends Observable implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	final GameMap gameMap;
-	final List<Tower> towers = new ArrayList<Tower>();
+	private final GameMap gameMap;
+	private final List<Tower> towers = new ArrayList<Tower>();
 
-	int currency;
+	private int currency;
 	
-	int lives;
+	private int lives;
 
 	/**
 	 * @param gameMap The map selected for Play

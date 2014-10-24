@@ -36,10 +36,6 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 * The position of Exit Tile
 	 */
 	private GridPosition endGridPosition;
-	
-	// REMOVE THIS HACK
-
-	public List<GridPosition> pathCoordinates = new ArrayList<GridPosition>();
 
 	/**
 	 * Display the {@link GameMap} with scenery at all the {@link Tile}
@@ -61,9 +57,8 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 
 	/**
 	 * Get the {@link Tile} type at X and Y coordinate on {@link GameMap}
-	 * @param x 
-	 * @param y
-	 * @return Tile type at X and Y coordinate on Map
+	 * @param gridPosition {@link GridPosition}
+	 * @return Tile type at the {@link GridPosition} on Map
 	 */
 	public Tile getTile(GridPosition gridPosition) {
 		return grid[gridPosition.getX()][gridPosition.getY()];
@@ -88,37 +83,6 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		grid[coordinate.getX()][coordinate.getY()] = null;
 	}
 
-	public boolean isValid() {
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(grid);
-		result = prime * result + height;
-		result = prime * result + width;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GameMap other = (GameMap) obj;
-		if (height != other.height)
-			return false;
-		if (width != other.width)
-			return false;
-		if (!Arrays.deepEquals(grid, other.grid))
-			return false;
-		return true;
-	}
 	/**
 	 * Returns the coordinates of Entry {@link Tile}
 	 * @return The X and Y coordinate of Entry {@link Tile} on {@link GameMap}
@@ -155,10 +119,18 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	}
 	
 
+	/**
+	 * Returns the width of this {@link GameMap}
+	 * @return the width of this {@link GameMap}
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Returns the height of this {@link GameMap}
+	 * @return the height of this {@link GameMap}
+	 */
 	public int getHeight() {
 		return height;
 	}
@@ -184,6 +156,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	public boolean hasStartTile() {
 		return startGridPosition != null;
 	}
+	
 	/**
 	 * Validate the presence of Exit {@link Tile} on {@link GameMap}
 	 * @return True or False if the Exit {@link Tile} is present or not
@@ -193,6 +166,10 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	}
 	
 	
+	/**
+	 * Returns a copy of this {@link GameMap}
+	 * @return a copy of this {@link GameMap}
+	 */
 	public GameMap clone() {
 		GameMap clone = new GameMap(getWidth(), getWidth());
 		clone.setStartGridPosition(getStartGridPosition());
@@ -250,5 +227,40 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 */
 	public boolean isEnemyWalkable(GridPosition gridPosition) {
 		return grid[gridPosition.getX()][gridPosition.getY()] == Tile.ENEMY_PATH;
+	}
+
+	/**
+	 * Returns a unique hashcode of this {@link GameMap}
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(grid);
+		result = prime * result + height;
+		result = prime * result + width;
+		return result;
+	}
+
+	/**
+	 * Returns true if this object is the same as the other, false if not
+	 * @return true if this object is the same as the other, false if not
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GameMap other = (GameMap) obj;
+		if (height != other.height)
+			return false;
+		if (width != other.width)
+			return false;
+		if (!Arrays.deepEquals(grid, other.grid))
+			return false;
+		return true;
 	}
 }

@@ -3,7 +3,6 @@ package ca.concordia.soen6441.logic.primitives;
 import java.io.Serializable;
 
 import javax.vecmath.Point2d;
-import javax.vecmath.Vector2d;
 
 /**
  * This class represents and X and Y gridPosition formed by integers
