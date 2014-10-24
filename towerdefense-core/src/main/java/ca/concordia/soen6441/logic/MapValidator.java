@@ -16,7 +16,7 @@ public class MapValidator {
 	
 	private static final int START_POSITION_COUNT = 1;
 	private static final int END_POSITION_COUNT = 1;
-	private static final int MIN_DISTANCE_FROM_START_TO_EXIT = 2;
+	private static final double MIN_DISTANCE_FROM_START_TO_EXIT = 1.1;
 
 
 
