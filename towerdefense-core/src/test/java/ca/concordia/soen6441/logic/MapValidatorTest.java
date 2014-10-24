@@ -126,7 +126,7 @@ public class MapValidatorTest {
 	}
 	
 	/**
-	 * Test the correctness of path between start and end
+	 * Test if the gameMap start and end are at the same position
 	 */
 	@Test
 	public void testMapStartSamePositionAsEnd() {
@@ -135,6 +135,9 @@ public class MapValidatorTest {
 		assertTrue(mapValidator.mapStartSamePositionAsEnd(gameMap));
 	}
 	
+	/**
+	 * Test if the gameMap start and end are at the different position
+	 */
 	@Test
 	public void testMapStartDifferentPositionFromEnd() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
@@ -142,6 +145,9 @@ public class MapValidatorTest {
 		assertFalse(mapValidator.mapStartSamePositionAsEnd(gameMap));
 	}
 	
+	/**
+	 * Test the correctness of path between start and end
+	 */
 	@Test
 	public void testMapHStartReachesTheEnd() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
