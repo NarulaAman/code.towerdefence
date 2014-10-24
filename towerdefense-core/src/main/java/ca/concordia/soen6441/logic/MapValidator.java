@@ -44,7 +44,7 @@ public class MapValidator {
 		}
 		
 		if (mapEndPositionCount(gameMap) > END_POSITION_COUNT) {
-			messageIfNotValid.append("GameMap shouldn't have more than one end position\n");
+			messageIfNotValid.append("GameMap shouldn't have more than one exit position\n");
 			mapInconsistent = true;
 		}
 		if (! coordinateOnTheEdge(gameMap, gameMap.getStartGridPosition())) {
@@ -62,7 +62,7 @@ public class MapValidator {
 		}
 			
 		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition()) < MIN_DISTANCE_FROM_START_TO_EXIT) {
-			messageIfNotValid.append("Map start can't be right next to the end\n");
+			messageIfNotValid.append("Map start and exit position should not be adjacent\n");
 			mapInconsistent = true;
 		}
 		
