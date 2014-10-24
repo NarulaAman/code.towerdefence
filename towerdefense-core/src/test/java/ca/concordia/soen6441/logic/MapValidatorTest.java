@@ -142,7 +142,7 @@ public class MapValidatorTest {
 	public void testMapStartDifferentPositionFromEnd() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
 		gameMap.setEndGridPosition(new GridPosition(0, 0));
-		assertFalse(mapValidator.mapStartSamePositionAsEnd(gameMap));
+		assertTrue(mapValidator.mapStartSamePositionAsEnd(gameMap));
 	}
 	
 	/**
