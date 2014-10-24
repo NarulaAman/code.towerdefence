@@ -62,8 +62,15 @@ public class MapValidator {
 		}
 			
 		if (distanceBtwnCoordinates(gameMap.getStartGridPosition(), gameMap.getEndGridPosition()) < MIN_DISTANCE_FROM_START_TO_EXIT) {
-			messageIfNotValid.append("GameMap's start should have a path to reach the end\n");
+			messageIfNotValid.append("Map start can't be right next to the end\n");
 			mapInconsistent = true;
+		}
+		
+		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
+			if (gameMap.getStartGridPosition().equals(gameMap.getEndGridPosition())) {
+				messageIfNotValid.append("You have the start and the exit on the same position, this is not allowed!\n");
+				mapInconsistent = true;				
+			}
 		}
 
 		if (mapInconsistent) {
