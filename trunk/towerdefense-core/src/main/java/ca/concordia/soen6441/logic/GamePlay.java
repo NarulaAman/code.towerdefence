@@ -67,8 +67,6 @@ public class GamePlay extends Observable implements Serializable {
 				return false;
 			}
 		}
-		int x = tower.getGridPosition().getX();
-		int y = tower.getGridPosition().getY();
 		Tile tile = getMap().getTile(tower.getGridPosition());
 		return tile == Tile.SCENERY;
 	}
@@ -122,6 +120,9 @@ public class GamePlay extends Observable implements Serializable {
 		}
 	}
 
+	/**
+	 * Notify the Observers that there was a change
+	 */
 	private void notifyWithChange() {
 		setChanged();
 		notifyObservers();
