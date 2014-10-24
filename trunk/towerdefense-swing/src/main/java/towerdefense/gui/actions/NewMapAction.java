@@ -12,15 +12,16 @@ import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
 import towerdefense.gui.NewMapDialog;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.MapValidator;
+
 
 public class NewMapAction extends AbstractAction implements MapSelectionListener {
 
 	/**
 	 * 
 	 */
-	private static final Icon EDIT_ICON = new ImageIcon(Object.class.getResource("/icons/edit.png"));
-
+	private static final Icon NEW_ICON = new ImageIcon(Object.class.getResource("/icons/newb.png"));
+    
+	
 	private static final long serialVersionUID = 7403090617352119267L;
 	private final MapEditionDialog mapEditionDialog;
 	private GameMap selectedMap = null;
@@ -29,40 +30,23 @@ public class NewMapAction extends AbstractAction implements MapSelectionListener
 	private static final String newMapText = "Enter the x and y values";
 
 	public NewMapAction(MapEditionDialog mapEditionDialog) {
-		super(null, EDIT_ICON);
+		super(null, NEW_ICON);
 		this.mapEditionDialog = mapEditionDialog;
-		setEnabled(false);
+		setEnabled(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		int dialogResult = JOptionPane.showConfirmDialog (null,saveMapText,"Warning",JOptionPane.YES_NO_OPTION);
-		
-
-		if(dialogResult == JOptionPane.YES_OPTION) {
-
-			Boolean checkMapValidate = mapEditionDialog.saveMap();
-
-			if(checkMapValidate) {
-				setNewMap();
-			}
-			
-	    } else {
-	    	setNewMap();
-	    }
-
-
-    }
-
-	public void setNewMap()
-	{
 		NewMapDialog newMapDialog = new NewMapDialog();
 		JOptionPane.showConfirmDialog(null, newMapDialog,newMapText,JOptionPane.OK_CANCEL_OPTION);
 		mapEditionDialog.setMap(new GameMap(newMapDialog.getXField(), newMapDialog.getYField()));
 		mapEditionDialog.setVisible(true);
+
 		
-	}
+
+
+    }
 	
 	@Override
 	public void mapSelected(GameMap gameMap) {

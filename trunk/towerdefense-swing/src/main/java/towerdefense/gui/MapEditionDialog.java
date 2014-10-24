@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
-import towerdefense.gui.actions.NewMapAction;
+import towerdefense.gui.actions.SaveMapAction;
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
@@ -36,7 +36,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 * 
 	 */
 	private static final long serialVersionUID = 9131842957154665067L;
-	private static final Icon NEW_ICON = new ImageIcon(Object.class.getResource("/icons/newb.png"));
 	private static final Icon ENTRY_ICON = new ImageIcon(Object.class.getResource("/icons/entry.png"));
 	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
 	private static final Icon PATH_ICON = new ImageIcon(Object.class.getResource("/icons/path.png"));
@@ -45,7 +44,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 	private final MapPanel gridPanel = new MapPanel();
 
-	private final JButton newMapButton = new JButton(NEW_ICON);;
 	private final JButton entryButton = new JButton(ENTRY_ICON);
 	private final JButton exitButton= new JButton(EXIT_ICON);
 	private final JButton pathButton = new JButton(PATH_ICON);
@@ -102,7 +100,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private void layoutButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-		buttonPanel.add(newMapButton);
 		buttonPanel.add(entryButton);
 		buttonPanel.add(exitButton);
 		buttonPanel.add(pathButton);
@@ -124,6 +121,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 			if(mapValidate) {
 				gameMapDao.save(gameMap, nameMapText.getText());
+				this.setVisible(false);
 				return true;
 			} else {
 				JOptionPane.showMessageDialog(null, incorrectMap);
@@ -143,7 +141,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 */
 	private void addBehaviorToButtons() {
 		
-		newMapButton.addActionListener(new NewMapAction(this));
 
 		exitButton.addActionListener(new ActionListener() {
 
@@ -177,14 +174,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			}
 		});
 		
-		saveButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				saveMap();
-			}
-		});
-		
 	}
 
 
@@ -202,6 +191,13 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
     	return gameMap;
     }
 	
+    public GameMapDao getMapDao() {
+    	return gameMapDao;
+    }
+    
+    public JTextField getMapName() {
+    	return nameMapText;
+    }
 	/* (non-Javadoc)
 	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
 	 */
@@ -248,6 +244,15 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 				createAndShowGUI();
 			}
 		});
+	}
+
+
+	/**
+	 * Returns the save button
+	 * @return the save button
+	 */
+	public JButton getSaveButton() {
+		return saveButton;
 	}
 
 }

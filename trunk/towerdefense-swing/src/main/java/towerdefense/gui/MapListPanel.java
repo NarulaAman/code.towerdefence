@@ -117,6 +117,13 @@ public class MapListPanel extends JPanel {
 		mapSelectionListenerList.add(listener);
 	}
 
+	/**
+	 * Refreshes the list of maps
+	 */
+	public void refreshList() {
+		mapListModel.refreshPersistedMapList();
+		repaint();
+	}
 
 	
 	

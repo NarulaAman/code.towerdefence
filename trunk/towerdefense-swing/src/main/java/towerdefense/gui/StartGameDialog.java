@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import towerdefense.gui.actions.MapEditAction;
+import towerdefense.gui.actions.NewMapAction;
 import towerdefense.gui.actions.StartGamePlayAction;
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GameMapDao;
@@ -32,6 +33,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private final MapPanel gridPanel = new MapPanel();
 	private final JPanel sideBar = new JPanel();
 	
+	private final JButton newBtn = new JButton();
 	private final JButton startBtn = new JButton();
 	private final JButton editBtn = new JButton();	
 	private final JButton exitBtn = new JButton(EXIT_ICON);
@@ -40,16 +42,16 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private final MapListPanel mapListPanel;
 	
 	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
-	
 	/**
 	 * Creates a {@link StartGameDialog} with a given {@link GameMapDao}, {@link MapEditAction}, {@link StartGamePlayAction}
 	 * @param gameMapDao 
 	 * @param mapEditAction
 	 * @param startGamePlayAction
 	 */
-	public StartGameDialog(GameMapDao gameMapDao, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
+	public StartGameDialog(GameMapDao gameMapDao,NewMapAction newMapAction ,MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
+		newBtn.setAction(newMapAction);
 		startBtn.setAction(startGamePlayAction);
 		editBtn.setAction(mapEditAction);
 		mapListPanel = new MapListPanel(gameMapDao);
@@ -77,6 +79,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		
 		sideBar.setPreferredSize(new Dimension(100, 600));
 		sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
+		sideBar.add(newBtn);
 		sideBar.add(startBtn);		
 		sideBar.add(editBtn);
 		sideBar.add(exitBtn);
@@ -121,4 +124,11 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		gridPanel.dispose();
 	}
 
+	/**
+	 * Refreshes the map list
+	 */
+	public void refreshMaps() {
+		mapListPanel.refreshList();
+		
+	}
 }
