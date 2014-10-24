@@ -9,6 +9,10 @@ import org.junit.Test;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
+/**
+ * This class will do unit testing of gameMap
+ *
+ */
 public class MapValidatorTest {
 
 
@@ -17,6 +21,10 @@ public class MapValidatorTest {
 	private GameMap gameMap;
 
 
+	/**
+	 * Setup pre-condition for all the test
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		mapValidator = new MapValidator();
@@ -24,6 +32,9 @@ public class MapValidatorTest {
 	}
 
 
+	/**
+	 * Test if the gameMap test validations are valid
+	 */
 	@Test
 	public void testIsValid() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
@@ -46,6 +57,9 @@ public class MapValidatorTest {
 //		System.err.println(stringBuilder.toString());
 	}
 
+	/**
+	 * Test if the gameMap start and end have distance between them 
+	 */
 	@Test
 	public void testDistanceBtwnCoordinates() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
@@ -55,6 +69,9 @@ public class MapValidatorTest {
 		assertTrue(distance < (2 + 0.1));
 	}
 
+	/**
+	 * Test if the gameMap has start and end at edges
+	 */
 	@Test
 	public void testCoordinateIsNotInTheSides() {
 		assertTrue(mapValidator.coordinateOnTheEdge(gameMap, new GridPosition(0, 0)));
@@ -62,6 +79,9 @@ public class MapValidatorTest {
 		assertFalse(mapValidator.coordinateOnTheEdge(gameMap, new GridPosition(1, 1)));
 	}
 
+	/**
+	 * Test if the gameMap has one start
+	 */
 	@Test
 	public void testMapStartPositionCount() {
 		assertEquals(0, mapValidator.mapStartPositionCount(gameMap));
@@ -71,28 +91,43 @@ public class MapValidatorTest {
 		assertEquals(1, mapValidator.mapStartPositionCount(gameMap));
 	}
 
+	/**
+	 * Test if the gameMap has no start
+	 */
 	@Test
 	public void testMapHasNoStart() {
 		assertFalse(mapValidator.mapMustHaveStart(gameMap));
 	}
 	
+	/**
+	 * Test if the gameMap has a start
+	 */
 	@Test
 	public void testMapHasNoStartWithAStart() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
 		assertTrue(mapValidator.mapMustHaveStart(gameMap));
 	}
 
+	/**
+	 * Test if the gameMap has no end
+	 */
 	@Test
 	public void testMapHasNoEnd() {
 		assertFalse(mapValidator.mapMustHaveEnd(gameMap));
 	}
 	
+	/**
+	 * Test if the gameMap has an end
+	 */
 	@Test
 	public void testMapHasNoEndWithAnEnd() {
 		gameMap.setEndGridPosition(new GridPosition(0, 0));
 		assertTrue(mapValidator.mapMustHaveEnd(gameMap));
 	}
 	
+	/**
+	 * Test the correctness of path between start and end
+	 */
 	@Test
 	public void testMapStartSamePositionAsEnd() {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
