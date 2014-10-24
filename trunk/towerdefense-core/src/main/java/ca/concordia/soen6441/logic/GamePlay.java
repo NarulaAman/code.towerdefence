@@ -67,6 +67,9 @@ public class GamePlay extends Observable implements Serializable {
 				return false;
 			}
 		}
+		if(hasTower(tower.getGridPosition())){
+			return false;
+		}
 		Tile tile = getMap().getTile(tower.getGridPosition());
 		return tile == Tile.SCENERY;
 	}
