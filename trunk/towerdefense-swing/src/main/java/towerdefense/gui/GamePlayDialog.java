@@ -33,6 +33,11 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class GamePlayDialog extends JDialog implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2925833637083353736L;
+
 	private enum State {
 		NOTHING,
 		BUYING_TOWER
@@ -104,6 +109,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void setupBuyTowerButton() {
 		buyTowerBtn.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				state = State.BUYING_TOWER;
@@ -179,8 +185,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
+	/**
+	 * Notifies that a {@link GridPosition} was clicked on the Map
+	 * @param gridPosition position clicked
 	 */
 	@Override
 	public void mapGridCoordinateClicked(GridPosition gridPosition) {
@@ -192,8 +199,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see towerdefense.gui.GamePlayPanel.TowerSelectedListener#towerSelected(ca.concordia.soen6441.logic.Tower)
+	
+	/**
+	 * Notifies that a {@link Tower} was selected on the Map
+	 * @param tower the tower in this position slected
 	 */
 	@Override
 	public void towerSelected(Tower tower) {
@@ -217,15 +226,19 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		banksTxtFld.setText("" + gamePlay.getCurrency());
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	/**
+	 * Update the current {@link GamePlay}
+	 * @param o ignored - not used
+	 * @param arg ignored - not used
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		readGamePlay();
-		
+		readGamePlay();		
 	}
 	
+	/**
+	 * Clean up method
+	 */
 	@Override
 	public void dispose() {
 		gamePlayPanel.dispose();
