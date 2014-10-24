@@ -21,11 +21,11 @@ public class TowerLevelCharacteristic {
 	 * @param refund of the tower
 	 * @param range of the tower
 	 */
-	public TowerLevelCharacteristic(int damage, int buyCost, int refundRate, int range) {
+	public TowerLevelCharacteristic(int damage, int buyCost, int refund, int range) {
 		super();
 		this.damage = damage;
 		this.buyCost = buyCost;
-		this.refund = refundRate;
+		this.refund = refund;
 		this.range = range;
 	}
 
