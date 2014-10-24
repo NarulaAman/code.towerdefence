@@ -107,7 +107,7 @@ public class MapPanel extends JPanel implements Observer{
 		}
 		for (int x = 0; x < getMap().getWidth(); ++x) {
 			for (int y = 0; y < getMap().getHeight(); ++y) {
-				Tile tile = getMap().getTile(x, y);
+				Tile tile = getMap().getTile(new GridPosition(x, y));
 				if (tile == Tile.SCENERY) {
 					g.drawImage(SCENERY_ICON, tileToScreenX(x),
 							tileToScreenY(y), getTileWidth(), getTileHeight(),

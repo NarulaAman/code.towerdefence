@@ -65,32 +65,11 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 * @param y
 	 * @return Tile type at X and Y coordinate on Map
 	 */
-	public Tile getTile(int x, int y) {
-		return grid[x][y];
+	public Tile getTile(GridPosition gridPosition) {
+		return grid[gridPosition.getX()][gridPosition.getY()];
 	}
 
-	/**
-	 * Validate the correct position of tower at {@link GameMap}
-	 * @param tower The position of tower on {@link GameMap}
-	 * @return True or False if the position of the Tower is correct or incorrect
-	 */
-	public boolean canPlace(Tower tower) {
-		if (hasStartTile()) {
-			if (tower.getGridPosition().equals(getStartGridPosition())) {
-				return false;
-			}
-		}
-		if (hasEndTile()) {
-			if (tower.getGridPosition().equals(getEndGridPosition())) {
-				return false;
-			}
-		}
-		int x = tower.getGridPosition().getX();
-		int y = tower.getGridPosition().getY();
-		Tile tile = grid[x][y];
-		return tile == Tile.SCENERY;
-	}
-
+	
 	/**
 	 * Validate the position of the {@link Tile} should within the {@link GameMap}
 	 * @param coordinate The X and Y coordinate on {@link GameMap}

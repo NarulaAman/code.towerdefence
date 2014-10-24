@@ -52,14 +52,28 @@ public class GamePlay extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Validate the position of {@link Tower}
-	 * @param tower The object of class {@link Tower}
-	 * @return True if the tower can be placed at give position else false
+	 * Validate the correct position of tower at {@link GameMap}
+	 * @param tower The position of tower on {@link GameMap}
+	 * @return True or False if the position of the Tower is correct or incorrect
 	 */
 	public boolean canPlace(Tower tower) {
-		return getMap().canPlace(tower);
+		if (getMap().hasStartTile()) {
+			if (tower.getGridPosition().equals(getMap().getStartGridPosition())) {
+				return false;
+			}
+		}
+		if (getMap().hasEndTile()) {
+			if (tower.getGridPosition().equals(getMap().getEndGridPosition())) {
+				return false;
+			}
+		}
+		int x = tower.getGridPosition().getX();
+		int y = tower.getGridPosition().getY();
+		Tile tile = getMap().getTile(tower.getGridPosition());
+		return tile == Tile.SCENERY;
 	}
 
+	
 	/**
 	 * Validate if the tower is present at give position
 	 * @param gridPosition The X and Y coordinate of {@link Tile} on {@link GameMap}
