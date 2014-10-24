@@ -66,11 +66,9 @@ public class MapValidator {
 			mapInconsistent = true;
 		}
 		
-		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
-			if (gameMap.getStartGridPosition().equals(gameMap.getEndGridPosition())) {
-				messageIfNotValid.append("You have the start and the exit on the same position, this is not allowed!\n");
-				mapInconsistent = true;				
-			}
+		if (mapStartSamePositionAsEnd(gameMap)) {
+			messageIfNotValid.append("You have the start and the exit on the same position, this is not allowed!\n");
+			mapInconsistent = true;				
 		}
 
 		if (mapInconsistent) {
@@ -80,6 +78,18 @@ public class MapValidator {
 		}
 	}
 	
+	/**
+	 * Tests if the start {@link GridPosition} of the {@link GameMap} is the same {@link GridPosition} as the end
+	 * @param gameMap
+	 * @return
+	 */
+	public boolean mapStartSamePositionAsEnd(GameMap gameMap) {
+		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
+			return gameMap.getStartGridPosition().equals(gameMap.getEndGridPosition());
+		}
+		return false;
+	}
+
 	/**
 	 * Check the distance between start and exit position 
 	 * @param positionA The start position coordinate
