@@ -103,7 +103,7 @@ public class MapValidator {
 
 	
 	/**
-	 * Return 0 if there is no start position on Map else 1
+	 * Returns 0 if there is no start position on Map else 1
 	 * @param gameMap to be checked
 	 * @return 0 if there is no start position on Map 
 	 */
