@@ -56,7 +56,7 @@ public class MapDaoTest {
 	
 	@Test(expected=IOException.class)
 	public final void testLoadWithNoExistantFile() throws ClassNotFoundException, IOException {
-		GameMap map2 = gameMapDao.load(MAP_DATA_FILENAME);
+		GameMap map2 = gameMapDao.load(MAP_DATA_FILENAME + "doesnt-exist");
 		Assert.assertTrue(map2.equals(gameMap));
 	}
 
