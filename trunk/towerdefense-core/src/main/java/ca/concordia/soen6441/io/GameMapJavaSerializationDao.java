@@ -29,22 +29,26 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	public static final String FILENAME_STRING_FORMAT = "." + File.separator + "%s" + MAP_FILENAME_EXTENSION;
 	
 
-	/* Save the {@link GameMap} to the file.
-	 * @see ca.concordia.soen6441.io.gameMapDao#save(ca.concordia.soen6441.logic.GameMap, java.lang.String)
+	/**
+	 * Save to file a {@link GameMap} given a map name
+	 * @param gameMap {@link GameMap} to be saved
+	 * @param mapName name of the map
 	 */
 	@Override
-	public void save(GameMap gameMap, String mapname) throws IOException { File file = new File(String.format(FILENAME_STRING_FORMAT, mapname)); FileOutputStream outPut = new FileOutputStream(file); 
+	public void save(GameMap gameMap, String mapName) throws IOException { File file = new File(String.format(FILENAME_STRING_FORMAT, mapName)); FileOutputStream outPut = new FileOutputStream(file); 
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
 		oos.writeObject(gameMap);
 		oos.close();
 	}
 	
-	/* Load the {@link GameMap} from the file.
-	 * @see ca.concordia.soen6441.io.IgameMapDao#load(java.io.File)
+	/**
+	 * Load the {@link GameMap} from the file.
+	 * @param mapName {@link GameMap} to be loaded
 	 */
+	
 	@Override
-	public GameMap load(String mapname) throws IOException, ClassNotFoundException {
-		File file = new File(String.format(FILENAME_STRING_FORMAT, mapname));
+	public GameMap load(String mapName) throws IOException, ClassNotFoundException {
+		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName));
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		GameMap gameMap = (GameMap) ois.readObject();
@@ -53,8 +57,9 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 		return gameMap;
 	}
 
-	/* List the name of all the saved {@link GameMap}.
-	 * @see ca.concordia.soen6441.io.gameMapDao#listAllNames()
+	/**
+	 * List the name of all the saved {@link GameMap}.
+	 * @return the list of all map names
 	 */
 	@Override
 	public List<String> listAllNames() throws IOException {
@@ -63,8 +68,8 @@ public class GameMapJavaSerializationDao implements GameMapDao {
  		for (File file : directory.listFiles())
 		{
 			if (file.isFile() && file.getName().endsWith(MAP_FILENAME_EXTENSION)) {
-				String filename = file.getName();
-				String mapName = filename.substring(0, filename.indexOf(MAP_FILENAME_EXTENSION));
+				String fileName = file.getName();
+				String mapName = fileName.substring(0, fileName.indexOf(MAP_FILENAME_EXTENSION));
 				fileList.add(mapName);
 			}
 		}
