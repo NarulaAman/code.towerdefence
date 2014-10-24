@@ -208,4 +208,15 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	public void update(Observable o, Object arg) {
 		repaint();
 	}
+
+	/**
+	 * Disposes of this panel, does clean
+	 */
+	public void dispose() {
+		mapPanel.dispose();
+		if (gamePlay != null) {
+			gamePlay.deleteObserver(this);
+		}
+		
+	}
 }

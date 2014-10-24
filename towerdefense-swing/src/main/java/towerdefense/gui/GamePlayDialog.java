@@ -226,6 +226,12 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 	
+	@Override
+	public void dispose() {
+		gamePlayPanel.dispose();
+		super.dispose();
+	}
+	
 	/**
 	 * Creates the GUI for testing purposes
 	 * @throws ClassNotFoundException
