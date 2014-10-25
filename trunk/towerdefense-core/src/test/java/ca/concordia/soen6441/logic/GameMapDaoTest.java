@@ -21,16 +21,19 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  *
  */
 @FixMethodOrder(MethodSorters.JVM)
-public class MapDaoTest {
+public class GameMapDaoTest {
 	
 	private static final String MAP_DATA_FILENAME = "testMapName";
 	
 	GameMapJavaSerializationDao gameMapDao = new GameMapJavaSerializationDao();
 	static GameMap gameMap = new GameMap(32, 32);
 
+	/**
+	 * Creates a {@link GameMap} to aid the tests
+	 * @throws Exception
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		new File(MAP_DATA_FILENAME).delete();		
 		gameMap.setTile(new GridPosition(1, 2), Tile.ENEMY_PATH);
 		gameMap.setTile(new GridPosition(5, 6), Tile.ENEMY_PATH);
 		gameMap.setTile(new GridPosition(2, 27), Tile.ENEMY_PATH);
@@ -40,31 +43,41 @@ public class MapDaoTest {
 		
 	}
 
+	/**
+	 * Delete the file created during the tests
+	 * @throws Exception
+	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		new File(MAP_DATA_FILENAME).delete();
 	}	
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		
-	}
 	
+	/**
+	 * Tests if an error occurs when opening a non-existant file
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	@Test(expected=IOException.class)
 	public final void testLoadWithNoExistantFile() throws ClassNotFoundException, IOException {
-		GameMap map2 = gameMapDao.load(MAP_DATA_FILENAME + "doesnt-exist");
+		GameMap map2 = gameMapDao.load(MAP_DATA_FILENAME + "non-existant");
 		Assert.assertTrue(map2.equals(gameMap));
 	}
 
+	/**
+	 * Tests if the save happens without errors
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public final void testSave() throws IOException, ClassNotFoundException {
 		gameMapDao.save(gameMap, MAP_DATA_FILENAME);
 	}
 
+	/**
+	 * Tests if the load method loaded the same method it saved before
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	@Test
 	public final void testLoad() throws ClassNotFoundException, IOException {
 		GameMap map2 = gameMapDao.load(MAP_DATA_FILENAME);
