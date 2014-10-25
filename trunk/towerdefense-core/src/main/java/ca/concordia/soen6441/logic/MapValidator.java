@@ -18,8 +18,6 @@ public class MapValidator {
 	private static final int END_POSITION_COUNT = 1;
 	private static final double MIN_DISTANCE_FROM_START_TO_EXIT = 1.1;
 
-
-
 	/**
 	 * Check  validation of the gameMap along with the error message to be display 
 	 * @param gameMap to be checked
@@ -31,28 +29,28 @@ public class MapValidator {
 		boolean mapInconsistent = false;
 
 		if (! mapMustHaveEnd(gameMap)) {
-			messageIfNotValid.append("GameMap must have one end\n");
+			messageIfNotValid.append("Map must have one end\n");
 			mapInconsistent = true;
 		}
 		if (! mapMustHaveStart(gameMap)) {
-			messageIfNotValid.append("GameMap must have one start\n");
+			messageIfNotValid.append("Map must have one start\n");
 			mapInconsistent = true;
 		}
 		if (mapStartPositionCount(gameMap) > START_POSITION_COUNT) {
-			messageIfNotValid.append("GameMap shouldn't have more than one start position\n");
+			messageIfNotValid.append("Map shouldn't have more than one start position\n");
 			mapInconsistent = true;
 		}
 		
 		if (mapEndPositionCount(gameMap) > END_POSITION_COUNT) {
-			messageIfNotValid.append("GameMap shouldn't have more than one exit position\n");
+			messageIfNotValid.append("Map shouldn't have more than one exit position\n");
 			mapInconsistent = true;
 		}
 		if (! coordinateOnTheEdge(gameMap, gameMap.getStartGridPosition())) {
-			messageIfNotValid.append("GameMap start position must be on the edges\n");
+			messageIfNotValid.append("Map start position must be on the edges\n");
 			mapInconsistent = true;
 		}
 		if (! coordinateOnTheEdge(gameMap, gameMap.getEndGridPosition())) {
-			messageIfNotValid.append("GameMap exit position must be on the edges\n");
+			messageIfNotValid.append("Map exit position must be on the edges\n");
 			mapInconsistent = true;
 		}
 		
@@ -96,10 +94,11 @@ public class MapValidator {
 	 * @param positionB The exit position coordinate
 	 * @return distance between positionA and positionB if positions are not null else return 0
 	 */
-	public double distanceBtwnCoordinates(GridPosition positionA,GridPosition positionB) { if (positionA == null || positionB == null) {
+	public double distanceBtwnCoordinates(GridPosition positionA,GridPosition positionB) { 
+		if (positionA == null || positionB == null) {
 			return 0;
 		}
-		return  Math.sqrt((positionA.getX()-positionB.getX())*(positionA.getX()-positionB.getX()) + (positionA.getY()-positionB.getY())*(positionA.getY()-positionB.getY()));
+		return  positionA.distance(positionB);
 	}
 
 	/**
@@ -111,7 +110,6 @@ public class MapValidator {
 		if (coordinate == null) {
 			return false;
 		}
-			
 		return coordinate.getX() == 0 
 				|| coordinate.getY() == 0
 				|| coordinate.getX() == gameMap.getWidth() - 1
