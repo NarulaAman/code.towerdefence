@@ -49,6 +49,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 */
 	public StartGameDialog(GameMapDao gameMapDao,NewMapAction newMapAction ,MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setTitle("Chicken Tikka Masala Gang - Tower Defense");
 		setLayout(new BorderLayout());
 		newBtn.setAction(newMapAction);
 		startBtn.setAction(startGamePlayAction);
@@ -69,7 +70,6 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 */
 	private void setupSideBar(GameMapDao gameMapDao) {
 		exitBtn.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -82,7 +82,6 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		sideBar.add(startBtn);		
 		sideBar.add(editBtn);
 		sideBar.add(exitBtn);
-		
 		sideBar.add(mapListPanel);
 		add(sideBar,BorderLayout.EAST);
 
