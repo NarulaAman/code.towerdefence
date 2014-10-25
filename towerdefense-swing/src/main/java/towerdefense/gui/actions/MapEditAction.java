@@ -34,7 +34,7 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 		setEnabled(false);
 	}
 	/**
-	 * Performs the Action
+	 * Performs the {@link MapEditAction}
 	 * @param e not used - ignored
 	 */
 	@Override
