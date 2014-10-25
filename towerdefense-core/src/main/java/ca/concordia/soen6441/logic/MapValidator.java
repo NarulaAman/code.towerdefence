@@ -183,7 +183,6 @@ public class MapValidator {
 						positionQueue.addFirst(gridPosition);
 					}
 				}
-				
 			}
 		}
 		return false;
