@@ -1,20 +1,19 @@
 package ca.concordia.soen6441.logic;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
- * This class will do unit testing of gameMap
+ * This class will do unit testing of {@link MapValidator}
  *
  */
 public class MapValidatorTest {
-
 
 	private MapValidator mapValidator;
 	
@@ -33,7 +32,7 @@ public class MapValidatorTest {
 
 
 	/**
-	 * Test if the gameMap test validations are valid
+	 * Test a valid {@link GameMap}
 	 */
 	@Test
 	public void testIsValid() {

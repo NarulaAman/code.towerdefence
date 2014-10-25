@@ -81,7 +81,6 @@ public class Tower extends Observable {
 
 	/**
 	 * Returns the damage done by the tower
-	 * 
 	 * @return The damage done by the tower
 	 */
 	public int getDamage() {
@@ -114,7 +113,6 @@ public class Tower extends Observable {
 	
 	/**
 	 * Returns true if the tower can be upgraded, false if not
-	 * 
 	 * @return true if the tower can be upgraded, false if not
 	 */
 	public boolean canUpgrade() {
