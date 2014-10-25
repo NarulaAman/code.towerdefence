@@ -24,6 +24,11 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
 public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinateClickedListener {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6461365434058158286L;
+
+	/**
 	 * This is a listener for selected {@link Tower} in the {@link GamePlayPanel}
 	 *
 	 */
