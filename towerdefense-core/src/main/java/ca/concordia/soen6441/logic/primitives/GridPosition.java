@@ -12,7 +12,8 @@ public class GridPosition implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 9068287181281433533L;
+	
 	final int x;
 	final int y;
 
