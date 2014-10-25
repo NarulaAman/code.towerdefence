@@ -156,11 +156,4 @@ public class Tower extends Observable {
 		return towerFactory;
 	}
 	
-	/**
-	 * @param milisecondsFromLastUpdate 
-	 */
-	public void update(long milisecondsFromLastUpdate) {
-//		shotMilisecondsAgo += milisecondsFromLastUpdate;
-	}
-	
 }
