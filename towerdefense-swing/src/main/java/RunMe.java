@@ -27,7 +27,6 @@ public class RunMe {
 		MapEditAction mapEditAction = new MapEditAction(mapEditionDialog);
 		StartGamePlayAction startGamePlayAction = new StartGamePlayAction();
 		NewMapAction newMapAction = new NewMapAction(mapEditionDialog);
-		
 		StartGameDialog startPanel = new StartGameDialog(gameMapDao,newMapAction ,mapEditAction, startGamePlayAction);
         SaveMapAction saveMapAction = new SaveMapAction(mapEditionDialog, startPanel);
         mapEditionDialog.getSaveButton().addActionListener(saveMapAction);

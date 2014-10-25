@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
@@ -224,8 +223,6 @@ public class MapPanel extends JPanel implements Observer{
 		JFrame frame = new JFrame("HelloWorldSwing");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		GameMap gameMap = new GameMap(9, 9);
-		GamePlay level = new GamePlay(gameMap, 1000);
 		MapPanel label = new MapPanel();
 		
 		label.setMap(new GameMap(10, 10));

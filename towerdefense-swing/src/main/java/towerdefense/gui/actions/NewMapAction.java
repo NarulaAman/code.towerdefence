@@ -25,7 +25,6 @@ public class NewMapAction extends AbstractAction implements MapSelectionListener
 	private final MapEditionDialog mapEditionDialog;
 	private GameMap selectedMap = null;
 
-	private static final String saveMapText = "Would You Like to Save your Game?";
 	private static final String newMapText = "Enter the x and y values";
 
 	public NewMapAction(MapEditionDialog mapEditionDialog) {
