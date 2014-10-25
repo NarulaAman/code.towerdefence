@@ -72,8 +72,8 @@ public class GameMapJavaSerializationDao implements GameMapDao {
  		for (File file : directory.listFiles())
 		{
 			if (file.isFile() && file.getName().endsWith(MAP_FILENAME_EXTENSION)) {
-				String fileName = file.getName();
-				String mapName = fileName.substring(0, fileName.indexOf(MAP_FILENAME_EXTENSION));
+				String filename = file.getName();
+				String mapName = filename.substring(0, filename.indexOf(MAP_FILENAME_EXTENSION));
 				fileList.add(mapName);
 			}
 		}
