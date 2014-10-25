@@ -10,6 +10,9 @@ import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
 import ca.concordia.soen6441.logic.GameMap;
 
+/**
+ * Action for the Edit Map button
+ */
 public class MapEditAction extends AbstractAction implements MapSelectionListener {
 	
 	/**
@@ -21,18 +24,29 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	private final MapEditionDialog mapEditionDialog;
 	private GameMap selectedMap = null;
 	
+	/**
+	 * Creates a {@link MapEditAction} to edit maps with the given {@link MapEditionDialog}
+	 * @param mapEditionDialog {@link MapEditionDialog} to work with this action
+	 */
 	public MapEditAction(MapEditionDialog mapEditionDialog) {
 		super(null, EDIT_ICON);
 		this.mapEditionDialog = mapEditionDialog;
 		setEnabled(false);
 	}
-	
+	/**
+	 * Performs the Action
+	 * @param e not used - ignored
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		mapEditionDialog.setMap(selectedMap.clone());
 		mapEditionDialog.setVisible(true);
 	}
 
+	/**
+	 * Invoked when a {@link GameMap} is selected to be edited, can be null
+	 * @param gameMap {@link GameMap} to be edited 
+	 */
 	@Override
 	public void mapSelected(GameMap gameMap) {
 		selectedMap = gameMap;
