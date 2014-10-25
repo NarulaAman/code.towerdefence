@@ -17,6 +17,7 @@ public class GamePlay extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final GameMap gameMap;
+	
 	private final List<Tower> towers = new ArrayList<Tower>();
 
 	private int currency;
@@ -118,7 +119,6 @@ public class GamePlay extends Observable implements Serializable {
 			notifyWithChange();
 			return true;
 		} else {
-
 			return false;
 		}
 	}
@@ -143,15 +143,15 @@ public class GamePlay extends Observable implements Serializable {
 	
 
 	/**
-	 * Return the total number of towers 
-	 * @return The total number of towers on {@link GameMap}
+	 * Returns the total number of towers on the {@link GameMap}
+	 * @return The total number of towers on the {@link GameMap}
 	 */
 	public int totalTowers() {
 		return towers.size();
 	}
 	
 	/**
-	 * Return amount of currency
+	 * Returns amount of currency
 	 * @return currency
 	 */
 	public int getCurrency() {
@@ -159,26 +159,24 @@ public class GamePlay extends Observable implements Serializable {
 	}
 
 	/**
-	 * Return the object of {@link GameMap}
-	 * @return {@link GameMap}
+	 * Returns the current {@link GameMap}
+	 * @return the current {@link GameMap}
 	 */
 	public GameMap getMap() {
 		return gameMap;
 	}
-	
-	
 
 	/**
-	 * Return the list of Towers
-	 * @return List of Towers
+	 * Returns a copy of the list of Towers 
+	 * @return a copy of the list of Towers
 	 */
 	public List<Tower> getTowers() {
 		return new ArrayList<>(towers);
 	}
 
 	/**
-	 * Return the number of lives
-	 * @return Number of lives
+	 * Returns the number of lives
+	 * @return the number of lives
 	 */
 	public int getLives() {
 		return lives;

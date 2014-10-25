@@ -13,7 +13,6 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class Tower extends Observable {
 	
-	
 	int level;
 	
 	final GridPosition gridPosition;
@@ -40,8 +39,6 @@ public class Tower extends Observable {
 	public GridPosition getGridPosition() {
 		return gridPosition;
 	}
-
-
 	
 	/**
 	 * Return the range of {@link Tower}
@@ -66,7 +63,7 @@ public class Tower extends Observable {
 	 * @return The distance between Tower and Enemy
 	 */
 	public double distanceTo(GridPosition otherCoordinate) {
-		return distance(this.gridPosition, otherCoordinate);
+		return distance(gridPosition, otherCoordinate);
 	}
 	
 	/**
