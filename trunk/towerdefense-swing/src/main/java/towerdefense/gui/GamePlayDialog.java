@@ -38,8 +38,19 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private static final long serialVersionUID = 2925833637083353736L;
 
+	/**
+	 * Internal state of the operations of the {@link GamePlayDialog}
+	 *
+	 */
 	private enum State {
+		/**
+		 * {@link GamePlayDialog} is doing thing
+		 */
 		NOTHING,
+		
+		/**
+		 * {@link GamePlayDialog} is buying tower
+		 */
 		BUYING_TOWER
 	}
 	private final GamePlayPanel gamePlayPanel;
@@ -99,7 +110,6 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setupInspectionWindow(sideBar);
 
 		setupBuyTowerButton();
-		
 		
 		add(sideBar, BorderLayout.EAST);
 	}	
@@ -202,7 +212,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	
 	/**
 	 * Notifies that a {@link Tower} was selected on the Map
-	 * @param tower the tower in this position slected
+	 * @param tower the tower selected
 	 */
 	@Override
 	public void towerSelected(Tower tower) {
