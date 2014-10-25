@@ -7,7 +7,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import towerdefense.gui.GamePlayDialog;
-import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GamePlay;
