@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.NewMapAction;
 import towerdefense.gui.actions.StartGamePlayAction;
-import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
 

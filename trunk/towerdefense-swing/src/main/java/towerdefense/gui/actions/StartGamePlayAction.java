@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 
 import towerdefense.gui.GamePlayDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
-import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.GamePlay;
 
 public class StartGamePlayAction extends AbstractAction implements MapSelectionListener {
 	

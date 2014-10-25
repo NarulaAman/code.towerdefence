@@ -5,13 +5,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import towerdefense.gui.MapEditionDialog;
-import towerdefense.gui.MapListPanel;
 import towerdefense.gui.StartGameDialog;
 import ca.concordia.soen6441.io.GameMapDao;
-import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.MapValidator;
 
 public class SaveMapAction implements ActionListener{

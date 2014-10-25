@@ -14,8 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
