@@ -115,7 +115,6 @@ public class GamePlayTest {
 		when(tower3.getGridPosition()).thenReturn(new GridPosition(3,  3));
 		when(gameMap.getTile(any(GridPosition.class))).thenReturn(Tile.SCENERY);
 		
-		
 		assertTrue(gamePlay.buy(tower1));
 		int expectedCurrencyFirstBuy = START_CURRENCY - tower1.getBuyCost();
 		assertEquals(expectedCurrencyFirstBuy, gamePlay.getCurrency());
@@ -163,7 +162,7 @@ public class GamePlayTest {
 	* Test if the tower upgrade did not happen
 	*/
    @Test
-   public void testUpgradeDintHappenCanUpgradeFalse(){
+   public void testUpgradeDidntHappenCanUpgradeFalse(){
 	   when(tower1.canUpgrade()).thenReturn(false);
 	   assertFalse(gamePlay.upgrade(tower1));
 	   verify(tower1, never()).doUpgrade();

@@ -197,6 +197,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
     public JTextField getMapName() {
     	return nameMapText;
     }
+    
 	/* (non-Javadoc)
 	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
 	 */
