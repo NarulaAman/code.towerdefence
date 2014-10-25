@@ -6,7 +6,6 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;

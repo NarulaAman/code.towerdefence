@@ -1,6 +1,5 @@
 package towerdefense.gui;
 
-import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
