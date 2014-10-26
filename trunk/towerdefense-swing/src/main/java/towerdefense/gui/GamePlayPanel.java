@@ -76,8 +76,9 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
+	/**
+	 * Method triggered when the position is clicked
+	 * @param gridPosition is the position has been clicked
 	 */
 	@Override
 	public void mapGridCoordinateClicked(GridPosition gridPosition) {
@@ -206,8 +207,10 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		this.towerSelectedListener = listener;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	/**
+	 * Update the scream
+	 * @param o is ignored
+	 * @param arg is ignored
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
