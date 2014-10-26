@@ -94,8 +94,9 @@ public class MapPanel extends JPanel implements Observer{
 		clickListenerList.add(listener);
 	}
 	
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
+	/**
+	 * Paints the component by a given graphic instance
+	 * @param g graphic instance
 	 */
 	@Override
 	public void paint(Graphics g) {
@@ -193,8 +194,10 @@ public class MapPanel extends JPanel implements Observer{
 		return getHeight() / getMap().getHeight();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	/**
+	 * update the view
+	 * @param o is ignored
+	 * @param arg is ignored
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
