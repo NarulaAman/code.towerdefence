@@ -182,6 +182,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 */
 	public void setMap(final GameMap gameMap) {
 		this.gameMap = gameMap;
+		nameMapText.setText(gameMap.getName());
 		gridPanel.setMap(gameMap);
 
 	}

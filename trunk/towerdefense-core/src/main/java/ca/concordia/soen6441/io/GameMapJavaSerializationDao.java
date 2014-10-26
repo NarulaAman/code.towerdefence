@@ -37,6 +37,7 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	@Override
 	public void save(GameMap gameMap, String mapName) throws IOException { 
 		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName)); 
+		gameMap.setName(mapName);
 		FileOutputStream outPut = new FileOutputStream(file); 
 		ObjectOutputStream oos = new ObjectOutputStream(outPut);
 		oos.writeObject(gameMap);

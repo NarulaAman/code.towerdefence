@@ -13,10 +13,12 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class GameMap extends Observable implements Serializable, Cloneable {
 
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7943086470924125701L;
+
 	final Tile grid[][];
 
 	/**
@@ -27,6 +29,9 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 * Number of tiles in Y-Coordinate
 	 */
 	final int height;
+	
+	
+	private String name = "Map";
 
 	/**
 	 * The position of Entry Tile
@@ -262,5 +267,13 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		if (!Arrays.deepEquals(grid, other.grid))
 			return false;
 		return true;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
