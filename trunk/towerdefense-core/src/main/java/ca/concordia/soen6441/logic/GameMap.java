@@ -269,10 +269,18 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		return true;
 	}
 
+	/**
+	 * Returns the name of the Map
+	 * @return  the name of the Map
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name of the map
+	 * @param name name to be given for the map
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
