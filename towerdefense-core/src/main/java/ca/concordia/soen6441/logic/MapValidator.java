@@ -90,7 +90,10 @@ public class MapValidator {
 		
 		for (int w = 0; w < gameMap.getWidth(); ++w) {
 			for (int h = 0; h < gameMap.getHeight(); ++h) {
-				if (gameMap.getTile(new GridPosition(w, h)) == Tile.SCENERY) {
+				GridPosition gridPosition = new GridPosition(w, h);
+				if (gameMap.getTile(gridPosition) == Tile.SCENERY 
+						&& (! gridPosition.equals(gameMap.getEndGridPosition()) 
+							|| ! gridPosition.equals(gameMap.getStartGridPosition()))) {
 					return true;
 				}
 			}
