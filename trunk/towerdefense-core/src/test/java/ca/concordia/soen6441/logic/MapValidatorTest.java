@@ -163,5 +163,18 @@ public class MapValidatorTest {
 		gameMap.setTile(new GridPosition(4, 5), Tile.ENEMY_PATH);
 		assertTrue(mapValidator.mapStartMustReachEnd(gameMap));
 	}
+	
+	/**
+	 * Tests that the validator can detect maps without scenery tiles to place the tower
+	 */
+	@Test
+	public void testMapDoesntHaveScenery() {
+		for (int x = 0; x < gameMap.getWidth(); ++x) {
+			for (int y = 0; y < gameMap.getHeight(); ++y) {
+				gameMap.setTile(new GridPosition(x, y), Tile.ENEMY_PATH);
+			}
+		}
+		assertFalse(mapValidator.mapHasAtLeastOneSceneryTile(gameMap));
+	}
 
 }

@@ -69,6 +69,11 @@ public class MapValidator {
 			mapInconsistent = true;				
 		}
 
+		if (! mapHasAtLeastOneSceneryTile(gameMap)) {
+			messageIfNotValid.append("You must have at least one Scenery Tile to place a tower!\n");
+			mapInconsistent = true;				
+		}
+		
 		if (mapInconsistent) {
 			return false;
 		} else {
@@ -76,6 +81,23 @@ public class MapValidator {
 		}
 	}
 	
+	/**
+	 * Returns true if the {@link GameMap} has at least one Scenery tile, false if not
+	 * @param gameMap {@link GameMap} to be checked
+	 * @return true if the {@link GameMap} has at least one Scenery tile, false if not
+	 */
+	public boolean mapHasAtLeastOneSceneryTile(GameMap gameMap) {
+		
+		for (int w = 0; w < gameMap.getWidth(); ++w) {
+			for (int h = 0; h < gameMap.getHeight(); ++h) {
+				if (gameMap.getTile(new GridPosition(w, h)) == Tile.SCENERY) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Tests if the start {@link GridPosition} of the {@link GameMap} is the same {@link GridPosition} as the end
 	 * @param gameMap {@link GameMap} to be checked if the {@link GridPosition} of the start is the same as the end
