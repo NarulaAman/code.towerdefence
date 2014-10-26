@@ -29,11 +29,11 @@ public class MapValidator {
 		boolean mapInconsistent = false;
 
 		if (! mapMustHaveEnd(gameMap)) {
-			messageIfNotValid.append("Map must have one end\n");
+			messageIfNotValid.append("Map must have one EXIT point\n");
 			mapInconsistent = true;
 		}
 		if (! mapMustHaveStart(gameMap)) {
-			messageIfNotValid.append("Map must have one start\n");
+			messageIfNotValid.append("Map must have one START point\n");
 			mapInconsistent = true;
 		}
 		if (mapStartPositionCount(gameMap) > START_POSITION_COUNT) {
@@ -55,7 +55,7 @@ public class MapValidator {
 		}
 		
 		if (! mapStartMustReachEnd(gameMap)) {
-			messageIfNotValid.append("Map start should reach the end\n");
+			messageIfNotValid.append("Map should have correct linked path between start and exit\n");
 			mapInconsistent = true;			
 		}
 			
