@@ -174,6 +174,13 @@ public class MapValidatorTest {
 				gameMap.setTile(new GridPosition(x, y), Tile.ENEMY_PATH);
 			}
 		}
+		GridPosition startPosition = new GridPosition(0, 0);
+		gameMap.setTile(startPosition, Tile.SCENERY);
+		gameMap.setStartGridPosition(startPosition);
+		GridPosition endPosition = new GridPosition(gameMap.getWidth()-1, gameMap.getHeight()-1);
+		gameMap.setTile(endPosition, Tile.SCENERY);
+		gameMap.setEndGridPosition(endPosition);
+		
 		assertFalse(mapValidator.mapHasAtLeastOneSceneryTile(gameMap));
 	}
 

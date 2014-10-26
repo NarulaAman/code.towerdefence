@@ -92,8 +92,8 @@ public class MapValidator {
 			for (int h = 0; h < gameMap.getHeight(); ++h) {
 				GridPosition gridPosition = new GridPosition(w, h);
 				if (gameMap.getTile(gridPosition) == Tile.SCENERY 
-						&& (! gridPosition.equals(gameMap.getEndGridPosition()) 
-							|| ! gridPosition.equals(gameMap.getStartGridPosition()))) {
+						&& ! gridPosition.equals(gameMap.getEndGridPosition()) 
+							&& ! gridPosition.equals(gameMap.getStartGridPosition())) {
 					return true;
 				}
 			}
