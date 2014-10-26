@@ -20,7 +20,7 @@ public class SaveMapAction implements ActionListener{
 	
 	private MapValidator mapValidator = new MapValidator();
 	private MapEditionDialog mapEditionDialog;
-	private GameMapDao gameMapDao;
+//	private GameMapDao gameMapDao;
 	private StartGameDialog startGameDialog;
 
 	/**
@@ -32,7 +32,7 @@ public class SaveMapAction implements ActionListener{
 	public SaveMapAction(MapEditionDialog mapEditionDialog, StartGameDialog startGameDialog) {
 		this.mapEditionDialog = mapEditionDialog;
 		this.startGameDialog = startGameDialog;
-		this.gameMapDao = mapEditionDialog.getMapDao() ;
+//		this.gameMapDao = mapEditionDialog.getMapDao() ;
 	}
 	
 
@@ -42,20 +42,20 @@ public class SaveMapAction implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-        try {
+//        try {
 			StringBuilder incorrectMap = new StringBuilder();
-			Boolean mapValidate = mapValidator.isValid(mapEditionDialog.getMap(), incorrectMap);
+			boolean mapValidate = mapEditionDialog.saveMap();
 
-			if(mapValidate) {
-				gameMapDao.save(mapEditionDialog.getMap(), mapEditionDialog.getMapName().getText());
+			if(mapEditionDialog.saveMap()) {
+//				gameMapDao.save(mapEditionDialog.getMap(), mapEditionDialog.getMapName().getText());
 			    mapEditionDialog.setVisible(false);
 			    startGameDialog.refreshMaps();
-			} else {
-				JOptionPane.showMessageDialog(mapEditionDialog, incorrectMap, "Map validation error",
-					    JOptionPane.ERROR_MESSAGE);
-			}
-		} catch (IOException exception) {
-			exception.printStackTrace();
+//			} else {
+//				JOptionPane.showMessageDialog(mapEditionDialog, incorrectMap, "Map validation error",
+//					    JOptionPane.ERROR_MESSAGE);
+//			}
+//		} catch (IOException exception) {
+//			exception.printStackTrace();
 		}
 	}
 }
