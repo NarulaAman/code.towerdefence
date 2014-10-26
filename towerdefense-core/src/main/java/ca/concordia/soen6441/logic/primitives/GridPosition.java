@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.vecmath.Point2d;
 
+import ca.concordia.soen6441.logic.GameMap;
+
 /**
  * This class represents and X and Y gridPosition formed by integers
  */
@@ -52,8 +54,9 @@ public class GridPosition implements Serializable {
 		return new Point2d(getX(), getY()).distance(new Point2d(other.getX(), other.getY()));
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * Returns a unique hashcode of this {@link GridPosition}
+	 * @return hashcode calculated for this {@link GridPosition}
 	 */
 	@Override
 	public int hashCode() {
@@ -64,8 +67,10 @@ public class GridPosition implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * Be sure that the position are equal
+	 * @param obj the object to compare with
+	 * @return True if are the same position and False if positions are different 
 	 */
 	@Override
 	public boolean equals(Object obj) {
