@@ -199,8 +199,9 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
     	return nameMapText;
     }
     
-	/* (non-Javadoc)
-	 * @see towerdefense.gui.MapPanel.MapGridCoordinateClickedListener#mapGridCoordinateClicked(ca.concordia.soen6441.logic.primitives.GridPosition)
+	/**
+	 * Method triggered when position is clicked to change this position to be: path, scenery, entry or exit
+	 * @param gridPosition position that being clicked
 	 */
 	@Override
 	public void mapGridCoordinateClicked(GridPosition gridPosition) {
