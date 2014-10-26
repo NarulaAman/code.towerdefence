@@ -254,7 +254,5 @@ public class MapPanel extends JPanel implements Observer{
 		if (gameMap != null) {
 			gameMap.deleteObserver(this);
 		}
-			
-		
 	}
 }
