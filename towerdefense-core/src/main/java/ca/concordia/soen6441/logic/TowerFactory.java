@@ -15,7 +15,7 @@ public class TowerFactory {
 	HashMap<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
 	
 	/**
-	 * Create towers
+	 * Create a TowerFactory 
 	 */
 	public TowerFactory() {
 		List<TowerLevelCharacteristic> towerLevelCharacteristic  = new ArrayList<>();
