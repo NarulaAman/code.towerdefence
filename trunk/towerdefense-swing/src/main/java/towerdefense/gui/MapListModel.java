@@ -20,7 +20,7 @@ public class MapListModel extends AbstractListModel<String> {
 	 */
 	private static final long serialVersionUID = 4411498947924101211L;
 
-	private final List<String> fileList = new ArrayList<String>();
+	private final List<String> mapNameList = new ArrayList<String>();
 	
 	private final GameMapDao gameMapDao;
 	
@@ -33,31 +33,34 @@ public class MapListModel extends AbstractListModel<String> {
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see javax.swing.ListModel#getSize()
+	/**
+	 * Method returns how many maps are there
+	 * @return number of maps
 	 */
 	@Override
 	public int getSize() {
-		return fileList.size();
+		return mapNameList.size();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.ListModel#getElementAt(int)
+	/**
+	 * returns map name by the index
+	 * @param index of the map
+	 * @return map name
 	 */
 	@Override
 	public String getElementAt(int index) {
-		return fileList.get(index);
+		return mapNameList.get(index);
 	}
 
 	/**
 	 * Refreshes the persisted {@link GameMap} list
 	 */
 	public void refreshPersistedMapList() {
-		fileList.clear();
+		mapNameList.clear();
 		try {
-			fileList.addAll(gameMapDao.listAllNames());
+			mapNameList.addAll(gameMapDao.listAllNames());
 		} catch (IOException e) {
-			fileList.add("ERROR loading existing maps");
+			mapNameList.add("ERROR loading existing maps");
 		}
 		fireContentsChanged(this, 0, getSize());
 	}
