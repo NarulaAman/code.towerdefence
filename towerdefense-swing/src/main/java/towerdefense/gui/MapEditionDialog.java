@@ -113,7 +113,10 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 
 	public boolean saveMap() {
 		try {
-			
+			if (nameMapText.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Map name can't be empty");
+				return false;
+			}
 			StringBuilder incorrectMap = new StringBuilder("");
 			Boolean mapValidate = mapValidator.isValid(gameMap, incorrectMap);
 
