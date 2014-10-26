@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.vecmath.Point2d;
 
-import ca.concordia.soen6441.logic.GameMap;
-
 /**
  * This class represents and X and Y gridPosition formed by integers
  */
