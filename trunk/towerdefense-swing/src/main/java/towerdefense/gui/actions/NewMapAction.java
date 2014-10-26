@@ -43,8 +43,24 @@ public class NewMapAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		NewMapDialog newMapDialog = new NewMapDialog();
-		JOptionPane.showConfirmDialog(null, newMapDialog, MAP_SIZE_TEXT, JOptionPane.OK_CANCEL_OPTION);
-		mapEditionDialog.setMap(new GameMap(newMapDialog.getXField(), newMapDialog.getYField()));
-		mapEditionDialog.setVisible(true);
+		
+		boolean stillNeedWidthHeight = true;
+		do {
+			int okOrCancel = JOptionPane.showConfirmDialog(null, newMapDialog, MAP_SIZE_TEXT, JOptionPane.OK_CANCEL_OPTION);
+			if(okOrCancel == JOptionPane.CANCEL_OPTION) {
+				return;
+			}
+			int width = newMapDialog.getWidthValue();
+			int height = newMapDialog.getHeightValue();
+			
+			if (width < 2 || height < 2) {
+				JOptionPane.showMessageDialog(null, "Width and Height should be greater than 1");
+			}
+			else {
+				stillNeedWidthHeight = false;
+				mapEditionDialog.setMap(new GameMap(width, height));
+				mapEditionDialog.setVisible(true);
+			}
+		} while (stillNeedWidthHeight);
     }
 }
