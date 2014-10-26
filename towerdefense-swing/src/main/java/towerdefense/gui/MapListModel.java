@@ -34,7 +34,7 @@ public class MapListModel extends AbstractListModel<String> {
 	
 	
 	/**
-	 * Method returns how many maps are there
+	 * Method returns how many maps are saved in memory
 	 * @return number of maps
 	 */
 	@Override
