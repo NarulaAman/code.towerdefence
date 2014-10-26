@@ -31,7 +31,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 * 
 	 */
 	private static final long serialVersionUID = -5034183610861487619L;
-	private final MapPanel gridPanel = new MapPanel();
+	private final MapPanel mapPanel = new MapPanel();
 	private final JPanel sideBar = new JPanel();
 	
 	private final JButton newBtn = new JButton();
@@ -66,7 +66,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 				System.exit(0);
 			}
 		});
-		add(gridPanel, BorderLayout.CENTER);
+		add(mapPanel, BorderLayout.CENTER);
 		setupSideBar(gameMapDao);
 		pack();
 	}
@@ -113,12 +113,13 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 //    }
 
 
-	/* (non-Javadoc)
-	 * @see towerdefense.gui.MapListPanel.MapSelectionListener#mapSelected(ca.concordia.soen6441.logic.GameMap)
+	/**
+	 * This method called when a certain map is being selected
+	 * @param gameMap that being selected
 	 */
 	@Override
 	public void mapSelected(GameMap gameMap) {
-		gridPanel.setMap(gameMap);
+		mapPanel.setMap(gameMap);
 	}
 	
 	
@@ -127,7 +128,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 */
 	@Override
 	public void dispose() {
-		gridPanel.dispose();
+		mapPanel.dispose();
 	}
 
 	/**
