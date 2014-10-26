@@ -74,7 +74,7 @@ public class TowerPanel extends JPanel implements Observer{
 	}
 
 	/**
-	 * Update the view
+	 * Update the view in {@link TowerPanel}
 	 * @param o is ignored
 	 * @param arg is ignored
 	 */
