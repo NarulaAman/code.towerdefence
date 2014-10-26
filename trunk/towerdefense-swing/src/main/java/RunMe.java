@@ -32,7 +32,7 @@ public class RunMe {
     }
  
     /**
-     * main method our application
+     * Main method our application
      * @param args arguments passed by the environment, they are ignored
      */
     public static void main(String[] args) {
