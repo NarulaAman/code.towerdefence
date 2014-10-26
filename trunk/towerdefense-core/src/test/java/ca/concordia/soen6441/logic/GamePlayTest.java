@@ -159,7 +159,7 @@ public class GamePlayTest {
    }
    
    /**
-	* Test if the tower upgrade did not happen
+	* Test if the tower upgrade didn't happen
 	*/
    @Test
    public void testUpgradeDidntHappenCanUpgradeFalse(){
