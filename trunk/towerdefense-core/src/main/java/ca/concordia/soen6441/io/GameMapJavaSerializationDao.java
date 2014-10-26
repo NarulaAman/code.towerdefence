@@ -32,7 +32,7 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	/**
 	 * Save to file a {@link GameMap} given a map name
 	 * @param gameMap {@link GameMap} to be saved
-	 * @param mapName name of the map
+	 * @param mapName name of the Map
 	 */
 	@Override
 	public void save(GameMap gameMap, String mapName) throws IOException { 
