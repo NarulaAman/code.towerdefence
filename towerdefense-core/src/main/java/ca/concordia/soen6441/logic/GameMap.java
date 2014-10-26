@@ -236,6 +236,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 
 	/**
 	 * Returns a unique hashcode of this {@link GameMap}
+	 * @return hashcode calculated for this {@link GameMap}
 	 */
 	@Override
 	public int hashCode() {
