@@ -73,8 +73,10 @@ public class TowerPanel extends JPanel implements Observer{
 		upgradeCostTxtFld .setEditable(false);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	/**
+	 * Update the view
+	 * @param o is ignored
+	 * @param arg is ignored
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
