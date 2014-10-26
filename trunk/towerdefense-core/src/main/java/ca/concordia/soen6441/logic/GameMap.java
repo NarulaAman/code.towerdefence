@@ -179,6 +179,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		GameMap clone = new GameMap(getWidth(), getWidth());
 		clone.setStartGridPosition(getStartGridPosition());
 		clone.setEndGridPosition(getEndGridPosition());
+		clone.setName(getName());
 		for (int x = 0; x < getWidth(); ++x) {
 			clone.grid[x] = Arrays.copyOf(grid[x], grid[x].length);
 		}
