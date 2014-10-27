@@ -5,23 +5,18 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
-import ca.concordia.soen6441.io.GameMapDao;
-import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
-import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.TowerFactory;
@@ -67,7 +62,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 	
-	private final JButton buyTowerBtn = new JButton("Buy Tower");
+	private final JButton buyTowerButton = new JButton("Buy Tower");
 	private final TowerFactory towerFactory = new TowerFactory();
 	
 	private Class<? extends Tower> towerToBuy = null;
@@ -118,7 +113,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Setup the BuyTower button
 	 */
 	private void setupBuyTowerButton() {
-		buyTowerBtn.addActionListener(new ActionListener() {
+		buyTowerButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -161,8 +156,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
-		towersToBuyPanel.add(buyTowerBtn);
-		buyTowerBtn.setToolTipText(towerFactory.getLevelInformation(Tower.class, 1).toHtmlString());
+		towersToBuyPanel.add(buyTowerButton);
+		buyTowerButton.setToolTipText(towerFactory.getLevelInformation(Tower.class, 1).toHtmlString());
 		sideBar.add(towersToBuyPanel);
 		
 	}
