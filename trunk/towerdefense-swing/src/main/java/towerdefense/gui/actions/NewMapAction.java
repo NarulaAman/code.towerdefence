@@ -21,7 +21,7 @@ public class NewMapAction extends AbstractAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 7403090617352119267L;
-	private static final Icon NEW_ICON = new ImageIcon(Object.class.getResource("/icons/newb.png"));
+	private static final Icon NEW_ICON = new ImageIcon(Object.class.getResource("/icons/new_button.png"));
 	private static final String MAP_SIZE_TEXT = "Enter the width and height for the new Map";
 	
 	private final MapEditionDialog mapEditionDialog;
