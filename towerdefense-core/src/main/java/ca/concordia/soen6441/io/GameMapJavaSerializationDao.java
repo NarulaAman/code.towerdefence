@@ -38,11 +38,11 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	public void save(GameMap gameMap, String mapName) throws IOException { 
 		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName)); 
 		gameMap.setName(mapName);
-		FileOutputStream outPut = new FileOutputStream(file); 
-		ObjectOutputStream oos = new ObjectOutputStream(outPut);
-		oos.writeObject(gameMap);
-		oos.close();
-		outPut.close();
+		FileOutputStream fileOutputStream = new FileOutputStream(file); 
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		objectOutputStream.writeObject(gameMap);
+		objectOutputStream.close();
+		fileOutputStream.close();
 		
 	}
 	
@@ -53,11 +53,11 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	@Override
 	public GameMap load(String mapName) throws IOException, ClassNotFoundException {
 		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName));
-		FileInputStream fis = new FileInputStream(file);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		GameMap gameMap = (GameMap) ois.readObject();
-		ois.close();
-		fis.close();
+		FileInputStream fileInputStream = new FileInputStream(file);
+		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+		GameMap gameMap = (GameMap) objectInputStream.readObject();
+		objectInputStream.close();
+		fileInputStream.close();
 		return gameMap;
 	}
 
