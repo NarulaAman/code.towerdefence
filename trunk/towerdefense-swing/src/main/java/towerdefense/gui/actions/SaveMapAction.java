@@ -13,8 +13,8 @@ import ca.concordia.soen6441.logic.GameMap;
  */
 public class SaveMapAction implements ActionListener{
 	
-	private MapEditionDialog mapEditionDialog;
-	private StartGameDialog startGameDialog;
+	private final MapEditionDialog mapEditionDialog;
+	private final StartGameDialog startGameDialog;
 
 	/**
 	 * Constructs a {@link SaveMapAction} to save the {@link GameMap} on the {@link MapEditionDialog} and to refresh
