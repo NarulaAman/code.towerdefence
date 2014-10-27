@@ -227,37 +227,36 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	}
 	
 	/**
-	 * Creates the GUI for testing purposes
-	 */
-	private static void createAndShowGUI() {
-		GameMap gameMap = new GameMap(4, 4);
-		MapEditionDialog mapEditionPanel = new MapEditionDialog(new GameMapJavaSerializationDao());
-		mapEditionPanel.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		mapEditionPanel.setMap(gameMap);
-		mapEditionPanel.setVisible(true);
-	}
-
-	/**
-	 * Main method used for testing the GUI
-	 * @param args arguments are ignored by this method
-	 */
-	public static void main(String[] args) {
-		//Schedule a job for the event-dispatching thread:
-		//creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}
-
-
-	/**
 	 * Returns the save button
 	 * @return the save button
 	 */
 	public JButton getSaveButton() {
 		return saveButton;
 	}
+	
+//	/**
+//	 * Creates the GUI for testing purposes
+//	 */
+//	private static void createAndShowGUI() {
+//		GameMap gameMap = new GameMap(4, 4);
+//		MapEditionDialog mapEditionPanel = new MapEditionDialog(new GameMapJavaSerializationDao());
+//		mapEditionPanel.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//		mapEditionPanel.setMap(gameMap);
+//		mapEditionPanel.setVisible(true);
+//	}
+//
+//	/**
+//	 * Main method used for testing the GUI
+//	 * @param args arguments are ignored by this method
+//	 */
+//	public static void main(String[] args) {
+//		//Schedule a job for the event-dispatching thread:
+//		//creating and showing this application's GUI.
+//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				createAndShowGUI();
+//			}
+//		});
+//	}
 
 }
