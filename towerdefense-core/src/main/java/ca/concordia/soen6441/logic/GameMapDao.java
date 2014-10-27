@@ -1,9 +1,7 @@
-package ca.concordia.soen6441.io;
+package ca.concordia.soen6441.logic;
 
 import java.io.IOException;
 import java.util.List;
-
-import ca.concordia.soen6441.logic.GameMap;
 
 /**
  * Interface for a Data Access Object for a {@link GameMap}

@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.NewMapAction;
 import towerdefense.gui.actions.StartGamePlayAction;
-import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.GameMapDao;
 
 /**
  * This is the Dialog that will be displayed when the user starts our game application
