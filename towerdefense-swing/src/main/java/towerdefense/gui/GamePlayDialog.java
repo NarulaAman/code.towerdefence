@@ -55,15 +55,15 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	}
 	private final GamePlayPanel gamePlayPanel;
 
-	private final JLabel livesLbl = new JLabel("Lives");
-	private final JLabel scoreLbl = new JLabel("Scores");
-	private final JLabel levelsLbl = new JLabel("Levels");
-	private final JLabel banksLbl = new JLabel("Banks");
+	private final JLabel livesLabel = new JLabel("Lives");
+	private final JLabel scoreLabel = new JLabel("Scores");
+	private final JLabel levelsLabel = new JLabel("Levels");
+	private final JLabel banksLabel = new JLabel("Banks");
 
-	private final JTextField livesTxtFld = new JTextField("");
-	private final JTextField scoreTxtFld = new JTextField("");
-	private final JTextField levelsTxtFld = new JTextField("");
-	private final JTextField banksTxtFld = new JTextField("");
+	private final JTextField livesField = new JTextField("");
+	private final JTextField scoreField = new JTextField("");
+	private final JTextField levelsField = new JTextField("");
+	private final JTextField banksField = new JTextField("");
 	
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 	
@@ -177,19 +177,19 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayAttributes.setPreferredSize(new Dimension(200, 50));
 		gamePlayAttributes.setMaximumSize(new Dimension(250, 50));
 
-		livesTxtFld.setEditable(false);
-		scoreTxtFld.setEditable(false);
-		levelsTxtFld.setEditable(false);
-		banksTxtFld.setEditable(false);
+		livesField.setEditable(false);
+		scoreField.setEditable(false);
+		levelsField.setEditable(false);
+		banksField.setEditable(false);
 	
-		gamePlayAttributes.add(livesLbl);
-		gamePlayAttributes.add(livesTxtFld);
-		gamePlayAttributes.add(scoreLbl);
-		gamePlayAttributes.add(scoreTxtFld);
-		gamePlayAttributes.add(levelsLbl);
-		gamePlayAttributes.add(levelsTxtFld);
-		gamePlayAttributes.add(banksLbl);
-		gamePlayAttributes.add(banksTxtFld);
+		gamePlayAttributes.add(livesLabel);
+		gamePlayAttributes.add(livesField);
+		gamePlayAttributes.add(scoreLabel);
+		gamePlayAttributes.add(scoreField);
+		gamePlayAttributes.add(levelsLabel);
+		gamePlayAttributes.add(levelsField);
+		gamePlayAttributes.add(banksLabel);
+		gamePlayAttributes.add(banksField);
 		
 		sideBar.add(gamePlayAttributes);
 		
@@ -233,7 +233,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Reads the current {@link GamePlay} attributes
 	 */
 	private void readGamePlay() {
-		banksTxtFld.setText("" + gamePlay.getCurrency());
+		banksField.setText("" + gamePlay.getCurrency());
 	}
 
 	/**
