@@ -1,3 +1,4 @@
+package runme;
 import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.StartGameDialog;
 import towerdefense.gui.actions.MapEditAction;
