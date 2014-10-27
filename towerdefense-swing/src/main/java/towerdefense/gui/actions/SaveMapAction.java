@@ -2,15 +2,10 @@ package towerdefense.gui.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
-import javax.swing.JOptionPane;
 
 import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.StartGameDialog;
-import ca.concordia.soen6441.io.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.MapValidator;
 
 /**
  * Action to save a {@link GameMap} in the {@link MapEditionDialog}
@@ -18,9 +13,7 @@ import ca.concordia.soen6441.logic.MapValidator;
  */
 public class SaveMapAction implements ActionListener{
 	
-	private MapValidator mapValidator = new MapValidator();
 	private MapEditionDialog mapEditionDialog;
-//	private GameMapDao gameMapDao;
 	private StartGameDialog startGameDialog;
 
 	/**
@@ -32,7 +25,6 @@ public class SaveMapAction implements ActionListener{
 	public SaveMapAction(MapEditionDialog mapEditionDialog, StartGameDialog startGameDialog) {
 		this.mapEditionDialog = mapEditionDialog;
 		this.startGameDialog = startGameDialog;
-//		this.gameMapDao = mapEditionDialog.getMapDao() ;
 	}
 	
 
@@ -42,20 +34,9 @@ public class SaveMapAction implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//        try {
-			StringBuilder incorrectMap = new StringBuilder();
-			boolean mapValidate = mapEditionDialog.saveMap();
-
-			if(mapEditionDialog.saveMap()) {
-//				gameMapDao.save(mapEditionDialog.getMap(), mapEditionDialog.getMapName().getText());
-			    mapEditionDialog.setVisible(false);
-			    startGameDialog.refreshMaps();
-//			} else {
-//				JOptionPane.showMessageDialog(mapEditionDialog, incorrectMap, "Map validation error",
-//					    JOptionPane.ERROR_MESSAGE);
-//			}
-//		} catch (IOException exception) {
-//			exception.printStackTrace();
+		if(mapEditionDialog.saveMap()) {
+		    mapEditionDialog.setVisible(false);
+		    startGameDialog.refreshMaps();
 		}
 	}
 }

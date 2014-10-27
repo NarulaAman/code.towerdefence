@@ -50,7 +50,6 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	 * Load the {@link GameMap} from the file.
 	 * @param mapName {@link GameMap} to be loaded
 	 */
-	
 	@Override
 	public GameMap load(String mapName) throws IOException, ClassNotFoundException {
 		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName));
