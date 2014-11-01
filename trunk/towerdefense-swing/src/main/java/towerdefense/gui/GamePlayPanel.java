@@ -128,39 +128,6 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 	
 	/**
-	 * Create the GUI and show it. For thread safety, this method should be
-	 * invoked from the event-dispatching thread.
-	 */
-	private static void createAndShowGUI() {
-		// Create and set up the window.
-		JFrame frame = new JFrame("HelloWorldSwing");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// Add the ubiquitous "Hello World" label.
-
-		GameMap gameMap = new GameMap(9, 9);
-
-		GamePlay level = new GamePlay(gameMap, 1000);
-		GamePlayPanel gamePanel = new GamePlayPanel(level);
-
-		frame.getContentPane().add(gamePanel);
-
-		// Display the window.
-		frame.pack();
-		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		// Schedule a job for the event-dispatching thread:
-		// creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}
-	
-	/**
 	 * Invoke the {@link TowerSelectedListener} with a selected {@link Tower}
 	 * @param tower {@link Tower} selected with a click
 	 */
@@ -225,6 +192,38 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		if (gamePlay != null) {
 			gamePlay.deleteObserver(this);
 		}
-		
 	}
+	
+//	/**
+//	 * Create the GUI and show it. For thread safety, this method should be
+//	 * invoked from the event-dispatching thread.
+//	 */
+//	private static void createAndShowGUI() {
+//		// Create and set up the window.
+//		JFrame frame = new JFrame("HelloWorldSwing");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//		// Add the ubiquitous "Hello World" label.
+//
+//		GameMap gameMap = new GameMap(9, 9);
+//
+//		GamePlay level = new GamePlay(gameMap, 1000);
+//		GamePlayPanel gamePanel = new GamePlayPanel(level);
+//
+//		frame.getContentPane().add(gamePanel);
+//
+//		// Display the window.
+//		frame.pack();
+//		frame.setVisible(true);
+//	}
+//
+//	public static void main(String[] args) {
+//		// Schedule a job for the event-dispatching thread:
+//		// creating and showing this application's GUI.
+//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				createAndShowGUI();
+//			}
+//		});
+//	}
 }
