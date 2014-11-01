@@ -19,16 +19,16 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 */
 	private static final long serialVersionUID = 7943086470924125701L;
 
-	final Tile grid[][];
+	private final Tile grid[][];
 
 	/**
 	 * Number of tiles in X-Coordinate
 	 */
-	final int width;
+	private final int width;
 	/**
 	 * Number of tiles in Y-Coordinate
 	 */
-	final int height;
+	private final int height;
 	
 	
 	private String name = "Map";
