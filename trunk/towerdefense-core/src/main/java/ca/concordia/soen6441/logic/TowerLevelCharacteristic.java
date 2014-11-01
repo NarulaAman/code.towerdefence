@@ -1,18 +1,19 @@
 package ca.concordia.soen6441.logic;
 
 /**
- * This class contain the characteristics of Tower as per level
+ * This class contain the characteristics of Tower as per level, 
+ * it is an immutable class to simplify the implementation
  *
  */
 public class TowerLevelCharacteristic {
 
-	final int damage;
+	private final int damage;
 	
-	final int buyCost;
+	private final int buyCost;
 
-	final int refund;
+	private final int refund;
 	
-	final int range;
+	private final int range;
 
 	/**
 	 * Construct the tower characteristics
@@ -62,8 +63,8 @@ public class TowerLevelCharacteristic {
 	}
 
 	/** 
-	 * Returns the damage, buyCost, refund and range of tower
-	 * @return the damage, buyCost, refund and range of tower
+	 * Returns a html string with the damage, buyCost, refund and range of tower
+	 * @return a html string with the damage, buyCost, refund and range of tower
 	 */
 	public String toHtmlString() {
 		return "<html>Damage: " + damage + "<br>Buy cost: "
