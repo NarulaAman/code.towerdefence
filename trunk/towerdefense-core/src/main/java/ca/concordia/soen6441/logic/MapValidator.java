@@ -11,7 +11,6 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  * This class validate the gameMap before saving it
  *
  */
-
 public class MapValidator {
 	
 	private static final int START_POSITION_COUNT = 1;
