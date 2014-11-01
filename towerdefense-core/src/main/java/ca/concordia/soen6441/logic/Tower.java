@@ -13,11 +13,11 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class Tower extends Observable {
 	
-	int level;
+	private int level;
 	
-	final GridPosition gridPosition;
+	private final GridPosition gridPosition;
 	
-	final TowerFactory towerFactory;
+	private final TowerFactory towerFactory;
 
 	/**
 	 * Initialize the data members
