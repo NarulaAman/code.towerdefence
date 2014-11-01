@@ -34,12 +34,17 @@ public class MapListPanel extends JPanel {
 	 *
 	 */
 	public interface MapSelectionListener {
+		
+		/**
+		 * Invoked when a {@link GameMap} is selected on the list
+		 * @param gameMap {@link GameMap} selected on the list
+		 */
 		void mapSelected(GameMap gameMap);
 	}
 	
-	private final GameMapDao gameMapDao;
-	
 	private final JScrollPane scrollPane = new JScrollPane();
+	
+	private final GameMapDao gameMapDao;
 	
 	private final JList<String> mapList;
 	
