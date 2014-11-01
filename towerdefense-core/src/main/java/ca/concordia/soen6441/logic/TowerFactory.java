@@ -3,16 +3,17 @@ package ca.concordia.soen6441.logic;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
- * Responsible for creating the towers
+ * Responsible for creating the towers and holding their level characteristics
  *
  */
 public class TowerFactory {
 	
-	HashMap<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
+	private Map<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
 	
 	/**
 	 * Create a TowerFactory 
