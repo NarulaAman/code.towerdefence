@@ -55,13 +55,16 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	
     private GameMap gameMap;
 
+	/**
+	 * Enum which holds the internal state of this dialog
+	 *
+	 */
 	private enum SelectedButton {
 		SCENERY,
 		ENEMY_PATH,
 		ENTRY,
 		EXIT
 	}
-
 	
 	private SelectedButton selectedButton = SelectedButton.SCENERY;
 
