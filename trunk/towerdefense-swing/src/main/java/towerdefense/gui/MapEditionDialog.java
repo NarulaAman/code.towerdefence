@@ -47,22 +47,23 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private final JButton pathButton = new JButton(PATH_ICON);
 	private final JButton sceneryButton = new JButton(SCENERY_BUTTON_ICON);
 	private final JButton saveButton = new JButton(SAVE_ICON);
-
 	private final JTextField nameMapText = new JTextField("DefaultMap");
+	
+	private final MapValidator mapValidator = new MapValidator();
 	
 	private final GameMapDao gameMapDao;
 	
     private GameMap gameMap;
 
-	enum SelectedButton {
+	private enum SelectedButton {
 		SCENERY,
 		ENEMY_PATH,
 		ENTRY,
 		EXIT
 	}
 
-	private final MapValidator mapValidator = new MapValidator();
-	SelectedButton selectedButton = SelectedButton.SCENERY;
+	
+	private SelectedButton selectedButton = SelectedButton.SCENERY;
 
 	/**
 	 * Creates a MapEditionDialog with a given {@link GameMapDao}
@@ -104,12 +105,13 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		buttonPanel.add(sceneryButton);		
 		buttonPanel.add(saveButton);
 		add(buttonPanel,BorderLayout.EAST);
-		if(nameMapText.getText()!=null)
-		{
-			saveButton.setVisible(true);
-		}
+		saveButton.setVisible(true);
 	}
 
+	/**
+	 * Saves the {@link GameMap} being currently opened in the Edition Panel
+	 * @return true if the map was saved
+	 */
 	public boolean saveMap() {
 		try {
 			if (nameMapText.getText().equals("")) {
@@ -118,8 +120,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			}
 			StringBuilder incorrectMap = new StringBuilder("");
 			Boolean mapValidate = mapValidator.isValid(gameMap, incorrectMap);
-
-
 			if(mapValidate) {
 				gameMapDao.save(gameMap, nameMapText.getText());
 				this.setVisible(false);
@@ -128,8 +128,6 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 				JOptionPane.showMessageDialog(null, incorrectMap);
 				return false;
 			}
-		
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;	
@@ -182,24 +180,11 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 * Sets the map to be edited
 	 * @param gameMap {@link GameMap} to be edited
 	 */
-	public void setMap(final GameMap gameMap) {
+	public void setMap(GameMap gameMap) {
 		this.gameMap = gameMap;
 		nameMapText.setText(gameMap.getName());
 		gridPanel.setMap(gameMap);
-
 	}
-
-    public GameMap getMap() {
-    	return gameMap;
-    }
-	
-    public GameMapDao getMapDao() {
-    	return gameMapDao;
-    }
-    
-    public JTextField getMapName() {
-    	return nameMapText;
-    }
     
 	/**
 	 * Method triggered when position is clicked to change this position to be: path, scenery, entry or exit
