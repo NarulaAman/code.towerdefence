@@ -19,7 +19,7 @@ public class NewMapDialog extends JPanel {
 	 */
 	private static final long serialVersionUID = 620779799725640674L;
 
-	NumberFormat format = NumberFormat.getNumberInstance();
+	private NumberFormat format = NumberFormat.getNumberInstance();
 
 	private JFormattedTextField widthField = new JFormattedTextField(format);
 	private JFormattedTextField heightField = new JFormattedTextField(format);
