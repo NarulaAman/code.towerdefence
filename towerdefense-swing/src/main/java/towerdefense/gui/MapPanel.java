@@ -218,39 +218,6 @@ public class MapPanel extends JPanel implements Observer{
 	}
 	
 	/**
-	 * Create the GUI and show it. For thread safety, this method should be
-	 * invoked from the event-dispatching thread.
-	 */
-	private static void createAndShowGUI() {
-		// Create and set up the window.
-		JFrame frame = new JFrame("HelloWorldSwing");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		MapPanel label = new MapPanel();
-		
-		label.setMap(new GameMap(10, 10));
-		frame.getContentPane().add(label);
-
-		// Display the window.
-		frame.pack();
-		frame.setVisible(true);
-	}
-
-	/**
-	 * Main method used for testing the GUI
-	 * @param args arguments are ignored by this method
-	 */
-	public static void main(String[] args) {
-		// Schedule a job for the event-dispatching thread:
-		// creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}
-
-	/**
 	 * Method to be called as this panel is disposed
 	 */
 	public void dispose() {
@@ -258,4 +225,37 @@ public class MapPanel extends JPanel implements Observer{
 			gameMap.deleteObserver(this);
 		}
 	}
+	
+//	/**
+//	 * Create the GUI and show it. For thread safety, this method should be
+//	 * invoked from the event-dispatching thread.
+//	 */
+//	private static void createAndShowGUI() {
+//		// Create and set up the window.
+//		JFrame frame = new JFrame("HelloWorldSwing");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//		MapPanel label = new MapPanel();
+//		
+//		label.setMap(new GameMap(10, 10));
+//		frame.getContentPane().add(label);
+//
+//		// Display the window.
+//		frame.pack();
+//		frame.setVisible(true);
+//	}
+//
+//	/**
+//	 * Main method used for testing the GUI
+//	 * @param args arguments are ignored by this method
+//	 */
+//	public static void main(String[] args) {
+//		// Schedule a job for the event-dispatching thread:
+//		// creating and showing this application's GUI.
+//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				createAndShowGUI();
+//			}
+//		});
+//	}
 }
