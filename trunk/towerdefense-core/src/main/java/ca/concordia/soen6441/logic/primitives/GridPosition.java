@@ -14,8 +14,8 @@ public class GridPosition implements Serializable {
 	 */
 	private static final long serialVersionUID = 9068287181281433533L;
 	
-	final int x;
-	final int y;
+	private final int x;
+	private final int y;
 
 	/**
 	 * Creates a GridPosition with a given X and Y coordinates
