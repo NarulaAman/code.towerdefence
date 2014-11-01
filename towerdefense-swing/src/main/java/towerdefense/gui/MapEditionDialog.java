@@ -60,9 +60,21 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 *
 	 */
 	private enum SelectedButton {
+		/**
+		 * Scenery being set on the map
+		 */
 		SCENERY,
+		/**
+		 * Enemy path being set on the map
+		 */
 		ENEMY_PATH,
+		/**
+		 * Entry being set on the map
+		 */
 		ENTRY,
+		/**
+		 * Exit being set on the map
+		 */
 		EXIT
 	}
 	
