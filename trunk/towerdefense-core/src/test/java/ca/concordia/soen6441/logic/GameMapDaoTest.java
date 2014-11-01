@@ -22,8 +22,8 @@ public class GameMapDaoTest {
 	
 	private static final String MAP_DATA_FILENAME = "testMapName";
 	
-	GameMapJavaSerializationDao gameMapDao = new GameMapJavaSerializationDao();
-	static GameMap gameMap = new GameMap(32, 32);
+	private GameMapJavaSerializationDao gameMapDao = new GameMapJavaSerializationDao();
+	private static GameMap gameMap = new GameMap(32, 32);
 
 	/**
 	 * Creates a {@link GameMap} to aid the tests
