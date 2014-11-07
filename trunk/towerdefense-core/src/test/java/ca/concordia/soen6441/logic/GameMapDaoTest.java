@@ -67,7 +67,7 @@ public class GameMapDaoTest {
 	 */
 	@Test
 	public final void testSave() throws IOException, ClassNotFoundException {
-		gameMapDao.save(gameMap, MAP_DATA_FILENAME);
+		gameMapDao.save(gameMap);
 	}
 
 	/**

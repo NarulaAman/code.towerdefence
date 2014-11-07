@@ -12,10 +12,9 @@ public interface GameMapDao {
 	/**
 	 * Saves a {@link GameMap} by its name
 	 * @param gameMap to be saved
-	 * @param name to save the gameMap under
 	 * @throws IOException
 	 */
-	public void save(GameMap gameMap, String name) throws IOException;
+	public void save(GameMap gameMap) throws IOException;
 
 	/**
 	 * Load the {@link GameMap} by a name

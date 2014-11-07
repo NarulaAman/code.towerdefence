@@ -33,12 +33,11 @@ public class GameMapJavaSerializationDao implements GameMapDao {
 	/**
 	 * Save to file a {@link GameMap} given a map name
 	 * @param gameMap {@link GameMap} to be saved
-	 * @param mapName name of the Map
 	 */
 	@Override
-	public void save(GameMap gameMap, String mapName) throws IOException { 
-		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName)); 
-		gameMap.setName(mapName);
+	public void save(GameMap gameMap) throws IOException { 
+		File file = new File(String.format(FILENAME_STRING_FORMAT, gameMap.getName())); 
+		gameMap.setName(gameMap.getName());
 		FileOutputStream fileOutputStream = new FileOutputStream(file); 
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 		objectOutputStream.writeObject(gameMap);
