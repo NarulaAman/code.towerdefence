@@ -146,7 +146,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				state = State.BUYING_TOWER;
-				selectTowerToBuy();			
+				selectTowerToBuy();
+				towerToBuy = FireTower.class;
 				towerInspectionPanel.setVisible(false);
 			}
 		});
