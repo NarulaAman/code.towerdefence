@@ -1,57 +1,78 @@
 package ca.concordia.soen6441.logic;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.FireTower;
+import ca.concordia.soen6441.logic.tower.AimWeakestStrategy;
+import ca.concordia.soen6441.logic.tower.AimingStrategy;
+import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
  * Responsible for creating the towers and holding their level characteristics
  *
  */
 public class TowerFactory {
-	
+
 	private Map<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
-	
+
 	/**
-	 * Create a TowerFactory 
+	 * Create a TowerFactory
 	 */
 	public TowerFactory() {
-		List<TowerLevelCharacteristic> towerLevelCharacteristic  = new ArrayList<>();
-		towerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2));
-		towerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 70, 75, 3));
-		towerTypeInformation.put(Tower.class, towerLevelCharacteristic);
+		List<TowerLevelCharacteristic> towerLevelCharacteristic = new ArrayList<>();
+		towerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
+		towerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
+		towerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
+		towerTypeInformation.put(FireTower.class, towerLevelCharacteristic);
 	}
-	
+
 	/**
-	 * Returns the maximum level of tower 
-	 * @param type The type of the tower
+	 * Returns the maximum level of tower
+	 * 
+	 * @param type
+	 *            The type of the tower
 	 * @return The maximum level of the tower
 	 */
 	public int maxLevel(Class<? extends Tower> type) {
 		return towerTypeInformation.get(type).size();
 	}
-	
+
 	/**
-	 * Return the object of {@link TowerLevelCharacteristic} based on tower type and level
-	 * @param type The type of the tower
-	 * @param level The level of the tower
+	 * Return the object of {@link TowerLevelCharacteristic} based on tower type
+	 * and level
+	 * 
+	 * @param type
+	 *            The type of the tower
+	 * @param level
+	 *            The level of the tower
 	 * @return The {@link TowerLevelCharacteristic}
 	 */
 	public TowerLevelCharacteristic getLevelInformation(Class<? extends Tower> type, int level) {
-		return towerTypeInformation.get(type).get(level-1);
+		return towerTypeInformation.get(type).get(level - 1);
 	}
-	
+
 	/**
 	 * Return the tower present on the given coordinate
-	 * @param type The type of the tower
-	 * @param coordinate The position of the tower on {@link GameMap}
+	 * 
+	 * @param type
+	 *            The type of the tower
+	 * @param coordinate
+	 *            The position of the tower on {@link GameMap}
 	 * @return The object of {@link Tower}
 	 */
 	public Tower towerOnCoordinate(Class<? extends Tower> type, GridPosition coordinate) {
-		return new Tower(1, coordinate, this); // new Tower(gridPosition, new TowerInformation(0, 0, 0, 0));
+		try {
+			Constructor<? extends Tower> constructor = type.getConstructor(Integer.class, GridPosition.class,
+					AimingStrategy.class, TowerFactory.class);
+			return constructor.newInstance(1, coordinate, new AimWeakestStrategy(), this);
+		} catch (Exception exception) {
+			throw new RuntimeException(exception);
+		}
 	}
-	
+
 }

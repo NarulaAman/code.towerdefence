@@ -18,9 +18,10 @@ import javax.swing.JTextField;
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.FireTower;
+import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
  * This is the dialog which will show the {@link GamePlay}. Here the user will be able to play the game
@@ -118,7 +119,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				state = State.BUYING_TOWER;
-				towerToBuy = Tower.class;
+				towerToBuy = FireTower.class;
 				towerInspectionPanel.setVisible(false);
 			}
 		});

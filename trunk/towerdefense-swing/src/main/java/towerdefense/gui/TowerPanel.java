@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ca.concordia.soen6441.logic.Tower;
+import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
  * This is the TowerInspectionWindow, it shows the current tower attributes
