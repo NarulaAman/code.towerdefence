@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.AimWeakestStrategy;
 import ca.concordia.soen6441.logic.tower.AimingStrategy;
+import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
@@ -24,11 +26,23 @@ public class TowerFactory {
 	 * Create a TowerFactory
 	 */
 	public TowerFactory() {
-		List<TowerLevelCharacteristic> towerLevelCharacteristic = new ArrayList<>();
-		towerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
-		towerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
-		towerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
-		towerTypeInformation.put(FireTower.class, towerLevelCharacteristic);
+		List<TowerLevelCharacteristic> fireTowerLevelCharacteristic = new ArrayList<>();
+		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
+		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
+		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
+		towerTypeInformation.put(FireTower.class, fireTowerLevelCharacteristic);
+	
+		List<TowerLevelCharacteristic> iceTowerLevelCharacteristic = new ArrayList<>();
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
+		towerTypeInformation.put(IceTower.class, iceTowerLevelCharacteristic);
+	
+		List<TowerLevelCharacteristic> cannonTowerLevelCharacteristic = new ArrayList<>();
+		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
+		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
+		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
+		towerTypeInformation.put(CannonTower.class, cannonTowerLevelCharacteristic);
 	}
 
 	/**
