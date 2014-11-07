@@ -164,7 +164,7 @@ public class Tower extends Observable {
 		return distanceTo(gridPosition);
 	}
 	
-	public void shotTitor(Enemy T) {
+	public void shootEnemy(Enemy T) {
 		T.setHealth(T.getHealth() - getDamage());
 
 	}
