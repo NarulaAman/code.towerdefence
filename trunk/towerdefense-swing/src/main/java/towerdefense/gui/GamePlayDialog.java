@@ -26,6 +26,8 @@ import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.FireTower;
+import ca.concordia.soen6441.logic.tower.IceTower;
+import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
@@ -54,6 +56,22 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		 */
 		BUYING_TOWER
 	}
+	private enum BuyingTower {
+		
+		/**
+		 * {@link GamePlayDialog} is buying fire tower
+		 */
+		FIRE_TOWER,
+		/**
+		 * {@link GamePlayDialog} is buying ice tower
+		 */
+		ICE_TOWER,
+		/**
+		 * {@link GamePlayDialog} is buying cannon tower
+		 */
+		CANNON_TOWER
+		
+	}
 	private final GamePlayPanel gamePlayPanel;
 
 	private final JLabel livesLabel = new JLabel("Lives");
@@ -77,6 +95,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private Tower selectedTower = null;
 	
 	private State state = State.NOTHING;
+	private BuyingTower buyingTower = BuyingTower.FIRE_TOWER;
 
 	private GamePlay gamePlay;
 	
@@ -127,10 +146,29 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				state = State.BUYING_TOWER;
-				towerToBuy = FireTower.class;
+				selectTowerToBuy();			
 				towerInspectionPanel.setVisible(false);
 			}
 		});
+	}
+	
+	/**
+	 * Setup the tower to be bought
+	 */
+	public boolean selectTowerToBuy() {
+		if(buyingTower == BuyingTower.FIRE_TOWER) {
+			towerToBuy = FireTower.class;
+			return true;
+		}
+		if(buyingTower == BuyingTower.ICE_TOWER) {
+			towerToBuy = IceTower.class;
+			return true;
+		}
+		if(buyingTower == BuyingTower.CANNON_TOWER) {
+			towerToBuy = CannonTower.class;
+			return true;
+		}
+		return false;
 	}
 	
 	private void startGamePlayUpdaateTimer() {
