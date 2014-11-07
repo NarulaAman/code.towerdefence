@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import javax.vecmath.Point2d;
 
+
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 
@@ -149,6 +150,23 @@ public class Tower extends Observable {
 	 */
 	private TowerFactory getTowerFactory() {
 		return towerFactory;
+	}
+	
+	
+	public boolean canLockTarget(Enemy T) {
+		double countedDistanse = countDistanse(T);
+		if ( countedDistanse < (getRange())) {
+			return true;
+		}
+		return false;
+	}
+	public double countDistanse(Enemy T) {
+		return distanceTo(gridPosition);
+	}
+	
+	public void shotTitor(Enemy T) {
+		T.setHealth(T.getHealth() - getDamage());
+
 	}
 	
 }
