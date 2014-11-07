@@ -5,8 +5,12 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
@@ -66,6 +71,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final JButton buyTowerButton = new JButton("Buy Tower");
 	private final TowerFactory towerFactory = new TowerFactory();
 	
+	private final Timer gameplayUpdateTimer = new Timer();
+	
 	private Class<? extends Tower> towerToBuy = null;
 	private Tower selectedTower = null;
 	
@@ -89,6 +96,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setupSidebar();
 		towerInspectionPanel.setVisible(false);
 		readGamePlay();
+		startGamePlayUpdaateTimer();
 		pack();
 	}
 
@@ -123,7 +131,35 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 				towerInspectionPanel.setVisible(false);
 			}
 		});
+	}
+	
+	private void startGamePlayUpdaateTimer() {
+		gameplayUpdateTimer.schedule(new TimerTask() {
+			
+			long lastTimestamp = System.currentTimeMillis();
+			
+			@Override
+			public void run() {
+				long currentTimestamp = System.currentTimeMillis();
+				long deltaTime = currentTimestamp - lastTimestamp;
+				final float seconds = (float) deltaTime / 1000;
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						gamePlay.update(seconds);
+						System.out.println("Seconds: " + seconds);
+					}
+				});
+				lastTimestamp = currentTimestamp;
+			}
+		}, 100, 100);
 		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gameplayUpdateTimer.cancel();
+			}
+		});
 	}
 
 	/**
@@ -158,7 +194,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
 		towersToBuyPanel.add(buyTowerButton);
-		buyTowerButton.setToolTipText(towerFactory.getLevelInformation(Tower.class, 1).toHtmlString());
+		buyTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
 		sideBar.add(towersToBuyPanel);
 		
 	}
@@ -247,6 +283,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	@Override
 	public void dispose() {
+		gameplayUpdateTimer.cancel();
 		gamePlayPanel.dispose();
 		super.dispose();
 	}
