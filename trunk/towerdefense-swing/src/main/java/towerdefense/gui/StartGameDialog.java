@@ -105,6 +105,10 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		mapPanel.setMap(gameMap);
 	}
 	
+	public void updateGameMap(GameMap gameMap) {		
+		mapPanel.setMap(gameMap);
+		
+	}
 	
 	/**
 	 * Method to be called when this window is disposed 

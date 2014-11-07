@@ -54,6 +54,8 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private final GameMapDao gameMapDao;
 	
     private GameMap gameMap;
+    
+    private StartGameDialog startGameDialog;
 
 	/**
 	 * Enum which holds the internal state of this dialog
@@ -123,6 +125,10 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		saveButton.setVisible(true);
 	}
 
+	public void setStartGameDialog(StartGameDialog startGameDialog) {
+		this.startGameDialog = startGameDialog;
+	}
+	
 	/**
 	 * Saves the {@link GameMap} being currently opened in the Edition Panel
 	 * @return true if the map was saved
@@ -136,7 +142,9 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 			StringBuilder incorrectMap = new StringBuilder("");
 			Boolean mapValidate = mapValidator.isValid(gameMap, incorrectMap);
 			if(mapValidate) {
-				gameMapDao.save(gameMap, nameMapText.getText());
+				startGameDialog.updateGameMap(gameMap);
+				gameMap.setName(nameMapText.getText());
+				gameMapDao.save(gameMap);
 				this.setVisible(false);
 				return true;
 			} else {
