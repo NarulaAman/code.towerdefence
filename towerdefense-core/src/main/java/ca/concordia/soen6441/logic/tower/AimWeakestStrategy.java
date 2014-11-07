@@ -3,19 +3,18 @@ package ca.concordia.soen6441.logic.tower;
 import java.util.List;
 
 import ca.concordia.soen6441.logic.Enemy;
-import ca.concordia.soen6441.logic.Tower;
 
-public class ShootWeakestStrategy implements ShootingStrategy {
+public class AimWeakestStrategy implements AimingStrategy {
 
 	private Tower tower;
 	
-	public ShootWeakestStrategy(Tower tower) {
-		super();
+	@Override
+	public void setTower(Tower tower) {
 		this.tower = tower;
 	}
-
+	
 	@Override
-	public void shoot(List<Enemy> enemies) {
+	public void shootIfInRange(List<Enemy> enemies) {
 		Enemy enemyToShoot = null;
 		for (Enemy enemy : enemies) {
 			if (tower.inRange(enemy.getGridPosition())) {
@@ -31,8 +30,11 @@ public class ShootWeakestStrategy implements ShootingStrategy {
 		}
 		
 		if (enemyToShoot != null) {
-			// shoot it
+			tower.shoot(enemyToShoot);
 		}
 	}
+
+
+
 
 }

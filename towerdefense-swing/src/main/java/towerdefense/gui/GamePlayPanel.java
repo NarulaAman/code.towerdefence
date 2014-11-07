@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.Tower;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
  * This class is responsible for painting the {@link GamePlay} action, like enemies moving and towers 

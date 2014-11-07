@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.Tower;
 
 
 

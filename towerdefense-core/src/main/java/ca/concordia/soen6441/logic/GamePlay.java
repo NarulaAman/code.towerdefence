@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.Tower;
 
 
 /**
@@ -19,6 +20,8 @@ public class GamePlay extends Observable implements Serializable {
 	private final GameMap gameMap;
 	
 	private final List<Tower> towers = new ArrayList<Tower>();
+	
+	private final List<Enemy> enemies = new ArrayList<>();
 
 	private int currency;
 	
@@ -180,6 +183,21 @@ public class GamePlay extends Observable implements Serializable {
 	 */
 	public int getLives() {
 		return lives;
+	}
+	
+	/**
+	 * Update the simulation passing how many seconds have elapsed since the last call
+	 * @param seconds delta seconds passed since the last call
+	 */
+	public void update(float seconds) {
+		for (Enemy enemy : enemies) {
+			enemy.update(seconds);
+		}
+		
+		for (Tower tower : towers) {
+			tower.update(seconds);
+			tower.maybeShoot(enemies);
+		}
 	}
 	
 }

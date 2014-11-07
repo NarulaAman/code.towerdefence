@@ -14,6 +14,8 @@ public class TowerLevelCharacteristic {
 	private final int refund;
 	
 	private final int range;
+	
+	private final float shootRateSecs;
 
 	/**
 	 * Construct the tower characteristics
@@ -21,13 +23,15 @@ public class TowerLevelCharacteristic {
 	 * @param buyCost of the tower
 	 * @param refund of the tower
 	 * @param range of the tower
+	 * @param shootRateSecs time in seconds between each shot
 	 */
-	public TowerLevelCharacteristic(int damage, int buyCost, int refund, int range) {
+	public TowerLevelCharacteristic(int damage, int buyCost, int refund, int range, float shootRateSecs) {
 		super();
 		this.damage = damage;
 		this.buyCost = buyCost;
 		this.refund = refund;
 		this.range = range;
+		this.shootRateSecs = shootRateSecs;
 	}
 
 	/**
@@ -62,6 +66,14 @@ public class TowerLevelCharacteristic {
 		return range;
 	}
 
+	/**
+	 * Returns the time in seconds for every shot of the tower
+	 * @return the time in seconds for every shot of the tower
+	 */
+	public float getShootRateSecs() {
+		return shootRateSecs;
+	}
+	
 	/** 
 	 * Returns a html string with the damage, buyCost, refund and range of tower
 	 * @return a html string with the damage, buyCost, refund and range of tower

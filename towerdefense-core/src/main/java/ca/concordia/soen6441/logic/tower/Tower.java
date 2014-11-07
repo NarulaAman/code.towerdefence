@@ -1,10 +1,14 @@
-package ca.concordia.soen6441.logic;
+package ca.concordia.soen6441.logic.tower;
 
+import java.util.List;
 import java.util.Observable;
 
 import javax.vecmath.Point2d;
 
-
+import ca.concordia.soen6441.logic.Enemy;
+import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.TowerFactory;
+import ca.concordia.soen6441.logic.TowerLevelCharacteristic;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 
@@ -12,13 +16,17 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  * This class has various Characteristics and operations executed on Tower 
  *
  */
-public class Tower extends Observable {
+public abstract class Tower extends Observable {
 	
 	private int level;
 	
 	private final GridPosition gridPosition;
 	
 	private final TowerFactory towerFactory;
+	
+	private AimingStrategy shootStrategy;
+	
+	private float secondsSinceLastShot;
 
 	/**
 	 * Initialize the data members
@@ -26,11 +34,13 @@ public class Tower extends Observable {
 	 * @param gridPosition The position of the {@link Tower} on {@link GameMap}
 	 * @param towerFactory The object of {@link TowerFactory}
 	 */
-	public Tower(int level, GridPosition gridPosition, TowerFactory towerFactory) {
+	public Tower(int level, GridPosition gridPosition, AimingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super();
 		this.gridPosition = gridPosition;
 		this.level = level;
 		this.towerFactory = towerFactory;
+		setShootingStrategy(shootingStrategy);
+		secondsSinceLastShot = getShootRateSecs();
 	}
 
 	/**
@@ -110,6 +120,14 @@ public class Tower extends Observable {
 	}
 	
 	/**
+	 * Returns the time in seconds for every shot of the tower
+	 * @return the time in seconds for every shot of the tower
+	 */
+	public float getShootRateSecs() {
+		return getTowerLevelCharacteristic().getShootRateSecs();
+	}
+	
+	/**
 	 * Returns true if the tower can be upgraded, false if not
 	 * @return true if the tower can be upgraded, false if not
 	 */
@@ -141,7 +159,7 @@ public class Tower extends Observable {
 	 * @return The {@link TowerLevelCharacteristic}
 	 */
 	private TowerLevelCharacteristic getTowerLevelCharacteristic() {
-		return getTowerFactory().getLevelInformation(this.getClass(), level);
+		return getTowerFactory().getLevelInformation(getClass(), level);
 	}
 	
 	/**
@@ -151,7 +169,6 @@ public class Tower extends Observable {
 	private TowerFactory getTowerFactory() {
 		return towerFactory;
 	}
-	
 	
 	public boolean canLockTarget(Enemy T) {
 		double countedDistanse = countDistanse(T);
@@ -166,7 +183,47 @@ public class Tower extends Observable {
 	
 	public void shootEnemy(Enemy T) {
 		T.setHealth(T.getHealth() - getDamage());
-
 	}
 	
+	/**
+	 * Sets the shooting strategy
+	 * @param shootingStrategy
+	 */
+	public void setShootingStrategy(AimingStrategy shootingStrategy) {
+		this.shootStrategy = shootingStrategy;
+		shootingStrategy.setTower(this);
+	}
+	
+	/**
+	 * Maybe shoots the enemies, if they are in range, with a given strategy
+	 * @param shootEnemies enemies that will maybe be shot
+	 */
+	public void maybeShoot(List<Enemy> shootEnemies) {
+		if (hasCooledDown()) {
+			shootStrategy.shootIfInRange(shootEnemies);
+		}
+	}
+	
+	/**
+	 * Towers shoot the enemies 
+	 * @param enemies enemies that are in range
+	 */
+	protected abstract void specializedShot(Enemy enemy);
+	
+	public void shoot(Enemy enemy) {
+		secondsSinceLastShot = 0;
+		specializedShot(enemy);
+	}
+	
+	public boolean hasCooledDown() {
+		return secondsSinceLastShot >= getShootRateSecs();
+	}
+
+	/**
+	 * Update the tower for the amount of seconds passed
+	 * @param seconds
+	 */
+	public void update(float seconds) {
+		secondsSinceLastShot = secondsSinceLastShot + seconds;
+	}
 }
