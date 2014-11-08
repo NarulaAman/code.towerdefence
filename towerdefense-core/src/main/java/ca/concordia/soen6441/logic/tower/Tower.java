@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Observable;
 
 import javax.vecmath.Point2d;
+import javax.vecmath.Point2f;
 
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
@@ -65,7 +66,7 @@ public abstract class Tower extends Observable {
 	 * @return True if the position of enemy is within the range of tower else false
 	 */
 	public boolean inRange(GridPosition otherCoordinate) {
-		return distance(this.gridPosition, otherCoordinate) < getRange();
+		return distance(gridPosition, otherCoordinate) < getRange();
 	}
 	
 	/**
@@ -225,5 +226,10 @@ public abstract class Tower extends Observable {
 	 */
 	public void update(float seconds) {
 		secondsSinceLastShot = secondsSinceLastShot + seconds;
+	}
+
+	public boolean inRange(Point2f otherPosition) {
+		float distance = new Point2f(gridPosition.getX(), gridPosition.getY()).distance(otherPosition);
+		return distance <= getRange();
 	}
 }
