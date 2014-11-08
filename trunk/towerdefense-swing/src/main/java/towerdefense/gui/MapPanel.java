@@ -12,6 +12,7 @@ import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.vecmath.Point2f;
 
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.Tile;
@@ -158,6 +159,10 @@ public class MapPanel extends JPanel implements Observer{
 	int tileToScreenY(int y) {
 		return y * getTileHeight();
 	}
+	
+	public Point2f tileToScreen(Point2f point) {
+		return new Point2f(point.x * getTileWidth(), point.y * getTileHeight());
+	}
 
 	/**
 	 * Convert from screen X coordinate to a {@link GridPosition} X coordinate
@@ -224,6 +229,8 @@ public class MapPanel extends JPanel implements Observer{
 			gameMap.deleteObserver(this);
 		}
 	}
+
+
 	
 //	/**
 //	 * Create the GUI and show it. For thread safety, this method should be

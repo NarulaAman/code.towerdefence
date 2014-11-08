@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import javax.vecmath.Point2f;
+import javax.vecmath.Vector2f;
+
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
 
@@ -16,8 +19,11 @@ public class Enemy extends Observable {
 	private GridPosition endGridPosition;
 	private List<Tower> towerList;
 	private List<Tower> towersInMap;
-	
-	
+
+	private/* final */GamePlay gamePlay;
+	private Point2f currentPosition;
+	private float tilesPerSecond = 0.5f;
+	private int destinationIdx = 1;
 
 	public Enemy() {
 		titorGridPosition = new GridPosition(-1, -1);
@@ -26,13 +32,19 @@ public class Enemy extends Observable {
 		lock = false;
 	}
 
+	public Enemy(GamePlay gamePlay, int health, Point2f currentPosition) {
+		this.gamePlay = gamePlay;
+		this.health = health;
+		this.currentPosition = currentPosition;
+	}
+
 	public char[][] getMap() {
 		return titorMap;
 	}
 
 	public Enemy(GridPosition p, int health, char[][] map, List<Tower> towersInMap) {
 		titorGridPosition = p;
-		health = health;
+		this.health = health;
 		for (int i = 0; i < map.length; i++)
 			for (int j = 0; j < map[0].length; j++) {
 				if (map[i][j] == 'S') {
@@ -48,7 +60,7 @@ public class Enemy extends Observable {
 
 			}
 		towerList = new ArrayList<Tower>();
-		towersInMap = towersInMap;
+		this.towersInMap = towersInMap;
 		lock = false;
 	}
 
@@ -203,7 +215,55 @@ public class Enemy extends Observable {
 	}
 
 	public void update(float seconds) {
+		if (!hasReachedEnd()) {
+			System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
+			move(seconds);
+		}
+		else {
+			gamePlay.reachedEnd(this);
+		}
 		
 		
 	}
+
+	private boolean hasReachedEnd() {
+		return destinationIdx >= gamePlay.getEnemyPath().size();
+	}
+
+	private void move(float seconds) {
+		Point2f nextPosition = getNextPosition();
+
+		float timeForNextTile = currentPosition.distance(nextPosition) / tilesPerSecond;
+		// if the enemy doesn't reach the next tile
+		if (seconds < timeForNextTile) {
+			float walkedDistance = tilesPerSecond * seconds;
+			Vector2f direction = directionTo(nextPosition);	
+			direction.scale(walkedDistance);
+			currentPosition.add(direction);
+		}
+		// else he passed the next tile and now goes to the following, if it exists
+		else {
+			currentPosition = nextPosition;
+			destinationIdx++;
+			update(timeForNextTile - seconds);
+		}
+	}
+
+	private Vector2f directionTo(Point2f nextPosition) {
+		Vector2f directionToMove = new Vector2f(nextPosition);
+		directionToMove.sub(currentPosition);
+		directionToMove.normalize();
+		return directionToMove;
+	}
+
+	public Point2f getNextPosition() {
+		GridPosition position = gamePlay.getEnemyPath().get(destinationIdx);
+		return new Point2f(position.getX(), position.getY());
+	}
+
+	public Point2f getCurrentPosition() {
+		return currentPosition;
+	}
+	
+	
 }

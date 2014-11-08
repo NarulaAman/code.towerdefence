@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import javax.vecmath.Point2f;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
@@ -19,13 +22,22 @@ public class GamePlay extends Observable implements Serializable {
 
 	private final GameMap gameMap;
 	
-	private final List<Tower> towers = new ArrayList<Tower>();
+	private final List<Tower> towers = new ArrayList<>();
 	
-	private final List<Enemy> enemies = new ArrayList<>();
+	private final List<Enemy> enemies = new CopyOnWriteArrayList<>();
+	
+	private final List<GridPosition> enemyPath = new ArrayList<>();
 
 	private int currency;
 	
 	private int lives;
+	
+	private enum State {
+		SETUP,
+		RUNNING,
+		GAMEOVER
+	}
+	
 
 	/**
 	 * @param gameMap The map selected for Play
@@ -36,7 +48,20 @@ public class GamePlay extends Observable implements Serializable {
 		this.gameMap = gameMap;
 		this.currency = currency;
 		this.lives = 3;
-
+		
+		
+		// TODO: remove the lines below, it is only for testing
+		
+//		for (int x = 0; x < gameMap.getWidth(); ++x) {
+//			for (int y = 0; y < gameMap.getHeight(); ++y) {
+//				if (x != y) continue;
+//				enemyPath.add(new GridPosition(x, y));
+//			}
+//		}
+		enemyPath.addAll(gameMap.getStartToEndPath());
+		enemies.add(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
+		
+		// TODO: end of lines to be removed
 	}
 
 	/**
@@ -198,6 +223,44 @@ public class GamePlay extends Observable implements Serializable {
 			tower.update(seconds);
 			tower.maybeShoot(enemies);
 		}
+		
+		setChanged();
+		notifyObservers();
 	}
+
+	
+	public List<GridPosition> getEnemyPath() {
+		return enemyPath;
+	}
+
+	/**
+	 * Adds an enemy to the {@link GamePlay}
+	 * @param enemy enemy to be added to the {@link GamePlay}
+	 */
+	public void addEnemy(Enemy enemy) {
+		enemies.add(enemy);
+	}
+	
+	/**
+	 * Notifies the {@link GamePlay} that the enemy has reached the end
+	 * @param enemy
+	 */
+	public synchronized void reachedEnd(Enemy enemy) {
+		enemies.remove(enemy);
+	}
+	
+	public boolean isGameOver() {
+		return false;
+	}
+
+	/**
+	 * Returns the enemies alive in the {@link GamePlay}
+	 * @return the enemies alive in the {@link GamePlay}
+	 */
+	public List<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	
 	
 }
