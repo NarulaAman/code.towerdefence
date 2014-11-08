@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
-import ca.concordia.soen6441.logic.tower.CannonTower;
-import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.AimWeakestStrategy;
 import ca.concordia.soen6441.logic.tower.AimingStrategy;
+import ca.concordia.soen6441.logic.tower.CannonTower;
+import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 

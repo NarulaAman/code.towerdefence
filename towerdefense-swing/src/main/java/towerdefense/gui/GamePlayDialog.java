@@ -25,9 +25,9 @@ import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
-import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
