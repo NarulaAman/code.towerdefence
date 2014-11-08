@@ -1,10 +1,13 @@
 package ca.concordia.soen6441.logic;
 
 import java.io.Serializable;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
+import java.util.Set;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
@@ -285,5 +288,39 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<GridPosition> getStartToEndPath() {
+		class PositionListPair {
+			GridPosition gridPosition;
+			List<GridPosition> path = new ArrayList<>();
+			PositionListPair(GridPosition gridPosition, List<GridPosition> path) {
+				this.gridPosition = gridPosition;
+				this.path.addAll(path);
+				this.path.add(gridPosition);
+			}
+		}	
+		List<GridPosition> enemyPath = new ArrayList<>();
+		ArrayDeque<PositionListPair> positionQueue = new ArrayDeque<>();
+		Set<GridPosition> visitedPositions = new HashSet<>();
+		positionQueue.addFirst(new PositionListPair(getStartGridPosition(), new ArrayList<GridPosition>()));
+		while (!positionQueue.isEmpty()) {
+			PositionListPair positionPathPair = positionQueue.getFirst();
+			GridPosition currentPosition = positionPathPair.gridPosition;
+			positionQueue.removeFirst();
+			visitedPositions.add(currentPosition);
+			if (currentPosition.distance(getEndGridPosition()) < 1.1) {
+				enemyPath.addAll(positionPathPair.path);
+				enemyPath.add(getEndGridPosition());
+				break;
+			}
+			List<GridPosition> walkableFromHere = getAdjacentWalkablePositions(currentPosition);
+			for (GridPosition gridPosition : walkableFromHere) {					
+				if (! visitedPositions.contains(gridPosition)) {
+					positionQueue.addFirst(new PositionListPair(gridPosition, positionPathPair.path));
+				}
+			}
+		}
+		return enemyPath;
 	}
 }

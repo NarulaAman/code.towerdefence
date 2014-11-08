@@ -185,8 +185,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						gamePlay.update(seconds);
-						System.out.println("Seconds: " + seconds);
+						update(seconds);
 					}
 				});
 				lastTimestamp = currentTimestamp;
@@ -199,6 +198,14 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 				gameplayUpdateTimer.cancel();
 			}
 		});
+	}
+	
+	public void update(float seconds) {
+		gamePlay.update(seconds);
+		if (gamePlay.isGameOver()) {
+			gameplayUpdateTimer.cancel();
+		}
+		System.out.println("Seconds: " + seconds);
 	}
 
 	/**

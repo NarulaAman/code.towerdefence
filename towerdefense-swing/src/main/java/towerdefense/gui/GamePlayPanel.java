@@ -9,8 +9,10 @@ import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.vecmath.Point2f;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
@@ -72,6 +74,12 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(),
 					this);
 		}
+		
+		for (Enemy enemy : getGamePlay().getEnemies()) {
+			g.drawImage(TOWER_ICON, (int) tileToScreen(enemy.getCurrentPosition()).x,
+					(int) tileToScreen(enemy.getCurrentPosition()).y, getTileWidth(), getTileHeight(),
+					this);
+		}
 	}
 	
 	/**
@@ -107,6 +115,17 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	int tileToScreenY(int y) {
 		return mapPanel.tileToScreenY(y);
 	}
+	
+	/**
+	 * Transforms from grid coordinates to screen coordinates
+	 * @param x the grid coordinate
+	 * @return the screen coordinate
+	 */
+	Point2f tileToScreen(Point2f point) {
+		return mapPanel.tileToScreen(point);
+	}
+
+
 	
 	
 	/**
