@@ -205,7 +205,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		if (gamePlay.isGameOver()) {
 			gameplayUpdateTimer.cancel();
 		}
-		System.out.println("Seconds: " + seconds);
+//		System.out.println("Seconds: " + seconds);
 	}
 
 	/**
