@@ -81,7 +81,7 @@ public class TowerFactory {
 	 */
 	public Tower towerOnCoordinate(Class<? extends Tower> type, GridPosition coordinate) {
 		try {
-			Constructor<? extends Tower> constructor = type.getConstructor(Integer.class, GridPosition.class,
+			Constructor<? extends Tower> constructor = type.getConstructor(int.class, GridPosition.class,
 					AimingStrategy.class, TowerFactory.class);
 			return constructor.newInstance(1, coordinate, new AimWeakestStrategy(), this);
 		} catch (Exception exception) {

@@ -41,6 +41,8 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 
 	private static final Image TOWER_ICON = new ImageIcon(Object.class.getResource("/icons/tower.png")).getImage();
+	private static final Image ENEMY_ICON = new ImageIcon(Object.class.getResource("/icons/enemy.png")).getImage();
+	
 	private final MapPanel mapPanel = new MapPanel();
 	private final GamePlay gamePlay;
 	private MapGridCoordinateClickedListener mapGridCoordinateClickedListener;
@@ -76,7 +78,7 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		}
 		
 		for (Enemy enemy : getGamePlay().getEnemies()) {
-			g.drawImage(TOWER_ICON, (int) tileToScreen(enemy.getCurrentPosition()).x,
+			g.drawImage(ENEMY_ICON, (int) tileToScreen(enemy.getCurrentPosition()).x,
 					(int) tileToScreen(enemy.getCurrentPosition()).y, getTileWidth(), getTileHeight(),
 					this);
 		}
@@ -185,7 +187,7 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	
 	/**
 	 * Sets the {@link TowerSelectedListener}, this listener will be invoked when a {@link Tower} is clicked on the {@link GamePlayPanel}
-	 * @param listener
+	 * @param listener {@link TowerSelectedListener} to be set
 	 */
 	public void setTowerSelectedListener(TowerSelectedListener listener) {
 		this.towerSelectedListener = listener;

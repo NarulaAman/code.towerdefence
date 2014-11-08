@@ -88,8 +88,12 @@ public class Enemy extends Observable {
 		return health;
 	}
 
-	public void setHealth(int H) {
-		health = H;
+	public void setHealth(int health) {
+		if (health != this.health){ 
+			this.health = health;
+			setChanged();
+			notifyObservers();
+		}
 	}
 
 	public void lockTitor(Tower t) {
@@ -245,7 +249,7 @@ public class Enemy extends Observable {
 		else {
 			currentPosition = nextPosition;
 			destinationIdx++;
-			update(timeForNextTile - seconds);
+			update(seconds - timeForNextTile);
 		}
 	}
 

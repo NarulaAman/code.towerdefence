@@ -17,7 +17,7 @@ public class AimWeakestStrategy implements AimingStrategy {
 	public void shootIfInRange(List<Enemy> enemies) {
 		Enemy enemyToShoot = null;
 		for (Enemy enemy : enemies) {
-			if (tower.inRange(enemy.getGridPosition())) {
+			if (tower.inRange(enemy.getCurrentPosition())) {
 				if (enemyToShoot == null) {
 					enemyToShoot = enemy;
 				}
