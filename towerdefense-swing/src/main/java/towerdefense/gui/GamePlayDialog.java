@@ -377,6 +377,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Reads the current {@link GamePlay} attributes
 	 */
 	private void readGamePlay() {
+		
+		livesField.setText("" + gamePlay.getLives());
 		banksField.setText("" + gamePlay.getCurrency());
 	}
 
