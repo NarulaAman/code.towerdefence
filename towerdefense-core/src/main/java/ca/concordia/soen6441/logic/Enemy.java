@@ -22,7 +22,7 @@ public class Enemy extends Observable {
 
 	private/* final */GamePlay gamePlay;
 	private Point2f currentPosition;
-	private float tilesPerSecond = 0.5f;
+	private float speed = 0.5f;
 	private int destinationIdx = 1;
 
 	public Enemy() {
@@ -237,10 +237,10 @@ public class Enemy extends Observable {
 	private void move(float seconds) {
 		Point2f nextPosition = getNextPosition();
 
-		float timeForNextTile = currentPosition.distance(nextPosition) / tilesPerSecond;
+		float timeForNextTile = currentPosition.distance(nextPosition) / speed;
 		// if the enemy doesn't reach the next tile
 		if (seconds < timeForNextTile) {
-			float walkedDistance = tilesPerSecond * seconds;
+			float walkedDistance = speed * seconds;
 			Vector2f direction = directionTo(nextPosition);	
 			direction.scale(walkedDistance);
 			currentPosition.add(direction);
@@ -266,11 +266,32 @@ public class Enemy extends Observable {
 	}
 
 	public Point2f getCurrentPosition() {
+		if (currentPosition == null) {
+			return new Point2f(titorGridPosition.getX(), titorGridPosition.getY());
+		}
 		return currentPosition;
 	}
 	
 	public boolean isAlive() {
 		return health > 0;
+	}
+	
+	
+	
+	/**
+	 * Returns the speed, which is units of the grid per second. Can also be understood as tiles per second.
+	 * @return the speed, which is units of the grid per second.
+	 */
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public void takeDamage(int damage) {
+		setHealth(getHealth() - damage); 
 	}
 	
 	
