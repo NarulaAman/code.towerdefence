@@ -219,8 +219,11 @@ public class Enemy extends Observable {
 	}
 
 	public void update(float seconds) {
-		System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
-		move(seconds);
+		if(!hasReachedEnd()) {
+			System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
+			move(seconds);
+		}
+		
 		
 	}
 

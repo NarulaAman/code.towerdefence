@@ -272,12 +272,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	}
 	
 	public boolean isGameOver() {
-		if(currency<=0)
-		{
+		if(currency<=0) {
 			return true;
 		}
-		else if(lives<=0)
-		{
+		else if(lives<=0) {
 			return true;
 		}
 		return false;
