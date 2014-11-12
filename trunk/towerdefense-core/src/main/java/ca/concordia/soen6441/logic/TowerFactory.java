@@ -33,9 +33,9 @@ public class TowerFactory {
 		towerTypeInformation.put(FireTower.class, fireTowerLevelCharacteristic);
 	
 		List<TowerLevelCharacteristic> iceTowerLevelCharacteristic = new ArrayList<>();
-		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(1, 100, 75, 2, 1.f));
-		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
-		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(0, 100, 75, 2, 1.f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(0, 60, 75, 3, 0.9f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(0, 75, 75, 3, 0.8f));
 		towerTypeInformation.put(IceTower.class, iceTowerLevelCharacteristic);
 	
 		List<TowerLevelCharacteristic> cannonTowerLevelCharacteristic = new ArrayList<>();
