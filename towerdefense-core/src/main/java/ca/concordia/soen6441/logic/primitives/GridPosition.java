@@ -3,6 +3,7 @@ package ca.concordia.soen6441.logic.primitives;
 import java.io.Serializable;
 
 import javax.vecmath.Point2d;
+import javax.vecmath.Point2f;
 
 /**
  * This class represents and X and Y gridPosition formed by integers
@@ -50,6 +51,14 @@ public class GridPosition implements Serializable {
 	 */
 	public double distance(GridPosition other) {
 		return new Point2d(getX(), getY()).distance(new Point2d(other.getX(), other.getY()));
+	}
+	
+	/**
+	 * Returns the {@link GridPosition} converted to a {@link Point2f}
+	 * @return the {@link GridPosition} converted to a {@link Point2f}
+	 */
+	public Point2f toPoint2f() {
+		return new Point2f(getX(), getY());
 	}
 
 	/**

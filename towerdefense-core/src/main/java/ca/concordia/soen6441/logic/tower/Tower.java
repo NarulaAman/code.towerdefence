@@ -25,7 +25,7 @@ public abstract class Tower extends Observable {
 	 * to show which enemy is the tower shooting at
 	 */
 	public class TowerShootEvent {
-		public final GridPosition origin;
+		public final Point2f origin;
 		public final Point2f destination;
 		
 		/**
@@ -33,7 +33,7 @@ public abstract class Tower extends Observable {
 		 * @param origin
 		 * @param destination
 		 */
-		public TowerShootEvent(GridPosition origin, Point2f destination) {
+		public TowerShootEvent(Point2f origin, Point2f destination) {
 			super();
 			this.origin = origin;
 			this.destination = destination;
@@ -235,7 +235,7 @@ public abstract class Tower extends Observable {
 	public void shoot(Enemy enemy) {
 		secondsSinceLastShot = 0;
 		specializedShot(enemy);
-		notifyObservers(new TowerShootEvent(getGridPosition(), enemy.getCurrentPosition()));
+		notifyObservers(new TowerShootEvent(getGridPosition().toPoint2f(), enemy.getCurrentPosition()));
 	}
 	
 	public boolean hasCooledDown() {
@@ -259,5 +259,9 @@ public abstract class Tower extends Observable {
 
 	public float distanceTo(Point2f currentPosition) {
 		return new Point2f(gridPosition.getX(), gridPosition.getY()).distance(currentPosition);
+	}
+	
+	protected ShootingStrategy getShootingStrategy() {
+		return shootStrategy;
 	}
 }
