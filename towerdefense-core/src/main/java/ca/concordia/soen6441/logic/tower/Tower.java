@@ -11,6 +11,7 @@ import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.TowerLevelCharacteristic;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 
 /**
@@ -45,7 +46,7 @@ public abstract class Tower extends Observable {
 	
 	private final TowerFactory towerFactory;
 	
-	private AimingStrategy shootStrategy;
+	private ShootingStrategy shootStrategy;
 	
 	private float secondsSinceLastShot;
 
@@ -55,7 +56,7 @@ public abstract class Tower extends Observable {
 	 * @param gridPosition The position of the {@link Tower} on {@link GameMap}
 	 * @param towerFactory The object of {@link TowerFactory}
 	 */
-	public Tower(int level, GridPosition gridPosition, AimingStrategy shootingStrategy, TowerFactory towerFactory) {
+	public Tower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super();
 		this.gridPosition = gridPosition;
 		this.level = level;
@@ -210,7 +211,7 @@ public abstract class Tower extends Observable {
 	 * Sets the shooting strategy
 	 * @param shootingStrategy
 	 */
-	public void setShootingStrategy(AimingStrategy shootingStrategy) {
+	public void setShootingStrategy(ShootingStrategy shootingStrategy) {
 		this.shootStrategy = shootingStrategy;
 		shootingStrategy.setTower(this);
 	}
@@ -255,4 +256,8 @@ public abstract class Tower extends Observable {
 	}
 	
 	public abstract void visit(TowerVisitor visitor);
+
+	public float distanceTo(Point2f currentPosition) {
+		return new Point2f(gridPosition.getX(), gridPosition.getY()).distance(currentPosition);
+	}
 }

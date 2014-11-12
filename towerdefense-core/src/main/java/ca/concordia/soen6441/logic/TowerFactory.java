@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
-import ca.concordia.soen6441.logic.tower.AimWeakestStrategy;
-import ca.concordia.soen6441.logic.tower.AimingStrategy;
 import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 /**
  * Responsible for creating the towers and holding their level characteristics
@@ -33,7 +33,7 @@ public class TowerFactory {
 		towerTypeInformation.put(FireTower.class, fireTowerLevelCharacteristic);
 	
 		List<TowerLevelCharacteristic> iceTowerLevelCharacteristic = new ArrayList<>();
-		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(1, 100, 75, 2, 1.f));
 		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
 		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
 		towerTypeInformation.put(IceTower.class, iceTowerLevelCharacteristic);
@@ -82,8 +82,8 @@ public class TowerFactory {
 	public Tower towerOnCoordinate(Class<? extends Tower> type, GridPosition coordinate) {
 		try {
 			Constructor<? extends Tower> constructor = type.getConstructor(int.class, GridPosition.class,
-					AimingStrategy.class, TowerFactory.class);
-			return constructor.newInstance(1, coordinate, new AimWeakestStrategy(), this);
+					ShootingStrategy.class, TowerFactory.class);
+			return constructor.newInstance(1, coordinate, new ShootWeakestStrategy(), this);
 		} catch (Exception exception) {
 			throw new RuntimeException(exception);
 		}

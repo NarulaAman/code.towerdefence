@@ -4,6 +4,7 @@ import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 /**
  * Tower that slows the enemies down when they are shot
@@ -11,8 +12,8 @@ import ca.concordia.soen6441.logic.primitives.TemporalEffect;
  */
 public class IceTower extends AbstractTemporalEffectTower {
 
-	private final static float SLOW_DURATION_SECS = 10; 
-	private final static float SLOWNESS_RATE = 0.7f;
+	public final static float SLOW_DURATION_SECS = 10; 
+	public final static float SLOWNESS_RATE = 0.2f;
 	
 	class SlowingEffect extends TemporalEffect {
 		
@@ -38,7 +39,6 @@ public class IceTower extends AbstractTemporalEffectTower {
 			super.stopEffect();
 			enemy.setSpeed(originalSpeed);
 		}
-		
 	}
 	
 	
@@ -49,7 +49,7 @@ public class IceTower extends AbstractTemporalEffectTower {
 	 * @param shootingStrategy
 	 * @param towerFactory
 	 */
-	public IceTower(int level, GridPosition gridPosition, AimingStrategy shootingStrategy, TowerFactory towerFactory) {
+	public IceTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
 	}
 
