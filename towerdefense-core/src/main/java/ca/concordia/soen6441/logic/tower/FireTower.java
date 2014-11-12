@@ -1,6 +1,7 @@
 package ca.concordia.soen6441.logic.tower;
 
 import java.util.Observer;
+
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
@@ -39,6 +40,12 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 
 	protected TemporalEffect buildEffectOn(Enemy enemy) {
 		return new BurningEnemyEffect(enemy);
+	}
+
+	@Override
+	public void visit(TowerVisitor visitor) {
+		visitor.visit(this);
+		
 	}
 
 }

@@ -253,4 +253,6 @@ public abstract class Tower extends Observable {
 		float distance = new Point2f(gridPosition.getX(), gridPosition.getY()).distance(otherPosition);
 		return distance <= getRange();
 	}
+	
+	public abstract void visit(TowerVisitor visitor);
 }

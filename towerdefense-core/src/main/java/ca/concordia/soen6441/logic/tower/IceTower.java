@@ -61,4 +61,10 @@ public class IceTower extends AbstractTemporalEffectTower {
 		return new SlowingEffect(enemy);
 	}
 
+	@Override
+	public void visit(TowerVisitor visitor) {
+		visitor.visit(this);
+		
+	}
+
 }

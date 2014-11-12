@@ -15,4 +15,9 @@ public class CannonTower extends Tower {
 		enemy.takeDamage(getDamage());
 	}
 
+	@Override
+	public void visit(TowerVisitor visit) {
+		visit.visit(this);
+	}
+
 }
