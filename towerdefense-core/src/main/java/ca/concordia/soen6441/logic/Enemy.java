@@ -20,20 +20,20 @@ public class Enemy extends Observable {
 	private List<Tower> towerList;
 	private List<Tower> towersInMap;
 
-	private/* final */GamePlay gamePlay;
+	private/* final */GameMap gameMap;
 	private Point2f currentPosition;
 	private float speed = 0.5f;
 	private int destinationIdx = 1;
 	private int prize = 50;
 
 	public Enemy() {
-		gamePlay = null;
+		 gameMap= null;
 		health = 0;
 		currentPosition = null;
 	}
 
-	public Enemy(GamePlay gamePlay, int health, Point2f currentPosition) {
-		this.gamePlay = gamePlay;
+	public Enemy(GameMap gameMap, int health, Point2f currentPosition) {
+		this.gameMap = gameMap;
 		this.health = health;
 		this.currentPosition = currentPosition;
 	}
@@ -219,19 +219,13 @@ public class Enemy extends Observable {
 	}
 
 	public void update(float seconds) {
-		if (!hasReachedEnd()) {
-			System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
-			move(seconds);
-		}
-		else {
-			gamePlay.reachedEnd(this);
-		}
-		
+		System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
+		move(seconds);
 		
 	}
 
-	private boolean hasReachedEnd() {
-		return destinationIdx >= gamePlay.getEnemyPath().size();
+	public boolean hasReachedEnd() {
+		return destinationIdx >= gameMap.getStartToEndPath().size();
 	}
 
 	private void move(float seconds) {
@@ -261,7 +255,7 @@ public class Enemy extends Observable {
 	}
 
 	public Point2f getNextPosition() {
-		GridPosition position = gamePlay.getEnemyPath().get(destinationIdx);
+		GridPosition position = gameMap.getStartToEndPath().get(destinationIdx);
 		return new Point2f(position.getX(), position.getY());
 	}
 
