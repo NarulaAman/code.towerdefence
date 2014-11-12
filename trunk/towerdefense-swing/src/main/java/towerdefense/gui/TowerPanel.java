@@ -26,6 +26,7 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JLabel damageLbl = new JLabel("Damage:");
 	private final JLabel rangeLbl = new JLabel("Range:");
 	private final JLabel levelLbl = new JLabel("Level:");
+	private final JLabel fireRateLbl = new JLabel("Fire Rate:");
 	private final JLabel refundLbl = new JLabel("Refund:");
 	private final JLabel upgradeCostLbl = new JLabel("Upgrade cost:");
 	
@@ -33,11 +34,15 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JTextField damageTxtFld = new JTextField("");
 	private final JTextField rangeTxtFld = new JTextField("");
 	private final JTextField levelTxtFld = new JTextField("");
+	private final JTextField fireRateTxtFld = new JTextField("");
 	private final JTextField refundTxtFld = new JTextField("");
 	private final JTextField upgradeCostTxtFld = new JTextField("");
 	
 	private final JButton upgradeBtn = new JButton("Upgrade");
 	private final JButton sellBtn = new JButton("Sell");
+	private final JButton weakestStratBtn = new JButton("Weakest Strategy");
+	private final JButton closestStratBtn = new JButton("Closest Strategy");
+	private final JButton shootingStratBtn = new JButton("Shooting Strategy");
 	
 	private Tower shownTower = null;
 
@@ -47,7 +52,7 @@ public class TowerPanel extends JPanel implements Observer{
 	 */
 	public TowerPanel()
 	{
-		super(new GridLayout(7, 2));
+		super(new GridLayout(10, 2));
 		setMinimumSize(new Dimension(200, 350));
 		setMaximumSize(new Dimension(200, 350));
 		add(costLbl);
@@ -58,12 +63,17 @@ public class TowerPanel extends JPanel implements Observer{
 		add(rangeTxtFld);
 		add(levelLbl);
 		add(levelTxtFld);
+		add(fireRateLbl);
+		add(fireRateTxtFld);
 		add(refundLbl);
 		add(refundTxtFld);
 		add(upgradeCostLbl);
 		add(upgradeCostTxtFld);
 		add(upgradeBtn);
 		add(sellBtn);
+		add(weakestStratBtn);
+		add(closestStratBtn);
+		add(shootingStratBtn);
 		
 		 costTxtFld.setEditable(false);
 		damageTxtFld.setEditable(false);
@@ -106,6 +116,7 @@ public class TowerPanel extends JPanel implements Observer{
 		damageTxtFld.setText("" + tower.getDamage());
 		rangeTxtFld .setText("" + tower.getRange());
 		levelTxtFld .setText("" + tower.getLevel());
+		fireRateTxtFld.setText("" + tower.getShootRateSecs());
 		refundTxtFld.setText("" + tower.getRefundRate());
 		if (tower.canUpgrade()) {
 			upgradeCostTxtFld .setText("" + tower.getUpgradeCost());
@@ -133,6 +144,29 @@ public class TowerPanel extends JPanel implements Observer{
 		return sellBtn;
 	}
 
+	/**
+	 * Returns the weakest strategy button
+	 * @return the weakest strategy button
+	 */
+	public JButton getWeakestStratBtn() {
+		return weakestStratBtn;
+	}
+	
+	/**
+	 * Returns the closest strategy button
+	 * @return the closest strategy button
+	 */
+	public JButton getClosestStratBtn() {
+		return closestStratBtn;
+	}
+	
+	/**
+	 * Returns the shooting strategy  button
+	 * @return the shooting strategy  button
+	 */
+	public JButton getShootingStratBtn() {
+		return shootingStratBtn;
+	}
 	/**
 	 * Sets the {@link Tower} to be shown by this {@link TowerPanel}
 	 * @param shownTower {@link Tower} to be shown by this {@link TowerPanel}

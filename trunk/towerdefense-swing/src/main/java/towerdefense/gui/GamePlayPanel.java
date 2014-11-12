@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -91,8 +93,9 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 
 	private static final Image TOWER_ICON = new ImageIcon(Object.class.getResource("/icons/tower.png")).getImage();
+
 	private static final Image FIRETOWER_ICON = new ImageIcon(Object.class.getResource("/icons/firetower.png")).getImage();
-	private static final Image ICETOWER_ICON = new ImageIcon(Object.class.getResource("/icons/icetower.png")).getImage();
+	private static final Image ICETOWER_ICON = new ImageIcon(Object.class.getResource("/icons/icetower.png")).getImage(); 
 	private static final Image ENEMY_ICON = new ImageIcon(Object.class.getResource("/icons/enemy.png")).getImage();
 	
 	private final MapPanel mapPanel = new MapPanel();
