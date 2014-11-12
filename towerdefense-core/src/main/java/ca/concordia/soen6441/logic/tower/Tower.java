@@ -182,8 +182,8 @@ public abstract class Tower extends Observable {
 		return distanceTo(gridPosition);
 	}
 	
-	public void shootEnemy(Enemy T) {
-		T.setHealth(T.getHealth() - getDamage());
+	public void shootEnemy(Enemy enemy) {
+		enemy.setHealth(enemy.getHealth() - getDamage());
 	}
 	
 	/**

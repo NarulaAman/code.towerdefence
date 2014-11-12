@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.vecmath.Point2f;
@@ -16,7 +17,7 @@ import ca.concordia.soen6441.logic.tower.Tower;
  * This class has logic for various operations executed on Game Play
  *
  */
-public class GamePlay extends Observable implements Serializable {
+public class GamePlay extends Observable implements Serializable, Observer {
 
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +60,7 @@ public class GamePlay extends Observable implements Serializable {
 //			}
 //		}
 		enemyPath.addAll(gameMap.getStartToEndPath());
-		enemies.add(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
+		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
 		
 		// TODO: end of lines to be removed
 	}
@@ -239,6 +240,7 @@ public class GamePlay extends Observable implements Serializable {
 	 */
 	public void addEnemy(Enemy enemy) {
 		enemies.add(enemy);
+		enemy.addObserver(this);
 	}
 	
 	/**
@@ -259,6 +261,19 @@ public class GamePlay extends Observable implements Serializable {
 	 */
 	public List<Enemy> getEnemies() {
 		return enemies;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof Enemy) {
+			Enemy enemy = (Enemy) o;
+			if (!enemy.isAlive()) {
+				enemies.remove(enemy);
+				setChanged();
+				notifyObservers();
+			}
+		}
+		
 	}
 
 	

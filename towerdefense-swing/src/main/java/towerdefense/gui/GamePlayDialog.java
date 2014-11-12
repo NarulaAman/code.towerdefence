@@ -87,6 +87,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 	
 	private final JButton buyTowerButton = new JButton("Buy Tower");
+	private final JButton startGameButton = new JButton("StartGame");
 	private final TowerFactory towerFactory = new TowerFactory();
 	
 	private final Timer gameplayUpdateTimer = new Timer();
@@ -115,7 +116,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setupSidebar();
 		towerInspectionPanel.setVisible(false);
 		readGamePlay();
-		startGamePlayUpdaateTimer();
+//		startGamePlayUpdaateTimer();
 		pack();
 	}
 
@@ -241,6 +242,14 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		JPanel towersToBuyPanel = new JPanel();
 		towersToBuyPanel.add(buyTowerButton);
 		buyTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
+		towersToBuyPanel.add(startGameButton);
+		startGameButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startGamePlayUpdaateTimer();
+			}
+		});
 		sideBar.add(towersToBuyPanel);
 		
 	}

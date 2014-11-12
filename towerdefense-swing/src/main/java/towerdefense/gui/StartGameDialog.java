@@ -109,9 +109,9 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 * This method called when a map is saved on MapEditionPanel
 	 * @param gameMap that being saved
 	 */
-	public void updateGameMap(GameMap gameMap) {		
+	public void updateGameMap(GameMap gameMap) {
+		mapListPanel.removeSelection();
 		mapPanel.setMap(gameMap);
-		
 	}
 	
 	/**
