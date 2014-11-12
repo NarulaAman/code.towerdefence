@@ -289,6 +289,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		return enemies;
 	}
 
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Enemy) {
@@ -303,6 +304,6 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		
 	}
 
-	
+
 	
 }
