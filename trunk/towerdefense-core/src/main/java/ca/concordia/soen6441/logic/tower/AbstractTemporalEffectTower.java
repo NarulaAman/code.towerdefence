@@ -10,12 +10,13 @@ import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 public abstract class AbstractTemporalEffectTower extends Tower implements Observer {
 
 	private final Map<Enemy, TemporalEffect> enemiesUnderEffect = new ConcurrentHashMap<>();
 
-	public AbstractTemporalEffectTower(int level, GridPosition gridPosition, AimingStrategy shootingStrategy,
+	public AbstractTemporalEffectTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy,
 			TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
 	}

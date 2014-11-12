@@ -6,6 +6,7 @@ import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 public class FireTower extends AbstractTemporalEffectTower implements Observer{
 	
@@ -34,7 +35,7 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 		}
 	};
 	
-	public FireTower(int level, GridPosition gridPosition, AimingStrategy shootingStrategy, TowerFactory towerFactory) {
+	public FireTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
 	}
 

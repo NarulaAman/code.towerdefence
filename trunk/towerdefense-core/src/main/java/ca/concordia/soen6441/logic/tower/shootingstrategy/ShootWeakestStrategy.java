@@ -1,23 +1,17 @@
-package ca.concordia.soen6441.logic.tower;
+package ca.concordia.soen6441.logic.tower.shootingstrategy;
 
 import java.util.List;
 
 import ca.concordia.soen6441.logic.Enemy;
+import ca.concordia.soen6441.logic.tower.Tower;
 
-public class AimWeakestStrategy implements AimingStrategy {
-
-	private Tower tower;
-	
-	@Override
-	public void setTower(Tower tower) {
-		this.tower = tower;
-	}
+public class ShootWeakestStrategy extends AbstractShootingStrategy {
 	
 	@Override
 	public void shootIfInRange(List<Enemy> enemies) {
 		Enemy enemyToShoot = null;
 		for (Enemy enemy : enemies) {
-			if (tower.inRange(enemy.getCurrentPosition())) {
+			if (getTower().inRange(enemy.getCurrentPosition())) {
 				if (enemyToShoot == null) {
 					enemyToShoot = enemy;
 				}
@@ -28,9 +22,9 @@ public class AimWeakestStrategy implements AimingStrategy {
 				}
 			}
 		}
-		
+		// if an enemy was chosen to shoot
 		if (enemyToShoot != null) {
-			tower.shoot(enemyToShoot);
+			getTower().shoot(enemyToShoot);
 		}
 	}
 
