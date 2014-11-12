@@ -22,6 +22,7 @@ import javax.swing.SwingUtilities;
 
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import ca.concordia.soen6441.logic.EnemyWave;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
@@ -147,8 +148,13 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				state = State.BUYING_TOWER;
-				selectTowerToBuy();
-				towerToBuy = FireTower.class;
+//				selectTowerToBuy();
+				if (towerToBuy == FireTower.class) {
+					towerToBuy = IceTower.class;
+				}
+				else {
+					towerToBuy = FireTower.class;
+				}
 				towerInspectionPanel.setVisible(false);
 			}
 		});
@@ -247,6 +253,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 5, 3));
+				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 3, 5));
 				startGamePlayUpdaateTimer();
 			}
 		});
