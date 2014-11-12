@@ -24,7 +24,7 @@ public class Enemy extends Observable {
 	private Point2f currentPosition;
 	private float speed = 0.5f;
 	private int destinationIdx = 1;
-	private int prize;
+	private int prize = 50;
 
 	public Enemy() {
 		titorGridPosition = new GridPosition(-1, -1);
@@ -295,5 +295,8 @@ public class Enemy extends Observable {
 		setHealth(getHealth() - damage); 
 	}
 	
+	public int getPrize() {
+		return prize;
+	}
 	
 }
