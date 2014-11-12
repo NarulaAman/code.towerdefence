@@ -31,9 +31,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	private int currency;
 	
-	private int numEnemeisSurvive=0;
-	
-	private int lives;
+	private int lives=10;
 	
 	private enum State {
 		SETUP,
@@ -50,7 +48,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		super();
 		this.gameMap = gameMap;
 		this.currency = currency;
-		this.lives = 3;
+		this.lives = 10;
 		
 		
 		// TODO: remove the lines below, it is only for testing
@@ -268,7 +266,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public void reachedEnd(Enemy enemy) {
 		enemies.remove(enemy);
 		currency = currency - enemy.getPrize();
-		numEnemeisSurvive++;
+		lives--;
 		setChanged();
 		notifyObservers();
 	}
@@ -278,7 +276,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		{
 			return true;
 		}
-		else if(numEnemeisSurvive>10)
+		else if(lives<=0)
 		{
 			return true;
 		}
