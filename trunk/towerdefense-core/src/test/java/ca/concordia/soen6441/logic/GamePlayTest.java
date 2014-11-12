@@ -100,6 +100,7 @@ public class GamePlayTest {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY + 50);		
 		assertFalse(gamePlay.buy(tower1));
 		assertEquals(0, gamePlay.totalTowers());
+		assertEquals(START_CURRENCY, gamePlay.getCurrency());
 	}
 	
 	

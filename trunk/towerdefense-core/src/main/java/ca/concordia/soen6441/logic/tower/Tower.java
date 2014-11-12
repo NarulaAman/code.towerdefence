@@ -19,6 +19,26 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public abstract class Tower extends Observable {
 	
+	/**
+	 * Event for a tower shooting an enemy, it will be used in the user interface
+	 * to show which enemy is the tower shooting at
+	 */
+	public class TowerShootEvent {
+		public final GridPosition origin;
+		public final Point2f destination;
+		
+		/**
+		 * Builds a shooting event
+		 * @param origin
+		 * @param destination
+		 */
+		public TowerShootEvent(GridPosition origin, Point2f destination) {
+			super();
+			this.origin = origin;
+			this.destination = destination;
+		}
+	}
+	
 	private int level;
 	
 	private final GridPosition gridPosition;
@@ -214,6 +234,7 @@ public abstract class Tower extends Observable {
 	public void shoot(Enemy enemy) {
 		secondsSinceLastShot = 0;
 		specializedShot(enemy);
+		notifyObservers(new TowerShootEvent(getGridPosition(), enemy.getCurrentPosition()));
 	}
 	
 	public boolean hasCooledDown() {

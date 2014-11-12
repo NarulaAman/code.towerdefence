@@ -12,7 +12,7 @@ public class CannonTower extends Tower {
 
 	@Override
 	protected void specializedShot(Enemy enemy) {
-		enemy.setHealth(enemy.getHealth() - getDamage());
+		enemy.takeDamage(getDamage());
 	}
 
 }

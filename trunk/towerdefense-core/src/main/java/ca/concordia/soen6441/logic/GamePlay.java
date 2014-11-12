@@ -23,9 +23,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	private final GameMap gameMap;
 	
-	private final List<Tower> towers = new ArrayList<>();
+	private final List<EnemyWave> enemyWaves = new ArrayList<>();
 	
 	private final List<Enemy> enemies = new CopyOnWriteArrayList<>();
+	
+	private final List<Tower> towers = new ArrayList<>();
 	
 	private final List<GridPosition> enemyPath = new ArrayList<>();
 
@@ -60,7 +62,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 //			}
 //		}
 		enemyPath.addAll(gameMap.getStartToEndPath());
-		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
+//		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
 		
 		// TODO: end of lines to be removed
 	}

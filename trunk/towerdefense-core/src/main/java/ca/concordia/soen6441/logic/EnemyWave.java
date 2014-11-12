@@ -8,18 +8,17 @@ public class EnemyWave implements Serializable{
 	
 	private final float spawnEverySeconds;
 	
-	private float startDelaySeconds;
+//	private float startDelaySeconds;
 	
 	private int enemiesToSpawn;
 	
 	private float lastSpawnDeltaTime;
 	
-	
-	public EnemyWave(GamePlay gamePlay, float spawnEverySeconds, float startDelaySeconds, int enemiesToSpawn) {
+	public EnemyWave(GamePlay gamePlay, float spawnEverySeconds, /*float startDelaySeconds, */ int enemiesToSpawn) {
 		super();
 		this.gamePlay = gamePlay;
 		this.spawnEverySeconds = spawnEverySeconds;
-		this.startDelaySeconds = startDelaySeconds;
+//		this.startDelaySeconds = startDelaySeconds;
 		this.enemiesToSpawn = enemiesToSpawn;
 	}
 	
