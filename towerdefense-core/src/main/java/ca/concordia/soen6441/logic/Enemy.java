@@ -27,10 +27,9 @@ public class Enemy extends Observable {
 	private int prize = 50;
 
 	public Enemy() {
-		titorGridPosition = new GridPosition(-1, -1);
-		health = -10;
-		titorMap = null;
-		lock = false;
+		gamePlay = null;
+		health = 0;
+		currentPosition = null;
 	}
 
 	public Enemy(GamePlay gamePlay, int health, Point2f currentPosition) {
