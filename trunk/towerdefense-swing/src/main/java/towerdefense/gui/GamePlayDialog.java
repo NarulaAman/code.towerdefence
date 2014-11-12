@@ -36,7 +36,7 @@ import ca.concordia.soen6441.logic.tower.Tower;
  *
  */
 public class GamePlayDialog extends JDialog implements TowerSelectedListener, MapGridCoordinateClickedListener, Observer{
-	
+
 	/**
 	 * 
 	 */
@@ -51,14 +51,14 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		 * {@link GamePlayDialog} is doing thing
 		 */
 		NOTHING,
-		
+
 		/**
 		 * {@link GamePlayDialog} is buying tower
 		 */
 		BUYING_TOWER
 	}
 	private enum BuyingTower {
-		
+
 		/**
 		 * {@link GamePlayDialog} is buying fire tower
 		 */
@@ -71,7 +71,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		 * {@link GamePlayDialog} is buying cannon tower
 		 */
 		CANNON_TOWER
-		
+
 	}
 	private final GamePlayPanel gamePlayPanel;
 
@@ -84,24 +84,27 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final JTextField scoreField = new JTextField("");
 	private final JTextField levelsField = new JTextField("");
 	private final JTextField banksField = new JTextField("");
-	
+
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
-	
-	private final JButton buyTowerButton = new JButton("Buy Tower");
+
+	//private final JButton buyTowerButton = new JButton("Buy Tower");
+	private final JButton fireTowerButton = new JButton("Fire Tower");
+	private final JButton iceTowerButton = new JButton("Ice Tower");
+	private final JButton cannonTowerButton = new JButton("Cannon Tower");
 	private final JButton startGameButton = new JButton("StartGame");
 	private final TowerFactory towerFactory = new TowerFactory();
-	
+
 	private final Timer gameplayUpdateTimer = new Timer();
-	
+
 	private Class<? extends Tower> towerToBuy = null;
 	private Tower selectedTower = null;
-	
+
 	private State state = State.NOTHING;
 	private BuyingTower buyingTower = BuyingTower.FIRE_TOWER;
 
 	private GamePlay gamePlay;
-	
-	
+
+
 	/**
 	 * Constructs a {@link GamePlayDialog} to play an instance of {@link GamePlay}
 	 * @param gamePlay {@link GamePlay} to be played in this dialog
@@ -117,7 +120,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setupSidebar();
 		towerInspectionPanel.setVisible(false);
 		readGamePlay();
-//		startGamePlayUpdaateTimer();
+		//		startGamePlayUpdaateTimer();
 		pack();
 	}
 
@@ -127,15 +130,15 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private void setupSidebar() {
 		JPanel sideBar = new JPanel();
 		sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
-		
+
 		setupGamePlayAttributes(sideBar);
-		
+
 		setupTowerAvailableToBuyPanel(sideBar);
 
 		setupInspectionWindow(sideBar);
 
 		setupBuyTowerButton();
-		
+
 		add(sideBar, BorderLayout.EAST);
 	}	
 
@@ -143,23 +146,38 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Setup the BuyTower button
 	 */
 	private void setupBuyTowerButton() {
-		buyTowerButton.addActionListener(new ActionListener() {
-			
+		fireTowerButton.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				state = State.BUYING_TOWER;
-//				selectTowerToBuy();
-				if (towerToBuy == FireTower.class) {
-					towerToBuy = IceTower.class;
-				}
-				else {
-					towerToBuy = FireTower.class;
-				}
+				buyingTower = BuyingTower.FIRE_TOWER;
+				selectTowerToBuy();
+				towerInspectionPanel.setVisible(false);
+			}
+		});
+		iceTowerButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				state = State.BUYING_TOWER;
+				buyingTower = BuyingTower.ICE_TOWER;
+				selectTowerToBuy();
+				towerInspectionPanel.setVisible(false);
+			}
+		});
+		cannonTowerButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				state = State.BUYING_TOWER;
+				buyingTower = BuyingTower.CANNON_TOWER;
+				selectTowerToBuy();
 				towerInspectionPanel.setVisible(false);
 			}
 		});
 	}
-	
+
 	/**
 	 * Setup the tower to be bought
 	 */
@@ -178,12 +196,12 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		}
 		return false;
 	}
-	
+
 	private void startGamePlayUpdaateTimer() {
 		gameplayUpdateTimer.schedule(new TimerTask() {
-			
+
 			long lastTimestamp = System.currentTimeMillis();
-			
+
 			@Override
 			public void run() {
 				long currentTimestamp = System.currentTimeMillis();
@@ -198,7 +216,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 				lastTimestamp = currentTimestamp;
 			}
 		}, 100, 100);
-		
+
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -206,13 +224,13 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			}
 		});
 	}
-	
+
 	public void update(float seconds) {
 		gamePlay.update(seconds);
 		if (gamePlay.isGameOver()) {
 			gameplayUpdateTimer.cancel();
 		}
-//		System.out.println("Seconds: " + seconds);
+		//		System.out.println("Seconds: " + seconds);
 	}
 
 	/**
@@ -221,18 +239,18 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void setupInspectionWindow(JPanel sideBar) {
 		sideBar.add(towerInspectionPanel);
-		
+
 		towerInspectionPanel.getSellBtn().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gamePlay.sell(selectedTower);
 				towerInspectionPanel.setVisible(false);
 			}
 		});
-		
+
 		towerInspectionPanel.getUpgradeBtn().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gamePlay.upgrade(selectedTower);
@@ -246,11 +264,16 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
-		towersToBuyPanel.add(buyTowerButton);
-		buyTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
+		towersToBuyPanel.setLayout(new BoxLayout(towersToBuyPanel, BoxLayout.Y_AXIS));
 		towersToBuyPanel.add(startGameButton);
+		towersToBuyPanel.add(fireTowerButton);
+		towersToBuyPanel.add(iceTowerButton);
+		towersToBuyPanel.add(cannonTowerButton);
+		fireTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
+		iceTowerButton.setToolTipText(towerFactory.getLevelInformation(IceTower.class, 1).toHtmlString());
+		cannonTowerButton.setToolTipText(towerFactory.getLevelInformation(CannonTower.class, 1).toHtmlString());
 		startGameButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 5, 3));
@@ -259,7 +282,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			}
 		});
 		sideBar.add(towersToBuyPanel);
-		
+
 	}
 
 	/**
@@ -276,7 +299,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		scoreField.setEditable(false);
 		levelsField.setEditable(false);
 		banksField.setEditable(false);
-	
+
 		gamePlayAttributes.add(livesLabel);
 		gamePlayAttributes.add(livesField);
 		gamePlayAttributes.add(scoreLabel);
@@ -285,9 +308,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayAttributes.add(levelsField);
 		gamePlayAttributes.add(banksLabel);
 		gamePlayAttributes.add(banksField);
-		
+
 		sideBar.add(gamePlayAttributes);
-		
+
 	}
 
 	/**
@@ -299,12 +322,12 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		if (state == State.BUYING_TOWER) {
 			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, gridPosition);
 			getGamePlay().buy(tower);
-//			state = State.NOTHING;
+			//			state = State.NOTHING;
 		}
-		
+
 	}
 
-	
+
 	/**
 	 * Notifies that a {@link Tower} was selected on the Map
 	 * @param tower the tower selected
@@ -315,7 +338,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towerInspectionPanel.show(selectedTower);
 		towerInspectionPanel.setVisible(true);
 	}
-	
+
 	/**
 	 * Returns the current {@link GamePlay} instance 
 	 * @return the current {@link GamePlay} instance 
@@ -323,7 +346,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	public GamePlay getGamePlay() {
 		return gamePlay;
 	}
-	
+
 	/**
 	 * Reads the current {@link GamePlay} attributes
 	 */
@@ -340,7 +363,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	public void update(Observable o, Object arg) {
 		readGamePlay();		
 	}
-	
+
 	/**
 	 * Clean up method
 	 */
@@ -350,45 +373,45 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayPanel.dispose();
 		super.dispose();
 	}
-	
-//	/**
-//	 * Creates the GUI for testing purposes
-//	 * @throws ClassNotFoundException
-//	 * @throws IOException
-//	 */
-//	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
-//		//Create and set up the window.
-//		JFrame frame = new JFrame("GamePlayPanel");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//		GameMapDao gameMapDao = new GameMapJavaSerializationDao();
-//		GameMap gameMap = gameMapDao.load("DefaultMap");
-//		GamePlay gamePlay = new GamePlay(gameMap, 1000);
-//		GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
-//		frame.setContentPane(gamePlayPanel);
-//
-//		//Display the window.
-//		frame.pack();
-//		frame.setVisible(true);
-//	}
-//
-//	/**
-//	 * Main method used for testing the GUI
-//	 * @param args arguments are ignored by this method
-//	 */
-//	public static void main(String[] args) {
-//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					createAndShowGUI();
-//				} catch (ClassNotFoundException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+
+	//	/**
+	//	 * Creates the GUI for testing purposes
+	//	 * @throws ClassNotFoundException
+	//	 * @throws IOException
+	//	 */
+	//	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
+	//		//Create and set up the window.
+	//		JFrame frame = new JFrame("GamePlayPanel");
+	//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//
+	//		GameMapDao gameMapDao = new GameMapJavaSerializationDao();
+	//		GameMap gameMap = gameMapDao.load("DefaultMap");
+	//		GamePlay gamePlay = new GamePlay(gameMap, 1000);
+	//		GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
+	//		frame.setContentPane(gamePlayPanel);
+	//
+	//		//Display the window.
+	//		frame.pack();
+	//		frame.setVisible(true);
+	//	}
+	//
+	//	/**
+	//	 * Main method used for testing the GUI
+	//	 * @param args arguments are ignored by this method
+	//	 */
+	//	public static void main(String[] args) {
+	//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	//			public void run() {
+	//				try {
+	//					createAndShowGUI();
+	//				} catch (ClassNotFoundException e) {
+	//					// TODO Auto-generated catch block
+	//					e.printStackTrace();
+	//				} catch (IOException e) {
+	//					// TODO Auto-generated catch block
+	//					e.printStackTrace();
+	//				}
+	//			}
+	//		});
+	//	}
 }
