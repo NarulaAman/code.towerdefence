@@ -31,6 +31,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	private int currency;
 	
+	private int numEnemeisSurvive=0;
+	
 	private int lives;
 	
 	private enum State {
@@ -262,11 +264,20 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public void reachedEnd(Enemy enemy) {
 		enemies.remove(enemy);
 		currency = currency - enemy.getPrize();
+		numEnemeisSurvive++;
 		setChanged();
 		notifyObservers();
 	}
 	
 	public boolean isGameOver() {
+		if(currency<=0)
+		{
+			return true;
+		}
+		else if(numEnemeisSurvive>10)
+		{
+			return true;
+		}
 		return false;
 	}
 
