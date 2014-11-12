@@ -228,6 +228,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 				
 		for (Enemy enemy : enemies) {
 			enemy.update(seconds);
+			if (enemy.hasReachedEnd()) {
+				reachedEnd(enemy);
+			}
+			
 		}
 		
 		for (Tower tower : towers) {
