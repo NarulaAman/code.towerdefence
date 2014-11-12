@@ -21,7 +21,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	private final GameMap gameMap;
 	
-	private final List<EnemyWave> enemyWaves = new ArrayList<>();
+	private final List<EnemyWave> enemyWaves = new CopyOnWriteArrayList<>();
 	
 	private final List<Enemy> enemies = new CopyOnWriteArrayList<>();
 	
@@ -216,6 +216,14 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * @param seconds delta seconds passed since the last call
 	 */
 	public void update(float seconds) {
+		if (enemyWaves.size() > 0) {
+			EnemyWave enemyWave = enemyWaves.get(0);
+			enemyWave.update(seconds);
+			if (enemyWave.isFinished()) {
+				enemyWaves.remove(enemyWave);
+			}
+		}
+				
 		for (Enemy enemy : enemies) {
 			enemy.update(seconds);
 		}
@@ -234,6 +242,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		return enemyPath;
 	}
 
+	public void addEnemyWave(EnemyWave enemyWave) {
+		enemyWaves.add(enemyWave);
+	}
+	
 	/**
 	 * Adds an enemy to the {@link GamePlay}
 	 * @param enemy enemy to be added to the {@link GamePlay}

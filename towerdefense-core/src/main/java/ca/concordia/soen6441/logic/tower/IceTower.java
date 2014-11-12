@@ -16,11 +16,13 @@ public class IceTower extends AbstractTemporalEffectTower {
 	
 	class SlowingEffect extends TemporalEffect {
 		
+		private final Enemy enemy;
 		private float originalSpeed;
-		private Enemy enemy;
+		
 
 		public SlowingEffect(Enemy enemy) {
 			super(SLOW_DURATION_SECS);
+			this.enemy = enemy;
 		}
 		
 		@Override
@@ -49,11 +51,6 @@ public class IceTower extends AbstractTemporalEffectTower {
 	 */
 	public IceTower(int level, GridPosition gridPosition, AimingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
-	}
-
-	@Override
-	protected void specializedShot(Enemy enemy) {
-		enemy.takeDamage(getDamage());
 	}
 
 	@Override
