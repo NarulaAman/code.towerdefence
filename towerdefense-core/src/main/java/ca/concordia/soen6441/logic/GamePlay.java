@@ -281,7 +281,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 			Enemy enemy = (Enemy) o;
 			if (!enemy.isAlive()) {
 				enemies.remove(enemy);
-				
+				currency = currency + enemy.getPrize();
 				setChanged();
 				notifyObservers();
 			}
