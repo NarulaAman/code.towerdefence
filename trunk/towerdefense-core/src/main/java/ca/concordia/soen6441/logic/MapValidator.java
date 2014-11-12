@@ -191,23 +191,7 @@ public class MapValidator {
 	 */
 	public boolean mapStartMustReachEnd(GameMap gameMap) {
 		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
-			ArrayDeque<GridPosition> positionQueue = new ArrayDeque<GridPosition>();
-			Set<GridPosition> visitedPositions = new HashSet<>();
-			positionQueue.addFirst(gameMap.getStartGridPosition());
-			while (!positionQueue.isEmpty()) {
-				GridPosition currentPosition = positionQueue.getFirst();
-				positionQueue.removeFirst();
-				visitedPositions.add(currentPosition);
-				if (currentPosition.distance(gameMap.getEndGridPosition()) < 1.1) {
-					return true;
-				}
-				List<GridPosition> walkableFromHere = gameMap.getAdjacentWalkablePositions(currentPosition);
-				for (GridPosition gridPosition : walkableFromHere) {					
-					if (! visitedPositions.contains(gridPosition)) {
-						positionQueue.addFirst(gridPosition);
-					}
-				}
-			}
+			return gameMap.getStartToEndPath().size() > 0;
 		}
 		return false;
 	}

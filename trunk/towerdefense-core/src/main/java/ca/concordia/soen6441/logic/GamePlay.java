@@ -33,11 +33,15 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private int lives=10;
 	
-	private enum State {
+	public enum State {
 		SETUP,
 		RUNNING,
 		GAMEOVER
 	}
+	
+	private State gameState;
+	
+	
 	
 
 	/**
@@ -63,6 +67,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 //		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
 		
 		// TODO: end of lines to be removed
+	}
+	
+	public void start() {
+		setState(State.RUNNING);
 	}
 
 	/**
@@ -237,11 +245,22 @@ public class GamePlay extends Observable implements Serializable, Observer {
 			tower.maybeShoot(enemies);
 		}
 		
+		
+		updateWaveFinished();
 		setChanged();
 		notifyObservers();
+		
+		
 	}
 
 	
+	private void updateWaveFinished() {
+		if (enemyWaves.isEmpty() && enemies.isEmpty()) {
+			setState(State.SETUP);
+		}
+		
+	}
+
 	public List<GridPosition> getEnemyPath() {
 		return enemyPath;
 	}
@@ -302,6 +321,18 @@ public class GamePlay extends Observable implements Serializable, Observer {
 			}
 		}
 		
+	}
+	
+	private void setState(State newState) {
+		if (newState != gameState) {
+			gameState = newState;
+			setChanged();
+			notifyObservers();
+		}
+	}
+
+	public State getState() {
+		return gameState;
 	}
 
 

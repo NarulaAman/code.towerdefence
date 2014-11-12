@@ -49,8 +49,8 @@ public class GridPosition implements Serializable {
 	 * @param other other {@link GridPosition} to be measured the distance to 
 	 * @return the distance between this {@link GridPosition} and a given second one passed by argument
 	 */
-	public double distance(GridPosition other) {
-		return new Point2d(getX(), getY()).distance(new Point2d(other.getX(), other.getY()));
+	public float distance(GridPosition other) {
+		return new Point2f(getX(), getY()).distance(new Point2f(other.getX(), other.getY()));
 	}
 	
 	/**

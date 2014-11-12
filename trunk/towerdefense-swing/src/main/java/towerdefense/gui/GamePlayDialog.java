@@ -228,6 +228,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	}
 
 	public void update(float seconds) {
+
 		gamePlay.update(seconds);
 		if (gamePlay.isGameOver()) {
 			gameplayUpdateTimer.cancel();
@@ -378,6 +379,25 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void readGamePlay() {
 		
+		if (gamePlay.getState() == GamePlay.State.SETUP) {
+			startGameButton.setEnabled(true);
+			startGameButton.setEnabled(true);
+			fireTowerButton.setEnabled(true);
+			cannonTowerButton.setEnabled(true);
+			iceTowerButton.setEnabled(true);
+		}
+		else if (gamePlay.getState() == GamePlay.State.RUNNING) {
+			startGameButton.setEnabled(false);
+			fireTowerButton.setEnabled(false);
+			cannonTowerButton.setEnabled(false);
+			iceTowerButton.setEnabled(false);
+		}
+		else if (gamePlay.getState() == GamePlay.State.GAMEOVER) {
+			startGameButton.setEnabled(false);
+			fireTowerButton.setEnabled(false);
+			cannonTowerButton.setEnabled(false);
+			iceTowerButton.setEnabled(false);	
+		}
 		livesField.setText("" + gamePlay.getLives());
 		banksField.setText("" + gamePlay.getCurrency());
 	}

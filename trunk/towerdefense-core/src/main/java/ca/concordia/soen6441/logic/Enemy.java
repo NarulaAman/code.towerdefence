@@ -295,4 +295,23 @@ public class Enemy extends Observable {
 		return prize;
 	}
 	
+	public float getProgress() {
+		float totalDistance = 0;
+		GridPosition prev = gameMap.getStartToEndPath().get(0);
+		for (int i = 1; i < gameMap.getStartToEndPath().size(); ++i) {
+			GridPosition current = gameMap.getStartToEndPath().get(i);
+			totalDistance = totalDistance + prev.distance(current);
+			prev = current;
+		}
+		
+		float currentDistance = currentPosition.distance(getNextPosition());
+		prev = gameMap.getStartToEndPath().get(destinationIdx);
+		for (int i = destinationIdx + 1; i < gameMap.getStartToEndPath().size(); ++i) {
+			GridPosition current = gameMap.getStartToEndPath().get(i);
+			currentDistance = currentDistance + prev.distance(current);
+			prev = current;
+		}
+		return currentDistance / totalDistance;
+	}
+	
 }
