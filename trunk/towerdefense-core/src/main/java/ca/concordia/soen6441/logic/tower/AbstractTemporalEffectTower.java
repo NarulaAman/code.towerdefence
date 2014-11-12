@@ -3,6 +3,7 @@ package ca.concordia.soen6441.logic.tower;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import ca.concordia.soen6441.logic.Enemy;
@@ -57,6 +58,10 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 				enemiesUnderEffect.remove(enemyUnderEffect);
 			}
 		}
+	}
+	
+	public Set<Enemy> getEnemiesUnderEffect() {
+		return enemiesUnderEffect.keySet();
 	}
 
 }

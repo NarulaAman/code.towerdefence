@@ -1,5 +1,6 @@
 package towerdefense.gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,7 +16,11 @@ import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.CannonTower;
+import ca.concordia.soen6441.logic.tower.FireTower;
+import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
+import ca.concordia.soen6441.logic.tower.TowerVisitor;
 
 /**
  * This class is responsible for painting the {@link GamePlay} action, like enemies moving and towers 
@@ -39,8 +44,55 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		 */
 		void towerSelected(Tower tower);
 	}
+	
+	
+	class TowerPainter implements TowerVisitor {
+		
+		private final Graphics g;
+		
+		private final JPanel parent;
+
+		public TowerPainter(Graphics g, JPanel parent) {
+			this.g = g;
+			this.parent = parent;
+		}
+
+		@Override
+		public void visit(FireTower tower) {
+			g.drawImage(FIRETOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
+					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(),
+					parent);
+			
+			for (Enemy enemy : tower.getEnemiesUnderEffect()) {
+				g.setColor(Color.red);
+				g.drawRect((int) tileToScreen(enemy.getCurrentPosition()).x, (int) tileToScreen(enemy.getCurrentPosition()).y, getTileWidth(), getTileHeight()); 
+			}
+			
+		}
+
+		@Override
+		public void visit(IceTower tower) {
+			g.drawImage(ICETOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
+					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(), parent);
+			
+			for (Enemy enemy : tower.getEnemiesUnderEffect()) {
+				g.setColor(Color.blue);
+				g.drawRect((int) tileToScreen(enemy.getCurrentPosition()).x + 2, (int) tileToScreen(enemy.getCurrentPosition()).y + 2, getTileWidth()-4, getTileHeight()-4); 
+			}
+			
+		}
+
+		@Override
+		public void visit(CannonTower tower) {
+			g.drawImage(TOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
+					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(),
+					parent);
+		}
+	}
 
 	private static final Image TOWER_ICON = new ImageIcon(Object.class.getResource("/icons/tower.png")).getImage();
+	private static final Image FIRETOWER_ICON = new ImageIcon(Object.class.getResource("/icons/firetower.png")).getImage();
+	private static final Image ICETOWER_ICON = new ImageIcon(Object.class.getResource("/icons/icetower.png")).getImage();
 	private static final Image ENEMY_ICON = new ImageIcon(Object.class.getResource("/icons/enemy.png")).getImage();
 	
 	private final MapPanel mapPanel = new MapPanel();
@@ -72,9 +124,7 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	public void paint(Graphics g) {
 		super.paint(g);
 		for (Tower tower : getGamePlay().getTowers()) {
-			g.drawImage(TOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
-					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(),
-					this);
+			tower.visit(new TowerPainter(g, this));
 		}
 		
 		for (Enemy enemy : getGamePlay().getEnemies()) {
