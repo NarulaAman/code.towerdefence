@@ -269,5 +269,9 @@ public class Enemy extends Observable {
 		return currentPosition;
 	}
 	
+	public boolean isAlive() {
+		return health > 0;
+	}
+	
 	
 }

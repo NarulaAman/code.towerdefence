@@ -129,6 +129,14 @@ public class MapListPanel extends JPanel {
 		mapListModel.refreshPersistedMapList();
 		repaint();
 	}
+	
+	/**
+	 * Removes the selection of the {@link MapListPanel}
+	 */
+	public void removeSelection() {
+		mapList.removeSelectionInterval(0, mapListModel.getSize()-1);
+		fireMapSelectedListeners(null);
+	}
 
 	
 	
