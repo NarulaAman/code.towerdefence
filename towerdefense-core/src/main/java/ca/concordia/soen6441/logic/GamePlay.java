@@ -259,8 +259,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * Notifies the {@link GamePlay} that the enemy has reached the end
 	 * @param enemy
 	 */
-	public synchronized void reachedEnd(Enemy enemy) {
+	public void reachedEnd(Enemy enemy) {
 		enemies.remove(enemy);
+		currency = currency - enemy.getPrize();
+		setChanged();
+		notifyObservers();
 	}
 	
 	public boolean isGameOver() {
