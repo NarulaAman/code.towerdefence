@@ -311,7 +311,7 @@ public class Enemy extends Observable {
 			currentDistance = currentDistance + prev.distance(current);
 			prev = current;
 		}
-		return currentDistance / totalDistance;
+		return 1 - currentDistance / totalDistance;
 	}
 	
 }

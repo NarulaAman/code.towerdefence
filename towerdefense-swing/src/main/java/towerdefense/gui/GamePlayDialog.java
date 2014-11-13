@@ -31,6 +31,7 @@ import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategy;
 
 /**
@@ -276,13 +277,13 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			}
 		});
 		
-//		towerInspectionPanel.getShootingStratBtn().addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				selectedTower.setShootingStrategy(new Sh);
-//			}
-//		});
+		towerInspectionPanel.getShootingStratBtn().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedTower.setShootingStrategy(new ShootClosestToEndPointStrategy());
+			}
+		});
 	}
 
 	/**
