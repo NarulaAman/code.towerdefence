@@ -2,6 +2,8 @@ package towerdefense.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +33,6 @@ import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestStrategy;
-import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategy;
 
 /**
@@ -229,7 +230,6 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	}
 
 	public void update(float seconds) {
-
 		gamePlay.update(seconds);
 		if (gamePlay.isGameOver()) {
 			gameplayUpdateTimer.cancel();
@@ -277,13 +277,13 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			}
 		});
 		
-		towerInspectionPanel.getShootingStratBtn().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				selectedTower.setShootingStrategy(new ShootClosestToEndPointStrategy());
-			}
-		});
+//		towerInspectionPanel.getShootingStratBtn().addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				selectedTower.setShootingStrategy(new Sh);
+//			}
+//		});
 	}
 
 	/**
@@ -292,11 +292,25 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
-		towersToBuyPanel.setLayout(new BoxLayout(towersToBuyPanel, BoxLayout.Y_AXIS));
-		towersToBuyPanel.add(startGameButton);
-		towersToBuyPanel.add(fireTowerButton);
-		towersToBuyPanel.add(iceTowerButton);
-		towersToBuyPanel.add(cannonTowerButton);
+		towersToBuyPanel.setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+		
+		setMinimumSize(new Dimension(200, 350));
+		setMaximumSize(new Dimension(200, 350));
+		
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.weightx = constraints.weighty = 1.0;
+		
+		towersToBuyPanel.add(startGameButton, constraints);
+		constraints.gridy = 1;
+		towersToBuyPanel.add(fireTowerButton,constraints);
+		constraints.gridy = 2;
+		towersToBuyPanel.add(iceTowerButton,constraints);
+		constraints.gridy = 3;
+		towersToBuyPanel.add(cannonTowerButton,constraints);
+		
 		fireTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
 		iceTowerButton.setToolTipText(towerFactory.getLevelInformation(IceTower.class, 1).toHtmlString());
 		cannonTowerButton.setToolTipText(towerFactory.getLevelInformation(CannonTower.class, 1).toHtmlString());
@@ -379,27 +393,6 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Reads the current {@link GamePlay} attributes
 	 */
 	private void readGamePlay() {
-		
-		if (gamePlay.getState() == GamePlay.State.SETUP) {
-			startGameButton.setEnabled(true);
-			startGameButton.setEnabled(true);
-			fireTowerButton.setEnabled(true);
-			cannonTowerButton.setEnabled(true);
-			iceTowerButton.setEnabled(true);
-		}
-		else if (gamePlay.getState() == GamePlay.State.RUNNING) {
-			startGameButton.setEnabled(false);
-			fireTowerButton.setEnabled(false);
-			cannonTowerButton.setEnabled(false);
-			iceTowerButton.setEnabled(false);
-		}
-		else if (gamePlay.getState() == GamePlay.State.GAMEOVER) {
-			startGameButton.setEnabled(false);
-			fireTowerButton.setEnabled(false);
-			cannonTowerButton.setEnabled(false);
-			iceTowerButton.setEnabled(false);	
-		}
-		livesField.setText("" + gamePlay.getLives());
 		banksField.setText("" + gamePlay.getCurrency());
 	}
 
