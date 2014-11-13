@@ -27,7 +27,7 @@ public class TowerFactory {
 	 */
 	public TowerFactory() {
 		List<TowerLevelCharacteristic> fireTowerLevelCharacteristic = new ArrayList<>();
-		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
+		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(1, 100, 75, 50, 4.f));
 		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
 		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
 		towerTypeInformation.put(FireTower.class, fireTowerLevelCharacteristic);
