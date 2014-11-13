@@ -1,11 +1,14 @@
 package towerdefense.gui;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,7 +32,7 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JLabel fireRateLbl = new JLabel("Fire Rate:");
 	private final JLabel refundLbl = new JLabel("Refund:");
 	private final JLabel upgradeCostLbl = new JLabel("Upgrade cost:");
-	
+
 	private final JTextField costTxtFld = new JTextField("");
 	private final JTextField damageTxtFld = new JTextField("");
 	private final JTextField rangeTxtFld = new JTextField("");
@@ -37,13 +40,13 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JTextField fireRateTxtFld = new JTextField("");
 	private final JTextField refundTxtFld = new JTextField("");
 	private final JTextField upgradeCostTxtFld = new JTextField("");
-	
+
 	private final JButton upgradeBtn = new JButton("Upgrade");
 	private final JButton sellBtn = new JButton("Sell");
 	private final JButton weakestStratBtn = new JButton("Weakest Strategy");
 	private final JButton closestStratBtn = new JButton("Closest Strategy");
 	private final JButton shootingStratBtn = new JButton("Shooting Strategy");
-	
+
 	private Tower shownTower = null;
 
 
@@ -52,30 +55,45 @@ public class TowerPanel extends JPanel implements Observer{
 	 */
 	public TowerPanel()
 	{
-		super(new GridLayout(10, 2));
+		super();
+		setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
 		setMinimumSize(new Dimension(200, 350));
 		setMaximumSize(new Dimension(200, 350));
-		add(costLbl);
-		add(costTxtFld);
-		add(damageLbl);
-		add(damageTxtFld);
-		add(rangeLbl);
-		add(rangeTxtFld);
-		add(levelLbl);
-		add(levelTxtFld);
-		add(fireRateLbl);
-		add(fireRateTxtFld);
-		add(refundLbl);
-		add(refundTxtFld);
-		add(upgradeCostLbl);
-		add(upgradeCostTxtFld);
-		add(upgradeBtn);
-		add(sellBtn);
-		add(weakestStratBtn);
-		add(closestStratBtn);
-		add(shootingStratBtn);
-		
-		 costTxtFld.setEditable(false);
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.weightx = constraints.weighty = 1.0;
+
+		JPanel attributesPnl = new JPanel(new GridLayout(8, 2));
+		add(attributesPnl, constraints);
+		attributesPnl.add(costLbl);
+		attributesPnl.add(costTxtFld);
+		attributesPnl.add(damageLbl);
+		attributesPnl.add(damageTxtFld);
+		attributesPnl.add(rangeLbl);
+		attributesPnl.add(rangeTxtFld);
+		attributesPnl.add(levelLbl);
+		attributesPnl.add(levelTxtFld);
+		attributesPnl.add(fireRateLbl);
+		attributesPnl.add(fireRateTxtFld);
+		attributesPnl.add(refundLbl);
+		attributesPnl.add(refundTxtFld);
+		attributesPnl.add(upgradeCostLbl);
+		attributesPnl.add(upgradeCostTxtFld);
+		attributesPnl.add(upgradeBtn);
+		attributesPnl.add(sellBtn);
+
+
+		//		constraints.gridx = 0;
+		constraints.gridy = 1;
+		add(weakestStratBtn, constraints);
+		constraints.gridy = 2;
+		add(closestStratBtn, constraints);
+		constraints.gridy = 3;
+		add(shootingStratBtn, constraints);
+
+		costTxtFld.setEditable(false);
 		damageTxtFld.setEditable(false);
 		rangeTxtFld .setEditable(false);
 		levelTxtFld .setEditable(false);
@@ -91,9 +109,9 @@ public class TowerPanel extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		read(shownTower);
-		
+
 	}
-	
+
 	/**
 	 * Sets the {@link Tower} to have its information displayed
 	 * @param tower {@link Tower} to have its information displayed
@@ -151,7 +169,7 @@ public class TowerPanel extends JPanel implements Observer{
 	public JButton getWeakestStratBtn() {
 		return weakestStratBtn;
 	}
-	
+
 	/**
 	 * Returns the closest strategy button
 	 * @return the closest strategy button
@@ -159,7 +177,7 @@ public class TowerPanel extends JPanel implements Observer{
 	public JButton getClosestStratBtn() {
 		return closestStratBtn;
 	}
-	
+
 	/**
 	 * Returns the shooting strategy  button
 	 * @return the shooting strategy  button
@@ -174,8 +192,8 @@ public class TowerPanel extends JPanel implements Observer{
 	public void setShownTower(Tower shownTower) {
 		this.shownTower = shownTower;
 	}
-	
-	
+
+
 
 
 
