@@ -202,6 +202,11 @@ public class MapValidator {
 	}
 	
 	
+	/**
+	 * Check that the map has a unique path from the start and end, that is, no forks in the enemy path
+	 * @param gameMap {@link GameMap} to be checked
+	 * @return true if the path from the start to end is unique
+	 */
 	public boolean mapShouldHaveUniquePath(GameMap gameMap) {
 		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
 			for (GridPosition gridPosition : gameMap.getStartToEndPath()) {
