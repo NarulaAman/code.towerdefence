@@ -43,9 +43,9 @@ public class TowerPanel extends JPanel implements Observer{
 
 	private final JButton upgradeBtn = new JButton("Upgrade");
 	private final JButton sellBtn = new JButton("Sell");
-	private final JButton weakestStratBtn = new JButton("Weakest Strategy");
-	private final JButton closestStratBtn = new JButton("Closest Strategy");
-	private final JButton shootingStratBtn = new JButton("Shooting Strategy");
+	private final JButton weakestStratBtn = new JButton("Shoot Weakest");
+	private final JButton closestStratBtn = new JButton("Shoot Closest to Tower");
+	private final JButton shootingStratBtn = new JButton("Shoot Closest to End");
 
 	private Tower shownTower = null;
 
@@ -58,8 +58,8 @@ public class TowerPanel extends JPanel implements Observer{
 		super();
 		setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
-		setMinimumSize(new Dimension(200, 350));
-		setMaximumSize(new Dimension(200, 350));
+		setMinimumSize(new Dimension(200, 300));
+		setMaximumSize(new Dimension(200, 300));
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
