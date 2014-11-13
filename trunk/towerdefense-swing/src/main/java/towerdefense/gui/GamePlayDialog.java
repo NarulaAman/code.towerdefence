@@ -292,6 +292,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void setupTowerAvailableToBuyPanel(JPanel sideBar) {
 		JPanel towersToBuyPanel = new JPanel();
+		towersToBuyPanel.setMaximumSize(new Dimension(200, 120));
+		towersToBuyPanel.setMinimumSize(new Dimension(200, 120));
 		towersToBuyPanel.setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		
