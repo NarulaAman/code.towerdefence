@@ -3,6 +3,7 @@ package ca.concordia.soen6441.logic.tower.shootingstrategy;
 import java.util.List;
 
 import ca.concordia.soen6441.logic.Enemy;
+import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
@@ -18,8 +19,8 @@ public interface ShootingStrategy {
 	public void setTower(Tower tower);
 	
 	/**
-	 * Shoot
-	 * @param enemies
+	 * Shoot of the enemy in range
+	 * @param enemies The list of {@link Enemy} in {@link GamePlay}
 	 */
 	public void shootIfInRange(List<Enemy> enemies); 
 
