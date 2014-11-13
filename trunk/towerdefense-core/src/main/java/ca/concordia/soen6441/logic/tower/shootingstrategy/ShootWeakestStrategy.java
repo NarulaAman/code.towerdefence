@@ -3,11 +3,20 @@ package ca.concordia.soen6441.logic.tower.shootingstrategy;
 import java.util.List;
 
 import ca.concordia.soen6441.logic.Enemy;
+import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.tower.Tower;
-
+/**
+ * 
+ * This class has strategy to shoot the enemy weakest health
+ *
+ */
 public class ShootWeakestStrategy extends AbstractShootingStrategy {
 	
-	@Override
+/**
+ * Shoot the enemy with weakest health
+ * @param enemies The list of {@link Enemy} in the {@link GamePlay}
+ * @param enemyToShoot The {@link Enemy} to shoot 
+ */
 	public void shootIfInRange(List<Enemy> enemies) {
 		Enemy enemyToShoot = null;
 		for (Enemy enemy : enemies) {
