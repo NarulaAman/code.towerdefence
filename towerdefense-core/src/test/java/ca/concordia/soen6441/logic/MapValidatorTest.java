@@ -191,7 +191,7 @@ public class MapValidatorTest {
 	
 	
 	/**
-	 * Test the correctness of path between start and end
+	 * Test the if there are non unique paths between start and end
 	 */
 	@Test
 	public void testMapWithNoUniquePath() {

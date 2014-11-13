@@ -31,6 +31,7 @@ public class GameMapDaoTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		gameMap.setName(MAP_DATA_FILENAME);
 		gameMap.setTile(new GridPosition(1, 2), Tile.ENEMY_PATH);
 		gameMap.setTile(new GridPosition(5, 6), Tile.ENEMY_PATH);
 		gameMap.setTile(new GridPosition(2, 27), Tile.ENEMY_PATH);
