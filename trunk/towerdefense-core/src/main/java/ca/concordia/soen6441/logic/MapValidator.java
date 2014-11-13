@@ -73,6 +73,11 @@ public class MapValidator {
 			mapInconsistent = true;				
 		}
 		
+		if (! mapShouldHaveUniquePath(gameMap)) {
+			messageIfNotValid.append("Your the enemy path tiles cannot have more than 2 adjacent paths!\n");
+			mapInconsistent = true;						
+		}
+		
 		if (mapInconsistent) {
 			return false;
 		} else {
@@ -196,6 +201,18 @@ public class MapValidator {
 		return false;
 	}
 	
+	
+	public boolean mapShouldHaveUniquePath(GameMap gameMap) {
+		if (gameMap.hasStartTile() && gameMap.hasEndTile()) {
+			for (GridPosition gridPosition : gameMap.getStartToEndPath()) {
+				if (gameMap.getAdjacentWalkablePositions(gridPosition).size() > 2) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 	
 
 
