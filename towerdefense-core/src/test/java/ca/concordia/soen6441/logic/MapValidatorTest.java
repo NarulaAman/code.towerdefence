@@ -18,6 +18,8 @@ public class MapValidatorTest {
 	private MapValidator mapValidator;
 	
 	private GameMap gameMap;
+	
+	private StringBuilder stringBuilder;
 
 
 	/**
@@ -28,6 +30,7 @@ public class MapValidatorTest {
 	public void setUp() throws Exception {
 		mapValidator = new MapValidator();
 		gameMap = new GameMap(7, 7);
+		stringBuilder = new StringBuilder();
 	}
 
 
@@ -50,7 +53,7 @@ public class MapValidatorTest {
 		gameMap.setTile(new GridPosition(5, 5), Tile.ENEMY_PATH);
 		gameMap.setTile(new GridPosition(5, 6), Tile.ENEMY_PATH);
 		
-		StringBuilder stringBuilder = new StringBuilder();
+//		StringBuilder stringBuilder = new StringBuilder();
 		assertTrue(mapValidator.isValid(gameMap, stringBuilder));
 //		mapValidator.isValid(gameMap, stringBuilder);
 //		System.err.println(stringBuilder.toString());
@@ -132,6 +135,7 @@ public class MapValidatorTest {
 		gameMap.setStartGridPosition(new GridPosition(0, 0));
 		gameMap.setEndGridPosition(new GridPosition(0, 0));
 		assertTrue(mapValidator.mapStartSamePositionAsEnd(gameMap));
+		assertFalse(mapValidator.isValid(gameMap,stringBuilder));
 	}
 	
 	/**
@@ -182,6 +186,30 @@ public class MapValidatorTest {
 		gameMap.setEndGridPosition(endPosition);
 		
 		assertFalse(mapValidator.mapHasAtLeastOneSceneryTile(gameMap));
+		assertFalse(mapValidator.isValid(gameMap,stringBuilder));
+	}
+	
+	
+	/**
+	 * Test the correctness of path between start and end
+	 */
+	@Test
+	public void testMapWithNoUniquePath() {
+		gameMap.setStartGridPosition(new GridPosition(0, 0));
+		gameMap.setEndGridPosition(new GridPosition(5, 5));
+		assertFalse(mapValidator.mapStartMustReachEnd(gameMap));
+		gameMap.setTile(new GridPosition(0, 1), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(1, 0), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(1, 1), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(1, 2), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(2, 2), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(2, 3), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(3, 3), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(3, 4), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(4, 4), Tile.ENEMY_PATH);
+		gameMap.setTile(new GridPosition(4, 5), Tile.ENEMY_PATH);
+		assertFalse(mapValidator.mapShouldHaveUniquePath(gameMap));
+		assertFalse(mapValidator.isValid(gameMap,stringBuilder));
 	}
 
 }

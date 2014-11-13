@@ -237,7 +237,9 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 * @return True if the  {@link Tile} type at given position is Enemy Path
 	 */
 	public boolean isEnemyWalkable(GridPosition gridPosition) {
-		return grid[gridPosition.getX()][gridPosition.getY()] == Tile.ENEMY_PATH;
+		return grid[gridPosition.getX()][gridPosition.getY()] == Tile.ENEMY_PATH 
+				|| gridPosition.equals(getStartGridPosition())
+				|| gridPosition.equals(getEndGridPosition());
 	}
 
 	/**
