@@ -1,25 +1,31 @@
 package towerdefense.gui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ca.concordia.soen6441.logic.tower.CannonTower;
+import ca.concordia.soen6441.logic.tower.FireTower;
+import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
+import ca.concordia.soen6441.logic.tower.TowerVisitor;
 
 /**
  * This is the TowerInspectionWindow, it shows the current tower attributes
  */
-public class TowerPanel extends JPanel implements Observer{
+public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 	/**
 	 * 
@@ -32,6 +38,28 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JLabel fireRateLbl = new JLabel("Fire Rate:");
 	private final JLabel refundLbl = new JLabel("Refund:");
 	private final JLabel upgradeCostLbl = new JLabel("Upgrade cost:");
+	private final JLabel specialEffectLbl = new JLabel("Special Effect:");
+	
+	private final List<Component> specializedTowerAttributes = new ArrayList<>();
+	
+	// Cannon tower
+	private final JLabel splashRadiusLbl = new JLabel("Splash radius:");
+	private final JLabel splashDamageRatioLbl = new JLabel("Splash damage ratio:");
+	
+	
+	// FireTower attributes
+	private final JLabel burnDamageLbl = new JLabel("Burn damage:");
+	private final JLabel burnRateLbl = new JLabel("Burn every secs:");
+	private final JLabel burnTimeLbl = new JLabel("Burn for secs:");
+	// put textfields here for the attributes
+	
+	
+	// IceTower attributes
+	private final JLabel slowTimeLbl = new JLabel("Slows for secs:");
+	
+	
+	
+	
 
 	private final JTextField costTxtFld = new JTextField("");
 	private final JTextField damageTxtFld = new JTextField("");
@@ -40,6 +68,7 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JTextField fireRateTxtFld = new JTextField("");
 	private final JTextField refundTxtFld = new JTextField("");
 	private final JTextField upgradeCostTxtFld = new JTextField("");
+	private final JTextField specialEffectTxtFld = new JTextField("");
 
 	private final JButton upgradeBtn = new JButton("Upgrade");
 	private final JButton sellBtn = new JButton("Sell");
@@ -48,6 +77,7 @@ public class TowerPanel extends JPanel implements Observer{
 	private final JButton shootingStratBtn = new JButton("Shoot Closest to End");
 
 	private Tower shownTower = null;
+	private JPanel attributesPnl;
 
 
 	/**
@@ -65,7 +95,7 @@ public class TowerPanel extends JPanel implements Observer{
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.weightx = constraints.weighty = 1.0;
 
-		JPanel attributesPnl = new JPanel(new GridLayout(8, 2));
+		attributesPnl = new JPanel(new GridLayout(11, 2));
 		add(attributesPnl, constraints);
 		attributesPnl.add(costLbl);
 		attributesPnl.add(costTxtFld);
@@ -99,6 +129,24 @@ public class TowerPanel extends JPanel implements Observer{
 		levelTxtFld .setEditable(false);
 		refundTxtFld .setEditable(false);
 		upgradeCostTxtFld .setEditable(false);
+		
+		fillSpecializedAttributesList();
+		
+	}
+
+	private void fillSpecializedAttributesList() {
+		specializedTowerAttributes.add(splashRadiusLbl);
+		specializedTowerAttributes.add(splashDamageRatioLbl); 
+		specializedTowerAttributes.add(burnDamageLbl);
+		specializedTowerAttributes.add(burnRateLbl);
+		specializedTowerAttributes.add(burnTimeLbl);
+		specializedTowerAttributes.add(slowTimeLbl);
+	}
+	
+	private void removeSpecializedAttributes() {
+		for (Component component : specializedTowerAttributes) {
+			remove(component);
+		}
 	}
 
 	/**
@@ -144,6 +192,10 @@ public class TowerPanel extends JPanel implements Observer{
 			upgradeCostTxtFld .setText("N/A");
 			upgradeBtn.setEnabled(false);
 		}
+		
+		
+		removeSpecializedAttributes();
+		tower.visit(this);
 	}
 
 	/**
@@ -191,6 +243,23 @@ public class TowerPanel extends JPanel implements Observer{
 	 */
 	public void setShownTower(Tower shownTower) {
 		this.shownTower = shownTower;
+	}
+
+	@Override
+	public void visit(FireTower tower) {
+//		add(burnDamageLbl);
+	}
+
+	@Override
+	public void visit(IceTower tower) {
+		
+	}
+
+	@Override
+	public void visit(CannonTower tower) {
+		
+		
+		
 	}
 
 
