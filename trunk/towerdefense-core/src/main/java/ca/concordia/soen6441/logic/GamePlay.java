@@ -331,10 +331,28 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 	}
 
-	public State getState() {
-		return gameState;
+
+	/**
+	 * Returns if the {@link GamePlay} is in setup state
+	 * @return if the {@link GamePlay} is in setup state
+	 */
+	public boolean isStateSetup() {
+		return gameState == State.SETUP;
 	}
-
-
+	
+	/**
+	 * Returns if the {@link GamePlay} is in Game Over state
+	 * @return if the {@link GamePlay} is in Game Over state
+	 */
+	public boolean isStateGameOver() {
+		return gameState == State.SETUP;
+	}
+	/**
+	 * Returns if the {@link GamePlay} is in running state
+	 * @return if the {@link GamePlay} is in running state
+	 */
+	public boolean isStateRunning() {
+		return gameState == State.RUNNING;
+	}
 	
 }
