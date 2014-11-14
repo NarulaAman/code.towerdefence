@@ -124,6 +124,11 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		
+		if (gamePlay.isGameOver()) {
+			g.drawString("Game Over", getWidth()/2, getHeight()/2);
+		}
+		
 		for (Tower tower : getGamePlay().getTowers()) {
 			tower.visit(new TowerPainter(g, this));
 		}
