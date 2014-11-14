@@ -321,7 +321,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 		
 	}
-	
+	/**
+	 * Set states for the game to new state 
+	 * @param newState value of the new state of the game
+	 */
 	private void setState(State newState) {
 		if (newState != gameState) {
 			gameState = newState;
