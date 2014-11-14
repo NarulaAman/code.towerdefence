@@ -277,7 +277,7 @@ public class Enemy extends Observable {
 	}
 
 	/**
-	 * Returns the direction vector from the current position to the given position
+	 * Returns the direction vector from the current position to given position
 	 * @param otherPosition other given position to have the vector directed to
 	 * @return the direction vector from the current position to the given position
 	 */
