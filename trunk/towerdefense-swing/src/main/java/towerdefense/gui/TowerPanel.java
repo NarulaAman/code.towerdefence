@@ -294,9 +294,12 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		
 	}
 
-
-
-
+	@Override
+	public void setEnabled(boolean enabled) {
+		sellBtn.setEnabled(enabled);
+		upgradeBtn.setEnabled(enabled);
+		
+	}
 
 
 
