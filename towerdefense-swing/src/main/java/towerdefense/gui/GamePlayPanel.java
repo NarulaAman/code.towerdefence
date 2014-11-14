@@ -1,6 +1,7 @@
 package towerdefense.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -126,7 +127,9 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		super.paint(g);
 		
 		if (gamePlay.isGameOver()) {
-			g.drawString("Game Over", getWidth()/2, getHeight()/2);
+			g.setColor(Color.red);
+			g.setFont(new Font("Times New Roman", Font.BOLD, 70));
+			g.drawString("Game Over", getWidth()/4, getHeight()/2);
 			return;
 		}
 		

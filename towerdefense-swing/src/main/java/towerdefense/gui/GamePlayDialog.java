@@ -1,14 +1,17 @@
 package towerdefense.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -97,6 +100,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final JButton cannonTowerButton = new JButton("Cannon Tower");
 	private final JButton startGameButton = new JButton("StartGame");
 	private final TowerFactory towerFactory = new TowerFactory();
+	private java.util.List<Component> towerButtons = new ArrayList<>();
 
 	private final Timer gameplayUpdateTimer = new Timer();
 
@@ -122,6 +126,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayPanel.setTowerSelectedListener(this);
 		add(gamePlayPanel, BorderLayout.CENTER);
 		setupSidebar();
+		towerButtons.add(fireTowerButton);
+		towerButtons.add(iceTowerButton);
+		towerButtons.add(cannonTowerButton);
 		towerInspectionPanel.setVisible(false);
 		readGamePlay();
 		//		startGamePlayUpdaateTimer();
@@ -231,9 +238,6 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 	public void update(float seconds) {
 		gamePlay.update(seconds);
-		if (gamePlay.isGameOver()) {
-			gameplayUpdateTimer.cancel();
-		}
 		//		System.out.println("Seconds: " + seconds);
 	}
 
@@ -322,6 +326,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			public void actionPerformed(ActionEvent e) {
 				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 5, 3));
 				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 3, 5));
+				gamePlay.start();
 				startGamePlayUpdaateTimer();
 			}
 		});
@@ -395,7 +400,34 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Reads the current {@link GamePlay} attributes
 	 */
 	private void readGamePlay() {
+		if (gamePlay.isGameOver()) {
+			gameplayUpdateTimer.cancel();
+		}
+		
+		enableButtons();
+		disableButtons();
 		banksField.setText("" + gamePlay.getCurrency());
+		livesField.setText("" + gamePlay.getLives());
+	}
+
+	private void disableButtons() {
+		if(gamePlay.isStateRunning()) {
+		for(Component component : towerButtons) {
+		    component.setEnabled(false);
+		} 
+		startGameButton.setEnabled(false);
+		}
+		
+	}
+
+	private void enableButtons() {
+		if(gamePlay.isStateSetup() || gamePlay.isGameOver()) {
+		for(Component component : towerButtons) {
+		    component.setEnabled(true);
+		}
+		startGameButton.setEnabled(true);
+		}
+		
 	}
 
 	/**

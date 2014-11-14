@@ -7,6 +7,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.swing.JButton;
+
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
 
@@ -32,6 +34,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	private int currency;
 	
 	private int lives=10;
+	
 	
 	public enum State {
 		SETUP,
@@ -256,7 +259,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private void updateWaveFinished() {
 		if (enemyWaves.isEmpty() && enemies.isEmpty()) {
-			setState(State.SETUP);
+			setState(State.SETUP);		
 		}
 		
 	}
