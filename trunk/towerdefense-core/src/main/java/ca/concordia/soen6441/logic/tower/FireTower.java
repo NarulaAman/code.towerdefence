@@ -49,7 +49,7 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 	};
 
 	/**
-	 * Calls the constructor of {@link AbstractTemporalEffectTower}
+	 * Create Fire {@link Tower} of certain level
 	 * @param level The level of the game
 	 * @param gridPosition The position of the {@link Tower} on {@link GameMap}
 	 * @param shootingStrategy The object of {@link ShootingStrategy}
