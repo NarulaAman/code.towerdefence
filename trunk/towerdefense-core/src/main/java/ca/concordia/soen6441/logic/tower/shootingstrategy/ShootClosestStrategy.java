@@ -14,7 +14,6 @@ public class ShootClosestStrategy extends AbstractShootingStrategy implements Sh
 /**
  * Shoot the enemy nearest to tower
  * @param enemies The list of {@link Enemy} in the {@link GamePlay}
- * @param enemyToShoot The {@link Enemy} to shoot 
  * 
  */
 	public void shootIfInRange(List<Enemy> enemies) {
