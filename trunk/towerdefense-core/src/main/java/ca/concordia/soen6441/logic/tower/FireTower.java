@@ -27,8 +27,8 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 		final Enemy enemy;
 		float lastBurnTime = 0;
 		/**
-		 * 	Initialize the data members and calls the constructor of {@link TemporalEffect}
-		 * @param enemy The enemy to be shot
+		 * 	Initialize the data members
+		 * @param enemy The {@link Enemy} to be shot
 		 */
 		public BurningEnemyEffect(Enemy enemy) {
 			super(BURN_DURATION_SECS);
