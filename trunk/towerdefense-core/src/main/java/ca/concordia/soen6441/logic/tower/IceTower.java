@@ -14,19 +14,28 @@ public class IceTower extends AbstractTemporalEffectTower {
 
 	public final static float SLOW_DURATION_SECS = 10; 
 	public final static float SLOWNESS_RATE = 0.2f;
-	
+	/**
+	 * 
+	 * Characteristics of slowing affect on {@link Enemy}
+	 *
+	 */
 	class SlowingEffect extends TemporalEffect {
 		
 		private final Enemy enemy;
 		private float originalSpeed;
 		
-
+/**
+ * Initialize the data members
+ * @param enemy
+ */
 		public SlowingEffect(Enemy enemy) {
 			super(SLOW_DURATION_SECS);
 			this.enemy = enemy;
 		}
 		
-		@Override
+/**
+ * Start the slowing affect on {@link Enemy}
+ */
 		protected void startEffect() {
 			super.startEffect();
 			originalSpeed = enemy.getSpeed();
@@ -34,7 +43,9 @@ public class IceTower extends AbstractTemporalEffectTower {
 			enemy.setSpeed(slowSpeed);
 		}
 		
-		@Override
+/**
+ * Stop the slowing affect on {@link Enemy}
+ */
 		protected void stopEffect() {
 			super.stopEffect();
 			enemy.setSpeed(originalSpeed);
@@ -53,12 +64,17 @@ public class IceTower extends AbstractTemporalEffectTower {
 		super(level, gridPosition, shootingStrategy, towerFactory);
 	}
 
-	@Override
+	/**
+	 * Returns the object of {@link SlowingEffect}
+	 * @return the object of {@link SlowingEffect}
+	 */
 	protected TemporalEffect buildEffectOn(Enemy enemy) {
 		return new SlowingEffect(enemy);
 	}
 
-	@Override
+	/**
+	 * Visit this tower to visit the {@link TowerVisitor}
+	 */
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);
 		
