@@ -46,7 +46,26 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 	@Override
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);
-		
+	}
+	
+	public float getBurnDurationSecs() {
+		return BURN_DURATION_SECS;
+	}
+	
+	/**
+	 * Returns the burn damage caused by the tower
+	 * @return the burn damage caused by the tower
+	 */
+	public int getBurnDamage() {
+		return BURN_DAMAGE;
+	}
+	
+	/**
+	 * Returns the frequency the burn damage will be applied to
+	 * @return the frequency the burn damage will be applied to
+	 */
+	public float getBurnRateSecs() {
+		return DAMAGE_EVERY_SECONDS;
 	}
 
 }
