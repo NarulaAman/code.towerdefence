@@ -263,7 +263,12 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 		
 	}
+	
 
+	/**
+	 * Add enemy wave to the game play
+	 * @param enemyWave the new enemy wave added to the game play
+	 */
 	public void addEnemyWave(EnemyWave enemyWave) {
 		enemyWaves.add(enemyWave);
 	}
