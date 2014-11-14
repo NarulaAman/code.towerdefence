@@ -218,6 +218,10 @@ public class Enemy extends Observable {
 
 	}
 
+	/**
+	 * Updates the state of the enemy by a given amount of time has passed
+	 * @param seconds seconds passed
+	 */
 	public void update(float seconds) {
 		if(!hasReachedEnd()) {
 			System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
@@ -227,10 +231,18 @@ public class Enemy extends Observable {
 		
 	}
 
+	/**
+	 * Returns true of the enemy has reached the end, false if not
+	 * @return true of the enemy has reached the end, false if not
+	 */
 	public boolean hasReachedEnd() {
 		return destinationIdx >= gameMap.getStartToEndPath().size();
 	}
 
+	/**
+	 * Moves this enemy by the amount of seconds passed
+	 * @param seconds amount of seconds passed
+	 */
 	private void move(float seconds) {
 		Point2f nextPosition = getNextPosition();
 
@@ -250,18 +262,31 @@ public class Enemy extends Observable {
 		}
 	}
 
-	private Vector2f directionTo(Point2f nextPosition) {
-		Vector2f directionToMove = new Vector2f(nextPosition);
+	/**
+	 * Returns the direction vector from the current position to the given position
+	 * @param otherPosition other given position to have the vector directed to
+	 * @return the direction vector from the current position to the given position
+	 */
+	private Vector2f directionTo(Point2f otherPosition) {
+		Vector2f directionToMove = new Vector2f(otherPosition);
 		directionToMove.sub(currentPosition);
 		directionToMove.normalize();
 		return directionToMove;
 	}
 
+	/**
+	 * Returns the next position the {@link Enemy} should walk to 
+	 * @return the next position the {@link Enemy} should walk to 
+	 */
 	public Point2f getNextPosition() {
 		GridPosition position = gameMap.getStartToEndPath().get(destinationIdx);
 		return new Point2f(position.getX(), position.getY());
 	}
 
+	/**
+	 * Returns the current position of the enemy on the map
+	 * @return the current position of the enemy on the map
+	 */
 	public Point2f getCurrentPosition() {
 		if (currentPosition == null) {
 			return new Point2f(titorGridPosition.getX(), titorGridPosition.getY());
@@ -269,6 +294,10 @@ public class Enemy extends Observable {
 		return currentPosition;
 	}
 	
+	/**
+	 * Returns true if the enemy is alive, false if not
+	 * @return true if the enemy is alive, false if not
+	 */
 	public boolean isAlive() {
 		return health > 0;
 	}
@@ -283,18 +312,34 @@ public class Enemy extends Observable {
 		return speed;
 	}
 
+	/**
+	 * Sets the speed of the enemy in units per second. Can also be understood as tiles per second.
+	 * @param speed the speed, which is units of the grid per second.
+	 */
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
 
+	/**
+	 * Makes the enemy take an amount of Damage
+	 * @param damage damage to be taken by the enemy
+	 */
 	public void takeDamage(int damage) {
 		setHealth(getHealth() - damage); 
 	}
 	
+	/**
+	 * Returns the amount of money gained by the player when the enemy is killed 
+	 * @return the amount of money gained by the player when the enemy is killed 
+	 */
 	public int getPrize() {
 		return prize;
 	}
 	
+	/**
+	 * Returns the progress of the {@link Enemy} in the {@link GameMap}
+	 * @return the progress of the {@link Enemy} in the {@link GameMap}
+	 */
 	public float getProgress() {
 		float totalDistance = 0;
 		GridPosition prev = gameMap.getStartToEndPath().get(0);
