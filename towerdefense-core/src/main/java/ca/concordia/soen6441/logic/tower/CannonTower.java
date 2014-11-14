@@ -20,7 +20,7 @@ public class CannonTower extends Tower {
 
 	private transient List<Enemy> enemies;
 	/**
-	 * Calls the constructor of {@link Tower}
+	 * Create Cannon {@link Tower} with certain level
 	 * @param level The level of the game
 	 * @param gridPosition The position of the {@link Tower} on {@link GameMap}
 	 * @param shootingStrategy The object of {@link ShootingStrategy}
