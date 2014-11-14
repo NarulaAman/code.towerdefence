@@ -27,7 +27,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private final List<Tower> towers = new ArrayList<>();
 	
-	private final List<GridPosition> enemyPath = new ArrayList<>();
+//	private final List<GridPosition> enemyPath = new ArrayList<>();
 
 	private int currency;
 	
@@ -63,7 +63,6 @@ public class GamePlay extends Observable implements Serializable, Observer {
 //				enemyPath.add(new GridPosition(x, y));
 //			}
 //		}
-		enemyPath.addAll(gameMap.getStartToEndPath());
 //		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
 		
 		// TODO: end of lines to be removed
@@ -262,10 +261,6 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		
 	}
 
-	public List<GridPosition> getEnemyPath() {
-		return enemyPath;
-	}
-
 	public void addEnemyWave(EnemyWave enemyWave) {
 		enemyWaves.add(enemyWave);
 	}
@@ -346,7 +341,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * @return if the {@link GamePlay} is in Game Over state
 	 */
 	public boolean isStateGameOver() {
-		return gameState == State.SETUP;
+		return gameState == State.GAMEOVER;
 	}
 	/**
 	 * Returns if the {@link GamePlay} is in running state
