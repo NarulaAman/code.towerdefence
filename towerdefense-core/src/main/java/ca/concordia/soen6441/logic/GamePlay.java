@@ -67,6 +67,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 //		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
 		
 		// TODO: end of lines to be removed
+		setState(State.SETUP);
 	}
 	
 	public void start() {
