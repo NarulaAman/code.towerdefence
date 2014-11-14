@@ -15,7 +15,6 @@ public class ShootClosestToEndPointStrategy extends AbstractShootingStrategy imp
 /**
  * Shoot the enemy closest to Exit point
  * @param enemies The list of {@link Enemy} in the {@link GamePlay}
- * @param enemyToShoot The {@link Enemy} to shoot 
  */
 	public void shootIfInRange(List<Enemy> enemies) {
 		Enemy enemyToShoot = null;
