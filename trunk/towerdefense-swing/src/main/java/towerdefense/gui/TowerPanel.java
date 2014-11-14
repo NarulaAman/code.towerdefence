@@ -46,16 +46,22 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	private final JLabel splashRadiusLbl = new JLabel("Splash radius:");
 	private final JLabel splashDamageRatioLbl = new JLabel("Splash damage ratio:");
 	
+	private final JTextField splashRadiusTxtFld = new JTextField("");
+	private final JTextField splashDamageRatioTxtFld = new JTextField("");
 	
 	// FireTower attributes
 	private final JLabel burnDamageLbl = new JLabel("Burn damage:");
 	private final JLabel burnRateLbl = new JLabel("Burn every secs:");
 	private final JLabel burnTimeLbl = new JLabel("Burn for secs:");
-	// put textfields here for the attributes
+	
+	private final JTextField burnDamageTxtFld = new JTextField("");
+	private final JTextField burnRateRatioTxtFld = new JTextField("");
+	private final JTextField burnTimeTxtFld = new JTextField("");
 	
 	
 	// IceTower attributes
 	private final JLabel slowTimeLbl = new JLabel("Slows for secs:");
+	private final JTextField slowTimeTxtFld = new JTextField("");
 	
 	
 	
@@ -78,6 +84,9 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 	private Tower shownTower = null;
 	private JPanel attributesPnl;
+	private JPanel fireTowerAttributes = new JPanel(new GridLayout(3,2));
+	private JPanel iceTowerAttributes = new JPanel(new GridLayout(1,2));
+	JPanel cannonTowerAttributes = new JPanel(new GridLayout(2,2));
 
 
 	/**
@@ -129,6 +138,26 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		levelTxtFld .setEditable(false);
 		refundTxtFld .setEditable(false);
 		upgradeCostTxtFld .setEditable(false);
+		
+		
+		fireTowerAttributes.add(burnRateLbl);
+		fireTowerAttributes.add(burnRateRatioTxtFld);
+		fireTowerAttributes.add(burnDamageLbl);
+		fireTowerAttributes.add(burnDamageTxtFld);
+		fireTowerAttributes.add(burnTimeLbl);
+		fireTowerAttributes.add(burnTimeTxtFld);
+		
+		
+		
+		iceTowerAttributes.add(slowTimeLbl);
+		iceTowerAttributes.add(slowTimeTxtFld);
+		
+		
+		cannonTowerAttributes.add(splashRadiusLbl);
+		cannonTowerAttributes.add(splashRadiusTxtFld);
+		cannonTowerAttributes.add(splashDamageRatioLbl);
+		cannonTowerAttributes.add(splashDamageRatioTxtFld);
+		
 		
 		fillSpecializedAttributesList();
 		
@@ -247,18 +276,17 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 	@Override
 	public void visit(FireTower tower) {
-//		add(burnDamageLbl);
+       add(fireTowerAttributes);
 	}
 
 	@Override
 	public void visit(IceTower tower) {
-		
+		add(iceTowerAttributes);
 	}
 
 	@Override
-	public void visit(CannonTower tower) {
-		
-		
+	public void visit(CannonTower tower) {	
+		add(cannonTowerAttributes);
 		
 	}
 
