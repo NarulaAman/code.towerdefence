@@ -52,7 +52,7 @@ public class CannonTower extends Tower {
 	}
 
 /**
- * Visit this tower to with the {@link TowerVisitor}
+ * Visit this tower to visit the {@link TowerVisitor}
  */
 	public void visit(TowerVisitor visit) {
 		visit.visit(this);
