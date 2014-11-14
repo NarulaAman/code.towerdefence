@@ -87,6 +87,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	private JPanel fireTowerAttributes = new JPanel(new GridLayout(3,2));
 	private JPanel iceTowerAttributes = new JPanel(new GridLayout(1,2));
 	JPanel cannonTowerAttributes = new JPanel(new GridLayout(2,2));
+	GridBagConstraints constraints = new GridBagConstraints();
 
 
 	/**
@@ -96,7 +97,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	{
 		super();
 		setLayout(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
+		
 		setMinimumSize(new Dimension(200, 300));
 		setMaximumSize(new Dimension(200, 300));
 		constraints.gridx = 0;
@@ -104,7 +105,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.weightx = constraints.weighty = 1.0;
 
-		attributesPnl = new JPanel(new GridLayout(11, 2));
+		attributesPnl = new JPanel(new GridLayout(8, 2));
 		add(attributesPnl, constraints);
 		attributesPnl.add(costLbl);
 		attributesPnl.add(costTxtFld);
@@ -157,20 +158,21 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		cannonTowerAttributes.add(splashRadiusTxtFld);
 		cannonTowerAttributes.add(splashDamageRatioLbl);
 		cannonTowerAttributes.add(splashDamageRatioTxtFld);
+	
 		
 		
-		fillSpecializedAttributesList();
+		//fillSpecializedAttributesList();
 		
 	}
 
-	private void fillSpecializedAttributesList() {
-		specializedTowerAttributes.add(splashRadiusLbl);
-		specializedTowerAttributes.add(splashDamageRatioLbl); 
-		specializedTowerAttributes.add(burnDamageLbl);
-		specializedTowerAttributes.add(burnRateLbl);
-		specializedTowerAttributes.add(burnTimeLbl);
-		specializedTowerAttributes.add(slowTimeLbl);
-	}
+//	private void fillSpecializedAttributesList() {
+//		specializedTowerAttributes.add(splashRadiusLbl);
+//		specializedTowerAttributes.add(splashDamageRatioLbl); 
+//		specializedTowerAttributes.add(burnDamageLbl);
+//		specializedTowerAttributes.add(burnRateLbl);
+//		specializedTowerAttributes.add(burnTimeLbl);
+//		specializedTowerAttributes.add(slowTimeLbl);
+//	}
 	
 	private void removeSpecializedAttributes() {
 		for (Component component : specializedTowerAttributes) {
@@ -276,12 +278,14 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 	@Override
 	public void visit(FireTower tower) {
-       add(fireTowerAttributes);
+	   constraints.gridy=4;
+       add(fireTowerAttributes,constraints);
 	}
 
 	@Override
 	public void visit(IceTower tower) {
-		add(iceTowerAttributes);
+		constraints.gridy=4;
+		add(iceTowerAttributes,constraints);
 	}
 
 	@Override
