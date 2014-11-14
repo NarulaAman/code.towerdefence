@@ -3,28 +3,41 @@ package ca.concordia.soen6441.logic.tower;
 import java.util.Observer;
 
 import ca.concordia.soen6441.logic.Enemy;
+import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
-
+/**
+ * 
+ * This class has characteristics of Fire {@link Tower}
+ *
+ */
 public class FireTower extends AbstractTemporalEffectTower implements Observer{
-	
+
 	private final static float BURN_DURATION_SECS = 4;
 	private final static int BURN_DAMAGE = 1;
 	private final static float DAMAGE_EVERY_SECONDS = 0.5f;
-	
+
+	/**
+	 * Characteristics of burning affect on Enemy 
+	 */
 	class BurningEnemyEffect extends TemporalEffect {
-		
+
 		final Enemy enemy;
 		float lastBurnTime = 0;
-		
+		/**
+		 * 	Initialize the data members and calls the constructor of {@link TemporalEffect}
+		 * @param enemy The enemy to be shot
+		 */
 		public BurningEnemyEffect(Enemy enemy) {
 			super(BURN_DURATION_SECS);
 			this.enemy = enemy;
 		}
 
-		@Override
+		/**
+		 * Update the damage to the {@link Enemy}
+		 */
 		protected void updateEffect(float seconds) {
 			super.updateEffect(seconds);
 			lastBurnTime = lastBurnTime + seconds;
@@ -34,20 +47,36 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 			}
 		}
 	};
-	
+
+	/**
+	 * Calls the constructor of {@link AbstractTemporalEffectTower}
+	 * @param level The level of the game
+	 * @param gridPosition The position of the {@link Tower} on {@link GameMap}
+	 * @param shootingStrategy The object of {@link ShootingStrategy}
+	 * @param towerFactory The object of {@link TowerFactory}
+	 */
 	public FireTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
 	}
-
+	/**
+	 * Returns the object of {@link TemporalEffect}
+	 * @return Returns the object of {@link TemporalEffect}
+	 */
 	protected TemporalEffect buildEffectOn(Enemy enemy) {
 		return new BurningEnemyEffect(enemy);
 	}
 
-	@Override
+	/**
+	 * Visit this tower to visit with the {@link TowerVisitor}
+	 */
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);
+
 	}
-	
+	/**
+	 * Returns the Burn Duration seconds
+	 * @return the burn duration seconds
+	 */
 	public float getBurnDurationSecs() {
 		return BURN_DURATION_SECS;
 	}
@@ -66,6 +95,7 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 	 */
 	public float getBurnRateSecs() {
 		return DAMAGE_EVERY_SECONDS;
+
 	}
 
 }
