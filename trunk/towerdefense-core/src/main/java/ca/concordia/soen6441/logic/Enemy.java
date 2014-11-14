@@ -6,7 +6,12 @@ import javax.vecmath.Point2f;
 import javax.vecmath.Vector2f;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
-
+import ca.concordia.soen6441.logic.tower.Tower;
+/**
+ * 
+ * This class has various characteristics of Enemy
+ *
+ */
 public class Enemy extends Observable {
 //	private GridPosition titorGridPosition;
 
@@ -29,7 +34,12 @@ public class Enemy extends Observable {
 //		health = 0;
 //		currentPosition = null;
 //	}
-
+/**
+ * Initialize the data members
+ * @param gameMap The object {@link GameMap}
+ * @param health The health of {@link Enemy}
+ * @param currentPosition The position of {@link Enemy}
+ */
 	public Enemy(GameMap gameMap, int health, Point2f currentPosition) {
 		this.gameMap = gameMap;
 		this.health = health;
@@ -81,11 +91,17 @@ public class Enemy extends Observable {
 //		}
 //		return test2;
 //	}
-
+/**
+ * Returns the health of {@link Enemy}
+ * @return The health of {@link Enemy}
+ */
 	public int getHealth() {
 		return health;
 	}
-
+/**
+ * Set the health of {@link Enemy}
+ * @param health Health of the {@link Enemy}
+ */
 	public void setHealth(int health) {
 		if (health != this.health){ 
 			this.health = health;
