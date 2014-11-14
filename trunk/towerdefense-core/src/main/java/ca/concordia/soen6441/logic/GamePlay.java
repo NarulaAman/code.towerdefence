@@ -293,7 +293,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		setChanged();
 		notifyObservers();
 	}
-	
+	/**
+	 * Test if the game is over 
+	 * @return true if game is over and false if not
+	 */
 	public boolean isGameOver() {
 		if(currency<=0) {
 			return true;
