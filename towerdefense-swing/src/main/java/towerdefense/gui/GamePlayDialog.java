@@ -119,6 +119,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	public GamePlayDialog(GamePlay gamePlay) {
 		setLayout(new BorderLayout());
+		setResizable(false);
 		this.gamePlay = gamePlay;
 		gamePlay.addObserver(this);
 		gamePlayPanel = new GamePlayPanel(gamePlay);
