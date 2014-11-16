@@ -61,7 +61,7 @@ public class MapPanel extends JPanel implements Observer{
 	 */
 	public MapPanel() {
 		super();
-		setPreferredSize(new Dimension(640, 480));
+		setPreferredSize(new Dimension(740, 540));
 
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

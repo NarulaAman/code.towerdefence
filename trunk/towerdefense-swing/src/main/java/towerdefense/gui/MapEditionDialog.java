@@ -88,6 +88,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 */
 	public MapEditionDialog(GameMapDao gameMapDao) {
 		setLayout(new BorderLayout());
+		setResizable(false);
 		this.gameMapDao = gameMapDao;
 		add(gridPanel,BorderLayout.CENTER);
 		gridPanel.addMapGridCoordinateClickedListener(this);

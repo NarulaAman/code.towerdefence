@@ -68,6 +68,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		});
 		add(mapPanel, BorderLayout.CENTER);
 		setupSideBar(gameMapDao);
+		setResizable(false);
 		pack();
 	}
 
