@@ -290,7 +290,8 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 	@Override
 	public void visit(CannonTower tower) {	
-		add(cannonTowerAttributes);
+		constraints.gridy=4;
+		add(cannonTowerAttributes,constraints);
 		
 	}
 
