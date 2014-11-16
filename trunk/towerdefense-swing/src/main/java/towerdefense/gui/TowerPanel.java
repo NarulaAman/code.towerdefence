@@ -86,7 +86,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	private JPanel attributesPnl;
 	private JPanel fireTowerAttributes = new JPanel(new GridLayout(3,2));
 	private JPanel iceTowerAttributes = new JPanel(new GridLayout(1,2));
-	JPanel cannonTowerAttributes = new JPanel(new GridLayout(2,2));
+	private JPanel cannonTowerAttributes = new JPanel(new GridLayout(2,2));
 	GridBagConstraints constraints = new GridBagConstraints();
 
 
@@ -98,8 +98,8 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		super();
 		setLayout(new GridBagLayout());
 		
-		setMinimumSize(new Dimension(300, 300));
-		setMaximumSize(new Dimension(300, 300));
+		setMinimumSize(new Dimension(200, 400));
+		setMaximumSize(new Dimension(200, 400));
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -122,8 +122,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		attributesPnl.add(upgradeCostLbl);
 		attributesPnl.add(upgradeCostTxtFld);
 		attributesPnl.add(upgradeBtn);
-		attributesPnl.add(sellBtn);
-
+		attributesPnl.add(sellBtn);	
 
 		//		constraints.gridx = 0;
 		constraints.gridy = 1;
