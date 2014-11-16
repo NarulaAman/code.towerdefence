@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -83,23 +82,20 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final GamePlayPanel gamePlayPanel;
 
 	private final JLabel livesLabel = new JLabel("Lives");
-	private final JLabel scoreLabel = new JLabel("Scores");
-	private final JLabel levelsLabel = new JLabel("Levels");
 	private final JLabel banksLabel = new JLabel("Banks");
 
 	private final JTextField livesField = new JTextField("");
-	private final JTextField scoreField = new JTextField("");
-	private final JTextField levelsField = new JTextField("");
 	private final JTextField banksField = new JTextField("");
 
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 
-	//private final JButton buyTowerButton = new JButton("Buy Tower");
 	private final JButton fireTowerButton = new JButton("Fire Tower");
 	private final JButton iceTowerButton = new JButton("Ice Tower");
 	private final JButton cannonTowerButton = new JButton("Cannon Tower");
 	private final JButton startGameButton = new JButton("StartGame");
+	
 	private final TowerFactory towerFactory = new TowerFactory();
+	
 	private java.util.List<Component> towerButtons = new ArrayList<>();
 
 	private final Timer gameplayUpdateTimer = new Timer();
@@ -346,16 +342,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayAttributes.setMaximumSize(new Dimension(250, 50));
 
 		livesField.setEditable(false);
-		scoreField.setEditable(false);
-		levelsField.setEditable(false);
 		banksField.setEditable(false);
 
 		gamePlayAttributes.add(livesLabel);
 		gamePlayAttributes.add(livesField);
-		gamePlayAttributes.add(scoreLabel);
-		gamePlayAttributes.add(scoreField);
-		gamePlayAttributes.add(levelsLabel);
-		gamePlayAttributes.add(levelsField);
 		gamePlayAttributes.add(banksLabel);
 		gamePlayAttributes.add(banksField);
 
