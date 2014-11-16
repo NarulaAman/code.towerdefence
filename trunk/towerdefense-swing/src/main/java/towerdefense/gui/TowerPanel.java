@@ -98,8 +98,8 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		super();
 		setLayout(new GridBagLayout());
 		
-		setMinimumSize(new Dimension(200, 300));
-		setMaximumSize(new Dimension(200, 300));
+		setMinimumSize(new Dimension(300, 300));
+		setMaximumSize(new Dimension(300, 300));
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
