@@ -15,12 +15,14 @@ import ca.concordia.soen6441.logic.tower.Tower;
 public class Enemy extends Observable {
 
 
-	private/* final */GameMap gameMap;
+	private final GameMap gameMap;
+	private final int maxHealth;
 	private Point2f currentPosition;
 	private float speed = 0.5f;
 	private int destinationIdx = 1;
 	private int prize = 50;
 	private int health;
+	
 
 
 /**
@@ -33,6 +35,7 @@ public class Enemy extends Observable {
 		this.gameMap = gameMap;
 		this.health = health;
 		this.currentPosition = currentPosition;
+		this.maxHealth = health;
 	}
 
 
@@ -196,6 +199,14 @@ public class Enemy extends Observable {
 			prev = current;
 		}
 		return 1 - currentDistance / totalDistance;
+	}
+	
+	/**
+	 * Returns the max health
+	 * @return the max health
+	 */
+	public int getMaxHealth() {
+		return maxHealth;
 	}
 	
 }

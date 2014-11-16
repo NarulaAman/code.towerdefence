@@ -1,6 +1,7 @@
 package towerdefense.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -65,6 +66,9 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 					parent);
 			
 			for (Enemy enemy : tower.getEnemiesUnderEffect()) {
+				if (!enemy.isAlive()) {
+					continue;
+				}
 				g.setColor(Color.red);
 				g.drawRect((int) tileToScreen(enemy.getCurrentPosition()).x, (int) tileToScreen(enemy.getCurrentPosition()).y, getTileWidth(), getTileHeight()); 
 			}
@@ -77,6 +81,9 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 					tileToScreenY(tower.getGridPosition().getY()), getTileWidth(), getTileHeight(), parent);
 			
 			for (Enemy enemy : tower.getEnemiesUnderEffect()) {
+				if (!enemy.isAlive()) {
+					continue;
+				}
 				g.setColor(Color.blue);
 				g.drawRect((int) tileToScreen(enemy.getCurrentPosition()).x + 2, (int) tileToScreen(enemy.getCurrentPosition()).y + 2, getTileWidth()-4, getTileHeight()-4); 
 			}
@@ -116,6 +123,8 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 		constraints.weightx = constraints.weighty = 1.0;
 		mapPanel.setMap(gamePlay.getMap());
 		add(mapPanel, constraints);
+		setMinimumSize(new Dimension(400, 400));
+		setPreferredSize(new Dimension(640, 640));
 	}
 	
 	/**

@@ -11,7 +11,7 @@ import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
-import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 /**
@@ -27,21 +27,21 @@ public class TowerFactory {
 	 */
 	public TowerFactory() {
 		List<TowerLevelCharacteristic> fireTowerLevelCharacteristic = new ArrayList<>();
-		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(1, 100, 75, 50, 4.f));
-		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
-		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
+		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 4, 0.9f));
+		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 120, 7, 0.7f));
+		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 190, 13, 0.5f));
 		towerTypeInformation.put(FireTower.class, fireTowerLevelCharacteristic);
 	
 		List<TowerLevelCharacteristic> iceTowerLevelCharacteristic = new ArrayList<>();
-		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(0, 100, 75, 2, 1.f));
-		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(0, 60, 75, 3, 0.9f));
-		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(0, 75, 75, 3, 0.8f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(1, 90, 75, 7, 1.f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(1, 50, 75, 13, 0.9f));
+		iceTowerLevelCharacteristic.add(new TowerLevelCharacteristic(1, 65, 75, 16, 0.8f));
 		towerTypeInformation.put(IceTower.class, iceTowerLevelCharacteristic);
 	
 		List<TowerLevelCharacteristic> cannonTowerLevelCharacteristic = new ArrayList<>();
-		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 2, 1.f));
-		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 75, 3, 0.9f));
-		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(20, 75, 75, 3, 0.8f));
+		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(12, 110, 75, 5, 1.f));
+		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(17, 65, 75, 8, 0.9f));
+		cannonTowerLevelCharacteristic.add(new TowerLevelCharacteristic(23, 85, 75, 14, 0.8f));
 		towerTypeInformation.put(CannonTower.class, cannonTowerLevelCharacteristic);
 	}
 
@@ -83,7 +83,7 @@ public class TowerFactory {
 		try {
 			Constructor<? extends Tower> constructor = type.getConstructor(int.class, GridPosition.class,
 					ShootingStrategy.class, TowerFactory.class);
-			return constructor.newInstance(1, coordinate, new ShootWeakestStrategy(), this);
+			return constructor.newInstance(1, coordinate, new ShootStrongestStrategy(), this);
 		} catch (Exception exception) {
 			throw new RuntimeException(exception);
 		}
