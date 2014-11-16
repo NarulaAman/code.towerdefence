@@ -6,10 +6,10 @@ import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GamePlay;
 /**
  * 
- * This class has strategy to shoot the enemy weakest health
+ * This class has strategy to shoot the enemy strongest health. 
  *
  */
-public class ShootWeakestStrategy extends AbstractShootingStrategy {
+public class ShootStrongestStrategy extends AbstractShootingStrategy {
 	
 	/**
 	 * Shoot the enemy with weakest health
@@ -23,7 +23,7 @@ public class ShootWeakestStrategy extends AbstractShootingStrategy {
 					enemyToShoot = enemy;
 				}
 				else {
-					if (enemy.getHealth() < enemyToShoot.getHealth()) {
+					if (enemy.getHealth() > enemyToShoot.getHealth()) {
 						enemyToShoot = enemy;
 					}
 				}

@@ -77,7 +77,21 @@ public class IceTower extends AbstractTemporalEffectTower {
 	 */
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);
-		
+	}
+	
+	/**
+	 * Returns the duration of slowing down the enemy
+	 * @return the duration of slowing down the enemy
+	 */
+	public float getSlownessDurationSecs() {
+		return SLOW_DURATION_SECS;
 	}
 
+	/**
+	 * Returns the Rate of the slowness applied to the speed of the enemy
+	 * @return the Rate of the slowness applied to the speed of the enemy
+	 */
+	public float getSlownessRate() {
+		return SLOWNESS_RATE;
+	}
 }

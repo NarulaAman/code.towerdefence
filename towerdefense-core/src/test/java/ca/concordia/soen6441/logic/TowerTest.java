@@ -1,8 +1,6 @@
 package ca.concordia.soen6441.logic;
 
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,12 +24,13 @@ public class TowerTest {
 	}
 	
 	
+	/**
+	 * Test that shooting an enemy takes damage off him
+	 */
 	@Test
 	public void testShoot() {
- 
-		when(enemy.getHealth()).thenReturn(100);
 		tower.shoot(enemy);
-		Mockito.verify(enemy).setHealth(100-tower.getDamage());
+		Mockito.verify(enemy).takeDamage(tower.getDamage());
 	}
 
 }

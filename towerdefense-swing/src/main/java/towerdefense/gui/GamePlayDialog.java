@@ -35,7 +35,7 @@ import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestStrategy;
-import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
 
 /**
  * This is the dialog which will show the {@link GamePlay}. Here the user will be able to play the game
@@ -266,7 +266,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				selectedTower.setShootingStrategy(new ShootWeakestStrategy());
+				selectedTower.setShootingStrategy(new ShootStrongestStrategy());
 			}
 		});
 		

@@ -41,7 +41,7 @@ public class EnemyWave implements Serializable{
 	 * Spawn the {@link Enemy} into the {@link GamePlay}
 	 */
 	public void spawnEnemy() {
-		Enemy e = new Enemy(gameMap, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY()));
+		Enemy e = new Enemy(gameMap, 500, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY()));
 		gamePlay.addEnemy(e);
 		enemiesToSpawn = enemiesToSpawn - 1;
 	}
