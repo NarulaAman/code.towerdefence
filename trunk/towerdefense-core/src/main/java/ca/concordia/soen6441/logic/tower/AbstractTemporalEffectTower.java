@@ -12,10 +12,21 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
+/**
+ * 
+ * Abstract class for characteristics of Tower 
+ *
+ */
 public abstract class AbstractTemporalEffectTower extends Tower implements Observer {
 
 	private final Map<Enemy, TemporalEffect> enemiesUnderEffect = new ConcurrentHashMap<>();
-
+/**
+ * Initialize the data members  
+ * @param level
+ * @param gridPosition
+ * @param shootingStrategy
+ * @param towerFactory
+ */
 	public AbstractTemporalEffectTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy,
 			TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
@@ -23,7 +34,10 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 	
 	protected abstract TemporalEffect buildEffectOn(Enemy enemy);
 
-	@Override
+	/**
+	 * Towers shoot the enemies 
+	 * @param enemy enemies that are in range
+	 */
 	protected void specializedShot(Enemy enemy) {
 		enemy.takeDamage(getDamage());
 		enemy.addObserver(this);
@@ -38,7 +52,11 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 		}
 	}
 
-	@Override
+	/**
+	 * Delete the {@link Enemy} if its health is zero
+	 * @param o object of class {@link Enemy}
+	 * @param arg is ignored
+	 */
 	public void update(Observable o, Object arg) {
 		if (o instanceof Enemy) {
 			Enemy enemy = (Enemy) o;
@@ -48,7 +66,9 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 			}
 		}
 	}
-
+/**
+ * Remove the burning affect from the {@link Enemy}  when time is out
+ */
 	public void update(float seconds) {
 		super.update(seconds);
 		for (Map.Entry<Enemy, TemporalEffect> burningEnemyEntry : enemiesUnderEffect.entrySet()) {
@@ -60,7 +80,10 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 			}
 		}
 	}
-	
+	/**
+	 * Return the set of {@link Enemy}
+	 * @return The set of {@link Enemy}
+	 */ 
 	public Set<Enemy> getEnemiesUnderEffect() {
 		return enemiesUnderEffect.keySet();
 	}
