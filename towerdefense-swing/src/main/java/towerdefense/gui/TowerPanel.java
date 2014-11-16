@@ -160,18 +160,16 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	
 		
 		
-		//fillSpecializedAttributesList();
+		fillSpecializedAttributesList();
 		
 	}
 
-//	private void fillSpecializedAttributesList() {
-//		specializedTowerAttributes.add(splashRadiusLbl);
-//		specializedTowerAttributes.add(splashDamageRatioLbl); 
-//		specializedTowerAttributes.add(burnDamageLbl);
-//		specializedTowerAttributes.add(burnRateLbl);
-//		specializedTowerAttributes.add(burnTimeLbl);
-//		specializedTowerAttributes.add(slowTimeLbl);
-//	}
+	private void fillSpecializedAttributesList() {
+		specializedTowerAttributes.add(fireTowerAttributes);
+		specializedTowerAttributes.add(iceTowerAttributes); 
+		specializedTowerAttributes.add(cannonTowerAttributes);
+	
+	}
 	
 	private void removeSpecializedAttributes() {
 		for (Component component : specializedTowerAttributes) {
@@ -225,6 +223,8 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		
 		
 		removeSpecializedAttributes();
+		revalidate();
+		repaint();
 		tower.visit(this);
 	}
 
