@@ -221,7 +221,6 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 			upgradeBtn.setEnabled(false);
 		}
 		
-		
 		removeSpecializedAttributes();
 		revalidate();
 		repaint();
@@ -278,18 +277,24 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	@Override
 	public void visit(FireTower tower) {
 	   constraints.gridy=4;
+	   burnRateRatioTxtFld.setText("" + tower.getBurnRateSecs());
+	   burnDamageTxtFld.setText("" + tower.getDamage());
+	   burnTimeTxtFld.setText("" + tower.getBurnDurationSecs());
        add(fireTowerAttributes,constraints);
 	}
 
 	@Override
 	public void visit(IceTower tower) {
 		constraints.gridy=4;
+//		slowTimeTxtFld.setText("" + tower);
 		add(iceTowerAttributes,constraints);
 	}
 
 	@Override
 	public void visit(CannonTower tower) {	
-		constraints.gridy=4;
+		constraints.gridy=4;	
+//		splashRadiusTxtFld.setText("" + tower);
+//		splashDamageRatioTxtFld.setText("" + tower);
 		add(cannonTowerAttributes,constraints);
 		
 	}
