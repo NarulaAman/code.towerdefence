@@ -9,7 +9,7 @@ import ca.concordia.soen6441.logic.GamePlay;
  * This class has strategy to shoot the 
  * enemy nearest to tower
  */
-public class ShootClosestStrategy extends AbstractShootingStrategy implements ShootingStrategy {
+public class ShootClosestToTowerStrategy extends AbstractShootingStrategy implements ShootingStrategy {
 
 /**
  * Shoot the enemy nearest to tower

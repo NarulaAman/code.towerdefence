@@ -42,7 +42,7 @@ public class ShootClosestToTowerStrategyTest {
 		enemyTargetPosition = mock(Point2f.class);
 		enemyNotTarget = mock(Enemy.class);
 		enemyNotTargetPosition = mock(Point2f.class);
-		strategy = new ShootClosestStrategy();
+		strategy = new ShootClosestToTowerStrategy();
 		
 	}
 	
