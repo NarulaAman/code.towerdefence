@@ -217,6 +217,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		return false;
 	}
 
+	/**
+	 * Starts the gameplay timer to update the simulation
+	 */
 	private void startGamePlayUpdaateTimer() {
 		gameplayUpdateTimer.schedule(new TimerTask() {
 
@@ -245,6 +248,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		});
 	}
 
+	/**
+	 * Update the {@link GamePlay}
+	 * @param seconds seconds passed
+	 */
 	public void update(float seconds) {
 		gamePlay.update(seconds);
 		//		System.out.println("Seconds: " + seconds);

@@ -48,17 +48,32 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 	
 	
+	/**
+	 * Paints the different towers according to their type.
+	 * Do not hold a reference to this object!!!
+	 *
+	 */
 	class TowerPainter implements TowerVisitor {
 		
 		private final Graphics g;
 		
 		private final JPanel parent;
 
+		/**
+		 * Creates a {@link TowerPainter}
+		 * @param g {@link Graphics} to be used to paint
+		 * @param parent parent {@link JPanel}
+		 */
 		public TowerPainter(Graphics g, JPanel parent) {
 			this.g = g;
 			this.parent = parent;
 		}
 
+		
+		/**
+		 * Paints a {@link FireTower}
+		 * @param tower tower to be painted
+		 */
 		@Override
 		public void visit(FireTower tower) {
 			g.drawImage(FIRETOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
@@ -74,7 +89,10 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 			}
 			
 		}
-
+		/**
+		 * Paints a {@link IceTower}
+		 * @param tower tower to be painted
+		 */
 		@Override
 		public void visit(IceTower tower) {
 			g.drawImage(ICETOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
@@ -89,7 +107,10 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 			}
 			
 		}
-
+		/**
+		 * Paints a {@link CannonTower}
+		 * @param tower tower to be painted
+		 */
 		@Override
 		public void visit(CannonTower tower) {
 			g.drawImage(TOWER_ICON, tileToScreenX(tower.getGridPosition().getX()),
