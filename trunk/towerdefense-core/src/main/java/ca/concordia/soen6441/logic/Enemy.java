@@ -6,7 +6,6 @@ import javax.vecmath.Point2f;
 import javax.vecmath.Vector2f;
 
 import ca.concordia.soen6441.logic.primitives.GridPosition;
-import ca.concordia.soen6441.logic.tower.Tower;
 /**
  * 
  * This class has various characteristics of Enemy

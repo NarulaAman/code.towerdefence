@@ -2,7 +2,6 @@ package ca.concordia.soen6441.logic.primitives;
 
 import java.io.Serializable;
 
-import javax.vecmath.Point2d;
 import javax.vecmath.Point2f;
 
 /**
