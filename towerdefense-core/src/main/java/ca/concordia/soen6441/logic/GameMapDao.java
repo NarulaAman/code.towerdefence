@@ -12,7 +12,7 @@ public interface GameMapDao {
 	/**
 	 * Saves a {@link GameMap} by its name
 	 * @param gameMap to be saved
-	 * @throws IOException
+	 * @throws IOException on error
 	 */
 	public void save(GameMap gameMap) throws IOException;
 
@@ -20,8 +20,8 @@ public interface GameMapDao {
 	 * Load the {@link GameMap} by a name
 	 * @param name of the gameMap to be loaded
 	 * @return the gameMap loaded from file
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws IOException on error
+	 * @throws ClassNotFoundException on error
 	 */
 	public GameMap load(String name) throws IOException,
 			ClassNotFoundException;
@@ -30,7 +30,7 @@ public interface GameMapDao {
 	/**
 	 * List the name of all the saved {@link GameMap}
 	 * @return The list of saved maps
-	 * @throws IOException
+	 * @throws IOException on error
 	 */
 	public List<String> listAllNames() throws IOException;
 
