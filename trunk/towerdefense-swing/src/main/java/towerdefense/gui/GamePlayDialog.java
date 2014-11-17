@@ -103,17 +103,15 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	
 	private java.util.List<Component> towerButtons = new ArrayList<>();
 
-	private final Timer gameplayUpdateTimer = new Timer();
+	private Timer gameplayUpdateTimer = new Timer();
     
-	private ShootingStrategy weakestStrategy = new ShootStrongestStrategy();
-	private ShootingStrategy closestStrategy = new ShootClosestToTowerStrategy();
-	private ShootClosestToEndPointStrategy closestEnd = new ShootClosestToEndPointStrategy();
-	
 	private Class<? extends Tower> towerToBuy = null;
 	private Tower selectedTower = null;
 
 	private State state = State.NOTHING;
 	private BuyingTower buyingTower = BuyingTower.FIRE_TOWER;
+	
+	private int level = 1;
 
 	private GamePlay gamePlay;
 	
@@ -346,16 +344,20 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		fireTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
 		iceTowerButton.setToolTipText(towerFactory.getLevelInformation(IceTower.class, 1).toHtmlString());
 		cannonTowerButton.setToolTipText(towerFactory.getLevelInformation(CannonTower.class, 1).toHtmlString());
+		
 		startGameButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 5, 3));
-				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 3, 5));
+				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 3.f / level, 3 * level));
+				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 4.f / level, 6 * level));
 				gamePlay.start();
+				gameplayUpdateTimer = new Timer();
 				startGamePlayUpdaateTimer();
+				level++;
 			}
 		});
+		 // this is a hack to increase the size of enemies at every wave, remove in the future!!
 		sideBar.add(towersToBuyPanel);
 
 	}
@@ -420,8 +422,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Reads the current {@link GamePlay} attributes
 	 */
 	private void readGamePlay() {
-		if (gamePlay.isGameOver()) {
+		if (gamePlay.isGameOver() || gamePlay.isStateSetup()) {
 			gameplayUpdateTimer.cancel();
+			
 		}
 		
 		enableButtons();
@@ -430,6 +433,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		livesField.setText("" + gamePlay.getLives());
 	}
 
+	/**
+	 * Disable the buttons
+	 */
 	private void disableButtons() {
 		if(gamePlay.isStateRunning()) {
 		for(Component component : towerButtons) {
@@ -440,6 +446,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		
 	}
 
+	/**
+	 * Enable the buttons
+	 */
 	private void enableButtons() {
 		if(gamePlay.isStateSetup() || gamePlay.isGameOver()) {
 		for(Component component : towerButtons) {

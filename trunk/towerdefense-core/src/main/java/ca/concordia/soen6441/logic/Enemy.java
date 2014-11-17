@@ -16,7 +16,7 @@ public class Enemy extends Observable {
 	private final GameMap gameMap;
 	private final int maxHealth;
 	private Point2f currentPosition;
-	private float speed = 0.5f;
+	private float speed = 1.5f;
 	private int destinationIdx = 1;
 	private int prize = 50;
 	private int health;
@@ -60,7 +60,7 @@ public class Enemy extends Observable {
 	 */
 	public void update(float seconds) {
 		if(!hasReachedEnd()) {
-			System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
+			//System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
 			move(seconds);
 		}
 	}
