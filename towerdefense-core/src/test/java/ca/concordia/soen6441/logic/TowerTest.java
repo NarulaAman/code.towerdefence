@@ -10,6 +10,10 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 
+/**
+ * Tests if the {@link Tower} shoots
+ *
+ */
 public class TowerTest {
 
 	private final TowerFactory towerFactory = new TowerFactory();
@@ -17,6 +21,9 @@ public class TowerTest {
 	private Tower tower;
 	private Enemy enemy;
 	
+	/**
+	 * Pre-conditions of the test
+	 */
 	@Before
 	public void setUp() {
 		tower = towerFactory.towerOnCoordinate(FireTower.class, new GridPosition(1, 1));

@@ -24,6 +24,9 @@ public class FireTowerTest {
 	private FireTower tower;
 	private Enemy enemy;
 	
+	/**
+	 * Pre-conditions of the test
+	 */
 	@Before
 	public void setUp() {
 		tower = (FireTower) towerFactory.towerOnCoordinate(FireTower.class, new GridPosition(1, 1));

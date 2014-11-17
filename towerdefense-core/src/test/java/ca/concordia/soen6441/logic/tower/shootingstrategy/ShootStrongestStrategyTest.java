@@ -28,6 +28,7 @@ public class ShootStrongestStrategyTest {
 	private Enemy enemyTarget;
 	private Enemy enemyNotTarget;
 	private ShootingStrategy strategy;
+	
 	/**
 	 * Preconditions of the test
 	 */
