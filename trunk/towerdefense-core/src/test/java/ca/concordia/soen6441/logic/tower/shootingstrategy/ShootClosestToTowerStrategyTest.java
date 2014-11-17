@@ -19,15 +19,17 @@ import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
- * Test to shoot the enemy closest to the end point
+ * Test to shoot the enemy closest to the tower
  *
  */
-public class ShootClosestStrategyTest {
+public class ShootClosestToTowerStrategyTest {
 
 	
 	private Tower tower;
 	private Enemy enemyTarget;
 	private Enemy enemyNotTarget;
+	private Point2f enemyTargetPosition;
+	private Point2f enemyNotTargetPosition;
 	private ShootingStrategy strategy;
 	
 	/**
@@ -37,19 +39,24 @@ public class ShootClosestStrategyTest {
 	public void setUp() {		
 		tower = mock(Tower.class);
 		enemyTarget = mock(Enemy.class);
+		enemyTargetPosition = mock(Point2f.class);
 		enemyNotTarget = mock(Enemy.class);
-		strategy = new ShootClosestToEndPointStrategy();
+		enemyNotTargetPosition = mock(Point2f.class);
+		strategy = new ShootClosestStrategy();
 		
 	}
 	
 	/**
-	 * Test that the enemy closest to the end point is shot
+	 * Test that the enemy closest to the tower is shot
 	 */
 	@Test
 	public void testShootEnemyClosestToEndPoint() {
 		when(tower.inRange(Matchers.any(Point2f.class))).thenReturn(true);
-		when(enemyTarget.getProgress()).thenReturn(0.7f);
-		when(enemyNotTarget.getProgress()).thenReturn(0.2f);
+		when(tower.inRange(Matchers.any(Point2f.class))).thenReturn(true);
+		when(enemyTarget.getCurrentPosition()).thenReturn(enemyTargetPosition);
+		when(enemyNotTarget.getCurrentPosition()).thenReturn(enemyNotTargetPosition);
+		when(tower.distanceTo(enemyTargetPosition)).thenReturn(1.f);
+		when(tower.distanceTo(enemyNotTargetPosition)).thenReturn(2.f);
 		List<Enemy> enemies = new ArrayList<>();
 		enemies.add(enemyTarget);
 		enemies.add(enemyNotTarget);

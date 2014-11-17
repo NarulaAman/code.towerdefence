@@ -22,22 +22,23 @@ import ca.concordia.soen6441.logic.tower.Tower;
  * Test to shoot the enemy closest to the end point
  *
  */
-public class ShootStrongestStrategyTest {
-	
+public class ShootClosestToEndPointStrategyTest {
+
 	private Tower tower;
 	private Enemy enemyTarget;
 	private Enemy enemyNotTarget;
 	private ShootingStrategy strategy;
+	
 	/**
 	 * Preconditions of the test
 	 */
 	@Before
-	public void setUp() {	
-		
+	public void setUp() {		
 		tower = mock(Tower.class);
 		enemyTarget = mock(Enemy.class);
 		enemyNotTarget = mock(Enemy.class);
-		strategy = new ShootStrongestStrategy();
+		strategy = new ShootClosestToEndPointStrategy();
+		
 	}
 	
 	/**
@@ -46,8 +47,8 @@ public class ShootStrongestStrategyTest {
 	@Test
 	public void testShootEnemyClosestToEndPoint() {
 		when(tower.inRange(Matchers.any(Point2f.class))).thenReturn(true);
-		when(enemyTarget.getHealth()).thenReturn(100);
-		when(enemyNotTarget.getHealth()).thenReturn(50);
+		when(enemyTarget.getProgress()).thenReturn(0.7f);
+		when(enemyNotTarget.getProgress()).thenReturn(0.2f);
 		List<Enemy> enemies = new ArrayList<>();
 		enemies.add(enemyTarget);
 		enemies.add(enemyNotTarget);
