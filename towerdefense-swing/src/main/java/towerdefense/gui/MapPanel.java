@@ -210,7 +210,7 @@ public class MapPanel extends JPanel implements Observer{
 	
 	/**
 	 * Sets a map to be displayed by this {@link MapPanel}
-	 * @param gameMap
+	 * @param gameMap {@link GameMap} to be set
 	 */
 	public void setMap(GameMap gameMap) {
 		if (this.gameMap != null) {
