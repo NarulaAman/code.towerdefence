@@ -24,18 +24,18 @@ public class IceTower extends AbstractTemporalEffectTower {
 		private final Enemy enemy;
 		private float originalSpeed;
 		
-/**
- * Initialize the data members
- * @param enemy
- */
+		/**
+		 * Initialize the data members
+		 * @param enemy to be slown down
+		 */
 		public SlowingEffect(Enemy enemy) {
 			super(SLOW_DURATION_SECS);
 			this.enemy = enemy;
 		}
 		
-/**
- * Start the slowing affect on {@link Enemy}
- */
+		/**
+		 * Start the slowing affect on {@link Enemy}
+		 */
 		protected void startEffect() {
 			super.startEffect();
 			originalSpeed = enemy.getSpeed();
@@ -43,9 +43,9 @@ public class IceTower extends AbstractTemporalEffectTower {
 			enemy.setSpeed(slowSpeed);
 		}
 		
-/**
- * Stop the slowing affect on {@link Enemy}
- */
+		/**
+		 * Stop the slowing affect on {@link Enemy}
+		 */
 		protected void stopEffect() {
 			super.stopEffect();
 			enemy.setSpeed(originalSpeed);
@@ -74,6 +74,7 @@ public class IceTower extends AbstractTemporalEffectTower {
 
 	/**
 	 * Visit this tower to visit the {@link TowerVisitor}
+	 * @param visitor visitor to be applied
 	 */
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);

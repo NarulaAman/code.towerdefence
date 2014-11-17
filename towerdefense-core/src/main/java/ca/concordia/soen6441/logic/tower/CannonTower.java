@@ -30,10 +30,10 @@ public class CannonTower extends Tower {
 		super(level, gridPosition, shootingStrategy, towerFactory);
 	}
 
-/**
- * Tower shoot the enemies 
- * @param enemy {@link Enemy} in the range
- */
+	/**
+	 * Tower shoot the enemies 
+	 * @param enemy {@link Enemy} in the range
+	 */
 	protected void specializedShot(Enemy enemy) {
 		List<Enemy> enemiesToSplash = new ArrayList<>();
 		for (Enemy otherEnemy : enemies) {
@@ -51,16 +51,18 @@ public class CannonTower extends Tower {
 		}
 	}
 
-/**
- * Visit this tower to visit the {@link TowerVisitor}
- */
-	public void visit(TowerVisitor visit) {
-		visit.visit(this);
+	/**
+	 * Visit this tower to visit the {@link TowerVisitor}
+	 * @param visitor visitor to be applied to this tower
+	 */
+	public void visit(TowerVisitor visitor) {
+		visitor.visit(this);
 	}
 
-/**
-* Shoot the {@link Enemy} after interval of time
-*/
+	/**
+	* Shoot the {@link Enemy} after interval of time
+	* @param shootEnemies enemies to be shot
+	*/
 	public void maybeShoot(List<Enemy> shootEnemies) {
 		if (hasCooledDown()) {
 			enemies = shootEnemies;
