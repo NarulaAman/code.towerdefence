@@ -12,12 +12,10 @@ import javax.vecmath.Point2f;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
-import ca.concordia.soen6441.logic.tower.CannonTower;
 
 /**
  * Tests the {@link CannonTower} special effect of splash damage
