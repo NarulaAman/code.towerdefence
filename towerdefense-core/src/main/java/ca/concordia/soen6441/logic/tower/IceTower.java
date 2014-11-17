@@ -84,7 +84,7 @@ public class IceTower extends AbstractTemporalEffectTower {
 	 * @return the duration of slowing down the enemy
 	 */
 	public float getSlownessDurationSecs() {
-		return SLOW_DURATION_SECS;
+		return SLOW_DURATION_SECS * getLevel();
 	}
 
 	/**
