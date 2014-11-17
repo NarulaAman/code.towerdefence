@@ -66,11 +66,9 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	// IceTower attributes
 	private final JLabel slowTimeLbl = new JLabel("Slows for secs:");
 	private final JTextField slowTimeTxtFld = new JTextField("");
+	private final JLabel slowRateLbl = new JLabel("Speed rate:");
+	private final JTextField slowRateTxtFld = new JTextField("");	
 	
-	
-	
-	
-
 	private final JTextField costTxtFld = new JTextField("");
 	private final JTextField damageTxtFld = new JTextField("");
 	private final JTextField rangeTxtFld = new JTextField("");
@@ -139,10 +137,10 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 		costTxtFld.setEditable(false);
 		damageTxtFld.setEditable(false);
-		rangeTxtFld .setEditable(false);
-		levelTxtFld .setEditable(false);
-		refundTxtFld .setEditable(false);
-		upgradeCostTxtFld .setEditable(false);
+		rangeTxtFld.setEditable(false);
+		levelTxtFld.setEditable(false);
+		refundTxtFld.setEditable(false);
+		upgradeCostTxtFld.setEditable(false);
 		
 		fireTowerAttributes.add(burnRateLbl);
 		fireTowerAttributes.add(burnRateRatioTxtFld);
@@ -154,11 +152,16 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		burnDamageTxtFld.setEditable(false);
 		burnTimeTxtFld.setEditable(false);
 		burnRateRatioTxtFld.setEditable(false);
-			
+		
+		
+		iceTowerAttributes.setLayout(new GridLayout(2,2));
 		iceTowerAttributes.add(slowTimeLbl);
 		iceTowerAttributes.add(slowTimeTxtFld);
+		iceTowerAttributes.add(slowRateLbl);
+		iceTowerAttributes.add(slowRateTxtFld);
 		
 		slowTimeTxtFld.setEditable(false);
+		slowRateTxtFld.setEditable(false);
 		
 		cannonTowerAttributes.add(splashRadiusLbl);
 		cannonTowerAttributes.add(splashRadiusTxtFld);
@@ -321,6 +324,10 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		this.shownTower = shownTower;
 	}
 
+	/**
+	 * Displays information about a {@link FireTower}
+	 * @param tower to be displayed
+	 */
 	@Override
 	public void visit(FireTower tower) {
 	   constraints.gridy=4;
@@ -330,13 +337,22 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
        add(fireTowerAttributes,constraints);
 	}
 
+	/**
+	 * Displays information about a {@link FireTower}
+	 * @param tower to be displayed
+	 */
 	@Override
 	public void visit(IceTower tower) {
 		constraints.gridy=4;
-        slowTimeTxtFld.setText("" + tower.getSlownessRate());
+        slowTimeTxtFld.setText("" + tower.getSlownessDurationSecs());
+        slowRateTxtFld.setText("" + tower.getSlownessRate());
 		add(iceTowerAttributes,constraints);
 	}
 
+	/**
+	 * Displays information about a {@link FireTower}
+	 * @param tower to be displayed
+	 */
 	@Override
 	public void visit(CannonTower tower) {	
 		constraints.gridy=4;	
@@ -346,6 +362,10 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		
 	}
 
+	/**
+	 * Enables/disabled the buttons
+	 * @param enabled boolean to show if the buttong should be enabled/disabled
+	 */
 	@Override
 	public void setEnabled(boolean enabled) {
 		sellBtn.setEnabled(enabled);
