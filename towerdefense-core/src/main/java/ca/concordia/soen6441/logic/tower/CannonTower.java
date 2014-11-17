@@ -31,8 +31,8 @@ public class CannonTower extends Tower {
 	}
 
 	/**
-	 * Tower shoot the enemies 
-	 * @param enemy {@link Enemy} in the range
+	 * Tower shoot the enemy
+	 * @param enemy {@link Enemy} to shoot
 	 */
 	protected void specializedShot(Enemy enemy) {
 		List<Enemy> enemiesToSplash = new ArrayList<>();

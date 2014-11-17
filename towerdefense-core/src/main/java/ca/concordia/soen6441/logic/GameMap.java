@@ -45,7 +45,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 */
 	private GridPosition endGridPosition;
 	
-//	private transient List<GridPosition> startToEndPath;
+	private transient List<GridPosition> startToEndPath;
 
 	/**
 	 * Display the {@link GameMap} with scenery at all the {@link Tile}
@@ -299,36 +299,38 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 * @return the path from the start to the end
 	 */
 	public List<GridPosition> getStartToEndPath() {
-		class PositionListPair {
-			GridPosition gridPosition;
-			List<GridPosition> path = new ArrayList<>();
-			PositionListPair(GridPosition gridPosition, List<GridPosition> path) {
-				this.gridPosition = gridPosition;
-				this.path.addAll(path);
-				this.path.add(gridPosition);
-			}
-		}	
-		List<GridPosition> enemyPath = new ArrayList<>();
-		ArrayDeque<PositionListPair> positionQueue = new ArrayDeque<>();
-		Set<GridPosition> visitedPositions = new HashSet<>();
-		positionQueue.addFirst(new PositionListPair(getStartGridPosition(), new ArrayList<GridPosition>()));
-		while (!positionQueue.isEmpty()) {
-			PositionListPair positionPathPair = positionQueue.getFirst();
-			GridPosition currentPosition = positionPathPair.gridPosition;
-			positionQueue.removeFirst();
-			visitedPositions.add(currentPosition);
-			if (currentPosition.distance(getEndGridPosition()) < 1.1) {
-				enemyPath.addAll(positionPathPair.path);
-				enemyPath.add(getEndGridPosition());
-				break;
-			}
-			List<GridPosition> walkableFromHere = getAdjacentWalkablePositions(currentPosition);
-			for (GridPosition gridPosition : walkableFromHere) {					
-				if (! visitedPositions.contains(gridPosition)) {
-					positionQueue.addFirst(new PositionListPair(gridPosition, positionPathPair.path));
+		if (startToEndPath == null) {
+			class PositionListPair {
+				GridPosition gridPosition;
+				List<GridPosition> path = new ArrayList<>();
+				PositionListPair(GridPosition gridPosition, List<GridPosition> path) {
+					this.gridPosition = gridPosition;
+					this.path.addAll(path);
+					this.path.add(gridPosition);
+				}
+			}	
+			startToEndPath = new ArrayList<>();
+			ArrayDeque<PositionListPair> positionQueue = new ArrayDeque<>();
+			Set<GridPosition> visitedPositions = new HashSet<>();
+			positionQueue.addFirst(new PositionListPair(getStartGridPosition(), new ArrayList<GridPosition>()));
+			while (!positionQueue.isEmpty()) {
+				PositionListPair positionPathPair = positionQueue.getFirst();
+				GridPosition currentPosition = positionPathPair.gridPosition;
+				positionQueue.removeFirst();
+				visitedPositions.add(currentPosition);
+				if (currentPosition.distance(getEndGridPosition()) < 1.1) {
+					startToEndPath.addAll(positionPathPair.path);
+					startToEndPath.add(getEndGridPosition());
+					break;
+				}
+				List<GridPosition> walkableFromHere = getAdjacentWalkablePositions(currentPosition);
+				for (GridPosition gridPosition : walkableFromHere) {					
+					if (! visitedPositions.contains(gridPosition)) {
+						positionQueue.addFirst(new PositionListPair(gridPosition, positionPathPair.path));
+					}
 				}
 			}
 		}
-		return enemyPath;
+		return startToEndPath;
 	}
 }

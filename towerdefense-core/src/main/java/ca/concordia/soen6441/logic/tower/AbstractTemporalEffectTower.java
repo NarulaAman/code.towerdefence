@@ -14,24 +14,31 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 /**
  * 
- * Abstract class for characteristics of Tower 
- *
+ * Abstract class for characteristics of A Temporal Effect Tower. Actually this class was a mistake, 
+ * this was a trap for re-use by inheritance. This class stores state and behavior, forcing the 
+ * subclass to take it with it. Bugs shall arise from this decision in 3...2...1...
  */
 public abstract class AbstractTemporalEffectTower extends Tower implements Observer {
 
 	private final Map<Enemy, TemporalEffect> enemiesUnderEffect = new ConcurrentHashMap<>();
-/**
- * Initialize the data members  
- * @param level
- * @param gridPosition
- * @param shootingStrategy
- * @param towerFactory
- */
+	
+	/**
+	 * Initialize the AbstractTemporalEffectTower  
+	 * @param level
+	 * @param gridPosition
+	 * @param shootingStrategy
+	 * @param towerFactory
+	 */
 	public AbstractTemporalEffectTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy,
 			TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
 	}
 	
+	/**
+	 * Factory method to build an effect on a given enemy
+	 * @param enemy to have an TemporalEffect
+	 * @return a Temporal effect for the enemy
+	 */
 	protected abstract TemporalEffect buildEffectOn(Enemy enemy);
 
 	/**
@@ -66,10 +73,11 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 			}
 		}
 	}
-/**
- * Remove the burning affect from the {@link Enemy}  when time is out
- * @param seconds seconds passed
- */
+	
+	/**
+	 * Remove the burning affect from the {@link Enemy}  when time is out
+	 * @param seconds seconds passed
+	 */
 	public void update(float seconds) {
 		super.update(seconds);
 		for (Map.Entry<Enemy, TemporalEffect> burningEnemyEntry : enemiesUnderEffect.entrySet()) {
