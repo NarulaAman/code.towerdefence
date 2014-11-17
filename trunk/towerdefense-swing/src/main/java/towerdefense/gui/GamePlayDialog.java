@@ -11,12 +11,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -35,7 +38,9 @@ import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 /**
  * This is the dialog which will show the {@link GamePlay}. Here the user will be able to play the game
@@ -99,7 +104,11 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private java.util.List<Component> towerButtons = new ArrayList<>();
 
 	private final Timer gameplayUpdateTimer = new Timer();
-
+    
+	private ShootingStrategy weakestStrategy = new ShootStrongestStrategy();
+	private ShootingStrategy closestStrategy = new ShootClosestStrategy();
+	private ShootClosestToEndPointStrategy closestEnd = new ShootClosestToEndPointStrategy();
+	
 	private Class<? extends Tower> towerToBuy = null;
 	private Tower selectedTower = null;
 
@@ -107,6 +116,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private BuyingTower buyingTower = BuyingTower.FIRE_TOWER;
 
 	private GamePlay gamePlay;
+	
+	private ButtonGroup buttonGroup = new ButtonGroup();
 
 
 	/**
@@ -126,6 +137,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towerButtons.add(fireTowerButton);
 		towerButtons.add(iceTowerButton);
 		towerButtons.add(cannonTowerButton);
+		buttonGroup.add(towerInspectionPanel.getWeakestStratBtn());
+		buttonGroup.add(towerInspectionPanel.getClosestStratBtn());
+		buttonGroup.add(towerInspectionPanel.getShootingStratBtn());
 		towerInspectionPanel.setVisible(false);
 		readGamePlay();
 		//		startGamePlayUpdaateTimer();
@@ -245,6 +259,15 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private void setupInspectionWindow(JPanel sideBar) {
 		sideBar.add(towerInspectionPanel);
 
+        	Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+        	while(buttons.hasMoreElements()){
+        		if(buttons.nextElement().isSelected()) {
+        			buttons.nextElement().setEnabled(false);
+        		}
+        		
+        		
+        	}      		       	
+        
 		towerInspectionPanel.getSellBtn().addActionListener(new ActionListener() {
 
 			@Override
@@ -255,18 +278,19 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		});
 
 		towerInspectionPanel.getUpgradeBtn().addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gamePlay.upgrade(selectedTower);
 			}
 		});
 		
+		
 		towerInspectionPanel.getWeakestStratBtn().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				selectedTower.setShootingStrategy(new ShootStrongestStrategy());
+				selectedTower.setShootingStrategy(new ShootStrongestStrategy());				
 			}
 		});
 		
