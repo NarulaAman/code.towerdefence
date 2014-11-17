@@ -19,6 +19,10 @@ import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.CannonTower;
 
+/**
+ * Tests the {@link CannonTower} special effect of splash damage
+ *
+ */
 public class CannonTowerTest {
 
 	private final TowerFactory towerFactory = new TowerFactory();
@@ -27,6 +31,9 @@ public class CannonTowerTest {
 	private Enemy enemyTarget;
 	private Enemy enemySplashed;
 	
+	/**
+	 * Sets up the preconditions of the test
+	 */
 	@Before
 	public void setUp() {
 		tower = (CannonTower) towerFactory.towerOnCoordinate(CannonTower.class, new GridPosition(1, 1));
