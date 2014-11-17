@@ -37,6 +37,7 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 
 		/**
 		 * Update the damage to the {@link Enemy}
+		 * @param seconds seconds passed
 		 */
 		protected void updateEffect(float seconds) {
 			super.updateEffect(seconds);

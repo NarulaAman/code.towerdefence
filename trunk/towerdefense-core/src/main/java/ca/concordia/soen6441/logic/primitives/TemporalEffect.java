@@ -57,12 +57,25 @@ public class TemporalEffect {
 		return timeLeft <= 0; 
 	}
 	
+	/**
+	 * Stub to be overridden when the effect starts
+	 */
 	protected void startEffect() {};
 	
+	/**
+	 * Stub to be overridden
+	 * @param seconds seconds passed
+	 */
 	protected void updateEffect(float seconds) {};
 	
+	/**
+	 * Stub to be overridden when the effect stops
+	 */
 	protected void stopEffect() {};
 	
+	/**
+	 * Stub to be overridden when the effect is to be reseted
+	 */
 	public void resetEffect() {};
 
 }

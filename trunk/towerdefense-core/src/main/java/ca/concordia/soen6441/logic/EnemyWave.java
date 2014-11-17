@@ -62,9 +62,11 @@ public class EnemyWave implements Serializable{
 			spawnEnemy();
 		}
 	}
-/*
- * Check if all the enemies are spawned
- */
+
+	/**
+	 * Returns true if there is no more enemies to spawn
+	 * @return true if there is no more enemies to spawn
+	 */
 	public boolean isFinished() {
 		return enemiesToSpawn < 1;
 	}

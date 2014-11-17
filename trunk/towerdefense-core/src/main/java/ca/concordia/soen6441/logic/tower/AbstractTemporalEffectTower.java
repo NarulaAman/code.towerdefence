@@ -68,6 +68,7 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 	}
 /**
  * Remove the burning affect from the {@link Enemy}  when time is out
+ * @param seconds seconds passed
  */
 	public void update(float seconds) {
 		super.update(seconds);
