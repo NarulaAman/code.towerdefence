@@ -127,7 +127,8 @@ public class MapValidator {
 
 	/**
 	 * Check true if the coordinates are on edges of the gameMap else false
-	 * @param gameMap to be checked            
+	 * @param gameMap to be checked
+	 * @param coordinate to be checked            
 	 * @return true if the coordinates are on edges of the gameMap 
 	 */
 	public boolean coordinateOnTheEdge(GameMap gameMap, GridPosition coordinate) {
