@@ -171,6 +171,9 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		
 	}
 
+	/**
+	 * Add strategy buttons to button group
+	 */
 	private void addStrategyButtonsToGroup() {
 		buttonGroup.add(getShootStrongestStratBtn());
 		buttonGroup.add(getShootClosestToTowerStratBtn());
@@ -178,6 +181,9 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		
 	}
 
+	/**
+	 * Fill specialized attributes list
+	 */
 	private void fillSpecializedAttributesList() {
 		specializedTowerAttributes.add(fireTowerAttributes);
 		specializedTowerAttributes.add(iceTowerAttributes); 
@@ -185,6 +191,9 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	
 	}
 	
+	/**
+	 * Remove special attributes
+	 */
 	private void removeSpecializedAttributes() {
 		for (Component component : specializedTowerAttributes) {
 			remove(component);
@@ -241,6 +250,10 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		tower.visit(this);
 	}
 
+	/**
+	 * Read the strategy from the given tower
+	 * @param tower to have the strategy read from
+	 */
 	private void selectStrategy(Tower tower) {
 		// we should prefer a visitor pattern instead of tests of instanceof,
 		// but we have little time now :(

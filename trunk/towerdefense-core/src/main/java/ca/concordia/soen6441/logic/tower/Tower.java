@@ -279,7 +279,7 @@ public abstract class Tower extends Observable {
 	 * Return the object of {@link ShootingStrategy}
 	 * @return The object of {@link ShootingStrategy}
 	 */
-	protected ShootingStrategy getShootingStrategy() {
+	public ShootingStrategy getShootingStrategy() {
 		return shootStrategy;
 	}
 }
