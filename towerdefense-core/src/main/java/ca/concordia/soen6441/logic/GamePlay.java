@@ -298,7 +298,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	/**
 	 * Notifies the {@link GamePlay} that the enemy has reached the end
-	 * @param enemy
+	 * @param enemy {@link Enemy} that has reached the end
 	 */
 	public void reachedEnd(Enemy enemy) {
 		enemies.remove(enemy);
