@@ -68,4 +68,12 @@ public class CannonTower extends Tower {
 			enemies = null;
 		}
 	}
+	
+	public float getSplashRange() {
+		return SPLASH_RANGE;
+	}
+	
+	public float getSplashDamageRatio() {
+		return SPLASH_DAMAGE_RATIO;
+	}
 }
