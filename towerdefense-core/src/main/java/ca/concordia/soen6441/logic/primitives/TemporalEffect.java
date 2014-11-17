@@ -14,6 +14,7 @@ public class TemporalEffect {
 	float timeLeft;
 	/**
 	 * Initialize the data members
+	 * @param duration duration of effect
 	 */
 	public TemporalEffect(float duration) {
 		this.duration = duration;
