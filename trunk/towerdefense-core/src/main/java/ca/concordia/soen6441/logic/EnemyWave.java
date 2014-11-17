@@ -10,6 +10,11 @@ import javax.vecmath.Point2f;
  */
 public class EnemyWave implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7112082959911825124L;
+
 	private final GamePlay gamePlay;
 	
 	private final GameMap gameMap;
