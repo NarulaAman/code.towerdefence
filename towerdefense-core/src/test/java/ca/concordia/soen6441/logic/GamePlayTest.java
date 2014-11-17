@@ -32,7 +32,7 @@ public class GamePlayTest {
 
 	/**
 	 * Setup pre-condition for all the test 
-	 * @throws Exception 
+	 * @throws Exception on error
 	 */
 	@Before
 	public void setUp() throws Exception {
