@@ -11,11 +11,12 @@ import ca.concordia.soen6441.logic.GamePlay;
  */
 public class ShootClosestToTowerStrategy extends AbstractShootingStrategy implements ShootingStrategy {
 
-/**
- * Shoot the enemy nearest to tower
- * @param enemies The list of {@link Enemy} in the {@link GamePlay}
- * 
- */
+	/**
+	 * Shoot the enemy nearest to tower
+	 * @param enemies The list of {@link Enemy} in the {@link GamePlay}
+	 * 
+	 */
+	@Override
 	public void shootIfInRange(List<Enemy> enemies) {
 		Enemy enemyToShoot = null;
 		for (Enemy enemy : enemies) {
