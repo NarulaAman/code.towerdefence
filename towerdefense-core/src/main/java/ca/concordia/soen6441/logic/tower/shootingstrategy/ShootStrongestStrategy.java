@@ -15,6 +15,7 @@ public class ShootStrongestStrategy extends AbstractShootingStrategy {
 	 * Shoot the enemy with weakest health
 	 * @param enemies The list of {@link Enemy} in the {@link GamePlay}
 	 */
+	@Override
 	public void shootIfInRange(List<Enemy> enemies) {
 		Enemy enemyToShoot = null;
 		for (Enemy enemy : enemies) {
