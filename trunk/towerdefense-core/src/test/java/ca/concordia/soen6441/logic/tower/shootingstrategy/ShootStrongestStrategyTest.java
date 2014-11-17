@@ -1,5 +1,7 @@
 package ca.concordia.soen6441.logic.tower.shootingstrategy;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -13,33 +15,38 @@ import javax.vecmath.Point2f;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
+import org.mockito.Mockito;
 
 import ca.concordia.soen6441.logic.Enemy;
+import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.Tile;
+import ca.concordia.soen6441.logic.TowerFactory;
+import ca.concordia.soen6441.logic.primitives.GridPosition;
+import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
  * Test to shoot the enemy closest to the end point
  *
  */
-public class ShootClosestStrategyTest {
+public class ShootStrongestStrategyTest {
 
 	
+	private final TowerFactory towerFactory = new TowerFactory();
 	private Tower tower;
 	private Enemy enemyTarget;
 	private Enemy enemyNotTarget;
-	private ShootingStrategy strategy;
 	
 	/**
 	 * Preconditions of the test
 	 */
 	@Before
-	public void setUp() {		
-		tower = mock(Tower.class);
+	public void setUp() {	
+		
+		tower = towerFactory.towerOnCoordinate(FireTower.class, new GridPosition(4, 3));
+		tower.setShootingStrategy(new ShootClosestStrategy());
 		enemyTarget = mock(Enemy.class);
 		enemyNotTarget = mock(Enemy.class);
-		strategy = new ShootClosestToEndPointStrategy();
-		
 	}
 	
 	/**
@@ -47,16 +54,14 @@ public class ShootClosestStrategyTest {
 	 */
 	@Test
 	public void testShootEnemyClosestToEndPoint() {
-		when(tower.inRange(Matchers.any(Point2f.class))).thenReturn(true);
-		when(enemyTarget.getProgress()).thenReturn(0.7f);
-		when(enemyNotTarget.getProgress()).thenReturn(0.2f);
+		when(enemyTarget.getCurrentPosition()).thenReturn(new Point2f(3, 4));
+		when(enemyNotTarget.getCurrentPosition()).thenReturn(new Point2f(2, 3));
 		List<Enemy> enemies = new ArrayList<>();
 		enemies.add(enemyTarget);
 		enemies.add(enemyNotTarget);
-		strategy.setTower(tower);
-		strategy.shootIfInRange(enemies);
-		verify(tower, times(1)).shoot(enemyTarget);
-		verify(tower, never()).shoot(enemyNotTarget);
+		tower.maybeShoot(enemies);
+		Mockito.verify(enemyTarget, atLeastOnce()).takeDamage(anyInt());
+		verify(enemyNotTarget, never()).takeDamage(anyInt());
 	}
 
 }
