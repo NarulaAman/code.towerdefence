@@ -69,10 +69,18 @@ public class CannonTower extends Tower {
 		}
 	}
 	
+	/**
+	 * Returns the range of the splash damage
+	 * @return the range of the splash damage
+	 */
 	public float getSplashRange() {
 		return SPLASH_RANGE;
 	}
 	
+	/**
+	 * Returns the damage ratio of the splash damage, i.e. how much is multiplied by the tower's base damage to calculate the damage
+	 * @return the damage ratio of the splash damage, i.e. how much is multiplied by the tower's base damage to calculate the damage
+	 */
 	public float getSplashDamageRatio() {
 		return SPLASH_DAMAGE_RATIO;
 	}
