@@ -34,9 +34,22 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	private int lives=10;
 	
 	
-	public enum State {
+	/**
+	 * Internal state of the {@link GamePlay}
+	 *
+	 */
+	private enum State {
+		/**
+		 * Setup state
+		 */
 		SETUP,
+		/**
+		 * Running state
+		 */
 		RUNNING,
+		/**
+		 * GameOver state
+		 */
 		GAMEOVER
 	}
 	
@@ -70,6 +83,9 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		setState(State.SETUP);
 	}
 	
+	/**
+	 * Starts the {@link GamePlay}
+	 */
 	public void start() {
 		setState(State.RUNNING);
 	}
@@ -246,15 +262,15 @@ public class GamePlay extends Observable implements Serializable, Observer {
 			tower.maybeShoot(enemies);
 		}
 		
-		
 		updateWaveFinished();
 		setChanged();
 		notifyObservers();
-		
-		
 	}
 
 	
+	/**
+	 * Update the internal state if a wave has finished
+	 */
 	private void updateWaveFinished() {
 		if (enemyWaves.isEmpty() && enemies.isEmpty()) {
 			setState(State.SETUP);		

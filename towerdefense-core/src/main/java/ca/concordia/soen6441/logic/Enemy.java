@@ -129,9 +129,6 @@ public class Enemy extends Observable {
 	 * @return the current position of the enemy on the map
 	 */
 	public Point2f getCurrentPosition() {
-//		if (currentPosition == null) {
-//			return new Point2f(titorGridPosition.getX(), titorGridPosition.getY());
-//		}
 		return currentPosition;
 	}
 	

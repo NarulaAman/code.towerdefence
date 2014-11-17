@@ -81,14 +81,14 @@ public abstract class Tower extends Observable {
 		return getTowerLevelCharacteristic().getRange();
 	}
 	
-//	/**
-//	 * Validate if position of enemy is within the range of tower 
-//	 * @param otherCoordinate The position of enemy on {@link GameMap}
-//	 * @return True if the position of enemy is within the range of tower else false
-//	 */
-//	public boolean inRange(GridPosition otherCoordinate) {
-//		return distance(gridPosition, otherCoordinate) < getRange();
-//	}
+	/**
+	 * Validate if position of enemy is within the range of tower 
+	 * @param otherCoordinate The position of enemy on {@link GameMap}
+	 * @return True if the position of enemy is within the range of tower else false
+	 */
+	public boolean inRange(GridPosition otherCoordinate) {
+		return distance(gridPosition, otherCoordinate) < getRange();
+	}
 	
 	/**
 	 * Calculate the distance between Tower and Enemy
@@ -192,21 +192,6 @@ public abstract class Tower extends Observable {
 		return towerFactory;
 	}
 	
-	public boolean canLockTarget(Enemy T) {
-		double countedDistanse = countDistanse(T);
-		if ( countedDistanse < (getRange())) {
-			return true;
-		}
-		return false;
-	}
-	public double countDistanse(Enemy T) {
-		return distanceTo(gridPosition);
-	}
-	
-	public void shootEnemy(Enemy enemy) {
-		enemy.setHealth(enemy.getHealth() - getDamage());
-	}
-	
 	/**
 	 * Sets the shooting strategy
 	 * @param shootingStrategy
@@ -232,6 +217,10 @@ public abstract class Tower extends Observable {
 	 */
 	protected abstract void specializedShot(Enemy enemy);
 	
+	/**
+	 * Shoots an enemy
+	 * @param enemy enemy to be shot
+	 */
 	public void shoot(Enemy enemy) {
 		secondsSinceLastShot = 0;
 		specializedShot(enemy);
