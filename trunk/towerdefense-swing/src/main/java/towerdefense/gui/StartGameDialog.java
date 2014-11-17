@@ -45,11 +45,12 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
 	/**
 	 * Creates a {@link StartGameDialog} with a given {@link GameMapDao}, {@link MapEditAction}, {@link StartGamePlayAction}
-	 * @param gameMapDao 
-	 * @param mapEditAction
-	 * @param startGamePlayAction
+	 * @param gameMapDao {@link GameMapDao} to be used
+	 * @param newMapAction {@link NewMapAction} to be used
+	 * @param mapEditAction {@link MapEditAction} to be used
+	 * @param startGamePlayAction {@link StartGamePlayAction} to be used
 	 */
-	public StartGameDialog(GameMapDao gameMapDao,NewMapAction newMapAction ,MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
+	public StartGameDialog(GameMapDao gameMapDao, NewMapAction newMapAction, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Chicken Tikka Masala Gang - Tower Defense");
 		setLayout(new BorderLayout());
