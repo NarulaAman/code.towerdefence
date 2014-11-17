@@ -13,6 +13,10 @@ import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.FireTower;
 
+/**
+ * Tests the special effects of the {@link FireTower}
+ *
+ */
 public class FireTowerTest {
 
 	private final TowerFactory towerFactory = new TowerFactory();

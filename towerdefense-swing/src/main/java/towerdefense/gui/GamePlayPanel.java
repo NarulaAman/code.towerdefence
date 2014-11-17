@@ -153,7 +153,7 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 			g.setColor(Color.black);
 			g.drawRect((int) tileToScreen(enemy.getCurrentPosition()).x + 4, (int) tileToScreen(enemy.getCurrentPosition()).y + 4, getTileWidth()-8, (getTileHeight()-8)/4);
 			g.setColor(Color.green);
-			g.fillRect((int) tileToScreen(enemy.getCurrentPosition()).x + 4, (int) tileToScreen(enemy.getCurrentPosition()).y + 4, (int) ((getTileWidth()-8) * ((float) enemy.getHealth()/100)), (getTileHeight()-8)/4);
+			g.fillRect((int) tileToScreen(enemy.getCurrentPosition()).x + 4, (int) tileToScreen(enemy.getCurrentPosition()).y + 4, (int) ((getTileWidth()-8) * ((float) enemy.getHealth()/enemy.getMaxHealth())), (getTileHeight()-8)/4);
 		}
 	}
 	

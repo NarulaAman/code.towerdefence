@@ -81,14 +81,14 @@ public abstract class Tower extends Observable {
 		return getTowerLevelCharacteristic().getRange();
 	}
 	
-	/**
-	 * Validate if position of enemy is within the range of tower 
-	 * @param otherCoordinate The position of enemy on {@link GameMap}
-	 * @return True if the position of enemy is within the range of tower else false
-	 */
-	public boolean inRange(GridPosition otherCoordinate) {
-		return distance(gridPosition, otherCoordinate) < getRange();
-	}
+//	/**
+//	 * Validate if position of enemy is within the range of tower 
+//	 * @param otherCoordinate The position of enemy on {@link GameMap}
+//	 * @return True if the position of enemy is within the range of tower else false
+//	 */
+//	public boolean inRange(GridPosition otherCoordinate) {
+//		return distance(gridPosition, otherCoordinate) < getRange();
+//	}
 	
 	/**
 	 * Calculate the distance between Tower and Enemy
@@ -262,6 +262,10 @@ public abstract class Tower extends Observable {
 		return distance <= getRange();
 	}
 	
+	/**
+	 * Applied the visitor to this {@link Tower}
+	 * @param visitor to be applied
+	 */
 	public abstract void visit(TowerVisitor visitor);
 /**
  * Return the distance  between the {@link Tower} and {@link Enemy}
