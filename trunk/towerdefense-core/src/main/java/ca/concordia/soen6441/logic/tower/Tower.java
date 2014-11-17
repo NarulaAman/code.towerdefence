@@ -52,9 +52,10 @@ public abstract class Tower extends Observable {
 
 	/**
 	 * Initialize the data members
-	 * @param level The level of the game
-	 * @param gridPosition The position of the {@link Tower} on {@link GameMap}
-	 * @param towerFactory The object of {@link TowerFactory}
+	 * @param level level of the tower to be created
+	 * @param gridPosition grid position of the tower
+	 * @param shootingStrategy shooting strategy to apply to the tower
+	 * @param towerFactory tower factory
 	 */
 	public Tower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super();
@@ -194,7 +195,7 @@ public abstract class Tower extends Observable {
 	
 	/**
 	 * Sets the shooting strategy
-	 * @param shootingStrategy
+	 * @param shootingStrategy shooting strategy to be applied
 	 */
 	public void setShootingStrategy(ShootingStrategy shootingStrategy) {
 		this.shootStrategy = shootingStrategy;
@@ -236,7 +237,7 @@ public abstract class Tower extends Observable {
 
 	/**
 	 * Update the tower for the amount of seconds passed
-	 * @param seconds
+	 * @param seconds seconds ellapsed since the last call
 	 */
 	public void update(float seconds) {
 		secondsSinceLastShot = secondsSinceLastShot + seconds;
