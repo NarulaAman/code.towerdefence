@@ -27,7 +27,7 @@ public class GameMapDaoTest {
 
 	/**
 	 * Creates a {@link GameMap} to aid the tests
-	 * @throws Exception
+	 * @throws Exception on error
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -43,7 +43,7 @@ public class GameMapDaoTest {
 
 	/**
 	 * Delete the file created during the tests
-	 * @throws Exception
+	 * @throws Exception on error
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
@@ -52,8 +52,8 @@ public class GameMapDaoTest {
 	
 	/**
 	 * Tests if an error occurs when opening a non-existant file
-	 * @throws ClassNotFoundException
-	 * @throws IOException
+	 * @throws ClassNotFoundException on error
+	 * @throws IOException on error
 	 */
 	@Test(expected=IOException.class)
 	public final void testLoadWithNoExistantFile() throws ClassNotFoundException, IOException {
@@ -63,8 +63,8 @@ public class GameMapDaoTest {
 
 	/**
 	 * Tests if the save happens without errors
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws IOException on error
+	 * @throws ClassNotFoundException on error
 	 */
 	@Test
 	public final void testSave() throws IOException, ClassNotFoundException {
@@ -73,8 +73,8 @@ public class GameMapDaoTest {
 
 	/**
 	 * Tests if the load method loaded the same method it saved before
-	 * @throws ClassNotFoundException
-	 * @throws IOException
+	 * @throws ClassNotFoundException on error
+	 * @throws IOException on error
 	 */
 	@Test
 	public final void testLoad() throws ClassNotFoundException, IOException {
