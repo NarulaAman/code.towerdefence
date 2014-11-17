@@ -11,16 +11,21 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.TowerVisitor;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToTowerStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
 
 /**
  * This is the TowerInspectionWindow, it shows the current tower attributes
@@ -78,9 +83,11 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 	private final JButton upgradeBtn = new JButton("Upgrade");
 	private final JButton sellBtn = new JButton("Sell");
-	private final JButton weakestStratBtn = new JButton("Shoot Weakest");
-	private final JButton closestStratBtn = new JButton("Shoot Closest to Tower");
-	private final JButton shootingStratBtn = new JButton("Shoot Closest to End");
+	
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final JToggleButton shootStrongestStratBtn = new JToggleButton("Shoot Strongest");
+	private final JToggleButton shootClosestToTowerStratBtn = new JToggleButton("Shoot Closest to Tower");
+	private final JToggleButton shootClosestToEndPointStratBtn = new JToggleButton("Shoot Closest to End");
 
 	private Tower shownTower = null;
 	private JPanel attributesPnl;
@@ -126,11 +133,11 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 
 		//		constraints.gridx = 0;
 		constraints.gridy = 1;
-		add(weakestStratBtn, constraints);
+		add(shootStrongestStratBtn, constraints);
 		constraints.gridy = 2;
-		add(closestStratBtn, constraints);
+		add(shootClosestToTowerStratBtn, constraints);
 		constraints.gridy = 3;
-		add(shootingStratBtn, constraints);
+		add(shootClosestToEndPointStratBtn, constraints);
 
 		costTxtFld.setEditable(false);
 		damageTxtFld.setEditable(false);
@@ -158,9 +165,16 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		cannonTowerAttributes.add(splashDamageRatioLbl);
 		cannonTowerAttributes.add(splashDamageRatioTxtFld);
 	
-		
+		addStrategyButtonsToGroup();
 		
 		fillSpecializedAttributesList();
+		
+	}
+
+	private void addStrategyButtonsToGroup() {
+		buttonGroup.add(getShootStrongestStratBtn());
+		buttonGroup.add(getShootClosestToTowerStratBtn());
+		buttonGroup.add(getShootClosestToEndPointStratBtn());
 		
 	}
 
@@ -220,11 +234,28 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 			upgradeCostTxtFld .setText("N/A");
 			upgradeBtn.setEnabled(false);
 		}
-		
+		selectStrategy(tower);
 		removeSpecializedAttributes();
 		revalidate();
 		repaint();
 		tower.visit(this);
+	}
+
+	private void selectStrategy(Tower tower) {
+		// we should prefer a visitor pattern instead of tests of instanceof,
+		// but we have little time now :(
+		if (tower.getShootingStrategy() instanceof ShootClosestToTowerStrategy) {
+			shootClosestToTowerStratBtn.setSelected(true);
+		} 
+		else if (tower.getShootingStrategy() instanceof ShootClosestToEndPointStrategy) {
+			shootClosestToEndPointStratBtn.setSelected(true);
+		} 
+		else if (tower.getShootingStrategy() instanceof ShootStrongestStrategy) {
+			shootStrongestStratBtn.setSelected(true);
+		}
+		else {
+			throw new RuntimeException("Unimplemented strategy!");
+		}
 	}
 
 	/**
@@ -247,24 +278,24 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	 * Returns the weakest strategy button
 	 * @return the weakest strategy button
 	 */
-	public JButton getWeakestStratBtn() {
-		return weakestStratBtn;
+	public JToggleButton getShootStrongestStratBtn() {
+		return shootStrongestStratBtn;
 	}
 
 	/**
 	 * Returns the closest strategy button
 	 * @return the closest strategy button
 	 */
-	public JButton getClosestStratBtn() {
-		return closestStratBtn;
+	public JToggleButton getShootClosestToTowerStratBtn() {
+		return shootClosestToTowerStratBtn;
 	}
 
 	/**
 	 * Returns the shooting strategy  button
 	 * @return the shooting strategy  button
 	 */
-	public JButton getShootingStratBtn() {
-		return shootingStratBtn;
+	public JToggleButton getShootClosestToEndPointStratBtn() {
+		return shootClosestToEndPointStratBtn;
 	}
 	/**
 	 * Sets the {@link Tower} to be shown by this {@link TowerPanel}

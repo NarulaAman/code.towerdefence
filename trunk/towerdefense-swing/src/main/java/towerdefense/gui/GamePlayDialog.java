@@ -37,7 +37,7 @@ import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
-import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToTowerStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
@@ -106,7 +106,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final Timer gameplayUpdateTimer = new Timer();
     
 	private ShootingStrategy weakestStrategy = new ShootStrongestStrategy();
-	private ShootingStrategy closestStrategy = new ShootClosestStrategy();
+	private ShootingStrategy closestStrategy = new ShootClosestToTowerStrategy();
 	private ShootClosestToEndPointStrategy closestEnd = new ShootClosestToEndPointStrategy();
 	
 	private Class<? extends Tower> towerToBuy = null;
@@ -117,7 +117,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 	private GamePlay gamePlay;
 	
-	private ButtonGroup buttonGroup = new ButtonGroup();
+	
 
 
 	/**
@@ -137,9 +137,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towerButtons.add(fireTowerButton);
 		towerButtons.add(iceTowerButton);
 		towerButtons.add(cannonTowerButton);
-		buttonGroup.add(towerInspectionPanel.getWeakestStratBtn());
-		buttonGroup.add(towerInspectionPanel.getClosestStratBtn());
-		buttonGroup.add(towerInspectionPanel.getShootingStratBtn());
+
 		towerInspectionPanel.setVisible(false);
 		readGamePlay();
 		//		startGamePlayUpdaateTimer();
@@ -259,14 +257,14 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private void setupInspectionWindow(JPanel sideBar) {
 		sideBar.add(towerInspectionPanel);
 
-        	Enumeration<AbstractButton> buttons = buttonGroup.getElements();
-        	while(buttons.hasMoreElements()){
-        		if(buttons.nextElement().isSelected()) {
-        			buttons.nextElement().setEnabled(false);
-        		}
-        		
-        		
-        	}      		       	
+//        	Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+//        	while(buttons.hasMoreElements()){
+//        		if(buttons.nextElement().isSelected()) {
+//        			buttons.nextElement().setEnabled(false);
+//        		}
+//        		
+//        		
+//        	}      		       	
         
 		towerInspectionPanel.getSellBtn().addActionListener(new ActionListener() {
 
@@ -286,7 +284,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		});
 		
 		
-		towerInspectionPanel.getWeakestStratBtn().addActionListener(new ActionListener() {
+		towerInspectionPanel.getShootStrongestStratBtn().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -294,21 +292,21 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			}
 		});
 		
-		towerInspectionPanel.getClosestStratBtn().addActionListener(new ActionListener() {
+		towerInspectionPanel.getShootClosestToTowerStratBtn().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				selectedTower.setShootingStrategy(new ShootClosestStrategy());
+				selectedTower.setShootingStrategy(new ShootClosestToTowerStrategy());
 			}
 		});
 		
-//		towerInspectionPanel.getShootingStratBtn().addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				selectedTower.setShootingStrategy(new Sh);
-//			}
-//		});
+		towerInspectionPanel.getShootClosestToEndPointStratBtn().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedTower.setShootingStrategy(new ShootClosestToEndPointStrategy());
+			}
+		});
 	}
 
 	/**
