@@ -43,7 +43,6 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	private final JLabel fireRateLbl = new JLabel("Fire Rate:");
 	private final JLabel refundLbl = new JLabel("Refund:");
 	private final JLabel upgradeCostLbl = new JLabel("Upgrade cost:");
-	private final JLabel specialEffectLbl = new JLabel("Special Effect:");
 	
 	private final List<Component> specializedTowerAttributes = new ArrayList<>();
 	
@@ -79,7 +78,6 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	private final JTextField fireRateTxtFld = new JTextField("");
 	private final JTextField refundTxtFld = new JTextField("");
 	private final JTextField upgradeCostTxtFld = new JTextField("");
-	private final JTextField specialEffectTxtFld = new JTextField("");
 
 	private final JButton upgradeBtn = new JButton("Upgrade");
 	private final JButton sellBtn = new JButton("Sell");
@@ -146,7 +144,6 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		refundTxtFld .setEditable(false);
 		upgradeCostTxtFld .setEditable(false);
 		
-		
 		fireTowerAttributes.add(burnRateLbl);
 		fireTowerAttributes.add(burnRateRatioTxtFld);
 		fireTowerAttributes.add(burnDamageLbl);
@@ -154,16 +151,22 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		fireTowerAttributes.add(burnTimeLbl);
 		fireTowerAttributes.add(burnTimeTxtFld);
 		
-		
-		
+		burnDamageTxtFld.setEditable(false);
+		burnTimeTxtFld.setEditable(false);
+		burnRateRatioTxtFld.setEditable(false);
+			
 		iceTowerAttributes.add(slowTimeLbl);
 		iceTowerAttributes.add(slowTimeTxtFld);
 		
+		slowTimeTxtFld.setEditable(false);
 		
 		cannonTowerAttributes.add(splashRadiusLbl);
 		cannonTowerAttributes.add(splashRadiusTxtFld);
 		cannonTowerAttributes.add(splashDamageRatioLbl);
 		cannonTowerAttributes.add(splashDamageRatioTxtFld);
+		
+		splashDamageRatioTxtFld.setEditable(false);
+		splashRadiusTxtFld.setEditable(false);
 	
 		addStrategyButtonsToGroup();
 		
