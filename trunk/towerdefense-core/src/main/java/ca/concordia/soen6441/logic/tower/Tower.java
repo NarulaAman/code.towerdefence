@@ -212,8 +212,8 @@ public abstract class Tower extends Observable {
 	}
 	
 	/**
-	 * Towers shoot the enemies 
-	 * @param enemies enemies that are in range
+	 * Towers shoot the enemies. Override in the super classes
+	 * @param enemy to be shot
 	 */
 	protected abstract void specializedShot(Enemy enemy);
 	
@@ -241,11 +241,12 @@ public abstract class Tower extends Observable {
 	public void update(float seconds) {
 		secondsSinceLastShot = secondsSinceLastShot + seconds;
 	}
-/**
- * Return True if the {@link Enemy} is in range
- * @param otherPosition The position of the {@link Enemy}
- * @return True if the {@link Enemy} is in range
- */
+	
+	/**
+	 * Return True if the {@link Enemy} is in range
+	 * @param otherPosition The position of the {@link Enemy}
+	 * @return True if the {@link Enemy} is in range
+	 */
 	public boolean inRange(Point2f otherPosition) {
 		float distance = new Point2f(gridPosition.getX(), gridPosition.getY()).distance(otherPosition);
 		return distance <= getRange();
@@ -256,14 +257,16 @@ public abstract class Tower extends Observable {
 	 * @param visitor to be applied
 	 */
 	public abstract void visit(TowerVisitor visitor);
-/**
- * Return the distance  between the {@link Tower} and {@link Enemy}
- * @param currentPosition The position of the {@link Enemy}
- * @return The distance between the {@link Tower} and {@link Enemy}
- */
+	
+	/**
+	 * Return the distance  between the {@link Tower} and {@link Enemy}
+	 * @param currentPosition The position of the {@link Enemy}
+	 * @return The distance between the {@link Tower} and {@link Enemy}
+	 */
 	public float distanceTo(Point2f currentPosition) {
 		return new Point2f(gridPosition.getX(), gridPosition.getY()).distance(currentPosition);
 	}
+	
 	/**
 	 * Return the object of {@link ShootingStrategy}
 	 * @return The object of {@link ShootingStrategy}

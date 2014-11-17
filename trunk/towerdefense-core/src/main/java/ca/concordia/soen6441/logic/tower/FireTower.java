@@ -69,6 +69,7 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 
 	/**
 	 * Visit this tower to visit the {@link TowerVisitor}
+	 * @param visitor visitor to be aplied
 	 */
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);
