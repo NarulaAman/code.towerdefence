@@ -23,8 +23,8 @@ import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.IceTower;
 import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.TowerVisitor;
-import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToTowerStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToTowerStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
 
 /**
