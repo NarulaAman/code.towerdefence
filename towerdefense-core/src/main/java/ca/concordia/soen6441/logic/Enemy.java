@@ -13,7 +13,6 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class Enemy extends Observable {
 
-
 	private final GameMap gameMap;
 	private final int maxHealth;
 	private Point2f currentPosition;
@@ -21,15 +20,13 @@ public class Enemy extends Observable {
 	private int destinationIdx = 1;
 	private int prize = 50;
 	private int health;
-	
 
-
-/**
- * Initialize the data members
- * @param gameMap The object {@link GameMap}
- * @param health The health of {@link Enemy}
- * @param currentPosition The position of {@link Enemy}
- */
+	/**
+	 * Initialize the data members
+	 * @param gameMap The object {@link GameMap}
+	 * @param health The health of {@link Enemy}
+	 * @param currentPosition The position of {@link Enemy}
+	 */
 	public Enemy(GameMap gameMap, int health, Point2f currentPosition) {
 		this.gameMap = gameMap;
 		this.health = health;
@@ -38,17 +35,17 @@ public class Enemy extends Observable {
 	}
 
 
-/**
- * Returns the health of {@link Enemy}
- * @return The health of {@link Enemy}
- */
+	/**
+	 * Returns the health of {@link Enemy}
+	 * @return The health of {@link Enemy}
+	 */
 	public int getHealth() {
 		return health;
 	}
-/**
- * Set the health of {@link Enemy}
- * @param health Health of the {@link Enemy}
- */
+	/**
+	 * Set the health of {@link Enemy}
+	 * @param health Health of the {@link Enemy}
+	 */
 	public void setHealth(int health) {
 		if (health != this.health){ 
 			this.health = health;
@@ -56,8 +53,6 @@ public class Enemy extends Observable {
 			notifyObservers();
 		}
 	}
-
-
 
 	/**
 	 * Updates the state of the enemy by a given amount of time has passed
@@ -68,8 +63,6 @@ public class Enemy extends Observable {
 			System.out.println("Enemy at " + currentPosition + " nextIdx " + destinationIdx + " on position " + getNextPosition());
 			move(seconds);
 		}
-		
-		
 	}
 
 	/**
@@ -139,8 +132,6 @@ public class Enemy extends Observable {
 	public boolean isAlive() {
 		return health > 0;
 	}
-	
-	
 	
 	/**
 	 * Returns the speed, which is units of the grid per second. Can also be understood as tiles per second.
