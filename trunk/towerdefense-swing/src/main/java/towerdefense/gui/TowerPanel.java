@@ -330,15 +330,15 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	@Override
 	public void visit(IceTower tower) {
 		constraints.gridy=4;
-//		slowTimeTxtFld.setText("" + tower);
+        slowTimeTxtFld.setText("" + tower.getSlownessRate());
 		add(iceTowerAttributes,constraints);
 	}
 
 	@Override
 	public void visit(CannonTower tower) {	
 		constraints.gridy=4;	
-//		splashRadiusTxtFld.setText("" + tower);
-//		splashDamageRatioTxtFld.setText("" + tower);
+		splashRadiusTxtFld.setText("" + tower.getSplashRange());
+		splashDamageRatioTxtFld.setText("" + tower.getSplashDamageRatio());
 		add(cannonTowerAttributes,constraints);
 		
 	}
