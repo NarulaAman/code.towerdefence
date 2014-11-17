@@ -55,10 +55,10 @@ public class IceTower extends AbstractTemporalEffectTower {
 	
 	/**
 	 * Create an Ice tower of a certain level
-	 * @param level
-	 * @param gridPosition
-	 * @param shootingStrategy
-	 * @param towerFactory
+	 * @param level level of the tower to be created
+	 * @param gridPosition grid position of the tower
+	 * @param shootingStrategy shooting strategy to apply to the tower
+	 * @param towerFactory tower factory
 	 */
 	public IceTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super(level, gridPosition, shootingStrategy, towerFactory);
