@@ -194,6 +194,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 	/**
 	 * Setup the tower to be bought
+	 * @return true if there was a tower to be bought, false if not
 	 */
 	public boolean selectTowerToBuy() {
 		if(buyingTower == BuyingTower.FIRE_TOWER) {
