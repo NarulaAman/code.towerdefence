@@ -435,10 +435,11 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void disableButtons() {
 		if(gamePlay.isStateRunning()) {
-		for(Component component : towerButtons) {
-		    component.setEnabled(false);
-		} 
-		startGameButton.setEnabled(false);
+			for(Component component : towerButtons) {
+			    component.setEnabled(false);
+			} 
+			startGameButton.setEnabled(false);
+			towerInspectionPanel.setEnabled(false);
 		}
 		
 	}
@@ -448,10 +449,11 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 */
 	private void enableButtons() {
 		if(gamePlay.isStateSetup() || gamePlay.isGameOver()) {
-		for(Component component : towerButtons) {
-		    component.setEnabled(true);
-		}
-		startGameButton.setEnabled(true);
+			for(Component component : towerButtons) {
+			    component.setEnabled(true);
+			}
+			startGameButton.setEnabled(true);
+			towerInspectionPanel.setEnabled(true);
 		}
 		
 	}
