@@ -45,7 +45,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 */
 	private GridPosition endGridPosition;
 	
-	private transient List<GridPosition> startToEndPath;
+//	private transient List<GridPosition> startToEndPath;
 
 	/**
 	 * Display the {@link GameMap} with scenery at all the {@link Tile}
