@@ -389,7 +389,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	public void mapGridCoordinateClicked(GridPosition gridPosition) {
 		if (state == State.BUYING_TOWER) {
 			Tower tower = towerFactory.towerOnCoordinate(towerToBuy, gridPosition);
-			getGamePlay().buy(tower);
+			getGamePlay().tryToBuy(tower);
 			//			state = State.NOTHING;
 		}
 

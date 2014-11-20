@@ -27,8 +27,6 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private final List<Tower> towers = new ArrayList<>();
 	
-//	private final List<GridPosition> enemyPath = new ArrayList<>();
-
 	private int currency;
 	
 	private int lives=10;
@@ -95,15 +93,32 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * @param tower The object of class {@link Tower}
 	 * @return True if the user can buy tower else false
 	 */
-	public boolean buy(Tower tower) {
-		if (canPlace(tower) && tower.getBuyCost() <= currency) {
+	public boolean tryToBuy(Tower tower) {
+		if (canPlace(tower) && hasEnoughMoneyToBuy(tower)) {
 			currency = currency - tower.getBuyCost();
-			towers.add(tower);
+			buy(tower);
 			notifyWithChange();
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Effectively buys the tower
+	 * @param tower tower that was bought
+	 */
+	private void buy(Tower tower) {
+		towers.add(tower);
+	}
+
+	/**
+	 * Check if there is enough money to buy tower
+	 * @param tower tower to be bough
+	 * @return true if there is enough money, false if not
+	 */
+	private boolean hasEnoughMoneyToBuy(Tower tower) {
+		return tower.getBuyCost() <= currency;
 	}
 	
 	/**
@@ -145,7 +160,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	}
 
 	/**
-	 * Return the object of {@link Tower} at give position
+	 * Return the object of {@link Tower} at give position. hasTower should be called first to check if a tower
+	 * exists in the {@link GridPosition}
 	 * @param gridPosition The X and Y coordinate of {@link Tile} on {@link GameMap}
 	 * @return The object of {@link Tower}
 	 */
@@ -155,7 +171,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 				return tower;
 			}
 		}
-		return null;
+		return null; // we should never get here if the proper use of the API was made, i.e. hasTower was called first
 	}
 
 	/**
@@ -329,7 +345,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		return enemies;
 	}
 
-
+	/**
+	 * Update this observer
+	 * @param o observable
+	 * @param arg argument
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Enemy) {
