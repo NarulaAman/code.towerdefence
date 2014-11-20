@@ -1,5 +1,7 @@
 package ca.concordia.soen6441.logic.tower;
 
+import java.util.Set;
+
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
@@ -10,7 +12,7 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
  * Tower that slows the enemies down when they are shot
  *
  */
-public class IceTower extends AbstractTemporalEffectTower {
+public class IceTower extends Tower {
 
 	public final static float SLOW_DURATION_SECS = 10; 
 	public final static float SLOWNESS_RATE = 0.2f;
@@ -52,6 +54,12 @@ public class IceTower extends AbstractTemporalEffectTower {
 		}
 	}
 	
+	private TemporalEffectApplier slowingEffect = new TemporalEffectApplier() {
+		@Override
+		protected TemporalEffect buildEffectOn(Enemy enemy) {
+			return buildSlowingEffectOn(enemy);
+		}
+	};
 	
 	/**
 	 * Create an Ice tower of a certain level
@@ -68,7 +76,7 @@ public class IceTower extends AbstractTemporalEffectTower {
 	 * Returns the object of {@link SlowingEffect}
 	 * @return the object of {@link SlowingEffect}
 	 */
-	protected TemporalEffect buildEffectOn(Enemy enemy) {
+	protected TemporalEffect buildSlowingEffectOn(Enemy enemy) {
 		return new SlowingEffect(enemy);
 	}
 
@@ -95,4 +103,21 @@ public class IceTower extends AbstractTemporalEffectTower {
 	public float getSlownessRate() {
 		return SLOWNESS_RATE;
 	}
+
+	@Override
+	protected void specializedShot(Enemy enemy) {
+		enemy.takeDamage(getDamage());
+		slowingEffect.applyEffectOn(enemy);
+	}
+	
+	@Override
+	public void update(float seconds) {
+		super.update(seconds);
+		slowingEffect.update(seconds);
+	}
+
+	public Set<Enemy> getEnemiesUnderEffect() {
+		return slowingEffect.getEnemiesUnderEffect();
+	}
+	
 }

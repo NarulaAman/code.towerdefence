@@ -19,20 +19,15 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
  * but this was a trap for re-use by inheritance. This class stores state and behavior, forcing the 
  * subclass to take it with it. Bugs shall arise from this decision in 3...2...1...
  */
-public abstract class AbstractTemporalEffectTower extends Tower implements Observer {
+public abstract class TemporalEffectApplier implements Observer {
 
 	private final Map<Enemy, TemporalEffect> enemiesUnderEffect = new ConcurrentHashMap<>();
 	
 	/**
 	 * Initialize the AbstractTemporalEffectTower  
-	 * @param level level of the tower to be created
-	 * @param gridPosition grid position of the tower
-	 * @param shootingStrategy shooting strategy to apply to the tower
-	 * @param towerFactory tower factory
 	 */
-	public AbstractTemporalEffectTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy,
-			TowerFactory towerFactory) {
-		super(level, gridPosition, shootingStrategy, towerFactory);
+	public TemporalEffectApplier() {
+		//super(level, gridPosition, shootingStrategy, towerFactory);
 	}
 	
 	/**
@@ -46,8 +41,7 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 	 * Towers shoot the enemies 
 	 * @param enemy enemies that are in range
 	 */
-	protected void specializedShot(Enemy enemy) {
-		enemy.takeDamage(getDamage());
+	public void applyEffectOn(Enemy enemy) {
 		enemy.addObserver(this);
 		if (!enemiesUnderEffect.containsKey(enemy)) {
 			TemporalEffect effect = buildEffectOn(enemy);
@@ -76,11 +70,10 @@ public abstract class AbstractTemporalEffectTower extends Tower implements Obser
 	}
 	
 	/**
-	 * Remove the burning affect from the {@link Enemy}  when time is out
+	 * Remove the temporal affect from the {@link Enemy}  when time is out
 	 * @param seconds seconds passed
 	 */
 	public void update(float seconds) {
-		super.update(seconds);
 		for (Map.Entry<Enemy, TemporalEffect> burningEnemyEntry : enemiesUnderEffect.entrySet()) {
 			Enemy enemyUnderEffect = burningEnemyEntry.getKey();
 			TemporalEffect effect = burningEnemyEntry.getValue();
