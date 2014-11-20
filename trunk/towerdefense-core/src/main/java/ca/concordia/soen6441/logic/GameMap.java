@@ -299,7 +299,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 * @return the path from the start to the end
 	 */
 	public List<GridPosition> getStartToEndPath() {
-		if (startToEndPath == null) {
+		if (startToEndPath == null || startToEndPath.size() < 1) {
 			class PositionListPair {
 				GridPosition gridPosition;
 				List<GridPosition> path = new ArrayList<>();

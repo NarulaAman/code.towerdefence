@@ -210,7 +210,7 @@ public class MapValidator {
 					return false;
 				}
 			}
-			return true;
+			return gameMap.getStartToEndPath().size() > 0;
 		}
 		return false;
 	}
