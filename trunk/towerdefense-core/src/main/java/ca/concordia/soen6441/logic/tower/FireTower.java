@@ -1,6 +1,7 @@
 package ca.concordia.soen6441.logic.tower;
 
 import java.util.Observer;
+import java.util.Set;
 
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
@@ -13,7 +14,7 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
  * This class has characteristics of Fire {@link Tower}
  *
  */
-public class FireTower extends AbstractTemporalEffectTower implements Observer{
+public class FireTower extends Tower /*implements Observer */{
 
 	private final static float BURN_DURATION_SECS = 4;
 	private final static int BURN_DAMAGE = 1;
@@ -48,6 +49,13 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 			}
 		}
 	};
+	
+	private TemporalEffectApplier burningEffect = new TemporalEffectApplier() {
+		@Override
+		protected TemporalEffect buildEffectOn(Enemy enemy) {
+			return buildBurningEffectOn(enemy);
+		}
+	};
 
 	/**
 	 * Create Fire {@link Tower} of certain level
@@ -63,18 +71,36 @@ public class FireTower extends AbstractTemporalEffectTower implements Observer{
 	 * Returns the object of {@link TemporalEffect}
 	 * @return Returns the object of {@link TemporalEffect}
 	 */
-	protected TemporalEffect buildEffectOn(Enemy enemy) {
+	protected TemporalEffect buildBurningEffectOn(Enemy enemy) {
 		return new BurningEnemyEffect(enemy);
 	}
 
+	@Override
+	protected void specializedShot(Enemy enemy) {
+		enemy.takeDamage(getDamage());
+		burningEffect.applyEffectOn(enemy);
+		
+	}
+	
+	@Override
+	public void update(float seconds) {
+		super.update(seconds);
+		burningEffect.update(seconds);
+	}
+	
+	
 	/**
 	 * Visit this tower to visit the {@link TowerVisitor}
 	 * @param visitor visitor to be aplied
 	 */
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);
-
 	}
+	
+	public Set<Enemy> getEnemiesUnderEffect() {
+		return burningEffect.getEnemiesUnderEffect();
+	}
+	
 	/**
 	 * Returns the Burn Duration seconds
 	 * @return the burn duration seconds
