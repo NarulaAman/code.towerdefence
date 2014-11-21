@@ -21,6 +21,8 @@ import ca.concordia.soen6441.logic.tower.Tower;
  * This class will do unit testing of GamePlay
  *
  */
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes={TestConfig.class})
 public class GamePlayTest {
 	
 	private static final int START_CURRENCY = 200;
@@ -58,7 +60,7 @@ public class GamePlayTest {
 	public void testBuySuccess() {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY / 2);		
 		when(gameMap.getTile(any(GridPosition.class))).thenReturn(Tile.SCENERY);	
-		assertTrue(gamePlay.buy(tower1));
+		assertTrue(gamePlay.tryToBuy(tower1));
 		assertEquals(1, gamePlay.totalTowers());
 	}
 	
@@ -74,9 +76,9 @@ public class GamePlayTest {
 		when(tower3.getBuyCost()).thenReturn(START_CURRENCY / 2);
 		when(tower3.getGridPosition()).thenReturn(new GridPosition(3,  3));
 		when(gameMap.getTile(any(GridPosition.class))).thenReturn(Tile.SCENERY);
-		assertTrue(gamePlay.buy(tower1));
+		assertTrue(gamePlay.tryToBuy(tower1));
 		assertEquals(1, gamePlay.totalTowers());
-		assertTrue(gamePlay.buy(tower2));
+		assertTrue(gamePlay.tryToBuy(tower2));
 		assertEquals(2, gamePlay.totalTowers());
 		assertEquals(0, gamePlay.getCurrency());
 	}
@@ -89,7 +91,7 @@ public class GamePlayTest {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY / 2);
 		when(tower1.getGridPosition()).thenReturn(new GridPosition(1,  1));
 		when(gameMap.getTile(any(GridPosition.class))).thenReturn(Tile.ENEMY_PATH);
-		assertFalse(gamePlay.buy(tower1));
+		assertFalse(gamePlay.tryToBuy(tower1));
 	}
 	
 	/**
@@ -98,7 +100,7 @@ public class GamePlayTest {
 	@Test
 	public void testBuyFailed() {
 		when(tower1.getBuyCost()).thenReturn(START_CURRENCY + 50);		
-		assertFalse(gamePlay.buy(tower1));
+		assertFalse(gamePlay.tryToBuy(tower1));
 		assertEquals(0, gamePlay.totalTowers());
 		assertEquals(START_CURRENCY, gamePlay.getCurrency());
 	}
@@ -117,13 +119,13 @@ public class GamePlayTest {
 		when(tower3.getGridPosition()).thenReturn(new GridPosition(3,  3));
 		when(gameMap.getTile(any(GridPosition.class))).thenReturn(Tile.SCENERY);
 		
-		assertTrue(gamePlay.buy(tower1));
+		assertTrue(gamePlay.tryToBuy(tower1));
 		int expectedCurrencyFirstBuy = START_CURRENCY - tower1.getBuyCost();
 		assertEquals(expectedCurrencyFirstBuy, gamePlay.getCurrency());
-		assertTrue(gamePlay.buy(tower2));
+		assertTrue(gamePlay.tryToBuy(tower2));
 		int expectedCurrencySecondBuy = expectedCurrencyFirstBuy - tower2.getBuyCost();
 		assertEquals(expectedCurrencySecondBuy, gamePlay.getCurrency());
-		assertFalse(gamePlay.buy(tower3));
+		assertFalse(gamePlay.tryToBuy(tower3));
 		assertEquals(2, gamePlay.totalTowers());
 	}
 	
@@ -135,8 +137,8 @@ public class GamePlayTest {
 		when(tower1.getGridPosition()).thenReturn(new GridPosition(1, 1));
 		when(tower2.getGridPosition()).thenReturn(new GridPosition(1, 1));
 		when(gameMap.getTile(new GridPosition(1, 1))).thenReturn(Tile.SCENERY);
-		assertTrue(gamePlay.buy(tower1));
-		assertFalse(gamePlay.buy(tower2));				
+		assertTrue(gamePlay.tryToBuy(tower1));
+		assertFalse(gamePlay.tryToBuy(tower2));				
 	}
 	
    /**
