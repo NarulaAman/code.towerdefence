@@ -13,11 +13,7 @@ import ca.concordia.soen6441.logic.primitives.TemporalEffect;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 /**
- * 
- * Abstract class for characteristics of A Temporal Effect Tower. Actually this class was a mistake, 
- * it was created to re-use code that would supposedly be common between IceTower and FireTower, 
- * but this was a trap for re-use by inheritance. This class stores state and behavior, forcing the 
- * subclass to take it with it. Bugs shall arise from this decision in 3...2...1...
+ * Abstract class for characteristics of A Temporal Effect Tower. 
  */
 public abstract class TemporalEffectApplier implements Observer {
 
