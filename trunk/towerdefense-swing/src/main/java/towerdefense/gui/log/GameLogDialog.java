@@ -8,7 +8,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.inject.Inject;
-import javax.print.attribute.standard.Fidelity;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

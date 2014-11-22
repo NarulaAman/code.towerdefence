@@ -20,7 +20,7 @@ public abstract class TemporalEffectApplier implements Observer {
 	private final Map<Enemy, TemporalEffect> enemiesUnderEffect = new ConcurrentHashMap<>();
 	
 	/**
-	 * Initialize the AbstractTemporalEffectTower  
+	 * Initialize the TemporalEffectApplier  
 	 */
 	public TemporalEffectApplier() {
 		//super(level, gridPosition, shootingStrategy, towerFactory);

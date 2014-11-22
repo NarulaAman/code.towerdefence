@@ -1,7 +1,7 @@
 package ca.concordia.soen6441.logic;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
@@ -9,11 +9,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GamePlayJavaSerialaizationDao;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
