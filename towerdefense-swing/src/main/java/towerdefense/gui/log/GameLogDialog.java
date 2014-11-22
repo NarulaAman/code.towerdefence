@@ -5,6 +5,12 @@ import java.io.IOException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
+import towerdefense.gui.StartGameDialog;
+import towerdefense.gui.guice.GuiModule;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 public class GameLogDialog extends JDialog {
 
 	private GameLogPanel gameLogPanel;
@@ -21,7 +27,11 @@ public class GameLogDialog extends JDialog {
 			//Create and set up the window.
 			JFrame frame = new JFrame("GameLogPanel");
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			GameLogPanel gameLogPanel = new GameLogPanel();
+			
+			Injector injector = Guice.createInjector(new GuiModule());
+			GameLogPanel gameLogPanel = injector.getInstance(GameLogPanel.class);  
+			
+//			GameLogPanel gameLogPanel = new GameLogPanel();
 			frame.setContentPane(gameLogPanel);
 	
 			//Display the window.

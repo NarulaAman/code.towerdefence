@@ -1,12 +1,22 @@
 package ca.concordia.soen6441.logger;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 
 public class LogManager {
 	
-	private final LogMessage logMessage = null;
+	private List<LogMessage> logMessages = new ArrayList<>();
 	
-//	public LogManager() {
-//		logMessage = new LogMessage();
-//	}
+	public LogManager() {
+		logMessages.add(new LogMessage(new Date(), "amand"));
+		logMessages.add(new LogMessage(new Date(), "alex"));
+		logMessages.add(new LogMessage(new Date(), "amado"));
+	}
+	
+	public List<LogMessage> getLogsFor(Object object) {
+		return new ArrayList<>();
+	}
 }

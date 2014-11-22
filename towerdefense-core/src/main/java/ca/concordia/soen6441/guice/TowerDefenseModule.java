@@ -1,13 +1,13 @@
 package ca.concordia.soen6441.guice;
 
+import javax.inject.Singleton;
+
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.logger.Log;
 import ca.concordia.soen6441.logger.LogInterceptor;
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logger.LogMessage;
 import ca.concordia.soen6441.logic.GameMapDao;
-import ca.concordia.soen6441.logic.TowerFactory;
-import ca.concordia.soen6441.logic.primitives.GridPosition;
-import ca.concordia.soen6441.logic.tower.FireTower;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -24,7 +24,9 @@ public class TowerDefenseModule extends AbstractModule {
 	       logger);
 	    
 	   bind(GameMapDao.class).to(GameMapJavaSerializationDao.class);
+	   bind(LogManager.class).in(Singleton.class);
 	   install(new FactoryModuleBuilder().build(GamePlayFactory.class));
+	   
   }
   
 //  @Provides
