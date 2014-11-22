@@ -37,7 +37,7 @@ public class TowerDefenseModule extends AbstractModule {
 	Injector injector = Guice.createInjector(new TowerDefenseModule());
 	LogMessage m = injector.getInstance(LogMessage.class);
 //	System.out.println(m.g);
-	m.method().tryToBuy(new TowerFactory().towerOnCoordinate(FireTower.class, new GridPosition(1, 1)));
+//	m.method().tryToBuy(new TowerFactory().towerOnCoordinate(FireTower.class, new GridPosition(1, 1)));
 //	System.out.println(m.method().toString());
 	
 }
