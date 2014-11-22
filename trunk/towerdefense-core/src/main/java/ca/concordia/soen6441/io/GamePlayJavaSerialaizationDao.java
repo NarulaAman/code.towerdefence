@@ -16,11 +16,11 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	
 	public static final String GamePlay_FILENAME_EXTENSION = ".game";
 	
-	public static final String FILENAME_STRING_FORMAT = "." + File.separator + "%s" + GamePlay_FILENAME_EXTENSION;
+	public static final String GAMEFILENAME_STRING_FORMAT = "." + File.separator + "%s" + GamePlay_FILENAME_EXTENSION;
 	
 	@Override
 	public void save(GamePlay gamePlay) throws IOException {
-		File file = new File(String.format(FILENAME_STRING_FORMAT, gamePlay.getName())); 
+		File file = new File(String.format(GAMEFILENAME_STRING_FORMAT, gamePlay.getName())); 
 		FileOutputStream fileOutputStream = new FileOutputStream(file); 
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 		objectOutputStream.writeObject(gamePlay);
@@ -31,7 +31,7 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	
 	@Override
 	public GamePlay load(String gamePlayName) throws IOException, ClassNotFoundException {
-		File file = new File(String.format(FILENAME_STRING_FORMAT, gamePlayName));
+		File file = new File(String.format(GAMEFILENAME_STRING_FORMAT, gamePlayName));
 		FileInputStream fileInputStream = new FileInputStream(file);
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 		GamePlay gamePlay = (GamePlay) objectInputStream.readObject();

@@ -404,14 +404,20 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	}
 	
 	/**
-	 * Returns the name of the Map
+	 * Returns the name of the Game Play
 	 * 
-	 * @return the name of the Map
+	 * @return the name of the Game Play
 	 */
 	public String getName() {
 		return name;
 	}
-	
+	/**
+	 * Sets the name of the Game Play
+	 * @param name is the name of the Game Play
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	
 }
