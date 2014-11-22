@@ -22,10 +22,16 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	public static final String FILENAME_STRING_FORMAT = "." + File.separator + "%s" + GamePlay_FILENAME_EXTENSION;
 	
 	@Override
-	public void save(GamePlay gamePlay) throws IOException { 
-		
-		
+	public void save(GamePlay gamePlay) throws IOException {
+		File file = new File(String.format(FILENAME_STRING_FORMAT, gamePlay.getName())); 
+		FileOutputStream fileOutputStream = new FileOutputStream(file); 
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		objectOutputStream.writeObject(gamePlay);
+		objectOutputStream.close();
+		fileOutputStream.close();
 	}
+	
+	
 	@Override
 	public GameMap load(String mapName) throws IOException, ClassNotFoundException {
 		return null;
