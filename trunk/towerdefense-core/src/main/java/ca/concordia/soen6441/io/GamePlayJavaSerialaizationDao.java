@@ -43,9 +43,19 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 		return gamePlay;
 	}
 	
-	
+	@Override
 	public List<String> listAllNames() throws IOException {
-		return null;
+		File directory = new File(".");
+		List<String> fileList = new ArrayList<>();
+ 		for (File file : directory.listFiles())
+		{
+			if (file.isFile() && file.getName().endsWith(GamePlay_FILENAME_EXTENSION)) {
+				String filename = file.getName();
+				String gamePlayName = filename.substring(0, filename.indexOf(GamePlay_FILENAME_EXTENSION));
+				fileList.add(gamePlayName);
+			}
+		}
+		return fileList;
 	}
 
 }
