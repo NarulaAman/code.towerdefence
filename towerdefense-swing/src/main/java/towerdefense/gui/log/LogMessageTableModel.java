@@ -1,16 +1,14 @@
 package towerdefense.gui.log;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.inject.Inject;
 import javax.swing.table.AbstractTableModel;
 
-import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logger.LogMessage;
 
-public class LogMessageTableModel extends AbstractTableModel implements Observer{
+public class LogMessageTableModel extends AbstractTableModel{
 	
 	
 	/**
@@ -18,28 +16,18 @@ public class LogMessageTableModel extends AbstractTableModel implements Observer
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private LogManager logManager;
-	@Inject
-	public LogMessageTableModel(LogManager logManager) {
-		this.logManager = logManager;
-	}
+	private List<LogMessage> logMessages = new ArrayList<>();
 	
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
 		return getLogMessages().size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 	
-	public void showLogsFor(Object object) {
-		
-	}
-
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		LogMessage logMessage = getLogMessages().get(rowIndex);
@@ -55,11 +43,12 @@ public class LogMessageTableModel extends AbstractTableModel implements Observer
 	}
 	
 	public List<LogMessage> getLogMessages() {
-		return logManager.getLogsFor(null);
+		return logMessages;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
+	public void setLogMessages(List<LogMessage> logMessages) {
+		this.logMessages = logMessages;
 		fireTableDataChanged();
+		
 	}
 }
