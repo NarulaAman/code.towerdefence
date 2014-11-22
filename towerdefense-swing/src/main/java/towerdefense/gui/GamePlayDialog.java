@@ -100,8 +100,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private java.util.List<Component> towerButtons = new ArrayList<>();
 
 	private Timer gameplayUpdateTimer = new Timer();
-    
+	
 	private Class<? extends Tower> towerToBuy = null;
+	
 	private Tower selectedTower = null;
 
 	private State state = State.NOTHING;
