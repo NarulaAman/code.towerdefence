@@ -1,7 +1,5 @@
 package ca.concordia.soen6441.io;
 
-import ca.concordia.soen6441.logic.GameMapDao;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.GamePlayDao;
 
