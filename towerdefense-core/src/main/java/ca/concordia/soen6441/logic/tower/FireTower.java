@@ -1,8 +1,8 @@
 package ca.concordia.soen6441.logic.tower;
 
-import java.util.Observer;
 import java.util.Set;
 
+import ca.concordia.soen6441.logger.Log;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.TowerFactory;
@@ -44,10 +44,12 @@ public class FireTower extends Tower /*implements Observer */{
 			super.updateEffect(seconds);
 			lastBurnTime = lastBurnTime + seconds;
 			while (lastBurnTime > DAMAGE_EVERY_SECONDS) {
-				enemy.takeDamage(BURN_DAMAGE);
+				burnEnemy(enemy, BURN_DAMAGE);
 				lastBurnTime = lastBurnTime - DAMAGE_EVERY_SECONDS;
 			}
 		}
+		
+
 	};
 	
 	private TemporalEffectApplier burningEffect = new TemporalEffectApplier() {
@@ -88,10 +90,15 @@ public class FireTower extends Tower /*implements Observer */{
 		burningEffect.update(seconds);
 	}
 	
+	@Log("%1$s burns %2$s for %3$d damage")
+	protected void burnEnemy(Enemy enemy, int damage) {
+		enemy.takeDamage(damage);
+	}
+	
 	
 	/**
 	 * Visit this tower to visit the {@link TowerVisitor}
-	 * @param visitor visitor to be aplied
+	 * @param visitor visitor to be applied
 	 */
 	public void visit(TowerVisitor visitor) {
 		visitor.visit(this);

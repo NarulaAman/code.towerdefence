@@ -173,7 +173,7 @@ public abstract class Tower extends Observable {
 	 * Upgrade tower to a specific level
 	 * @param upgradeLevel level to upgrade the tower to
 	 */
-	@Log("%1$s upraded to %2$s")
+	@Log("%1$s upraded to level %2$s")
 	protected void upgradeTo(int upgradeLevel) {
 		level = upgradeLevel;
 		setChanged();
@@ -227,13 +227,13 @@ public abstract class Tower extends Observable {
 	 * Towers shoot the enemies. Override in the super classes
 	 * @param enemy to be shot
 	 */
-	@Log("%1$s shot %2$s")
 	protected abstract void specializedShot(Enemy enemy);
 	
 	/**
 	 * Shoots an enemy
 	 * @param enemy enemy to be shot
 	 */
+	@Log("%1$s shot %2$s")
 	public void shoot(Enemy enemy) {
 		secondsSinceLastShot = 0;
 		specializedShot(enemy);
