@@ -2,11 +2,13 @@ package ca.concordia.soen6441.guice;
 
 import javax.inject.Singleton;
 
+import org.aspectj.lang.Aspects;
+
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.logger.Log;
 import ca.concordia.soen6441.logger.LogInterceptor;
 import ca.concordia.soen6441.logger.LogManager;
-import ca.concordia.soen6441.logger.LogMessage;
+import ca.concordia.soen6441.logger.LoggerAspect;
 import ca.concordia.soen6441.logic.GameMapDao;
 
 import com.google.inject.AbstractModule;
@@ -20,9 +22,8 @@ public class TowerDefenseModule extends AbstractModule {
   protected void configure() {
 	  LogInterceptor logger = new LogInterceptor();
 	  requestInjection(logger);
-	    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Log.class), 
-	       logger);
-	    
+//	    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Log.class),  logger);
+	   requestInjection(Aspects.aspectOf(LoggerAspect.class)); 
 	   bind(GameMapDao.class).to(GameMapJavaSerializationDao.class);
 	   bind(LogManager.class).in(Singleton.class);
 	   install(new FactoryModuleBuilder().build(GamePlayFactory.class));
@@ -34,13 +35,13 @@ public class TowerDefenseModule extends AbstractModule {
 //	  return new LogMessage();
 //  }
   
-  
-  public static void main(String[] args) {
-	Injector injector = Guice.createInjector(new TowerDefenseModule());
-	LogMessage m = injector.getInstance(LogMessage.class);
-//	System.out.println(m.g);
-//	m.method().tryToBuy(new TowerFactory().towerOnCoordinate(FireTower.class, new GridPosition(1, 1)));
-//	System.out.println(m.method().toString());
+//  
+//  public static void main(String[] args) {
+//	Injector injector = Guice.createInjector(new TowerDefenseModule());
+//	InterceptorTest m = injector.getInstance(InterceptorTest.class);
+////	System.out.println(m.g);
+//	m.message();
+////	System.out.println(m.method().toString());
 	
-}
+//}
 }

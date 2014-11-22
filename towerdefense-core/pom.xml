@@ -78,37 +78,67 @@
 		<!-- <version>${spring.version}</version> -->
 		<!-- </dependency> -->
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.aspectj</groupId> -->
-		<!-- <artifactId>aspectjrt</artifactId> -->
-		<!-- <version>1.7.0</version> -->
-		<!-- </dependency> -->
+ 		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.7.0</version>
+		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.aspectj</groupId> -->
-		<!-- <artifactId>aspectjweaver</artifactId> -->
-		<!-- <version>1.7.0</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.7.0</version>
+		</dependency>
 
 		<!-- notneeded (yet?) <dependency> <groupId>org.springframework</groupId> 
 			<artifactId>spring-aop</artifactId> <version>${spring.version}</version> 
 			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aspects</artifactId> 
 			<version>${spring.version}</version> </dependency> <dependency> <groupId>org.springframework</groupId> 
-			<artifactId>spring-tx</artifactId> <version>${spring.version}</version> </dependency> -->
-
+			<artifactId>spring-tx</artifactId> <version>${spring.version}</version> </dependency>
+ -->
 	</dependencies>
 
-	<!-- <build> <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>aspectj-maven-plugin</artifactId> 
-		<version>1.7</version> <executions> <execution> <goals> <goal>compile</goal> 
-		<goal>test-compile</goal> </goals> <configuration> <showWeaveInfo>true</showWeaveInfo> 
-		<complianceLevel>1.7</complianceLevel> <source>1.7</source> <target>1.7</target> 
-		<aspectLibraries> <aspectLibrary> <groupId>org.springframework</groupId> 
-		<artifactId>spring-aspects</artifactId> </aspectLibrary> </aspectLibraries> 
-		</configuration> </execution> </executions> <dependencies> <dependency> <groupId>org.aspectj</groupId> 
-		<artifactId>aspectjrt</artifactId> <version>1.7.0</version> </dependency> 
-		<dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjtools</artifactId> 
-		<version>1.7.0</version> </dependency> </dependencies> </plugin> </plugins> 
-		</build> -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
+						</goals>
+						<configuration>
+							<showWeaveInfo>true</showWeaveInfo>
+							<complianceLevel>1.7</complianceLevel>
+							<source>1.7</source>
+							<target>1.7</target>
+<!-- 							<aspectLibraries> -->
+<!-- 								<aspectLibrary> -->
+<!-- 									<groupId>org.springframework</groupId> -->
+<!-- 									<artifactId>spring-aspects</artifactId> -->
+<!-- 								</aspectLibrary> -->
+<!-- 							</aspectLibraries> -->
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjrt</artifactId>
+						<version>1.7.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>1.7.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build> 
 
 
 
