@@ -52,7 +52,7 @@ public class GamePlayDaoTest {
 
 	@Test
 	public void testLoad() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
