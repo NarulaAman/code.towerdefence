@@ -3,8 +3,8 @@ package towerdefense.gui.log;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.List;
-import java.util.ArrayList;
 
+import javax.inject.Inject;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,15 +23,16 @@ public class GameLogPanel extends JPanel {
 
 	private final JScrollPane scrollPane = new JScrollPane();
 
-	private LogMessageTableModel logMessageTable;
+	private LogMessageTableModel logMessageTableModel;
 	private List<LogMessage> logMessages;;
 
-	public GameLogPanel() {
+	@Inject
+	public GameLogPanel(LogMessageTableModel logMessageTableModel) {
 
-		logMessageTable = new LogMessageTableModel();
+		this.logMessageTableModel = logMessageTableModel;
 
 		table = new JTable();
-		table.setModel(logMessageTable);
+		table.setModel(logMessageTableModel);
 
 		//scrollPane.add(table);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -45,7 +46,7 @@ public class GameLogPanel extends JPanel {
 //			System.out.println(((LogMessage)table.getModel().getValueAt(i, 0)).getMessage());
 //			System.out.println(((LogMessage)table.getModel().getValueAt(i, 0)).getTimeStamp());
 //		}
-
+		logMessageTableModel.fireTableDataChanged();
 		add(table,BorderLayout.CENTER);
 	}
 

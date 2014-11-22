@@ -1,26 +1,27 @@
 package towerdefense.gui.log;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.inject.Inject;
 import javax.swing.table.AbstractTableModel;
 
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logger.LogMessage;
 
-public class LogMessageTableModel extends AbstractTableModel {
+public class LogMessageTableModel extends AbstractTableModel implements Observer{
 	
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<LogMessage> logMessages = new ArrayList<>();
-
-	public LogMessageTableModel() {
-		logMessages.add(new LogMessage(new Date(), "amand"));
-		logMessages.add(new LogMessage(new Date(), "alex"));
-		logMessages.add(new LogMessage(new Date(), "amado"));
+	
+	private LogManager logManager;
+	@Inject
+	public LogMessageTableModel(LogManager logManager) {
+		this.logManager = logManager;
 	}
 	
 	@Override
@@ -54,6 +55,11 @@ public class LogMessageTableModel extends AbstractTableModel {
 	}
 	
 	public List<LogMessage> getLogMessages() {
-		return logMessages;
+		return logManager.getLogsFor(null);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		fireTableDataChanged();
 	}
 }
