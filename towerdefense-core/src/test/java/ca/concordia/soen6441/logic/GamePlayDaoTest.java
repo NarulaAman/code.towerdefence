@@ -3,6 +3,8 @@ package ca.concordia.soen6441.logic;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -40,10 +42,12 @@ public class GamePlayDaoTest {
 		gameMap.setTile(new GridPosition(15, 26), Tile.ENEMY_PATH);
 		
 	}
+	
+	
 
 	@Test
-	public void testSave() {
-		fail("Not yet implemented");
+	public final void testSave() throws IOException, ClassNotFoundException {
+		gamePlayDao.save(gamePlay);
 	}
 
 	@Test
