@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -51,10 +52,10 @@ public class GamePlayDaoTest {
 	}
 
 	@Test
-	public void testLoad() {
-		
+	public final void testLoad() throws ClassNotFoundException, IOException {
+		GamePlay gamePlay2 = gamePlayDao.load(GAMEPLAY_DATA_FILENAME);
+		Assert.assertTrue(gamePlay2.equals(gamePlay));
 	}
-
 	@Test
 	public void testListAllNames() {
 		fail("Not yet implemented");
