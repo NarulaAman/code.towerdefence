@@ -33,9 +33,17 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	
 	
 	@Override
-	public GameMap load(String mapName) throws IOException, ClassNotFoundException {
-		return null;
+	public GamePlay load(String gamePlayName) throws IOException, ClassNotFoundException {
+		File file = new File(String.format(FILENAME_STRING_FORMAT, gamePlayName));
+		FileInputStream fileInputStream = new FileInputStream(file);
+		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+		GamePlay gamePlay = (GamePlay) objectInputStream.readObject();
+		objectInputStream.close();
+		fileInputStream.close();
+		return gamePlay;
 	}
+	
+	
 	public List<String> listAllNames() throws IOException {
 		return null;
 	}
