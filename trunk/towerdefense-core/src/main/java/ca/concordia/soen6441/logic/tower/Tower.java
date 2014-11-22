@@ -164,10 +164,20 @@ public abstract class Tower extends Observable {
 	 * @return True if the tower is upgraded
 	 */
 	public boolean doUpgrade() {
-		level = level + 1;
-		setChanged();
-		notifyObservers();
+		upgradeTo(level + 1);
 		return true;
+	}
+	
+	
+	/**
+	 * Upgrade tower to a specific level
+	 * @param upgradeLevel level to upgrade the tower to
+	 */
+	@Log("%1$s upraded to %2$s")
+	protected void upgradeTo(int upgradeLevel) {
+		level = upgradeLevel;
+		setChanged();
+		notifyObservers();	
 	}
 	
 	/**
