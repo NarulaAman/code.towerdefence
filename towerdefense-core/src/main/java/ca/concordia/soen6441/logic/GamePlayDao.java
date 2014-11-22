@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public interface GamePlayDoa {
+public interface GamePlayDao {
 	
 	public void save(GamePlay gamePlay) throws IOException;
 	

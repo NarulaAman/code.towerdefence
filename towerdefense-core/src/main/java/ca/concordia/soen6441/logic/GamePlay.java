@@ -22,6 +22,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	private final GameMap gameMap;
 	
+	private String name = "Map";
+	
 	private final List<EnemyWave> enemyWaves = new CopyOnWriteArrayList<>();
 	
 	private final List<Enemy> enemies = new CopyOnWriteArrayList<>();
@@ -66,6 +68,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		this.gameMap = gameMap;
 		this.currency = currency;
 		this.lives = 10;
+		//this.name ="";
 		
 		
 		// TODO: remove the lines below, it is only for testing
@@ -399,5 +402,16 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public boolean isStateRunning() {
 		return gameState == State.RUNNING;
 	}
+	
+	/**
+	 * Returns the name of the Map
+	 * 
+	 * @return the name of the Map
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	
 	
 }
