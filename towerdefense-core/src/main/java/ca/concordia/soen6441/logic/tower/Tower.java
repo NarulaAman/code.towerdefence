@@ -6,6 +6,7 @@ import java.util.Observable;
 import javax.vecmath.Point2d;
 import javax.vecmath.Point2f;
 
+import ca.concordia.soen6441.logger.Log;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.TowerFactory;
@@ -216,6 +217,7 @@ public abstract class Tower extends Observable {
 	 * Towers shoot the enemies. Override in the super classes
 	 * @param enemy to be shot
 	 */
+	@Log("%1$s shot %2$s")
 	protected abstract void specializedShot(Enemy enemy);
 	
 	/**

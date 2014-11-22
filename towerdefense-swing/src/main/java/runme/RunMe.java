@@ -1,12 +1,9 @@
 package runme;
-import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.StartGameDialog;
-import towerdefense.gui.actions.MapEditAction;
-import towerdefense.gui.actions.NewMapAction;
-import towerdefense.gui.actions.SaveMapAction;
-import towerdefense.gui.actions.StartGamePlayAction;
-import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
-import ca.concordia.soen6441.logic.GameMapDao;
+import towerdefense.gui.guice.GuiModule;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 
 
@@ -20,17 +17,8 @@ public class RunMe {
 	 * Created the GUI, this should be run in the EDT
 	 */
 	private static void createAndShowGUI() {
-		GameMapDao gameMapDao = new GameMapJavaSerializationDao(); 
-		MapEditionDialog mapEditionDialog = new MapEditionDialog(gameMapDao);
-		mapEditionDialog.setVisible(false);
-		MapEditAction mapEditAction = new MapEditAction(mapEditionDialog);
-		StartGamePlayAction startGamePlayAction = new StartGamePlayAction();
-		NewMapAction newMapAction = new NewMapAction(mapEditionDialog);
-		StartGameDialog startDialog = new StartGameDialog(gameMapDao, newMapAction, mapEditAction, startGamePlayAction);		
-        SaveMapAction saveMapAction = new SaveMapAction(mapEditionDialog, startDialog);
-        mapEditionDialog.getSaveButton().addActionListener(saveMapAction);
-        mapEditionDialog.setStartGameDialog(startDialog);
-        startDialog.setVisible(true);        
+		Injector injector = Guice.createInjector(new GuiModule());
+		injector.getInstance(StartGameDialog.class);  
     }
  
     /**

@@ -2,6 +2,7 @@ package towerdefense.gui.actions;
 
 import java.awt.event.ActionEvent;
 
+import javax.inject.Inject;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -10,6 +11,8 @@ import javax.swing.JOptionPane;
 import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.NewMapDialog;
 import ca.concordia.soen6441.logic.GameMap;
+
+import com.google.inject.Provider;
 
 
 /**
@@ -24,15 +27,15 @@ public class NewMapAction extends AbstractAction {
 	private static final Icon NEW_ICON = new ImageIcon(Object.class.getResource("/icons/new_button.png"));
 	private static final String MAP_SIZE_TEXT = "Enter the width and height for the new Map";
 	
-	private final MapEditionDialog mapEditionDialog;
+	@Inject
+	private Provider<MapEditionDialog> mapEditionDialog;
 
 	/**
 	 * Constructs a {@link NewMapAction} to edit a map o a given {@link MapEditionDialog}
 	 * @param mapEditionDialog {@link MapEditionDialog} to 
 	 */
-	public NewMapAction(MapEditionDialog mapEditionDialog) {
+	public NewMapAction() {
 		super(null, NEW_ICON);
-		this.mapEditionDialog = mapEditionDialog;
 		setEnabled(true);
 	}
 
@@ -58,9 +61,14 @@ public class NewMapAction extends AbstractAction {
 			}
 			else {
 				stillNeedWidthHeight = false;
-				mapEditionDialog.setMap(new GameMap(width, height));
-				mapEditionDialog.setVisible(true);
+				getMapEditionDialog().setMap(new GameMap(width, height));
+				getMapEditionDialog().setVisible(true);
 			}
 		} while (stillNeedWidthHeight);
     }
+	
+	
+	private MapEditionDialog getMapEditionDialog() {
+		return mapEditionDialog.get();
+	}
 }

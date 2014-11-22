@@ -120,4 +120,9 @@ public class IceTower extends Tower {
 		return slowingEffect.getEnemiesUnderEffect();
 	}
 	
+	@Override
+	public String toString() {
+		return "IceTower on " + getGridPosition();
+	}
+	
 }

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.inject.Inject;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -50,6 +51,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 * @param mapEditAction {@link MapEditAction} to be used
 	 * @param startGamePlayAction {@link StartGamePlayAction} to be used
 	 */
+	@Inject
 	public StartGameDialog(GameMapDao gameMapDao, NewMapAction newMapAction, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Chicken Tikka Masala Gang - Tower Defense");
@@ -70,6 +72,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		add(mapPanel, BorderLayout.CENTER);
 		setupSideBar(gameMapDao);
 		setResizable(false);
+		setVisible(true);
 		pack();
 	}
 

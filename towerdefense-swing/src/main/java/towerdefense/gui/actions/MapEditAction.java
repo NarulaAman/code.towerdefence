@@ -2,6 +2,8 @@ package towerdefense.gui.actions;
 
 import java.awt.event.ActionEvent;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -18,19 +20,22 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 7403090617352119267L;
+	
 	private static final Icon EDIT_ICON = new ImageIcon(Object.class.getResource("/icons/edit.png"));
 	
-	private static final long serialVersionUID = 7403090617352119267L;
-	private final MapEditionDialog mapEditionDialog;
+
+	
+	@Inject
+	private Provider<MapEditionDialog> mapEditionDialogProvider;
 	private GameMap selectedMap = null;
 	
 	/**
 	 * Creates a {@link MapEditAction} to edit maps with the given {@link MapEditionDialog}
 	 * @param mapEditionDialog {@link MapEditionDialog} to work with this action
 	 */
-	public MapEditAction(MapEditionDialog mapEditionDialog) {
+	public MapEditAction() {
 		super(null, EDIT_ICON);
-		this.mapEditionDialog = mapEditionDialog;
 		setEnabled(false);
 	}
 	/**
@@ -39,8 +44,10 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		mapEditionDialog.setMap(selectedMap.clone());
-		mapEditionDialog.setVisible(true);
+		if (selectedMap != null) {
+			getMapEditionDialog().setMap(selectedMap.clone());
+			getMapEditionDialog().setVisible(true);
+		}
 	}
 
 	/**
@@ -49,8 +56,11 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	 */
 	@Override
 	public void mapSelected(GameMap gameMap) {
-		selectedMap = gameMap;
 		setEnabled(selectedMap != null);
+		selectedMap = gameMap;
 	}
 
+	private MapEditionDialog getMapEditionDialog() {
+		return mapEditionDialogProvider.get();
+	}
 }

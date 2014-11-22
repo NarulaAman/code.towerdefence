@@ -123,7 +123,10 @@ public class FireTower extends Tower /*implements Observer */{
 	 */
 	public float getBurnRateSecs() {
 		return DAMAGE_EVERY_SECONDS;
-
 	}
 
+	@Override
+	public String toString() {
+		return "FireTower on " + getGridPosition();
+	}
 }

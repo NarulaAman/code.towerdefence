@@ -94,6 +94,14 @@ public class GridPosition implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "GridPosition [x=" + x + ", y=" + y + "]";
+	}
+	
+	
+	
+
 
 
 	
