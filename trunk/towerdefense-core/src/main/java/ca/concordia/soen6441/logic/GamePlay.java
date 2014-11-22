@@ -7,9 +7,13 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.inject.Inject;
+
 import ca.concordia.soen6441.logger.Log;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
+
+import com.google.inject.assistedinject.Assisted;
 
 
 /**
@@ -60,10 +64,12 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 
 	/**
+	 * Build a GamePlay instance
 	 * @param gameMap The map selected for Play
 	 * @param currency The amount available
 	 */
-	public GamePlay(GameMap gameMap, int currency) {
+	@Inject
+	public GamePlay(@Assisted GameMap gameMap, @Assisted int currency) {
 		super();
 		this.gameMap = gameMap;
 		this.currency = currency;
@@ -112,7 +118,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * Effectively buys the tower
 	 * @param tower tower that was bought
 	 */
-	private void buy(Tower tower) {
+	@Log("Bought %2$s")
+	protected void buy(Tower tower) {
 		towers.add(tower);
 	}
 
@@ -185,11 +192,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * @param tower To be upgraded
 	 * @return true if the upgrade happened, false if not
 	 */
-	public boolean upgrade(Tower tower) {
+	public boolean tryToUpgrade(Tower tower) {
 		// implement upgrade logic here
 		if (tower.canUpgrade() && currency >= tower.getUpgradeCost()) {
 			currency = currency - tower.getUpgradeCost();
-			tower.doUpgrade();
+			upgrade(tower);
 			notifyWithChange();
 			return true;
 		} else {
@@ -197,6 +204,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 	}
 
+	@Log("Upgraded %2$s")
+	protected void upgrade(Tower tower) {
+		tower.doUpgrade();
+	}
 	/**
 	 * Notify the Observers that there was a change
 	 */

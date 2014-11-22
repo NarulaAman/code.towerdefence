@@ -86,4 +86,9 @@ public class CannonTower extends Tower {
 	public float getSplashDamageRatio() {
 		return SPLASH_DAMAGE_RATIO;
 	}
+	
+	@Override
+	public String toString() {
+		return "CannonTower on " + getGridPosition();
+	}
 }

@@ -281,7 +281,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gamePlay.upgrade(selectedTower);
+				gamePlay.tryToUpgrade(selectedTower);
 			}
 		});
 		

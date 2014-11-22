@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import towerdefense.gui.actions.SaveMapAction;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GameMapDao;
 import ca.concordia.soen6441.logic.MapValidator;
@@ -56,6 +59,8 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
     private GameMap gameMap;
     
     private StartGameDialog startGameDialog;
+    
+//    private Provider<SaveMapAction> saveMapActionProvider;
 
 	/**
 	 * Enum which holds the internal state of this dialog
@@ -86,8 +91,10 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 * Creates a MapEditionDialog with a given {@link GameMapDao}
 	 * @param gameMapDao {@link GameMapDao} to have the maps loaded from
 	 */
+	@Inject
 	public MapEditionDialog(GameMapDao gameMapDao) {
 		setLayout(new BorderLayout());
+		setVisible(false);
 		setResizable(false);
 		this.gameMapDao = gameMapDao;
 		add(gridPanel,BorderLayout.CENTER);
@@ -99,6 +106,11 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		nameMapPanel.add(nameMapText);
 		add(nameMapPanel,BorderLayout.SOUTH);
 		pack();
+	}
+	
+	@Inject
+	public void setSaveMapAction(SaveMapAction saveMapAction) {
+		getSaveButton().addActionListener(saveMapAction);
 	}
 
 
@@ -126,6 +138,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		saveButton.setVisible(true);
 	}
 
+	@Inject
 	public void setStartGameDialog(StartGameDialog startGameDialog) {
 		this.startGameDialog = startGameDialog;
 	}
@@ -238,7 +251,7 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	 * Returns the save button
 	 * @return the save button
 	 */
-	public JButton getSaveButton() {
+	private JButton getSaveButton() {
 		return saveButton;
 	}
 	

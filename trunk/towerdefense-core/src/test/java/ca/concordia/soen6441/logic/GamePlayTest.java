@@ -148,7 +148,7 @@ public class GamePlayTest {
     public void testUpgrade(){
 	   when(tower1.getUpgradeCost()).thenReturn(START_CURRENCY /2); 
 	   when(tower1.canUpgrade()).thenReturn(true);
-	   assertTrue(gamePlay.upgrade(tower1));
+	   assertTrue(gamePlay.tryToUpgrade(tower1));
 	   verify(tower1).doUpgrade();
    }
    
@@ -158,7 +158,7 @@ public class GamePlayTest {
    @Test
    public void testUpgradeFailed(){
 	   when(tower1.getUpgradeCost()).thenReturn(START_CURRENCY + 1);
-	   assertFalse(gamePlay.upgrade(tower1));
+	   assertFalse(gamePlay.tryToUpgrade(tower1));
 	   verify(tower1, never()).doUpgrade();
    }
    
@@ -168,7 +168,7 @@ public class GamePlayTest {
    @Test
    public void testUpgradeDidntHappenCanUpgradeFalse(){
 	   when(tower1.canUpgrade()).thenReturn(false);
-	   assertFalse(gamePlay.upgrade(tower1));
+	   assertFalse(gamePlay.tryToUpgrade(tower1));
 	   verify(tower1, never()).doUpgrade();
    }
 }
