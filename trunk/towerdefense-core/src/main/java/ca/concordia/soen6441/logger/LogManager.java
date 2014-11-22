@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-
 public class LogManager {
 	
 	private List<LogMessage> logMessages = new ArrayList<>();
@@ -17,6 +15,11 @@ public class LogManager {
 	}
 	
 	public List<LogMessage> getLogsFor(Object object) {
-		return new ArrayList<>();
+		return logMessages;
+	}
+
+	public void log(Class<?> declaringClass, Object object, String logMessage) {
+		logMessages.add(new LogMessage(new Date(), logMessage));
+		System.out.println(logMessage);
 	}
 }
