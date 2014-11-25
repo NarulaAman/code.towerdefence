@@ -59,6 +59,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 
 	/**
+	 * Constructs a game play with a given map and currency
 	 * @param gameMap The map selected for Play
 	 * @param currency The amount available
 	 */
@@ -275,10 +276,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		if (enemyWaves.isEmpty() && enemies.isEmpty()) {
 			setState(State.SETUP);		
 		}
-		
 	}
 	
-
 	/**
 	 * Add enemy wave to the game play
 	 * @param enemyWave the new enemy wave added to the game play
@@ -307,6 +306,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		setChanged();
 		notifyObservers();
 	}
+	
 	/**
 	 * Test if the game is over 
 	 * @return true if game is over and false if not
@@ -330,6 +330,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	}
 
 
+	/**
+	 * Update the observer
+	 * @param o Observable
+	 * @param arg argument
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Enemy) {
@@ -341,8 +346,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 				notifyObservers();
 			}
 		}
-		
 	}
+	
 	/**
 	 * Set states for the game to new state 
 	 * @param newState value of the new state of the game
@@ -354,7 +359,6 @@ public class GamePlay extends Observable implements Serializable, Observer {
 			notifyObservers();
 		}
 	}
-
 
 	/**
 	 * Returns if the {@link GamePlay} is in setup state
@@ -371,6 +375,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public boolean isStateGameOver() {
 		return gameState == State.GAMEOVER;
 	}
+	
 	/**
 	 * Returns if the {@link GamePlay} is in running state
 	 * @return if the {@link GamePlay} is in running state
