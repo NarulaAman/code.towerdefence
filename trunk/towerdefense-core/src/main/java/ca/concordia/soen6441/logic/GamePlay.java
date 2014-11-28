@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.inject.Inject;
 
 import ca.concordia.soen6441.logger.Log;
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
 
@@ -24,6 +25,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	private static final long serialVersionUID = 1L;
 
+	private final LogManager logManager = new LogManager();
+	
 	private final GameMap gameMap;
 	
 	private String name = "Map";
@@ -34,10 +37,13 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private final List<Tower> towers = new ArrayList<>();
 	
+	private int score = 0;
+	
+	private int level = 0;
+	
 	private int currency;
 	
 	private int lives=10;
-	
 	
 	/**
 	 * Internal state of the {@link GamePlay}
@@ -428,6 +434,14 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public int getLevel() {
+		return level;
 	}
 	
 	
