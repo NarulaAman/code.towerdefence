@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

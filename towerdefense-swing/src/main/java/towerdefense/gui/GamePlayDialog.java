@@ -37,6 +37,7 @@ import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToTowerStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategy;
 
 /**
  * This is the dialog which will show the {@link GamePlay}. Here the user will be able to play the game
@@ -282,7 +283,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gamePlay.tryToUpgrade(selectedTower);
+				if(!gamePlay.tryToUpgrade(selectedTower)) {
+					towerInspectionPanel.getUpgradeBtn().setEnabled(false);
+				}
 			}
 		});
 		
@@ -308,6 +311,14 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedTower.setShootingStrategy(new ShootClosestToEndPointStrategy());
+			}
+		});
+		
+		towerInspectionPanel.getShootWeakestStratBtn().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedTower.setShootingStrategy(new ShootWeakestStrategy());
 			}
 		});
 	}
