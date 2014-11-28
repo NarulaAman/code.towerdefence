@@ -85,9 +85,13 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 	private final JLabel livesLabel = new JLabel("Lives");
 	private final JLabel banksLabel = new JLabel("Banks");
+	private final JLabel scoresLabel = new JLabel("Scores");
+	private final JLabel levelsLabel = new JLabel("Wave");
 
 	private final JTextField livesField = new JTextField("");
 	private final JTextField banksField = new JTextField("");
+	private final JTextField scoresField = new JTextField("");
+	private final JTextField levelsField = new JTextField("");
 
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 
@@ -388,6 +392,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayAttributes.add(livesField);
 		gamePlayAttributes.add(banksLabel);
 		gamePlayAttributes.add(banksField);
+		gamePlayAttributes.add(scoresLabel);
+		gamePlayAttributes.add(scoresField);
+		gamePlayAttributes.add(levelsLabel);
+		gamePlayAttributes.add(levelsField);
 
 		sideBar.add(gamePlayAttributes);
 
@@ -440,6 +448,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		disableButtons();
 		banksField.setText("" + gamePlay.getCurrency());
 		livesField.setText("" + gamePlay.getLives());
+		scoresField.setText("" + gamePlay.getScore());
+		levelsField.setText("" + gamePlay.getLevel());
 	}
 
 	/**
