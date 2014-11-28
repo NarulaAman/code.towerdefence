@@ -3,7 +3,6 @@ package towerdefense.gui.log;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.swing.table.AbstractTableModel;
 
 import ca.concordia.soen6441.logger.LogMessage;

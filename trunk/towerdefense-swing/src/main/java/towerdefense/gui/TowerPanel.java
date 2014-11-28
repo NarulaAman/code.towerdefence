@@ -26,6 +26,7 @@ import ca.concordia.soen6441.logic.tower.TowerVisitor;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToEndPointStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootClosestToTowerStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
+import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategy;
 
 /**
  * This is the TowerInspectionWindow, it shows the current tower attributes
@@ -84,7 +85,8 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	private final JToggleButton shootStrongestStratBtn = new JToggleButton("Shoot Strongest");
 	private final JToggleButton shootClosestToTowerStratBtn = new JToggleButton("Shoot Closest to Tower");
 	private final JToggleButton shootClosestToEndPointStratBtn = new JToggleButton("Shoot Closest to End");
-
+	private final JToggleButton shootWeakestStratBtn = new JToggleButton("Shoot Weakest");
+	
 	private Tower shownTower = null;
 	private JPanel attributesPnl;
 	private JPanel fireTowerAttributes = new JPanel(new GridLayout(3,2));
@@ -134,6 +136,8 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		add(shootClosestToTowerStratBtn, constraints);
 		constraints.gridy = 3;
 		add(shootClosestToEndPointStratBtn, constraints);
+		constraints.gridy = 4;
+		add(shootWeakestStratBtn, constraints);
 
 		costTxtFld.setEditable(false);
 		damageTxtFld.setEditable(false);
@@ -184,6 +188,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		buttonGroup.add(getShootStrongestStratBtn());
 		buttonGroup.add(getShootClosestToTowerStratBtn());
 		buttonGroup.add(getShootClosestToEndPointStratBtn());
+		buttonGroup.add(getShootWeakestStratBtn());
 		
 	}
 
@@ -272,6 +277,9 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 		else if (tower.getShootingStrategy() instanceof ShootStrongestStrategy) {
 			shootStrongestStratBtn.setSelected(true);
 		}
+		else if (tower.getShootingStrategy() instanceof ShootWeakestStrategy) {
+			shootWeakestStratBtn.setSelected(true);
+		}
 		else {
 			throw new RuntimeException("Unimplemented strategy!");
 		}
@@ -294,13 +302,21 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	}
 
 	/**
-	 * Returns the weakest strategy button
-	 * @return the weakest strategy button
+	 * Returns the strongest strategy button
+	 * @return the strongest strategy button
 	 */
 	public JToggleButton getShootStrongestStratBtn() {
 		return shootStrongestStratBtn;
 	}
 
+	/**
+	 * Returns the weakest strategy button
+	 * @return the weakest strategy button
+	 */
+	public JToggleButton getShootWeakestStratBtn() {
+		return shootWeakestStratBtn;
+	}
+	
 	/**
 	 * Returns the closest strategy button
 	 * @return the closest strategy button
@@ -330,7 +346,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	 */
 	@Override
 	public void visit(FireTower tower) {
-	   constraints.gridy=4;
+	   constraints.gridy=5;
 	   burnRateRatioTxtFld.setText("" + tower.getBurnRateSecs());
 	   burnDamageTxtFld.setText("" + tower.getDamage());
 	   burnTimeTxtFld.setText("" + tower.getBurnDurationSecs());
@@ -343,7 +359,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	 */
 	@Override
 	public void visit(IceTower tower) {
-		constraints.gridy=4;
+		constraints.gridy=5;
         slowTimeTxtFld.setText("" + tower.getSlownessDurationSecs());
         slowRateTxtFld.setText("" + tower.getSlownessRate());
 		add(iceTowerAttributes,constraints);
@@ -355,7 +371,7 @@ public class TowerPanel extends JPanel implements Observer, TowerVisitor{
 	 */
 	@Override
 	public void visit(CannonTower tower) {	
-		constraints.gridy=4;	
+		constraints.gridy=5;	
 		splashRadiusTxtFld.setText("" + tower.getSplashRange());
 		splashDamageRatioTxtFld.setText("" + tower.getSplashDamageRatio());
 		add(cannonTowerAttributes,constraints);
