@@ -26,9 +26,7 @@ public class GameLogDialog extends JDialog implements Observer {
 
 	private final JScrollPane scrollPane = new JScrollPane();
 	
-	private final String[] logTypes = { "Select Log", "Game Log", "Tower Log", "Map Log" };
-	private final JComboBox<String> comboBox = new JComboBox<String>(logTypes);
-
+	private final JComboBox<String> comboBox = new JComboBox<String>();
 	private final LogMessageTableModel logMessageTableModel;
 	
 	private final LogManager logManager;
@@ -39,7 +37,7 @@ public class GameLogDialog extends JDialog implements Observer {
 	public GameLogDialog(LogMessageTableModel logMessageTableModel, LogManager logManager) {
 		this.logMessageTableModel = logMessageTableModel;
 		this.logManager = logManager;
-        comboBox.setSelectedIndex(0);
+       
 		table.setModel(logMessageTableModel);
 
 		// scrollPane.add(table);
@@ -48,7 +46,6 @@ public class GameLogDialog extends JDialog implements Observer {
 
 
 		logMessageTableModel.fireTableDataChanged();
-		add(comboBox,BorderLayout.NORTH);
 		add(table, BorderLayout.CENTER);
 		pack();
 		setVisible(true);
