@@ -19,7 +19,7 @@ public class TowerDefenseModule extends AbstractModule {
 	  LogInterceptor logger = new LogInterceptor();
 	  requestInjection(logger);
 //	    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Log.class),  logger);
-	   requestInjection(Aspects.aspectOf(LoggerAspect.class));
+//	   requestInjection(Aspects.aspectOf(LoggerAspect.class));
 //	   requestInjection(Aspects.aspectOf(InjectorAspect.class));
 	   bind(GameMapDao.class).to(GameMapJavaSerializationDao.class);
 	   bind(LogManager.class).in(Singleton.class);
