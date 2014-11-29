@@ -68,8 +68,8 @@ public class IceTower extends Tower {
 	 * @param shootingStrategy shooting strategy to apply to the tower
 	 * @param towerFactory tower factory
 	 */
-	public IceTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
-		super(level, gridPosition, shootingStrategy, towerFactory);
+	public IceTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
+		super(id, level, gridPosition, shootingStrategy, towerFactory);
 	}
 
 	/**

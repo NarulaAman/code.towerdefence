@@ -108,7 +108,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final JButton cannonTowerButton = new JButton("Cannon Tower");
 	private final JButton startGameButton = new JButton("StartGame");
 	
-	private final TowerFactory towerFactory = new TowerFactory();
+	private final TowerFactory towerFactory;
 	
 	private java.util.List<Component> towerButtons = new ArrayList<>();
 
@@ -136,6 +136,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setLayout(new BorderLayout());
 		setResizable(false);
 		this.gamePlay = gamePlay;
+		this.towerFactory = gamePlay.getTowerFactory();
 		gamePlay.addObserver(this);
 		gamePlayPanel = new GamePlayPanel(gamePlay);
 		gamePlayPanel.setMapGridCoordinateClickedListener(this);
@@ -460,7 +461,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Reads the current {@link GamePlay} attributes
 	 */
 	private void readGamePlay() {
-		if (gamePlay.isGameOver() || gamePlay.isStateSetup()) {
+		if (gamePlay.isStateGameOver() || gamePlay.isStateSetup()) {
 			gameplayUpdateTimer.cancel();
 			
 		}
@@ -491,7 +492,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	 * Enable the buttons
 	 */
 	private void enableButtons() {
-		if(gamePlay.isStateSetup() || gamePlay.isGameOver()) {
+		if(gamePlay.isStateSetup() || gamePlay.isStateGameOver()) {
 			for(Component component : towerButtons) {
 			    component.setEnabled(true);
 			}

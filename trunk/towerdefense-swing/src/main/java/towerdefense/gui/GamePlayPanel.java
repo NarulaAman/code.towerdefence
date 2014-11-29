@@ -156,7 +156,7 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		if (gamePlay.isGameOver()) {
+		if (gamePlay.isStateGameOver()) {
 			g.setColor(Color.red);
 			g.setFont(new Font("Times New Roman", Font.BOLD, 70));
 			g.drawString("Game Over", getWidth()/4, getHeight()/2);

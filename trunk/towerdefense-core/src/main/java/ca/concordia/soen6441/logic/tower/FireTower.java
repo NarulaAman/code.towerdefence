@@ -66,8 +66,8 @@ public class FireTower extends Tower /*implements Observer */{
 	 * @param shootingStrategy The object of {@link ShootingStrategy}
 	 * @param towerFactory The object of {@link TowerFactory}
 	 */
-	public FireTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
-		super(level, gridPosition, shootingStrategy, towerFactory);
+	public FireTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
+		super(id, level, gridPosition, shootingStrategy, towerFactory);
 	}
 	/**
 	 * Returns the object of {@link TemporalEffect}
