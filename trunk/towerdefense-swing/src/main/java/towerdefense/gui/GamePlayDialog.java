@@ -102,7 +102,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 
-	private final JButton saveGamePlayBtn = new JButton("Save Game");
+	private final JButton saveGamePlayBtn = new JButton("Save Game");	
 	private final JButton fireTowerButton = new JButton("Fire Tower");
 	private final JButton iceTowerButton = new JButton("Ice Tower");
 	private final JButton cannonTowerButton = new JButton("Cannon Tower");
@@ -152,6 +152,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		readGamePlay();
 		//		startGamePlayUpdaateTimer();
 		pack();
+		setVisible(true);
 	}
 
 	/**
@@ -529,17 +530,17 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	//	 */
 		private static void createAndShowGUI() throws ClassNotFoundException, IOException {
 			//Create and set up the window.
-			JFrame frame = new JFrame("GamePlayPanel");
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//			JFrame frame = new JFrame("GamePlayPanel");
+//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 			GamePlayDao gameMapDao = new GamePlayJavaSerialaizationDao();
 			GamePlay gamePlay = gameMapDao.load("gamePlay1");
 			GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
-			frame.setContentPane(gamePlayPanel);
-	
-			//Display the window.
-			frame.pack();
-			frame.setVisible(true);
+//			frame.setContentPane(gamePlayPanel);
+//	
+//			//Display the window.
+//			frame.pack();
+//			frame.setVisible(true);
 		}
 	
 		/**
