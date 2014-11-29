@@ -1,13 +1,12 @@
 package ca.concordia.soen6441.logger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JComboBox;
+public class LogManager implements Serializable {
 
-public class LogManager {
-	
 	private List<LogMessage> logMessages = new ArrayList<>();
 	private final String[] logTypes = { "Select Log", "Game Log", "Tower Log", "Map Log" };
 	
