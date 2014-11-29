@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import towerdefense.gui.guice.GuiModule;
+import ca.concordia.soen6441.logger.LogFilter;
 import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logger.LogMessage;
 
@@ -43,7 +44,7 @@ public class GameLogDialog extends JDialog implements Observer {
 		// scrollPane.add(table);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
-
+		logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter("sdf")));
 
 		logMessageTableModel.fireTableDataChanged();
 		add(table, BorderLayout.CENTER);
@@ -70,7 +71,7 @@ public class GameLogDialog extends JDialog implements Observer {
 
 
 	private void showLogsFor(Object arg) {
-		logMessageTableModel.setLogMessages(logManager.getLogsFor(displayed));
+		logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter("sdf")));
 	}
 	
 //	/**

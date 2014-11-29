@@ -15,6 +15,7 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
 public class Enemy extends Observable implements Serializable{
 
 	private final GameMap gameMap;
+	private final int id;
 	private final int maxHealth;
 	private Point2f currentPosition;
 	private float speed = 1.5f;
@@ -28,8 +29,9 @@ public class Enemy extends Observable implements Serializable{
 	 * @param health The health of {@link Enemy}
 	 * @param currentPosition The position of {@link Enemy}
 	 */
-	public Enemy(GameMap gameMap, int health, Point2f currentPosition) {
+	public Enemy(GameMap gameMap, int id, int health, Point2f currentPosition) {
 		this.gameMap = gameMap;
+		this.id = id;
 		this.health = health;
 		this.currentPosition = currentPosition;
 		this.maxHealth = health;
@@ -196,5 +198,13 @@ public class Enemy extends Observable implements Serializable{
 	public int getMaxHealth() {
 		return maxHealth;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Enemy " + id;
+	}
+	
+	
 	
 }

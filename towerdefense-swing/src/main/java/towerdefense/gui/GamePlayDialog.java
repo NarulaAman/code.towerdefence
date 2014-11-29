@@ -385,8 +385,6 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 3.f / level, 3 * level));
-				gamePlay.addEnemyWave(new EnemyWave(getGamePlay(), 4.f / level, 6 * level));
 				gamePlay.start();
 				gameplayUpdateTimer = new Timer();
 				startGamePlayUpdaateTimer();

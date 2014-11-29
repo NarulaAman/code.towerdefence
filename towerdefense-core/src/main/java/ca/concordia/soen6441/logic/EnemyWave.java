@@ -15,6 +15,8 @@ public class EnemyWave implements Serializable{
 	 */
 	private static final long serialVersionUID = -7112082959911825124L;
 
+	private final int id;
+	
 	private final GamePlay gamePlay;
 	
 	private final GameMap gameMap;
@@ -32,9 +34,10 @@ public class EnemyWave implements Serializable{
 	 * @param spawnEverySeconds After number of seconds the {@link Enemy} should be spawn in {@link GamePlay}
 	 * @param enemiesToSpawn Number of {@link Enemy} to be spawn
 	 */
-	public EnemyWave(GamePlay gamePlay, float spawnEverySeconds, /*float startDelaySeconds, */ int enemiesToSpawn) {
+	public EnemyWave(GamePlay gamePlay, int id, float spawnEverySeconds, /*float startDelaySeconds, */ int enemiesToSpawn) {
 		super();
 		this.gamePlay = gamePlay;
+		this.id = id;
 		this.spawnEverySeconds = spawnEverySeconds;
 //		this.startDelaySeconds = startDelaySeconds;
 		this.enemiesToSpawn = enemiesToSpawn;
@@ -46,7 +49,7 @@ public class EnemyWave implements Serializable{
 	 * Spawn the {@link Enemy} into the {@link GamePlay}
 	 */
 	public void spawnEnemy() {
-		Enemy e = new Enemy(gameMap, 500, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY()));
+		Enemy e = new Enemy(gameMap, gamePlay.getNextEnemyId(), 500, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY()));
 		gamePlay.addEnemy(e);
 		enemiesToSpawn = enemiesToSpawn - 1;
 	}
@@ -70,4 +73,12 @@ public class EnemyWave implements Serializable{
 	public boolean isFinished() {
 		return enemiesToSpawn < 1;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Wave " + id;
+	}
+	
+	
 }
