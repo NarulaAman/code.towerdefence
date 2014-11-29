@@ -21,7 +21,9 @@ public class TowerDefenseModule extends AbstractModule {
 //	    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Log.class),  logger);
 //	   requestInjection(Aspects.aspectOf(LoggerAspect.class));
 //	   requestInjection(Aspects.aspectOf(InjectorAspect.class));
+	   bind(GameMapJavaSerializationDao.class).in(Singleton.class);
 	   bind(GameMapDao.class).to(GameMapJavaSerializationDao.class);
+
 	   bind(LogManager.class).in(Singleton.class);
 	   install(new FactoryModuleBuilder().build(GamePlayFactory.class));
 	   

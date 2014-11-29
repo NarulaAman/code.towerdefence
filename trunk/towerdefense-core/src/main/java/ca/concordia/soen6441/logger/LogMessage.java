@@ -16,6 +16,8 @@ public class LogMessage implements Serializable, Comparable<LogMessage>{
 	@Inject
 	public GamePlayFactory m;
 	
+	private Object source;
+	
 	private Date timeStamp;
 
 	private String message;
@@ -56,4 +58,12 @@ public class LogMessage implements Serializable, Comparable<LogMessage>{
 	public int compareTo(LogMessage o) {
 		return timeStamp.compareTo(o.timeStamp);
 	}
+
+
+
+	public Object getSource() {
+		return source;
+	}
+	
+	
 }

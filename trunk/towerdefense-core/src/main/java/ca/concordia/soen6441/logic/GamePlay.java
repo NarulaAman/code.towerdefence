@@ -32,14 +32,17 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	private String name = "gamePlay1";
 	
 	private final List<EnemyWave> enemyWaves = new CopyOnWriteArrayList<>();
+//	private EnemyWave currentWave;
 	
 	private final List<Enemy> enemies = new CopyOnWriteArrayList<>();
 	
 	private final List<Tower> towers = new ArrayList<>();
 	
+	private int enemyId = 0;
+	
 	private int score = 0;
 	
-	private int level = 0;
+	private int level = 1;
 	
 	private int currency;
 	
@@ -309,7 +312,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * Update the internal state if a wave has finished
 	 */
 	private void updateWaveFinished() {
-		if (enemyWaves.isEmpty() && enemies.isEmpty()) {
+		if (enemies.isEmpty()) {
 			setState(State.SETUP);		
 		}
 		
@@ -320,7 +323,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * Add enemy wave to the game play
 	 * @param enemyWave the new enemy wave added to the game play
 	 */
-	public void addEnemyWave(EnemyWave enemyWave) {
+	private void addEnemyWave(EnemyWave enemyWave) {
 		enemyWaves.add(enemyWave);
 	}
 	
@@ -442,6 +445,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	public int getLevel() {
 		return level;
+	}
+
+	public int getNextEnemyId() {
+		return ++enemyId;
 	}
 	
 	
