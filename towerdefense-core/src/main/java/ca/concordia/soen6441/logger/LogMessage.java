@@ -1,5 +1,6 @@
 package ca.concordia.soen6441.logger;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -9,7 +10,7 @@ import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GamePlay;
 
 
-public class LogMessage implements Comparable<LogMessage>{
+public class LogMessage implements Serializable, Comparable<LogMessage>{
 
 
 	@Inject

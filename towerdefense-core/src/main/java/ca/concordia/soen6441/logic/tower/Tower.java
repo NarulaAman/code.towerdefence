@@ -1,5 +1,6 @@
 package ca.concordia.soen6441.logic.tower;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Observable;
 
@@ -19,7 +20,7 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
  * This class has various Characteristics and operations executed on Tower 
  *
  */
-public abstract class Tower extends Observable {
+public abstract class Tower extends Observable implements Serializable {
 	
 	/**
 	 * Event for a tower shooting an enemy, it will be used in the user interface

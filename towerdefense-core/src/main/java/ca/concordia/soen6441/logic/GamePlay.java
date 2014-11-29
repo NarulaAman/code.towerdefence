@@ -29,7 +29,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private final GameMap gameMap;
 	
-	private String name = "Map";
+	private String name = "gamePlay1";
 	
 	private final List<EnemyWave> enemyWaves = new CopyOnWriteArrayList<>();
 	

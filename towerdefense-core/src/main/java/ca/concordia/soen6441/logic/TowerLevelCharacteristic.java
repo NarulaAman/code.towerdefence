@@ -1,11 +1,13 @@
 package ca.concordia.soen6441.logic;
 
+import java.io.Serializable;
+
 /**
  * This class contain the characteristics of Tower as per level, 
  * it is an immutable class to simplify the implementation
  *
  */
-public class TowerLevelCharacteristic {
+public class TowerLevelCharacteristic implements Serializable{
 
 	private final int damage;
 	

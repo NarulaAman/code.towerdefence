@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,6 +20,7 @@ import java.util.TimerTask;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,8 +28,13 @@ import javax.swing.SwingUtilities;
 
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
+import ca.concordia.soen6441.io.GamePlayJavaSerialaizationDao;
 import ca.concordia.soen6441.logic.EnemyWave;
+import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.GameMapDao;
 import ca.concordia.soen6441.logic.GamePlay;
+import ca.concordia.soen6441.logic.GamePlayDao;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.CannonTower;
@@ -95,6 +102,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 	private final TowerPanel towerInspectionPanel = new TowerPanel();
 
+	private final JButton saveGamePlayBtn = new JButton("Save Game");
 	private final JButton fireTowerButton = new JButton("Fire Tower");
 	private final JButton iceTowerButton = new JButton("Ice Tower");
 	private final JButton cannonTowerButton = new JButton("Cannon Tower");
@@ -117,7 +125,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 
 	private GamePlay gamePlay;
 	
-	
+	private GamePlayDao gamePlayDao = new GamePlayJavaSerialaizationDao();
 
 
 	/**
@@ -139,6 +147,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towerButtons.add(cannonTowerButton);
 
 		towerInspectionPanel.setVisible(false);
+		add(saveGamePlayBtn, BorderLayout.WEST);
 		readGamePlay();
 		//		startGamePlayUpdaateTimer();
 		pack();
@@ -158,6 +167,20 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		setupInspectionWindow(sideBar);
 
 		setupBuyTowerButton();
+		
+		saveGamePlayBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					gamePlayDao.save(gamePlay);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 
 		add(sideBar, BorderLayout.EAST);
 	}	
@@ -505,39 +528,38 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	//	 * @throws ClassNotFoundException
 	//	 * @throws IOException
 	//	 */
-	//	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
-	//		//Create and set up the window.
-	//		JFrame frame = new JFrame("GamePlayPanel");
-	//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//
-	//		GameMapDao gameMapDao = new GameMapJavaSerializationDao();
-	//		GameMap gameMap = gameMapDao.load("DefaultMap");
-	//		GamePlay gamePlay = new GamePlay(gameMap, 1000);
-	//		GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
-	//		frame.setContentPane(gamePlayPanel);
-	//
-	//		//Display the window.
-	//		frame.pack();
-	//		frame.setVisible(true);
-	//	}
-	//
-	//	/**
-	//	 * Main method used for testing the GUI
-	//	 * @param args arguments are ignored by this method
-	//	 */
-	//	public static void main(String[] args) {
-	//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	//			public void run() {
-	//				try {
-	//					createAndShowGUI();
-	//				} catch (ClassNotFoundException e) {
-	//					// TODO Auto-generated catch block
-	//					e.printStackTrace();
-	//				} catch (IOException e) {
-	//					// TODO Auto-generated catch block
-	//					e.printStackTrace();
-	//				}
-	//			}
-	//		});
-	//	}
+		private static void createAndShowGUI() throws ClassNotFoundException, IOException {
+			//Create and set up the window.
+			JFrame frame = new JFrame("GamePlayPanel");
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+			GamePlayDao gameMapDao = new GamePlayJavaSerialaizationDao();
+			GamePlay gamePlay = gameMapDao.load("gamePlay1");
+			GamePlayDialog gamePlayPanel = new GamePlayDialog(gamePlay);
+			frame.setContentPane(gamePlayPanel);
+	
+			//Display the window.
+			frame.pack();
+			frame.setVisible(true);
+		}
+	
+		/**
+		 * Main method used for testing the GUI
+		 * @param args arguments are ignored by this method
+		 */
+		public static void main(String[] args) {
+			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						createAndShowGUI();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+		}
 }
