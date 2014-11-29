@@ -29,6 +29,7 @@ public class LogManager extends Observable implements Serializable {
 				returnedMessages.add(logMessage);
 			}
 		}
+		returnedMessages.add(new LogMessage(new Date(), "" + Math.random()));
 		return returnedMessages;
 	}
 
