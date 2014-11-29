@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JComboBox;
+
 public class LogManager {
 	
 	private List<LogMessage> logMessages = new ArrayList<>();
+	private final String[] logTypes = { "Select Log", "Game Log", "Tower Log", "Map Log" };
+	
 	
 	public LogManager() {
 		logMessages.add(new LogMessage(new Date(), "amand"));
@@ -22,4 +26,5 @@ public class LogManager {
 		logMessages.add(new LogMessage(new Date(), logMessage));
 		System.out.println(logMessage);
 	}
+	
 }
