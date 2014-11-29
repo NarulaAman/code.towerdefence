@@ -18,14 +18,14 @@ import ca.concordia.soen6441.logic.GamePlayDao;
  * Action to start playing the game on the {@link GamePlayDialog}
  *
  */
-public class LoadGamePlayAction extends AbstractAction implements MapSelectionListener {
+public class LoadGamePlayAction extends AbstractAction {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7403090617352119267L;
 	private static final Icon START_ICON = new ImageIcon(Object.class.getResource("/icons/start.png"));
-	private GameMap selectedMap = null;
+	
 	private GamePlayDao gamePlayDao=new GamePlayJavaSerialaizationDao();
 	
 	/**
@@ -61,11 +61,6 @@ public class LoadGamePlayAction extends AbstractAction implements MapSelectionLi
 	 * Invoked when a {@link GameMap} is selected to be played, can be null
 	 * @param gameMap {@link GameMap} to be played 
 	 */
-	@Override
-	public void mapSelected(GameMap gameMap) {
-		selectedMap = gameMap;
-		setEnabled(selectedMap != null);
-		
-	}
+	
 
 }
