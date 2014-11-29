@@ -354,6 +354,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public void addEnemy(Enemy enemy) {
 		enemies.add(enemy);
 		enemy.addObserver(this);
+		logManager.log(currentWave, "%1$s spawned", enemy);
 	}
 	
 	/**
