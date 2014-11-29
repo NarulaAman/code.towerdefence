@@ -31,7 +31,7 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 
 	private final JScrollPane scrollPane = new JScrollPane();
 	
-	private final LogMessageTableModel logMessageTableModel;
+	private final LogMessageTableModel logMessageTableModel = new LogMessageTableModel();
 	
 	private final DefaultComboBoxModel<LogFilter> logFilterModel = new DefaultComboBoxModel<LogFilter>();
 
@@ -41,19 +41,18 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 	private Object displayed = null;
 	
 	@Inject
-	public GameLogDialog(LogMessageTableModel logMessageTableModel, LogManager logManager) {
+	public GameLogDialog(LogManager logManager) {
 		
 		setMaximumSize(new Dimension(600, 450));
 		setMinimumSize(new Dimension(600, 450));
-		this.logMessageTableModel = logMessageTableModel;
 		this.logManager = logManager;
-       
+        this.logManager.addObserver(this);
 		table.setModel(logMessageTableModel);
-
+    
 		// scrollPane.add(table);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
-		logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter("sdf")));
+		//logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter("sdf")));
         comboBox.addActionListener(this);
 		update(null, null);
 		logMessageTableModel.fireTableDataChanged();
@@ -77,6 +76,7 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		logFilterModel.removeAllElements();
 		for (LogFilter filter : logManager.getLogFilters()) {
 			logFilterModel.addElement(filter);
+			logMessageTableModel.setLogMessages(logManager.getLogsFor(filter));
 		}
 		//logFilterModel.setSelectedItem(selected);
 	}

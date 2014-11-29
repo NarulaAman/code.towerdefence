@@ -41,12 +41,13 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private final JButton startBtn = new JButton();
 	private final JButton editBtn = new JButton();	
 	private final JButton exitBtn = new JButton(EXIT_ICON);
-	private final JButton logBtn = new JButton("Log Messages");
+	private final JButton mapLogBtn = new JButton(MAP_LOG_ICON);
 	private final JButton loadBtn= new JButton();
 	
 	
 	private final MapListPanel mapListPanel;
 	
+	private static final Icon MAP_LOG_ICON = new ImageIcon(Object.class.getResource("/icons/maplogbutton.png"));
 	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
 	/**
 	 * Creates a {@link StartGameDialog} with a given {@link GameMapDao}, {@link MapEditAction}, {@link StartGamePlayAction}
@@ -63,7 +64,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		newBtn.setAction(newMapAction);
 		startBtn.setAction(startGamePlayAction);
 		editBtn.setAction(mapEditAction);
-		logBtn.setAction(displayLogAction);
+		mapLogBtn.setAction(displayLogAction);
 		loadBtn.setAction(loadGamePlayAction);
 		mapListPanel = new MapListPanel(gameMapDao);
 		mapListPanel.addMapSelectionListerner(this);
@@ -101,7 +102,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		sideBar.add(startBtn);		
 		sideBar.add(editBtn);
 		sideBar.add(exitBtn);
-		sideBar.add(logBtn);
+		sideBar.add(mapLogBtn);
 		sideBar.add(loadBtn);
 		sideBar.add(mapListPanel);
 		add(sideBar,BorderLayout.EAST);
