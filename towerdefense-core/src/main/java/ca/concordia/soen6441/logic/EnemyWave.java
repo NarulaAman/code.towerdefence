@@ -60,7 +60,7 @@ public class EnemyWave implements Serializable{
 	 */
 	public void update(float seconds) {
 		lastSpawnDeltaTime = lastSpawnDeltaTime + seconds;
-		while (lastSpawnDeltaTime > spawnEverySeconds) {
+		while (lastSpawnDeltaTime > spawnEverySeconds && !isFinished()) {
 			lastSpawnDeltaTime = lastSpawnDeltaTime - spawnEverySeconds;
 			spawnEnemy();
 		}
