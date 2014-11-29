@@ -26,8 +26,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
+import towerdefense.gui.actions.MapLogAction;
+import towerdefense.gui.guice.GuiModule;
+import towerdefense.gui.log.MapLogDialog;
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GamePlayJavaSerialaizationDao;
 import ca.concordia.soen6441.logic.EnemyWave;
@@ -106,7 +112,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final JButton fireTowerButton = new JButton("Fire Tower");
 	private final JButton iceTowerButton = new JButton("Ice Tower");
 	private final JButton cannonTowerButton = new JButton("Cannon Tower");
-	private final JButton startGameButton = new JButton("StartGame");
+	private final JButton startGameButton = new JButton("Start Game");
+	private final JButton mapLogButton = new JButton("Map Log");
 	
 	private final TowerFactory towerFactory;
 	
@@ -378,6 +385,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towersToBuyPanel.add(iceTowerButton,constraints);
 		constraints.gridy = 3;
 		towersToBuyPanel.add(cannonTowerButton,constraints);
+		constraints.gridy = 4;
+		towersToBuyPanel.add(mapLogButton,constraints);
 		
 		fireTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
 		iceTowerButton.setToolTipText(towerFactory.getLevelInformation(IceTower.class, 1).toHtmlString());
@@ -393,6 +402,9 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 				level++;
 			}
 		});
+		Injector injector = Guice.createInjector(new GuiModule());
+		
+		mapLogButton.addActionListener(injector.getInstance(MapLogAction.class));
 		 // this is a hack to increase the size of enemies at every wave, remove in the future!!
 		sideBar.add(towersToBuyPanel);
 
