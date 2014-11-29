@@ -32,10 +32,10 @@ public class LogManager extends Observable implements Serializable {
 		return returnedMessages;
 	}
 
-	public void log(Class<?> declaringClass, Object object, String logMessage) {
-		logMessages.add(new LogMessage(new Date(), logMessage));
-		System.out.println(logMessage);
-	}
+//	public void log(Class<?> declaringClass, Object object, String logMessage) {
+//		logMessages.add(new LogMessage(new Date(), logMessage));
+//		System.out.println(logMessage);
+//	}
 	
 	
 	public List<LogFilter> getLogFilters() {
@@ -48,13 +48,18 @@ public class LogManager extends Observable implements Serializable {
 
 	public void log(Object source, String format, EnemyWave enemyWave) {
 		currentWave = enemyWave;
-		LogMessage logMessage = new LogMessage(new Date(), String.format(format, enemyWave));
+		LogMessage logMessage = new WaveLogMessage(currentWave, new Date(), String.format(format, enemyWave));
 		logMessages.add(logMessage);
+		System.out.println("" + logMessage);
 	}
 	
 	public void log(Object source, String format, Object ... args) {
+		LogMessage logMessage = new LogMessage(new Date(), String.format(format, args));
 		if (currentWave != null) {
-			LogMessage logMessage = new WaveLogMessage(currentWave, new Date(), String.format(format, args));
+			logMessage = new WaveLogMessage(currentWave, new Date(), String.format(format, args));
 		}
+		System.out.println("" + logMessage);
+		logMessages.add(logMessage);
+		
 	}
 }

@@ -22,7 +22,7 @@ public class LogInterceptor implements MethodInterceptor{
 			args.add(methodInvocation.getThis());
 			args.addAll(Arrays.asList(methodInvocation.getArguments()));
 			String logMessage = String.format(l.value(), args.toArray());
-			logManager.log(methodInvocation.getMethod().getDeclaringClass(),methodInvocation.getThis(), logMessage);
+//			logManager.log(methodInvocation.getMethod().getDeclaringClass(),methodInvocation.getThis(), logMessage);
 		}
 		else {
 			System.err.println("No log message for method: " + methodInvocation.getMethod());

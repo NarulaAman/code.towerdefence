@@ -21,7 +21,7 @@ public class LoggerAspect {
 		Log logAnnotation = getLogAnnotation(joinPoint);
 		if (hasLogMessageFormat(logAnnotation)) {
 			String logMessage = String.format(getLogMessageFormat(logAnnotation), getLoggingArgs(joinPoint));
-			logManager.log(joinPoint.getThis().getClass(),joinPoint.getThis(), logMessage);
+//			logManager.log(joinPoint.getThis().getClass(),joinPoint.getThis(), logMessage);
 		}
 		else {
 			System.err.println("No log message format for method: " +joinPoint.getSignature());
