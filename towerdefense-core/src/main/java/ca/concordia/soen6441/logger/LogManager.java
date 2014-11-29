@@ -6,10 +6,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
+import ca.concordia.soen6441.logic.EnemyWave;
+
 public class LogManager extends Observable implements Serializable {
 
 	private List<LogMessage> logMessages = new ArrayList<>();
 	
+	private List<LogFilter> logFilters = new ArrayList<>();
+	
+	private EnemyWave currentWave = null;
 	
 	public LogManager() {
 		logMessages.add(new LogMessage(new Date(), "amand"));
@@ -39,5 +44,17 @@ public class LogManager extends Observable implements Serializable {
 		logFiltersExample.add(new LogFilter("955lfsds"));
 		logFiltersExample.add(new LogFilter("--123dfkjs"));
 		return logFiltersExample;
+	}
+
+	public void log(Object source, String format, EnemyWave enemyWave) {
+		currentWave = enemyWave;
+		LogMessage logMessage = new LogMessage(new Date(), String.format(format, enemyWave));
+		logMessages.add(logMessage);
+	}
+	
+	public void log(Object source, String format, Object ... args) {
+		if (currentWave != null) {
+			LogMessage logMessage = new WaveLogMessage(currentWave, new Date(), String.format(format, args));
+		}
 	}
 }

@@ -32,11 +32,15 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	private String name = "gamePlay1";
 	
 	private final List<EnemyWave> enemyWaves = new CopyOnWriteArrayList<>();
-//	private EnemyWave currentWave;
+	private EnemyWave currentWave;
+	
+	private final TowerFactory towerFactory = new TowerFactory();
 	
 	private final List<Enemy> enemies = new CopyOnWriteArrayList<>();
 	
 	private final List<Tower> towers = new ArrayList<>();
+	
+	private int waveId = 0;
 	
 	private int enemyId = 0;
 	
@@ -98,6 +102,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		
 		// TODO: end of lines to be removed
 		setState(State.SETUP);
+		createNextWave();
+		
 	}
 	
 	/**
@@ -123,6 +129,12 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 	}
 
+	
+	private void createNextWave() {
+		currentWave = new EnemyWave(this, getNextWaveId(), 5.f/level, 5 * level);
+		logManager.log(this, "%1%s set-up", currentWave);
+	}
+	
 	/**
 	 * Effectively buys the tower
 	 * @param tower tower that was bought
@@ -281,12 +293,14 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * @param seconds delta seconds passed since the last call
 	 */
 	public void update(float seconds) {
-		if (enemyWaves.size() > 0) {
-			EnemyWave enemyWave = enemyWaves.get(0);
-			enemyWave.update(seconds);
-			if (enemyWave.isFinished()) {
-				enemyWaves.remove(enemyWave);
-			}
+		if (gameState != State.RUNNING) {
+			return;
+		}
+		
+		if (currentWave != null) {
+//			EnemyWave enemyWave = enemyWaves.get(0);
+			currentWave.update(seconds);
+
 		}
 				
 		for (Enemy enemy : enemies) {
@@ -301,7 +315,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 			tower.update(seconds);
 			tower.maybeShoot(enemies);
 		}
-		
+		detectGameOver();
 		updateWaveFinished();
 		setChanged();
 		notifyObservers();
@@ -312,10 +326,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * Update the internal state if a wave has finished
 	 */
 	private void updateWaveFinished() {
-		if (enemies.isEmpty()) {
+		if (enemies.isEmpty() && currentWave.isFinished()) {
 			setState(State.SETUP);		
+			createNextWave();
 		}
-		
 	}
 	
 
@@ -351,12 +365,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * Test if the game is over 
 	 * @return true if game is over and false if not
 	 */
-	public boolean isGameOver() {
-		if(currency<=0) {
-			return true;
-		}
-		else if(lives<=0) {
-			return true;
+	private boolean detectGameOver() {
+		if(currency<=0 || lives<=0) {
+			setState(State.GAMEOVER);
+			return isStateGameOver();
 		}
 		return false;
 	}
@@ -449,6 +461,14 @@ public class GamePlay extends Observable implements Serializable, Observer {
 
 	public int getNextEnemyId() {
 		return ++enemyId;
+	}
+	
+	private int getNextWaveId() {
+		return ++waveId;
+	}
+
+	public TowerFactory getTowerFactory() {
+		return towerFactory;
 	}
 	
 	

@@ -42,6 +42,8 @@ public abstract class Tower extends Observable implements Serializable {
 		}
 	}
 	
+	private final int id;
+	
 	private int level;
 	
 	private final GridPosition gridPosition;
@@ -59,8 +61,9 @@ public abstract class Tower extends Observable implements Serializable {
 	 * @param shootingStrategy shooting strategy to apply to the tower
 	 * @param towerFactory tower factory
 	 */
-	public Tower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
+	public Tower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
 		super();
+		this.id = id;
 		this.gridPosition = gridPosition;
 		this.level = level;
 		this.towerFactory = towerFactory;
@@ -288,4 +291,9 @@ public abstract class Tower extends Observable implements Serializable {
 	public ShootingStrategy getShootingStrategy() {
 		return shootStrategy;
 	}
+
+	public int getId() {
+		return id;
+	}
+	
 }

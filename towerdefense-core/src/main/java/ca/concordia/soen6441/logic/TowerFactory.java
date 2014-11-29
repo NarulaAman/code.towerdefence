@@ -23,6 +23,7 @@ public class TowerFactory implements Serializable {
 
 	private Map<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
 
+	private int towerId;
 	/**
 	 * Create a TowerFactory
 	 */
@@ -82,12 +83,16 @@ public class TowerFactory implements Serializable {
 	 */
 	public Tower towerOnCoordinate(Class<? extends Tower> type, GridPosition coordinate) {
 		try {
-			Constructor<? extends Tower> constructor = type.getConstructor(int.class, GridPosition.class,
+			Constructor<? extends Tower> constructor = type.getConstructor(int.class, int.class, GridPosition.class,
 					ShootingStrategy.class, TowerFactory.class);
-			return constructor.newInstance(1, coordinate, new ShootStrongestStrategy(), this);
+			return constructor.newInstance(getNextTowerId(), 1, coordinate, new ShootStrongestStrategy(), this);
 		} catch (Exception exception) {
 			throw new RuntimeException(exception);
 		}
+	}
+	
+	private int getNextTowerId() {
+		return ++towerId;
 	}
 
 }

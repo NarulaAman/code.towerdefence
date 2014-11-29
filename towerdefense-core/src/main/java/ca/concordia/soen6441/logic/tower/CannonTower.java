@@ -26,8 +26,8 @@ public class CannonTower extends Tower {
 	 * @param shootingStrategy The object of {@link ShootingStrategy}
 	 * @param towerFactory The object of {@link TowerFactory}
 	 */
-	public CannonTower(int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
-		super(level, gridPosition, shootingStrategy, towerFactory);
+	public CannonTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
+		super(id, level, gridPosition, shootingStrategy, towerFactory);
 	}
 
 	/**
