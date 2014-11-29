@@ -24,7 +24,7 @@ public class LoadGamePlayAction extends AbstractAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 7403090617352119267L;
-	private static final Icon START_ICON = new ImageIcon(Object.class.getResource("/icons/start.png"));
+	private static final Icon LOAD_ICON = new ImageIcon(Object.class.getResource("/icons/Load.png"));
 	
 	private GamePlayDao gamePlayDao=new GamePlayJavaSerialaizationDao();
 	
@@ -33,7 +33,7 @@ public class LoadGamePlayAction extends AbstractAction {
 	 * from inside this action for every new game
 	 */
 	public LoadGamePlayAction() {
-		super(null, START_ICON);
+		super(null, LOAD_ICON);
 		setEnabled(true);
 	}
 	
