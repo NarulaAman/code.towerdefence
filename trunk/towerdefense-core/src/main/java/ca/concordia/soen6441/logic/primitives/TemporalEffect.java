@@ -1,5 +1,7 @@
 package ca.concordia.soen6441.logic.primitives;
 
+import java.io.Serializable;
+
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.tower.Tower;
 
@@ -7,7 +9,7 @@ import ca.concordia.soen6441.logic.tower.Tower;
  * This class will manage the temporary affect of {@link Tower} on {@link Enemy}
  *
  */
-public class TemporalEffect {
+public class TemporalEffect implements Serializable{
 	
 	boolean active = false;
 	float duration;

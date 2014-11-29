@@ -1,5 +1,6 @@
 package ca.concordia.soen6441.logic.tower;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,7 +16,7 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 /**
  * Abstract class for characteristics of A Temporal Effect Tower. 
  */
-public abstract class TemporalEffectApplier implements Observer {
+public abstract class TemporalEffectApplier implements Observer, Serializable {
 
 	private final Map<Enemy, TemporalEffect> enemiesUnderEffect = new ConcurrentHashMap<>();
 	

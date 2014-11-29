@@ -1,5 +1,6 @@
 package ca.concordia.soen6441.logic;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 import javax.vecmath.Point2f;
@@ -11,7 +12,7 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  * This class has various characteristics of Enemy
  *
  */
-public class Enemy extends Observable {
+public class Enemy extends Observable implements Serializable{
 
 	private final GameMap gameMap;
 	private final int maxHealth;

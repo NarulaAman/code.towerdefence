@@ -1,5 +1,6 @@
 package ca.concordia.soen6441.logic;
 
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
  * Responsible for creating the towers and holding their level characteristics
  *
  */
-public class TowerFactory {
+public class TowerFactory implements Serializable {
 
 	private Map<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
 

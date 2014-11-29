@@ -1,5 +1,6 @@
 package ca.concordia.soen6441.logic.tower.shootingstrategy;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ca.concordia.soen6441.logic.Enemy;
@@ -10,7 +11,7 @@ import ca.concordia.soen6441.logic.tower.Tower;
  * This is the interface of the shooting strategy of the tower
  *
  */
-public interface ShootingStrategy {
+public interface ShootingStrategy extends Serializable {
 	
 	/**
 	 * Sets the tower to be used by the strategy
