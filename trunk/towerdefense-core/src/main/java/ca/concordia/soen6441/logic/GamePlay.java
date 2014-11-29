@@ -40,13 +40,12 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private final List<Tower> towers = new ArrayList<>();
 	
-	private int waveId = 0;
 	
 	private int enemyId = 0;
 	
 	private int score = 0;
 	
-	private int level = 1;
+	private int level = 0;
 	
 	private int currency;
 	
@@ -331,7 +330,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 */
 	private void updateWaveFinished() {
 		if (enemies.isEmpty() && currentWave.isFinished()) {
-			logManager.log(currentWave, "%1$s started", currentWave);
+			logManager.log(currentWave, "%1$s ended", currentWave);
 			createNextWave();
 			setState(State.SETUP);		
 
@@ -472,7 +471,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	}
 	
 	private int getNextWaveId() {
-		return ++waveId;
+		return ++level;
 	}
 
 	public TowerFactory getTowerFactory() {
