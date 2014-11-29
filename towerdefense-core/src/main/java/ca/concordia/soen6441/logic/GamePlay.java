@@ -101,8 +101,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 //		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
 		
 		// TODO: end of lines to be removed
-		setState(State.SETUP);
+		logManager.log(this, "Game started");
 		createNextWave();
+		setState(State.SETUP);
+		
+		
 		
 	}
 	
@@ -111,6 +114,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 */
 	public void start() {
 		setState(State.RUNNING);
+		logManager.log(this, "%1$s started", currentWave);
 	}
 
 	/**
@@ -132,7 +136,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	
 	private void createNextWave() {
 		currentWave = new EnemyWave(this, getNextWaveId(), 5.f/level, 5 * level);
-		logManager.log(this, "%1%s set-up", currentWave);
+		logManager.log(this, "%1$s set-up", currentWave);
 	}
 	
 	/**
@@ -142,6 +146,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	@Log("Bought %2$s")
 	protected void buy(Tower tower) {
 		towers.add(tower);
+		logManager.log(tower, "Bought %1$s", tower);
 	}
 
 	/**
@@ -225,7 +230,6 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 	}
 
-	@Log("Upgraded %2$s")
 	protected void upgrade(Tower tower) {
 		tower.doUpgrade();
 	}
@@ -327,8 +331,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 */
 	private void updateWaveFinished() {
 		if (enemies.isEmpty() && currentWave.isFinished()) {
-			setState(State.SETUP);		
+			logManager.log(currentWave, "%1$s started", currentWave);
 			createNextWave();
+			setState(State.SETUP);		
+
 		}
 	}
 	
@@ -393,6 +399,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 			if (!enemy.isAlive()) {
 				enemies.remove(enemy);
 				currency = currency + enemy.getPrize();
+				score += enemy.getPrize();
 				setChanged();
 				notifyObservers();
 			}

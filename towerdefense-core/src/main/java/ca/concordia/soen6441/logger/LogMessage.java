@@ -65,5 +65,10 @@ public class LogMessage implements Serializable, Comparable<LogMessage>{
 		return source;
 	}
 	
+	@Override
+	public String toString() {
+		return "" + timeStamp + " " + message;
+	}
+	
 	
 }

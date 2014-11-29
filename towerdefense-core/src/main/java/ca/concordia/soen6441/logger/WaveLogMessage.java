@@ -18,5 +18,15 @@ public class WaveLogMessage extends LogMessage {
 		this.enemyWave = enemyWave;
 	}
 	
+	@Override
+	public String toString() {
+		return " WAVE LOG: " + super.toString();
+	}
+
+	public EnemyWave getEnemyWave() {
+		return enemyWave;
+	}
+	
+	
 
 }
