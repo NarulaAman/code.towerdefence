@@ -34,7 +34,7 @@ public class LoadGamePlayAction extends AbstractAction {
 	 */
 	public LoadGamePlayAction() {
 		super(null, START_ICON);
-		setEnabled(false);
+		setEnabled(true);
 	}
 	
 	/**
