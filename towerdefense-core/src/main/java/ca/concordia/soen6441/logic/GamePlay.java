@@ -477,6 +477,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public TowerFactory getTowerFactory() {
 		return towerFactory;
 	}
+
+	public LogManager getLogger() {
+		return logManager;
+	}
 	
 	
 }

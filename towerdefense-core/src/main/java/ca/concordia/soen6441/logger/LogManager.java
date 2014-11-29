@@ -17,9 +17,9 @@ public class LogManager extends Observable implements Serializable {
 	private EnemyWave currentWave = null;
 	
 	public LogManager() {
-		logMessages.add(new LogMessage(new Date(), "amand"));
-		logMessages.add(new LogMessage(new Date(), "alex"));
-		logMessages.add(new LogMessage(new Date(), "amado"));
+//		logMessages.add(new LogMessage(new Date(), "amand"));
+//		logMessages.add(new LogMessage(new Date(), "alex"));
+//		logMessages.add(new LogMessage(new Date(), "amado"));
 	}
 	
 	public List<LogMessage> getLogsFor(LogFilter filter) {
@@ -41,9 +41,9 @@ public class LogManager extends Observable implements Serializable {
 	
 	public List<LogFilter> getLogFilters() {
 		List<LogFilter> logFiltersExample = new ArrayList<>();
-		logFiltersExample.add(new LogFilter("asldfkjs"));
-		logFiltersExample.add(new LogFilter("955lfsds"));
-		logFiltersExample.add(new LogFilter("--123dfkjs"));
+		logFiltersExample.add(new LogFilter("Wave Logs"));
+		logFiltersExample.add(new LogFilter("Tower Logs"));
+		logFiltersExample.add(new LogFilter("Ice Tower"));
 		return logFiltersExample;
 	}
 
@@ -51,6 +51,9 @@ public class LogManager extends Observable implements Serializable {
 		currentWave = enemyWave;
 		LogMessage logMessage = new WaveLogMessage(currentWave, new Date(), String.format(format, enemyWave));
 		logMessages.add(logMessage);
+		setChanged();
+		notifyObservers();
+		
 		System.out.println("" + logMessage);
 	}
 	
@@ -61,6 +64,9 @@ public class LogManager extends Observable implements Serializable {
 		}
 		System.out.println("" + logMessage);
 		logMessages.add(logMessage);
+		setChanged();
+		notifyObservers();
+		
 		
 	}
 }

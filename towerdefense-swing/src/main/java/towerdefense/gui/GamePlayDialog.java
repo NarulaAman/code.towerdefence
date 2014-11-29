@@ -33,6 +33,7 @@ import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import towerdefense.gui.actions.MapLogAction;
 import towerdefense.gui.guice.GuiModule;
+import towerdefense.gui.log.GameLogDialog;
 import towerdefense.gui.log.MapLogDialog;
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GamePlayJavaSerialaizationDao;
@@ -113,7 +114,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private final JButton iceTowerButton = new JButton("Ice Tower");
 	private final JButton cannonTowerButton = new JButton("Cannon Tower");
 	private final JButton startGameButton = new JButton("Start Game");
-	private final JButton mapLogButton = new JButton("Map Log");
+	private final JButton gamePlayLogButton = new JButton("Game Play Log");
 	
 	private final TowerFactory towerFactory;
 	
@@ -386,7 +387,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		constraints.gridy = 3;
 		towersToBuyPanel.add(cannonTowerButton,constraints);
 		constraints.gridy = 4;
-		towersToBuyPanel.add(mapLogButton,constraints);
+		towersToBuyPanel.add(gamePlayLogButton,constraints);
 		
 		fireTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
 		iceTowerButton.setToolTipText(towerFactory.getLevelInformation(IceTower.class, 1).toHtmlString());
@@ -402,16 +403,23 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 				level++;
 			}
 		});
-		Injector injector = Guice.createInjector(new GuiModule());
 		
-		mapLogButton.addActionListener(injector.getInstance(MapLogAction.class));
+		
+		gamePlayLogButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		    GameLogDialog log = new GameLogDialog(gamePlay.getLogger());
+				
+			}
+		});
 		 // this is a hack to increase the size of enemies at every wave, remove in the future!!
 		sideBar.add(towersToBuyPanel);
 
 	}
 
 	/**
-	 * Sets up the {@link GamePlay} attributes
+	 * Sets up the {@link GamePslay} attributes
 	 * @param sideBar sidebar to have the attributes added to
 	 */
 	private void setupGamePlayAttributes(JPanel sideBar) {
