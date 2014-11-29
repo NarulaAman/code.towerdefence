@@ -16,6 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import towerdefense.gui.actions.DisplayLogAction;
+import towerdefense.gui.actions.LoadGamePlayAction;
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.NewMapAction;
 import towerdefense.gui.actions.StartGamePlayAction;
@@ -41,6 +42,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private final JButton editBtn = new JButton();	
 	private final JButton exitBtn = new JButton(EXIT_ICON);
 	private final JButton logBtn = new JButton("Log Messages");
+	private final JButton loadBtn= new JButton();
 	
 	
 	private final MapListPanel mapListPanel;
@@ -54,7 +56,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 * @param startGamePlayAction {@link StartGamePlayAction} to be used
 	 */
 	@Inject
-	public StartGameDialog(GameMapDao gameMapDao, NewMapAction newMapAction, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction, DisplayLogAction displayLogAction) {
+	public StartGameDialog(GameMapDao gameMapDao, NewMapAction newMapAction, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction, DisplayLogAction displayLogAction, LoadGamePlayAction loadGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Chicken Tikka Masala Gang - Tower Defense");
 		setLayout(new BorderLayout());
@@ -62,6 +64,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		startBtn.setAction(startGamePlayAction);
 		editBtn.setAction(mapEditAction);
 		logBtn.setAction(displayLogAction);
+		loadBtn.setAction(loadGamePlayAction);
 		mapListPanel = new MapListPanel(gameMapDao);
 		mapListPanel.addMapSelectionListerner(this);
 		mapListPanel.addMapSelectionListerner(mapEditAction);
@@ -99,6 +102,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		sideBar.add(editBtn);
 		sideBar.add(exitBtn);
 		sideBar.add(logBtn);
+		sideBar.add(loadBtn);
 		sideBar.add(mapListPanel);
 		add(sideBar,BorderLayout.EAST);
 
