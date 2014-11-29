@@ -40,7 +40,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	private final JButton startBtn = new JButton();
 	private final JButton editBtn = new JButton();	
 	private final JButton exitBtn = new JButton(EXIT_ICON);
-	private final JButton logBtn = new JButton();
+	private final JButton logBtn = new JButton("Log Messages");
 	
 	
 	private final MapListPanel mapListPanel;
