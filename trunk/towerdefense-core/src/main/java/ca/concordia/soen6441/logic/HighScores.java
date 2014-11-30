@@ -25,8 +25,8 @@ public class HighScores implements Serializable, Cloneable {
 	{
 		
 		highScore.add(score);		
-		Comparator<Integer> comparator = Collections.reverseOrder();
-		highScore.sort(comparator);
+		Collections.sort(highScore);
+		Collections.reverse(highScore);
 		if(highScore.size()>5)
 		{
 			highScore.remove(5);
