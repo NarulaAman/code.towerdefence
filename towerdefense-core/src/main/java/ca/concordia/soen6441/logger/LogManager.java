@@ -11,18 +11,33 @@ import java.util.TreeSet;
 import ca.concordia.soen6441.logic.EnemyWave;
 import ca.concordia.soen6441.logic.tower.Tower;
 
+/**
+ * The Class LogManager.
+ */
 public class LogManager extends Observable implements Serializable {
 
+	/** The log messages. */
 	private List<LogMessage> logMessages = new ArrayList<>();
 	
+	/** The log filters. */
 	private SortedSet<LogFilter> logFilters = new TreeSet<>();
 	
+	/** The current wave. */
 	private EnemyWave currentWave = null;
 	
+	/**
+	 * Instantiates a new log manager.
+	 */
 	public LogManager() {
 		logFilters.add(new AllMessagesFIlter());
 	}
 	
+	/**
+	 * Gets the logs for.
+	 *
+	 * @param filter the filter
+	 * @return the logs for
+	 */
 	public List<LogMessage> getLogsFor(LogFilter filter) {
 		List<LogMessage> returnedMessages = new ArrayList<>();
 		for (LogMessage logMessage : logMessages) {
@@ -33,11 +48,23 @@ public class LogManager extends Observable implements Serializable {
 		return returnedMessages;
 	}
 
+	/**
+	 * Gets the log filters.
+	 *
+	 * @return the log filters
+	 */
 	public List<LogFilter> getLogFilters() {
 		List<LogFilter> logFiltersExample = new ArrayList<>(logFilters);
 		return logFiltersExample;
 	}
 
+	/**
+	 * Log.
+	 *
+	 * @param source the source
+	 * @param format the format
+	 * @param enemyWave the enemy wave
+	 */
 	public void log(Object source, String format, EnemyWave enemyWave) {
 		if (currentWave != enemyWave) {
 			currentWave = enemyWave;
@@ -56,6 +83,13 @@ public class LogManager extends Observable implements Serializable {
 	
 
 
+	/**
+	 * Log.
+	 *
+	 * @param source the source
+	 * @param format the format
+	 * @param args the args
+	 */
 	public void log(Object source, String format, Object ... args) {
 		LogMessage logMessage = new LogMessage(source, new Date(), String.format(format, args));
 		if (currentWave != null) {
@@ -68,6 +102,11 @@ public class LogManager extends Observable implements Serializable {
 		notifyObservers(logMessage);
 	}
 	
+	/**
+	 * Creates the log filters for.
+	 *
+	 * @param source the source
+	 */
 	private void createLogFiltersFor(Object source) {
 		if (source instanceof Tower) {
 			Tower tower = (Tower) source;
