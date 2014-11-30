@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+
 /**
  * This class will maintain the high scores of the map
  * 
@@ -20,6 +21,11 @@ public class HighScores implements Serializable, Cloneable {
 	List<Integer> highScore= new  ArrayList<>();
 	
 	
+	/**
+	 * Instantiates a new high scores.
+	 *
+	 * @param name the name
+	 */
 	public HighScores(String name) {
 		this.name = name;
 	}
@@ -89,6 +95,9 @@ public class HighScores implements Serializable, Cloneable {
 	}
 
 	
+	/**
+	 * Save.
+	 */
 	public void save() {
 		highScoresDao.save(this);
 	}

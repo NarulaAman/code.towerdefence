@@ -516,6 +516,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		return logManager;
 	}
 	
+	/**
+	 * Gets the high scores.
+	 *
+	 * @return the high scores
+	 */
 	public HighScores getHighScores() {
 		return gameMap.getHighScores();
 	}

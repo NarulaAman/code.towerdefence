@@ -63,6 +63,9 @@ public class MapLogger implements Serializable{
 		return logMessages;
 	}
 	
+	/**
+	 * Save.
+	 */
 	public void save() {
 		mapLoggerDao.save(this);
 	}
