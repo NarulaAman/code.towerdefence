@@ -156,7 +156,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towerButtons.add(cannonTowerButton);
 
 		towerInspectionPanel.setVisible(false);
-		add(saveGamePlayBtn, BorderLayout.WEST);
+		
 		readGamePlay();
 		//		startGamePlayUpdaateTimer();
 		pack();
@@ -388,6 +388,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		towersToBuyPanel.add(cannonTowerButton,constraints);
 		constraints.gridy = 4;
 		towersToBuyPanel.add(gamePlayLogButton,constraints);
+		constraints.gridy = 5;
+		towersToBuyPanel.add(saveGamePlayBtn,constraints);
 		
 		fireTowerButton.setToolTipText(towerFactory.getLevelInformation(FireTower.class, 1).toHtmlString());
 		iceTowerButton.setToolTipText(towerFactory.getLevelInformation(IceTower.class, 1).toHtmlString());
