@@ -13,6 +13,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import towerdefense.gui.MapEditionDialog;
+import towerdefense.gui.MapListPanel;
 import towerdefense.gui.StartGameDialog;
 import towerdefense.gui.MapListPanel.MapSelectionListener;
 import towerdefense.gui.guice.GuiModule;
@@ -25,7 +26,7 @@ import ca.concordia.soen6441.logger.MapLogger;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.MapLoggerDao;
 
-public class MapLogAction extends AbstractAction implements MapSelectionListener{
+public class MapLogAction extends AbstractAction implements MapListPanel.MapSelectionListener{
 	
 	/**
 	 * 
@@ -54,10 +55,11 @@ public class MapLogAction extends AbstractAction implements MapSelectionListener
 				System.out.println("in action map log");
 				
 			
-				mapLogDialog.setVisible(true);
-				MapLogger mapLogger = mapLoggerDao.load(selectedMap.getName());
 				
+				MapLogger mapLogger = mapLoggerDao.load(selectedMap.getName());
+				System.out.println(mapLogger.getLogMessages());
 				mapLogDialog.setMapLogs(mapLogger.getLogMessages());
+				mapLogDialog.setVisible(true);
 				
 				
 			}

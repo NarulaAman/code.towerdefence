@@ -70,6 +70,7 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		mapListPanel = new MapListPanel(gameMapDao);
 		mapListPanel.addMapSelectionListerner(this);
 		mapListPanel.addMapSelectionListerner(mapEditAction);
+		mapListPanel.addMapSelectionListerner(mapLogAction);
 		mapListPanel.addMapSelectionListerner(startGamePlayAction);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -144,19 +145,4 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 		mapListPanel.refreshList();
 	}
 	
-//	private static void createAndShowGUI() {
-//  StartGameDialog startPanel = new StartGameDialog(new MapJavaSerializationPersister(), null, null);
-//  
-//  startPanel.setVisible(true);
-//}
-//
-//public static void main(String[] args) {
-//  //Schedule a job for the event-dispatching thread:
-//  //creating and showing this application's GUI.
-//  javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//      public void run() {
-//          createAndShowGUI();
-//      }
-//  });
-//}
 }
