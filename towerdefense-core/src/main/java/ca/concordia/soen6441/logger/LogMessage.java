@@ -13,53 +13,31 @@ import ca.concordia.soen6441.logic.GamePlay;
 public class LogMessage implements Serializable, Comparable<LogMessage>{
 
 
-	@Inject
-	public GamePlayFactory m;
+	private final Object source;
 	
-	private Object source;
-	
-	private Date timeStamp;
+	private final Date timeStamp;
 
-	private String message;
+	private final String message;
 
-
-
-	public LogMessage(Date timeStamp, String message) {
+	public LogMessage(Object source, Date timeStamp, String message) {
 		super();
+		this.source = source;
 		this.timeStamp = timeStamp;
 		this.message = message;
 	}
-
-
 
 	public Date getTimeStamp() {
 		return timeStamp;
 	}
 
-
-
-	public void setTimeStamp(Date timeStamp) {
-		this.timeStamp = timeStamp;
-	}
-
-
-
 	public String getMessage() {
 		return message;
-	}
-
-
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	@Override
 	public int compareTo(LogMessage o) {
 		return timeStamp.compareTo(o.timeStamp);
 	}
-
-
 
 	public Object getSource() {
 		return source;
@@ -69,6 +47,4 @@ public class LogMessage implements Serializable, Comparable<LogMessage>{
 	public String toString() {
 		return "" + timeStamp + " " + message;
 	}
-	
-	
 }

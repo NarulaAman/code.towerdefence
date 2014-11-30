@@ -8,6 +8,7 @@ import javax.vecmath.Point2d;
 import javax.vecmath.Point2f;
 
 import ca.concordia.soen6441.logger.Log;
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.TowerFactory;
@@ -42,6 +43,8 @@ public abstract class Tower extends Observable implements Serializable {
 		}
 	}
 	
+	private final LogManager logger;
+	
 	private final int id;
 	
 	private int level;
@@ -61,9 +64,10 @@ public abstract class Tower extends Observable implements Serializable {
 	 * @param shootingStrategy shooting strategy to apply to the tower
 	 * @param towerFactory tower factory
 	 */
-	public Tower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
+	public Tower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, LogManager logger) {
 		super();
 		this.id = id;
+		this.logger = logger;
 		this.gridPosition = gridPosition;
 		this.level = level;
 		this.towerFactory = towerFactory;
@@ -177,11 +181,12 @@ public abstract class Tower extends Observable implements Serializable {
 	 * Upgrade tower to a specific level
 	 * @param upgradeLevel level to upgrade the tower to
 	 */
-	@Log("%1$s upraded to level %2$s")
+	@Log("%1$s upgraded to level %2$s")
 	protected void upgradeTo(int upgradeLevel) {
 		level = upgradeLevel;
 		setChanged();
-		notifyObservers();	
+		notifyObservers();
+		logger.log(this, "%1$s upgraded to level %2$s", this, upgradeLevel);
 	}
 	
 	/**

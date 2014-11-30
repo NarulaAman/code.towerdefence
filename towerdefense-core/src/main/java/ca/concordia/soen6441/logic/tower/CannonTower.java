@@ -3,6 +3,7 @@ package ca.concordia.soen6441.logic.tower;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.TowerFactory;
@@ -26,8 +27,8 @@ public class CannonTower extends Tower {
 	 * @param shootingStrategy The object of {@link ShootingStrategy}
 	 * @param towerFactory The object of {@link TowerFactory}
 	 */
-	public CannonTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
-		super(id, level, gridPosition, shootingStrategy, towerFactory);
+	public CannonTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, LogManager logger) {
+		super(id, level, gridPosition, shootingStrategy, towerFactory, logger);
 	}
 
 	/**

@@ -79,6 +79,15 @@ public class EnemyWave implements Serializable{
 	public String toString() {
 		return "Wave " + id;
 	}
+
+
+	/**
+	 * Returns the id of the Wave
+	 * @return the id of the Wave
+	 */
+	public int getId() {
+		return id;
+	}
 	
 	
 }

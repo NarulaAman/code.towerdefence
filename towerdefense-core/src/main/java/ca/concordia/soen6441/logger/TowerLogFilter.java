@@ -4,11 +4,11 @@ import ca.concordia.soen6441.logic.tower.Tower;
 
 public class TowerLogFilter extends LogFilter {
 
-	private int towerId;
+	private final int towerId;
 	
-	public TowerLogFilter(int towerId) {
-		super("Tower " + towerId);
-
+	public TowerLogFilter(Tower tower) {
+		super("Tower " + tower.getId());
+		this.towerId = tower.getId();
 	}
 	
 	
@@ -16,8 +16,7 @@ public class TowerLogFilter extends LogFilter {
 		if (Tower.class.isAssignableFrom(logMessage.getSource().getClass())) {
 			if (logMessage.getSource() instanceof Tower) {
 				Tower tower = (Tower) logMessage.getSource();
-//				return tower.getId() == towerId;
-				return true;
+				return tower.getId() == towerId;
 			}
 		}
 		return false;
