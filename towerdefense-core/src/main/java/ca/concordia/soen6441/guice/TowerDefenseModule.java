@@ -2,13 +2,14 @@ package ca.concordia.soen6441.guice;
 
 import javax.inject.Singleton;
 
-import org.aspectj.lang.Aspects;
-
 import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
+import ca.concordia.soen6441.io.HighScoresJavaSerializationDao;
+import ca.concordia.soen6441.io.MapLoggerJavaSerializationDao;
 import ca.concordia.soen6441.logger.LogInterceptor;
 import ca.concordia.soen6441.logger.LogManager;
-import ca.concordia.soen6441.logger.LoggerAspect;
 import ca.concordia.soen6441.logic.GameMapDao;
+import ca.concordia.soen6441.logic.HighScoresDao;
+import ca.concordia.soen6441.logic.MapLoggerDao;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
@@ -23,6 +24,8 @@ public class TowerDefenseModule extends AbstractModule {
 //	   requestInjection(Aspects.aspectOf(InjectorAspect.class));
 	   bind(GameMapJavaSerializationDao.class).in(Singleton.class);
 	   bind(GameMapDao.class).to(GameMapJavaSerializationDao.class);
+	   bind(HighScoresDao.class).to(HighScoresJavaSerializationDao.class);
+	   bind(MapLoggerDao.class).to(MapLoggerJavaSerializationDao.class);
 
 	   bind(LogManager.class).in(Singleton.class);
 	   install(new FactoryModuleBuilder().build(GamePlayFactory.class));

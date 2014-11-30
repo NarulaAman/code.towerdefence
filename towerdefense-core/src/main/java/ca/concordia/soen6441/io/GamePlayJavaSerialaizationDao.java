@@ -14,9 +14,9 @@ import ca.concordia.soen6441.logic.GamePlayDao;
 
 public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	
-	public static final String GamePlay_FILENAME_EXTENSION = ".game";
+	public static final String GAMEPLAY_FILENAME_EXTENSION = ".game";
 	
-	public static final String GAMEFILENAME_STRING_FORMAT = "." + File.separator + "%s" + GamePlay_FILENAME_EXTENSION;
+	public static final String GAMEFILENAME_STRING_FORMAT = "." + File.separator + "%s" + GAMEPLAY_FILENAME_EXTENSION;
 	
 	@Override
 	public void save(GamePlay gamePlay) throws IOException {
@@ -46,9 +46,9 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 		List<String> fileList = new ArrayList<>();
  		for (File file : directory.listFiles())
 		{
-			if (file.isFile() && file.getName().endsWith(GamePlay_FILENAME_EXTENSION)) {
+			if (file.isFile() && file.getName().endsWith(GAMEPLAY_FILENAME_EXTENSION)) {
 				String filename = file.getName();
-				String gamePlayName = filename.substring(0, filename.indexOf(GamePlay_FILENAME_EXTENSION));
+				String gamePlayName = filename.substring(0, filename.indexOf(GAMEPLAY_FILENAME_EXTENSION));
 				fileList.add(gamePlayName);
 			}
 		}

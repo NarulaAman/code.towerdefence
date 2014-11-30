@@ -16,8 +16,20 @@ public class MapLogger implements Serializable{
 	
 	private List<LogMessage> logMessages = new ArrayList<>();
 	
+	public MapLogger(String name) {
+		this.mapName = name;
+	}
+	
 	public void log(String message) {
 		logMessages.add(new LogMessage(this, new Date(), message));
+	}
+
+	public String getName() {
+		return mapName;
+	}
+	
+	public List<LogMessage> getLogMessages() {
+		return logMessages;
 	}
 	
 }

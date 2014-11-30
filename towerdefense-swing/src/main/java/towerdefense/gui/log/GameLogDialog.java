@@ -33,7 +33,7 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 	
 	private final LogMessageTableModel logMessageTableModel = new LogMessageTableModel();
 	
-	private final DefaultComboBoxModel<LogFilter> logFilterModel = new DefaultComboBoxModel<LogFilter>();
+	private DefaultComboBoxModel<LogFilter> logFilterModel = new DefaultComboBoxModel<LogFilter>();
 
 	private final JComboBox<LogFilter> comboBox = new JComboBox<LogFilter>(logFilterModel);
 	private final LogManager logManager;
@@ -80,6 +80,7 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		if(selected!=null) {
 			logMessageTableModel.setLogMessages(logManager.getLogsFor(selected));
 		}
+		logFilterModel.setSelectedItem(selected);
 	}
 
 
