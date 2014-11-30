@@ -93,7 +93,9 @@ public class GridPosition implements Serializable {
 			return false;
 		return true;
 	}
-
+/**
+ * Return String
+ */
 	@Override
 	public String toString() {
 		return "GridPosition [x=" + x + ", y=" + y + "]";
