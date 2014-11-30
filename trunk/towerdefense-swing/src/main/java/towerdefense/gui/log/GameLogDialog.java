@@ -75,10 +75,11 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		LogFilter selected = (LogFilter) logFilterModel.getSelectedItem();
 		logFilterModel.removeAllElements();
 		for (LogFilter filter : logManager.getLogFilters()) {
-			logFilterModel.addElement(filter);
-			logMessageTableModel.setLogMessages(logManager.getLogsFor(filter));
+			logFilterModel.addElement(filter);		
 		}
-		//logFilterModel.setSelectedItem(selected);
+		if(selected!=null) {
+			logMessageTableModel.setLogMessages(logManager.getLogsFor(selected));
+		}
 	}
 
 
