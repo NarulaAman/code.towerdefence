@@ -135,8 +135,10 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JComboBox<LogFilter> logFilters = (JComboBox<LogFilter>)e.getSource();
 	        LogFilter logFilter = (LogFilter)logFilters.getSelectedItem();
-	        List<LogMessage> logMessages = logManager.getLogsFor(logFilter);
-	        logMessageTableModel.setLogMessages(logMessages);
+	        if (logFilter != null) {
+	        	List<LogMessage> logMessages = logManager.getLogsFor(logFilter);
+	        	logMessageTableModel.setLogMessages(logMessages);
+	        }
 		}
 
 	
