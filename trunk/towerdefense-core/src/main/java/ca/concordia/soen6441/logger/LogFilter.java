@@ -2,10 +2,20 @@ package ca.concordia.soen6441.logger;
 
 import java.io.Serializable;
 
+
+/**
+ * The Class LogFilter.
+ */
 public class LogFilter implements Serializable, Comparable<LogFilter>{
 
+	/** The name. */
 	private String name;
 	
+	/**
+	 * Instantiates a new log filter.
+	 *
+	 * @param name the name
+	 */
 	public LogFilter(String name) {
 		super();
 		this.name = name;
@@ -13,15 +23,27 @@ public class LogFilter implements Serializable, Comparable<LogFilter>{
 
 
 
+	/**
+	 * This method will return string
+	 */
 	@Override
 	public String toString() {
 		return name;
 	}
 	
+	/**
+	 * Filter.
+	 *
+	 * @param logMessage the log message
+	 * @return true, if successful
+	 */
 	boolean filter(LogMessage logMessage) {
 		return true;
 	}
 
+	/**
+	 * This method will compare 
+	 */
 	@Override
 	public int compareTo(LogFilter o) {
 		return name.compareTo(o.name);
@@ -29,6 +51,9 @@ public class LogFilter implements Serializable, Comparable<LogFilter>{
 
 
 
+	/**
+	 * This method will return the hashcode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -39,6 +64,9 @@ public class LogFilter implements Serializable, Comparable<LogFilter>{
 
 
 
+	/**
+	 * This method will check if two objects are equal
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

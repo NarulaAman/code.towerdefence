@@ -9,10 +9,17 @@ import javax.inject.Inject;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
+/**
+ * The Class LogInterceptor.
+ */
 public class LogInterceptor implements MethodInterceptor{
 
+	/** The log manager. */
 	@Inject private LogManager logManager;
 	
+	/**
+	 * This method will return the object
+	 */
 	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		Object result = methodInvocation.proceed();
