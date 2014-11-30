@@ -338,6 +338,11 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 		return startToEndPath;
 	}
 
+	/**
+	 * Gets the high scores.
+	 *
+	 * @return the high scores
+	 */
 	public HighScores getHighScores() {
 		return highScoresDao.load(getName());
 		
