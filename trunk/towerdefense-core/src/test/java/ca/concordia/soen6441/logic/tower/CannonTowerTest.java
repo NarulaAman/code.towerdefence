@@ -13,6 +13,7 @@ import javax.vecmath.Point2f;
 import org.junit.Before;
 import org.junit.Test;
 
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
@@ -23,7 +24,8 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class CannonTowerTest {
 
-	private final TowerFactory towerFactory = new TowerFactory();
+	private final LogManager logger = mock(LogManager.class);
+	private final TowerFactory towerFactory = new TowerFactory(logger);
 	
 	private CannonTower tower;
 	private Enemy enemyTarget;

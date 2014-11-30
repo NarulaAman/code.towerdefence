@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.FireTower;
 import ca.concordia.soen6441.logic.tower.Tower;
@@ -16,7 +17,8 @@ import ca.concordia.soen6441.logic.tower.Tower;
  */
 public class TowerTest {
 
-	private final TowerFactory towerFactory = new TowerFactory();
+	private final LogManager logger = mock(LogManager.class);
+	private final TowerFactory towerFactory = new TowerFactory(logger);
 	
 	private Tower tower;
 	private Enemy enemy;
