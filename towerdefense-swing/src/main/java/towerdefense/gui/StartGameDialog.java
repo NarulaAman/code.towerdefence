@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import towerdefense.gui.actions.DisplayLogAction;
 import towerdefense.gui.actions.LoadGamePlayAction;
 import towerdefense.gui.actions.MapEditAction;
+import towerdefense.gui.actions.MapLogAction;
 import towerdefense.gui.actions.NewMapAction;
 import towerdefense.gui.actions.StartGamePlayAction;
 import ca.concordia.soen6441.logic.GameMap;
@@ -57,14 +58,14 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	 * @param startGamePlayAction {@link StartGamePlayAction} to be used
 	 */
 	@Inject
-	public StartGameDialog(GameMapDao gameMapDao, NewMapAction newMapAction, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction, DisplayLogAction displayLogAction, LoadGamePlayAction loadGamePlayAction) {
+	public StartGameDialog(GameMapDao gameMapDao, NewMapAction newMapAction, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction, MapLogAction mapLogAction, LoadGamePlayAction loadGamePlayAction) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Chicken Tikka Masala Gang - Tower Defense");
 		setLayout(new BorderLayout());
 		newBtn.setAction(newMapAction);
 		startBtn.setAction(startGamePlayAction);
 		editBtn.setAction(mapEditAction);
-		mapLogBtn.setAction(displayLogAction);
+		mapLogBtn.setAction(mapLogAction);
 		loadBtn.setAction(loadGamePlayAction);
 		mapListPanel = new MapListPanel(gameMapDao);
 		mapListPanel.addMapSelectionListerner(this);

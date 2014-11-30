@@ -3,6 +3,7 @@ package towerdefense.gui.log;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
@@ -17,6 +18,7 @@ import com.google.inject.Injector;
 
 import ca.concordia.soen6441.logger.LogFilter;
 import ca.concordia.soen6441.logger.LogManager;
+import ca.concordia.soen6441.logger.LogMessage;
 import ca.concordia.soen6441.logic.GameMap;
 
 public class MapLogDialog extends JDialog {
@@ -29,24 +31,24 @@ public class MapLogDialog extends JDialog {
 	private final JTable table = new JTable();
 	
 	private final LogMessageTableModel logMessageTableModel;
-	private final LogManager logManager;
 	private GameMap selectedMap;
 	
 	@Inject
-	public MapLogDialog(LogMessageTableModel logMessageTableModel, LogManager logManager) {
+	public MapLogDialog(LogMessageTableModel logMessageTableModel) {
 		
 		setMaximumSize(new Dimension(600, 450));
 		
 		setMinimumSize(new Dimension(600, 450));
 		this.logMessageTableModel = logMessageTableModel;
-		this.logManager = logManager;
+
        
 		table.setModel(logMessageTableModel);
 
 		// scrollPane.add(table);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
-		logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter(selectedMap.toString())));
+		
+		//logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter(selectedMap.toString())));
 		logMessageTableModel.fireTableDataChanged();
 		add(table, BorderLayout.CENTER);
 		pack();
@@ -78,5 +80,11 @@ public class MapLogDialog extends JDialog {
 			}
 		});
 	}
+	
+	public void setMapLogs(List<LogMessage> logMessages ) {
+		logMessageTableModel.setLogMessages(logMessages);
+	}
+	
+	
 
 }

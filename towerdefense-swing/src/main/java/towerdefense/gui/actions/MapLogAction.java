@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.swing.AbstractAction;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -19,7 +21,9 @@ import towerdefense.gui.log.MapLogDialog;
 import ca.concordia.soen6441.logger.LogFilter;
 import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logger.LogMessage;
+import ca.concordia.soen6441.logger.MapLogger;
 import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.MapLoggerDao;
 
 public class MapLogAction extends AbstractAction implements MapSelectionListener{
 	
@@ -29,17 +33,37 @@ public class MapLogAction extends AbstractAction implements MapSelectionListener
 	private static final long serialVersionUID = 1L;
 	private final LogMessageTableModel logMessageTableModel;
 	private List<LogMessage> logMessages= new ArrayList<LogMessage>();
+	//private final MapLoggerDao mapLoggerDao;
 	private GameMap selectedMap = null;
+	private MapLoggerDao mapLoggerDao;
+	private static final Icon MAP_LOG_ICON = new ImageIcon(Object.class.getResource("/icons/maplogbutton.png"));
+	
+	@Inject MapLogDialog mapLogDialog;
 	
 	@Inject
-	public MapLogAction(LogMessageTableModel logMessageTableModel) {
+	public MapLogAction(LogMessageTableModel logMessageTableModel, MapLoggerDao mapLoggerDao) {
+		super(null,MAP_LOG_ICON);
+		this.mapLoggerDao = mapLoggerDao;
 		this.logMessageTableModel = logMessageTableModel;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(selectedMap != null) {
-			getMapLogDialog().setVisible(true);
+			try {
+				System.out.println("in action map log");
+				
+			
+				mapLogDialog.setVisible(true);
+				MapLogger mapLogger = mapLoggerDao.load(selectedMap.getName());
+				
+				mapLogDialog.setMapLogs(mapLogger.getLogMessages());
+				
+				
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 		
 	}
@@ -50,8 +74,5 @@ public class MapLogAction extends AbstractAction implements MapSelectionListener
 		selectedMap = gameMap;
 	}
 	
-	private MapLogDialog getMapLogDialog() {
-		Injector injector = Guice.createInjector(new GuiModule());
-		return injector.getInstance(MapLogDialog.class);  
-	}
+	
 }
