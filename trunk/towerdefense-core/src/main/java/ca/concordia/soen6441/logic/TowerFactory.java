@@ -96,7 +96,10 @@ public class TowerFactory implements Serializable {
 			throw new RuntimeException(exception);
 		}
 	}
-	
+	/**
+	 * Return the NextTowerId
+	 * @return
+	 */
 	private int getNextTowerId() {
 		return ++towerId;
 	}
