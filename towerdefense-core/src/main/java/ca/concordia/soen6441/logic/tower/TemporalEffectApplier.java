@@ -13,29 +13,33 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
+
 /**
  * Abstract class for characteristics of A Temporal Effect Tower. 
  */
 public abstract class TemporalEffectApplier implements Observer, Serializable {
 
+	/** The enemies under effect. */
 	private final Map<Enemy, TemporalEffect> enemiesUnderEffect = new ConcurrentHashMap<>();
 	
 	/**
-	 * Initialize the TemporalEffectApplier  
+	 * Initialize the TemporalEffectApplier.
 	 */
 	public TemporalEffectApplier() {
 		//super(level, gridPosition, shootingStrategy, towerFactory);
 	}
 	
 	/**
-	 * Factory method to build an effect on a given enemy
+	 * Factory method to build an effect on a given enemy.
+	 *
 	 * @param enemy to have an TemporalEffect
 	 * @return a Temporal effect for the enemy
 	 */
 	protected abstract TemporalEffect buildEffectOn(Enemy enemy);
 
 	/**
-	 * Towers shoot the enemies 
+	 * Towers shoot the enemies .
+	 *
 	 * @param enemy enemies that are in range
 	 */
 	public void applyEffectOn(Enemy enemy) {
@@ -52,7 +56,8 @@ public abstract class TemporalEffectApplier implements Observer, Serializable {
 	}
 
 	/**
-	 * Delete the {@link Enemy} if its health is zero
+	 * Delete the {@link Enemy} if its health is zero.
+	 *
 	 * @param o object of class {@link Enemy}
 	 * @param arg is ignored
 	 */
@@ -67,7 +72,8 @@ public abstract class TemporalEffectApplier implements Observer, Serializable {
 	}
 	
 	/**
-	 * Remove the temporal affect from the {@link Enemy}  when time is out
+	 * Remove the temporal affect from the {@link Enemy}  when time is out.
+	 *
 	 * @param seconds seconds passed
 	 */
 	public void update(float seconds) {
@@ -80,8 +86,10 @@ public abstract class TemporalEffectApplier implements Observer, Serializable {
 			}
 		}
 	}
+	
 	/**
-	 * Return the set of {@link Enemy}
+	 * Return the set of {@link Enemy}.
+	 *
 	 * @return The set of {@link Enemy}
 	 */ 
 	public Set<Enemy> getEnemiesUnderEffect() {
