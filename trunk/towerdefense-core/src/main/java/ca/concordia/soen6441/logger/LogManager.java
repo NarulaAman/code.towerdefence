@@ -20,6 +20,7 @@ public class LogManager extends Observable implements Serializable {
 	private EnemyWave currentWave = null;
 	
 	public LogManager() {
+		logFilters.add(new AllMessagesFIlter());
 	}
 	
 	public List<LogMessage> getLogsFor(LogFilter filter) {
@@ -38,7 +39,10 @@ public class LogManager extends Observable implements Serializable {
 	}
 
 	public void log(Object source, String format, EnemyWave enemyWave) {
-		currentWave = enemyWave;
+		if (currentWave != enemyWave) {
+			currentWave = enemyWave;
+			createLogFiltersFor(currentWave);
+		}
 		LogMessage logMessage = new WaveLogMessage(source, currentWave, new Date(), String.format(format, enemyWave));
 		logMessages.add(logMessage);
 		setChanged();
