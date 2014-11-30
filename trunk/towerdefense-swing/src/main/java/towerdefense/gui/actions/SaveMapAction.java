@@ -45,7 +45,7 @@ public class SaveMapAction implements ActionListener{
 		if(getMapEditionDialog().saveMap()) {
 			getMapEditionDialog().setVisible(false);
 			getStartGameDialog().refreshMaps();
-			MapLogger mapLogger = mapLoggerDao.load(getMapEditionDialog().getName());
+			MapLogger mapLogger = mapLoggerDao.load(getMapEditionDialog().getGameMapName());
 			if (mapLogger.getLogMessages().size() < 1) {
 				mapLogger.log("Map created");
 			}
