@@ -14,7 +14,15 @@ import ca.concordia.soen6441.logic.MapLoggerDao;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
+
+/**
+ * The Class TowerDefenseModule.
+ */
 public class TowerDefenseModule extends AbstractModule {
+  
+  /**
+   * This function will configure
+   */
   @Override 
   protected void configure() {
 	  LogInterceptor logger = new LogInterceptor();
