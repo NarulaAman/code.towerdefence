@@ -24,7 +24,7 @@ public class HighScoresDaoTest {
 	private static final String MAP_DATA_FILENAME = "testHighScore";
 	
 	private HighScoresJavaSerializationDao highScoreDao = new HighScoresJavaSerializationDao();
-	private static HighScores highScore = new HighScores();
+	private static HighScores highScore = new HighScores(MAP_DATA_FILENAME);
 
 	/**
 	 * Creates a {@link HighScores} to aid the tests
@@ -55,10 +55,9 @@ public class HighScoresDaoTest {
 	 * @throws ClassNotFoundException on error
 	 * @throws IOException on error
 	 */
-	@Test(expected=IOException.class)
+	@Test
 	public final void testLoadWithNoExistantFile() throws ClassNotFoundException, IOException {
 		HighScores highScore2 = highScoreDao.load(MAP_DATA_FILENAME + "non-existant");
-		Assert.assertTrue(highScore2.equals(highScore));
 	}
 
 	/**

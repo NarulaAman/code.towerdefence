@@ -2,6 +2,7 @@ package ca.concordia.soen6441.io;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.concordia.soen6441.logger.MapLogger;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GameMapDao;
 import ca.concordia.soen6441.logic.HighScores;
@@ -37,13 +39,18 @@ public class HighScoresJavaSerializationDao implements HighScoresDao {
 	 * @param gameMap {@link HighScores} to be saved
 	 */
 	@Override
-	public void save(HighScores highScores) throws IOException { 
-		File file = new File(String.format(FILENAME_STRING_FORMAT, highScores.getName())); 
-		FileOutputStream fileOutputStream = new FileOutputStream(file); 
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-		objectOutputStream.writeObject(highScores);
-		objectOutputStream.close();
-		fileOutputStream.close();
+	public void save(HighScores highScores) { 
+		try {
+			File file = new File(String.format(FILENAME_STRING_FORMAT, highScores.getName())); 
+			FileOutputStream fileOutputStream = new FileOutputStream(file); 
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+			objectOutputStream.writeObject(highScores);
+			objectOutputStream.close();
+			fileOutputStream.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
 		
 	}
 	
@@ -52,14 +59,20 @@ public class HighScoresJavaSerializationDao implements HighScoresDao {
 	 * @param mapName {@link highScores} to be loaded
 	 */
 	@Override
-	public HighScores load(String mapName) throws IOException, ClassNotFoundException {
-		File file = new File(String.format(FILENAME_STRING_FORMAT, mapName));
-		FileInputStream fileInputStream = new FileInputStream(file);
-		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-		HighScores highScores = (HighScores) objectInputStream.readObject();
-		objectInputStream.close();
-		fileInputStream.close();
-		return highScores;
+	public HighScores load(String mapName) {
+		try {
+			File file = new File(String.format(FILENAME_STRING_FORMAT, mapName));
+			FileInputStream fileInputStream = new FileInputStream(file);
+			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+			HighScores highScores = (HighScores) objectInputStream.readObject();
+			objectInputStream.close();
+			fileInputStream.close();
+			return highScores;
+		} catch (FileNotFoundException ex) {
+			return new HighScores(mapName);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

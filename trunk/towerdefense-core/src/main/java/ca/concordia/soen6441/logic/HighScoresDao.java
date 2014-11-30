@@ -14,7 +14,7 @@ public interface HighScoresDao {
 	 * @param highScores to be saved
 	 * @throws IOException on error
 	 */
-	public void save(HighScores highScores) throws IOException;
+	public void save(HighScores highScores);
 
 	/**
 	 * Load the {@link HighScores} by a name
@@ -23,8 +23,7 @@ public interface HighScoresDao {
 	 * @throws IOException on error
 	 * @throws ClassNotFoundException on error
 	 */
-	public HighScores load(String name) throws IOException,
-			ClassNotFoundException;	
+	public HighScores load(String name);	
 	
 	
 

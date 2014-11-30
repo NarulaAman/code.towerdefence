@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
@@ -21,6 +23,8 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 * 
 	 */
 	private static final long serialVersionUID = 7943086470924125701L;
+	
+	@Inject static HighScoresDao highScoresDao;
 
 	private final Tile grid[][];
 
@@ -332,5 +336,10 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 			}
 		}
 		return startToEndPath;
+	}
+
+	public HighScores getHighScores() {
+		return highScoresDao.load(getName());
+		
 	}
 }

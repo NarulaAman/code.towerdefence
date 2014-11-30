@@ -2,10 +2,10 @@ package ca.concordia.soen6441.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+
+import javax.inject.Inject;
 /**
  * This class will maintain the high scores of the map
  * 
@@ -13,9 +13,16 @@ import java.util.List;
 public class HighScores implements Serializable, Cloneable {
 	
 	private static final long serialVersionUID = 7943086470924125701L;
+	
+	@Inject static HighScoresDao highScoresDao; 
 
-	private String name = "HighScores";	
+	private String name;	
 	List<Integer> highScore= new  ArrayList<>();
+	
+	
+	public HighScores(String name) {
+		this.name = name;
+	}
 	
 /**
  * This method will add and order the high score	
@@ -71,5 +78,20 @@ public class HighScores implements Serializable, Cloneable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		String str = "HighScores:";
+		for (Integer integer : highScore)
+		{
+			str += " " + integer;
+		}
+		return str;
+	}
+
+	
+	public void save() {
+		highScoresDao.save(this);
+	}
+	
 
 }

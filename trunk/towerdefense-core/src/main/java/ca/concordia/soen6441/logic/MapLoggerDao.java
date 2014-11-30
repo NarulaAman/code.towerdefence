@@ -16,7 +16,7 @@ public interface MapLoggerDao {
 	 * @param mapLogger to be saved
 	 * @throws IOException on error
 	 */
-	public void save(MapLogger mapLogger) throws IOException;
+	public void save(MapLogger mapLogger);
 
 	/**
 	 * Load the {@link MapLogger} by a name
@@ -25,8 +25,7 @@ public interface MapLoggerDao {
 	 * @throws IOException on error
 	 * @throws ClassNotFoundException on error
 	 */
-	public MapLogger load(String name) throws IOException,
-			ClassNotFoundException;
+	public MapLogger load(String name);
 
 
 }

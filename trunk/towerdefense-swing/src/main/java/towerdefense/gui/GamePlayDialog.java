@@ -20,28 +20,19 @@ import java.util.TimerTask;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
 import towerdefense.gui.GamePlayPanel.TowerSelectedListener;
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
-import towerdefense.gui.actions.MapLogAction;
-import towerdefense.gui.guice.GuiModule;
 import towerdefense.gui.log.GameLogDialog;
-import towerdefense.gui.log.MapLogDialog;
-import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.GamePlayJavaSerialaizationDao;
-import ca.concordia.soen6441.logic.EnemyWave;
-import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GameMapDao;
+import ca.concordia.soen6441.io.MapLoggerJavaSerializationDao;
 import ca.concordia.soen6441.logic.GamePlay;
 import ca.concordia.soen6441.logic.GamePlayDao;
+import ca.concordia.soen6441.logic.MapLoggerDao;
 import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.CannonTower;
@@ -135,6 +126,7 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	
 	private GamePlayDao gamePlayDao = new GamePlayJavaSerialaizationDao();
 
+	private MapLoggerDao mapLoggerDao = new MapLoggerJavaSerializationDao();
 
 	/**
 	 * Constructs a {@link GamePlayDialog} to play an instance of {@link GamePlay}

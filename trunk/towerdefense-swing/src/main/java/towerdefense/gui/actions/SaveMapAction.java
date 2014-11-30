@@ -2,12 +2,15 @@ package towerdefense.gui.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.inject.Inject;
 
 import towerdefense.gui.MapEditionDialog;
 import towerdefense.gui.StartGameDialog;
+import ca.concordia.soen6441.logger.MapLogger;
 import ca.concordia.soen6441.logic.GameMap;
+import ca.concordia.soen6441.logic.MapLoggerDao;
 
 import com.google.inject.Provider;
 
@@ -19,6 +22,7 @@ public class SaveMapAction implements ActionListener{
 	
 	@Inject Provider<MapEditionDialog> mapEditionDialogProvider;
 	@Inject Provider<StartGameDialog> startGameDialogProvider;
+	@Inject MapLoggerDao mapLoggerDao;
 
 //	/**
 //	 * Constructs a {@link SaveMapAction} to save the {@link GameMap} on the {@link MapEditionDialog} and to refresh
@@ -41,6 +45,14 @@ public class SaveMapAction implements ActionListener{
 		if(getMapEditionDialog().saveMap()) {
 			getMapEditionDialog().setVisible(false);
 			getStartGameDialog().refreshMaps();
+			MapLogger mapLogger = mapLoggerDao.load(getMapEditionDialog().getName());
+			if (mapLogger.getLogMessages().size() < 1) {
+				mapLogger.log("Map created");
+			}
+			else {
+				mapLogger.log("Map edited");
+			}
+			mapLoggerDao.save(mapLogger);
 		}
 	}
 
