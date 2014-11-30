@@ -5,16 +5,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import ca.concordia.soen6441.logic.MapLoggerDao;
+
+
 
 /**
  * The Class MapLogger.
  */
+
 public class MapLogger implements Serializable{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4682860387217811691L;
 	
-	/** The map name. */
+	@Inject static MapLoggerDao mapLoggerDao;
+
 	private String mapName;
 	
 	/** The log messages. */
@@ -54,6 +61,10 @@ public class MapLogger implements Serializable{
 	 */
 	public List<LogMessage> getLogMessages() {
 		return logMessages;
+	}
+	
+	public void save() {
+		mapLoggerDao.save(this);
 	}
 	
 }

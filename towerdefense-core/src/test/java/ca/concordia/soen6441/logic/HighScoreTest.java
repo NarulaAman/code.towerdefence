@@ -25,7 +25,7 @@ public class HighScoreTest {
 	
 	private static final String MAP_DATA_FILENAME = "testHighScore";	
 	
-	private static HighScores highScore = new HighScores() ;
+	private static HighScores highScore = new HighScores(MAP_DATA_FILENAME) ;
 
 	/**
 	 * Creates a {@link HighScores} to aid the tests
@@ -48,7 +48,7 @@ public class HighScoreTest {
 	 */
 	@After 
 	public void setUpAfter() throws Exception {
-		highScore = new HighScores();	
+		highScore = new HighScores(MAP_DATA_FILENAME);	
 		
 	}
 	
@@ -57,7 +57,7 @@ public class HighScoreTest {
 	 */
 	@Test
 	public final void testAdd() {
-		HighScores highScore2=new HighScores();
+		HighScores highScore2=new HighScores(MAP_DATA_FILENAME);
 		highScore2.addHighScore(60);
 		Assert.assertTrue(highScore2.highScore.size()==1);
 	}
@@ -67,7 +67,7 @@ public class HighScoreTest {
 	 */
 	@Test
 	public final void testEqual() {
-		HighScores highScore2=new HighScores();
+		HighScores highScore2=new HighScores(MAP_DATA_FILENAME);
 		highScore2.addHighScore(10);
 		highScore2.addHighScore(20);
 		highScore2.addHighScore(30);
