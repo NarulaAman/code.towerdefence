@@ -4,6 +4,8 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.never;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,4 +62,20 @@ public class CannonTowerTest {
 //		Mockito.verify(enemy, times((int)(tower.getBurnDurationSecs() / tower.getBurnRateSecs()))).takeDamage(tower.getBurnDamage());
 	}
 
+	/**
+	 * Test no Splash damage of the {@link CannonTower}
+	 */
+	@Test
+	public void testNoSplashDamage() {
+		when(enemyTarget.getCurrentPosition()).thenReturn(new Point2f(1, 2.f));
+		when(enemySplashed.getCurrentPosition()).thenReturn(new Point2f(1, 4.1f));
+		List<Enemy> enemies = new ArrayList<>();
+		enemies.add(enemyTarget);
+		enemies.add(enemySplashed);
+		tower.maybeShoot(enemies);
+		verify(enemyTarget).takeDamage(tower.getDamage());
+		verify(enemySplashed, never()).takeDamage(anyInt());
+//		
+
+	}
 }
