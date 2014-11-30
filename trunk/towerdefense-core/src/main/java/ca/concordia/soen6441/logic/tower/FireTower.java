@@ -3,6 +3,7 @@ package ca.concordia.soen6441.logic.tower;
 import java.util.Set;
 
 import ca.concordia.soen6441.logger.Log;
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.TowerFactory;
@@ -66,8 +67,8 @@ public class FireTower extends Tower /*implements Observer */{
 	 * @param shootingStrategy The object of {@link ShootingStrategy}
 	 * @param towerFactory The object of {@link TowerFactory}
 	 */
-	public FireTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory) {
-		super(id, level, gridPosition, shootingStrategy, towerFactory);
+	public FireTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, LogManager logger) {
+		super(id, level, gridPosition, shootingStrategy, towerFactory, logger);
 	}
 	/**
 	 * Returns the object of {@link TemporalEffect}

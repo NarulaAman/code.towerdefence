@@ -13,8 +13,8 @@ public class WaveLogMessage extends LogMessage {
 	
 	private final EnemyWave enemyWave;
 
-	public WaveLogMessage(EnemyWave enemyWave, Date timeStamp, String message) {
-		super(timeStamp, message);
+	public WaveLogMessage(Object source, EnemyWave enemyWave, Date timeStamp, String message) {
+		super(source, timeStamp, message);
 		this.enemyWave = enemyWave;
 	}
 	

@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import ca.concordia.soen6441.logic.EnemyWave;
+import ca.concordia.soen6441.logic.tower.Tower;
 
 public class LogManager extends Observable implements Serializable {
 
 	private List<LogMessage> logMessages = new ArrayList<>();
 	
-	private List<LogFilter> logFilters = new ArrayList<>();
+	private SortedSet<LogFilter> logFilters = new TreeSet<>();
 	
 	private EnemyWave currentWave = null;
 	
 	public LogManager() {
-//		logMessages.add(new LogMessage(new Date(), "amand"));
-//		logMessages.add(new LogMessage(new Date(), "alex"));
-//		logMessages.add(new LogMessage(new Date(), "amado"));
 	}
 	
 	public List<LogMessage> getLogsFor(LogFilter filter) {
@@ -29,44 +29,50 @@ public class LogManager extends Observable implements Serializable {
 				returnedMessages.add(logMessage);
 			}
 		}
-		returnedMessages.add(new LogMessage(new Date(), "" + Math.random()));
 		return returnedMessages;
 	}
 
-//	public void log(Class<?> declaringClass, Object object, String logMessage) {
-//		logMessages.add(new LogMessage(new Date(), logMessage));
-//		System.out.println(logMessage);
-//	}
-	
-	
 	public List<LogFilter> getLogFilters() {
-		List<LogFilter> logFiltersExample = new ArrayList<>();
-		logFiltersExample.add(new LogFilter("Wave Logs"));
-		logFiltersExample.add(new LogFilter("Tower Logs"));
-		logFiltersExample.add(new LogFilter("Ice Tower"));
+		List<LogFilter> logFiltersExample = new ArrayList<>(logFilters);
 		return logFiltersExample;
 	}
 
 	public void log(Object source, String format, EnemyWave enemyWave) {
 		currentWave = enemyWave;
-		LogMessage logMessage = new WaveLogMessage(currentWave, new Date(), String.format(format, enemyWave));
+		LogMessage logMessage = new WaveLogMessage(source, currentWave, new Date(), String.format(format, enemyWave));
 		logMessages.add(logMessage);
 		setChanged();
 		notifyObservers();
 		
 		System.out.println("" + logMessage);
+		createLogFiltersFor(source);
+		setChanged();
+		notifyObservers(logMessage);
 	}
 	
+
+
 	public void log(Object source, String format, Object ... args) {
-		LogMessage logMessage = new LogMessage(new Date(), String.format(format, args));
+		LogMessage logMessage = new LogMessage(source, new Date(), String.format(format, args));
 		if (currentWave != null) {
-			logMessage = new WaveLogMessage(currentWave, new Date(), String.format(format, args));
+			logMessage = new WaveLogMessage(source, currentWave, new Date(), String.format(format, args));
 		}
 		System.out.println("" + logMessage);
 		logMessages.add(logMessage);
+		createLogFiltersFor(source);
 		setChanged();
-		notifyObservers();
-		
-		
+		notifyObservers(logMessage);
+	}
+	
+	private void createLogFiltersFor(Object source) {
+		if (source instanceof Tower) {
+			Tower tower = (Tower) source;
+			logFilters.add(new AllTowersLogFilter());
+			logFilters.add(new TowerLogFilter(tower));
+		}
+		else if (source instanceof EnemyWave) {
+			EnemyWave enemyWave = (EnemyWave) source;
+			logFilters.add(new WaveLogFilter(enemyWave));
+		}
 	}
 }

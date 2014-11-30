@@ -34,7 +34,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	private final List<EnemyWave> enemyWaves = new CopyOnWriteArrayList<>();
 	private EnemyWave currentWave;
 	
-	private final TowerFactory towerFactory = new TowerFactory();
+	private final TowerFactory towerFactory = new TowerFactory(logManager);
 	
 	private final List<Enemy> enemies = new CopyOnWriteArrayList<>();
 	
@@ -229,6 +229,10 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 	}
 
+	/**
+	 * Upgrade tower 
+	 * @param tower tower to be upgraded
+	 */
 	protected void upgrade(Tower tower) {
 		tower.doUpgrade();
 	}
@@ -248,6 +252,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		currency = currency + tower.getRefundRate();
 		towers.remove(tower);
 		notifyWithChange();
+		logManager.log(tower, "%1$s was sold", tower);
 	}
 	
 
@@ -366,6 +371,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		lives--;
 		setChanged();
 		notifyObservers();
+		logManager.log(currentWave, "%1$s reached the end", enemy);
 	}
 	/**
 	 * Test if the game is over 
@@ -374,6 +380,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	private boolean detectGameOver() {
 		if(currency<0 || lives<=0) {
 			setState(State.GAMEOVER);
+			logManager.log(currentWave, "Game Over on %s", currentWave);
 			return isStateGameOver();
 		}
 		return false;

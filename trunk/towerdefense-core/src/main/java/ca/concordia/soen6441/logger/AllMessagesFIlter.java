@@ -8,7 +8,7 @@ public class AllMessagesFIlter extends LogFilter {
 	private static final long serialVersionUID = 556940165605471976L;
 
 	public AllMessagesFIlter() {
-		super("Gameplay Log");
+		super("All Gameplay Log");
 	}
 	
 	boolean filter(LogMessage logMessage) {

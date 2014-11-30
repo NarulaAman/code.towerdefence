@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.CannonTower;
 import ca.concordia.soen6441.logic.tower.FireTower;
@@ -23,11 +24,16 @@ public class TowerFactory implements Serializable {
 
 	private Map<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
 
+	private final LogManager logger;
+	
 	private int towerId;
+	
+	
 	/**
 	 * Create a TowerFactory
 	 */
-	public TowerFactory() {
+	public TowerFactory(LogManager logManager) {
+		this.logger = logManager;
 		List<TowerLevelCharacteristic> fireTowerLevelCharacteristic = new ArrayList<>();
 		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 4, 0.9f));
 		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(15, 60, 120, 7, 0.7f));
@@ -84,8 +90,8 @@ public class TowerFactory implements Serializable {
 	public Tower towerOnCoordinate(Class<? extends Tower> type, GridPosition coordinate) {
 		try {
 			Constructor<? extends Tower> constructor = type.getConstructor(int.class, int.class, GridPosition.class,
-					ShootingStrategy.class, TowerFactory.class);
-			return constructor.newInstance(getNextTowerId(), 1, coordinate, new ShootStrongestStrategy(), this);
+					ShootingStrategy.class, TowerFactory.class, LogManager.class);
+			return constructor.newInstance(getNextTowerId(), 1, coordinate, new ShootStrongestStrategy(), this, logger);
 		} catch (Exception exception) {
 			throw new RuntimeException(exception);
 		}
