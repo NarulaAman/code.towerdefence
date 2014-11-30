@@ -12,7 +12,7 @@ import ca.concordia.soen6441.logic.GamePlay;
 public class ShootStrongestStrategy extends AbstractShootingStrategy {
 	
 	/**
-	 * Shoot the enemy with weakest health
+	 * Shoot the enemy with Strongest health
 	 * @param enemies The list of {@link Enemy} in the {@link GamePlay}
 	 */
 	@Override
