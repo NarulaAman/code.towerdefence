@@ -199,7 +199,9 @@ public class Enemy extends Observable implements Serializable{
 		return maxHealth;
 	}
 
-
+/**
+ * Return string
+ */
 	@Override
 	public String toString() {
 		return "Enemy " + id;

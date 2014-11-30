@@ -132,7 +132,9 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		}
 	}
 
-	
+	/**
+	 * Will Create NextWave
+	 */
 	private void createNextWave() {
 		currentWave = new EnemyWave(this, getNextWaveId(), 5.f/level, 5 * level);
 		logManager.log(this, "%1$s set-up", currentWave);
@@ -467,27 +469,45 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+/**
+ * Return Score
+ * @return
+ */
 	public int getScore() {
 		return score;
 	}
-
+/**
+ * Return Level
+ * @return
+ */
 	public int getLevel() {
 		return level;
 	}
-
+/**
+ * Return enemyId
+ * @return
+ */
 	public int getNextEnemyId() {
 		return ++enemyId;
 	}
-	
+	/**
+	 * Return the level
+	 * @return
+	 */
 	private int getNextWaveId() {
 		return ++level;
 	}
-
+/**
+ * Return Tower Factory
+ * @return
+ */
 	public TowerFactory getTowerFactory() {
 		return towerFactory;
 	}
-
+/**
+ * Return LogManager
+ * @return
+ */
 	public LogManager getLogger() {
 		return logManager;
 	}
