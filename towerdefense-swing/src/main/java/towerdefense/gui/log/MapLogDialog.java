@@ -42,14 +42,14 @@ public class MapLogDialog extends JDialog {
 		this.logMessageTableModel = logMessageTableModel;
 
        
-		table.setModel(logMessageTableModel);
+		
 
 		// scrollPane.add(table);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
 		
 		//logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter(selectedMap.toString())));
-		logMessageTableModel.fireTableDataChanged();
+		
 		add(table, BorderLayout.CENTER);
 		pack();
 		setVisible(true);
@@ -83,6 +83,8 @@ public class MapLogDialog extends JDialog {
 	
 	public void setMapLogs(List<LogMessage> logMessages ) {
 		logMessageTableModel.setLogMessages(logMessages);
+		table.setModel(logMessageTableModel);
+		logMessageTableModel.fireTableDataChanged();
 	}
 	
 	
