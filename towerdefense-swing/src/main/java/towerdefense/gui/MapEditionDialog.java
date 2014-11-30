@@ -253,6 +253,10 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 	private JButton getSaveButton() {
 		return saveButton;
 	}
+
+	public String getGameMapName() {
+		return nameMapText.getText();
+	}
 	
 //	/**
 //	 * Creates the GUI for testing purposes
