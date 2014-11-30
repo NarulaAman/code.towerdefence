@@ -5,6 +5,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import ca.concordia.soen6441.logic.GameMapDaoTest;
 import ca.concordia.soen6441.logic.GamePlayTest;
+import ca.concordia.soen6441.logic.HighScoreTest;
+import ca.concordia.soen6441.logic.HighScoresDaoTest;
 import ca.concordia.soen6441.logic.MapValidatorTest;
 import ca.concordia.soen6441.logic.TowerTest;
 import ca.concordia.soen6441.logic.tower.CannonTowerTest;
@@ -21,7 +23,8 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootWeakestStrategyTe
  */
 @RunWith(Suite.class)
 @SuiteClasses({GamePlayTest.class, GameMapDaoTest.class, MapValidatorTest.class, TowerTest.class, FireTowerTest.class, IceTowerTest.class, CannonTowerTest.class, 
-	ShootClosestToEndPointStrategyTest.class, ShootStrongestStrategyTest.class,ShootWeakestStrategyTest.class, ShootClosestToTowerStrategyTest.class})
+	ShootClosestToEndPointStrategyTest.class, ShootStrongestStrategyTest.class,ShootWeakestStrategyTest.class,
+	ShootClosestToTowerStrategyTest.class,HighScoresDaoTest.class,HighScoreTest.class})
 public class TowerDefenseCoreTestSuite {
 	
 }
