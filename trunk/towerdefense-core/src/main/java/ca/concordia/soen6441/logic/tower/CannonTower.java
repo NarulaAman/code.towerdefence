@@ -88,6 +88,9 @@ public class CannonTower extends Tower {
 		return SPLASH_DAMAGE_RATIO;
 	}
 	
+	/**
+	 * Return String
+	 */
 	@Override
 	public String toString() {
 		return "CannonTower on " + getGridPosition();

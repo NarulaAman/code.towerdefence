@@ -18,23 +18,27 @@ import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 
 /**
- * This class has various Characteristics and operations executed on Tower 
- *
+ * This class has various Characteristics and operations executed on Tower .
  */
 public abstract class Tower extends Observable implements Serializable {
 	
 	/**
 	 * Event for a tower shooting an enemy, it will be used in the user interface
-	 * to show which enemy is the tower shooting at
+	 * to show which enemy is the tower shooting at.
 	 */
 	public class TowerShootEvent {
+		
+		/** The origin. */
 		public final Point2f origin;
+		
+		/** The destination. */
 		public final Point2f destination;
 		
 		/**
-		 * Builds a shooting event
-		 * @param origin
-		 * @param destination
+		 * Builds a shooting event.
+		 *
+		 * @param origin the origin
+		 * @param destination the destination
 		 */
 		public TowerShootEvent(Point2f origin, Point2f destination) {
 			super();
@@ -43,26 +47,36 @@ public abstract class Tower extends Observable implements Serializable {
 		}
 	}
 	
+	/** The logger. */
 	private final LogManager logger;
 	
+	/** The id. */
 	private final int id;
 	
+	/** The level. */
 	private int level;
 	
+	/** The grid position. */
 	private final GridPosition gridPosition;
 	
+	/** The tower factory. */
 	private final TowerFactory towerFactory;
 	
+	/** The shoot strategy. */
 	private ShootingStrategy shootStrategy;
 	
+	/** The seconds since last shot. */
 	private float secondsSinceLastShot;
 
 	/**
-	 * Initialize the data members
+	 * Initialize the data members.
+	 *
+	 * @param id the id
 	 * @param level level of the tower to be created
 	 * @param gridPosition grid position of the tower
 	 * @param shootingStrategy shooting strategy to apply to the tower
 	 * @param towerFactory tower factory
+	 * @param logger the logger
 	 */
 	public Tower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, LogManager logger) {
 		super();
@@ -76,7 +90,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 
 	/**
-	 * Return the position on {@link GameMap}
+	 * Return the position on {@link GameMap}.
+	 *
 	 * @return The position on {@link GameMap}
 	 */
 	public GridPosition getGridPosition() {
@@ -84,7 +99,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Return the range of {@link Tower}
+	 * Return the range of {@link Tower}.
+	 *
 	 * @return Range of {@link Tower}
 	 */
 	public int getRange() {
@@ -92,7 +108,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Validate if position of enemy is within the range of tower 
+	 * Validate if position of enemy is within the range of tower .
+	 *
 	 * @param otherCoordinate The position of enemy on {@link GameMap}
 	 * @return True if the position of enemy is within the range of tower else false
 	 */
@@ -101,7 +118,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Calculate the distance between Tower and Enemy
+	 * Calculate the distance between Tower and Enemy.
+	 *
 	 * @param otherCoordinate The position of enemy on {@link GameMap}
 	 * @return The distance between Tower and Enemy
 	 */
@@ -110,7 +128,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Calculate the distance between two positions
+	 * Calculate the distance between two positions.
+	 *
 	 * @param p0 Position on {@link GameMap}
 	 * @param p1 Position on {@link GameMap}
 	 * @return The distance between the two positions
@@ -120,7 +139,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 
 	/**
-	 * Returns the damage done by the tower
+	 * Returns the damage done by the tower.
+	 *
 	 * @return The damage done by the tower
 	 */
 	public int getDamage() {
@@ -128,7 +148,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 
 	/**
-	 * Returns the cost of the tower
+	 * Returns the cost of the tower.
+	 *
 	 * @return The cost of the tower
 	 */
 	public int getBuyCost() {
@@ -136,7 +157,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 
 	/**
-	 * Returns the Refund Rate for the Tower
+	 * Returns the Refund Rate for the Tower.
+	 *
 	 * @return The Refund Rate for the Tower
 	 */
 	public int getRefundRate() {
@@ -144,7 +166,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Returns the upgraded cost of the Tower
+	 * Returns the upgraded cost of the Tower.
+	 *
 	 * @return The upgraded cost of the Tower
 	 */
 	public int getUpgradeCost() {
@@ -152,7 +175,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Returns the time in seconds for every shot of the tower
+	 * Returns the time in seconds for every shot of the tower.
+	 *
 	 * @return the time in seconds for every shot of the tower
 	 */
 	public float getShootRateSecs() {
@@ -160,7 +184,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Returns true if the tower can be upgraded, false if not
+	 * Returns true if the tower can be upgraded, false if not.
+	 *
 	 * @return true if the tower can be upgraded, false if not
 	 */
 	public boolean canUpgrade() {
@@ -168,7 +193,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Upgrade the tower
+	 * Upgrade the tower.
+	 *
 	 * @return True if the tower is upgraded
 	 */
 	public boolean doUpgrade() {
@@ -178,7 +204,8 @@ public abstract class Tower extends Observable implements Serializable {
 	
 	
 	/**
-	 * Upgrade tower to a specific level
+	 * Upgrade tower to a specific level.
+	 *
 	 * @param upgradeLevel level to upgrade the tower to
 	 */
 	@Log("%1$s upgraded to level %2$s")
@@ -190,7 +217,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Returns the level of the tower
+	 * Returns the level of the tower.
+	 *
 	 * @return The level of the tower
 	 */
 	public int getLevel() {
@@ -198,7 +226,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Returns the {@link TowerLevelCharacteristic}
+	 * Returns the {@link TowerLevelCharacteristic}.
+	 *
 	 * @return The {@link TowerLevelCharacteristic}
 	 */
 	private TowerLevelCharacteristic getTowerLevelCharacteristic() {
@@ -206,7 +235,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Returns the {@link TowerFactory}
+	 * Returns the {@link TowerFactory}.
+	 *
 	 * @return The {@link TowerFactory}
 	 */
 	private TowerFactory getTowerFactory() {
@@ -214,7 +244,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Sets the shooting strategy
+	 * Sets the shooting strategy.
+	 *
 	 * @param shootingStrategy shooting strategy to be applied
 	 */
 	public void setShootingStrategy(ShootingStrategy shootingStrategy) {
@@ -223,7 +254,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Maybe shoots the enemies, if they are in range, with a given strategy
+	 * Maybe shoots the enemies, if they are in range, with a given strategy.
+	 *
 	 * @param shootEnemies enemies that will maybe be shot
 	 */
 	public void maybeShoot(List<Enemy> shootEnemies) {
@@ -239,7 +271,8 @@ public abstract class Tower extends Observable implements Serializable {
 	protected abstract void specializedShot(Enemy enemy);
 	
 	/**
-	 * Shoots an enemy
+	 * Shoots an enemy.
+	 *
 	 * @param enemy enemy to be shot
 	 */
 	@Log("%1$s shot %2$s")
@@ -248,16 +281,19 @@ public abstract class Tower extends Observable implements Serializable {
 		specializedShot(enemy);
 		notifyObservers(new TowerShootEvent(getGridPosition().toPoint2f(), enemy.getCurrentPosition()));
 	}
+	
 	/**
-	 * Return true if the {@link Tower} has to shoot 
-	 * @return True if {@link Tower} has to shoot  
+	 * Return true if the {@link Tower} has to shoot .
+	 *
+	 * @return True if {@link Tower} has to shoot
 	 */
 	public boolean hasCooledDown() {
 		return secondsSinceLastShot >= getShootRateSecs();
 	}
 
 	/**
-	 * Update the tower for the amount of seconds passed
+	 * Update the tower for the amount of seconds passed.
+	 *
 	 * @param seconds seconds ellapsed since the last call
 	 */
 	public void update(float seconds) {
@@ -265,7 +301,8 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Return True if the {@link Enemy} is in range
+	 * Return True if the {@link Enemy} is in range.
+	 *
 	 * @param otherPosition The position of the {@link Enemy}
 	 * @return True if the {@link Enemy} is in range
 	 */
@@ -275,13 +312,15 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Applied the visitor to this {@link Tower}
+	 * Applied the visitor to this {@link Tower}.
+	 *
 	 * @param visitor to be applied
 	 */
 	public abstract void visit(TowerVisitor visitor);
 	
 	/**
-	 * Return the distance  between the {@link Tower} and {@link Enemy}
+	 * Return the distance  between the {@link Tower} and {@link Enemy}.
+	 *
 	 * @param currentPosition The position of the {@link Enemy}
 	 * @return The distance between the {@link Tower} and {@link Enemy}
 	 */
@@ -290,13 +329,19 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/**
-	 * Return the object of {@link ShootingStrategy}
+	 * Return the object of {@link ShootingStrategy}.
+	 *
 	 * @return The object of {@link ShootingStrategy}
 	 */
 	public ShootingStrategy getShootingStrategy() {
 		return shootStrategy;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
