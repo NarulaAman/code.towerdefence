@@ -107,7 +107,13 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 	//	 * @throws ClassNotFoundException
 	//	 * @throws IOException
 	//	 */
-		private static void createAndShowGUI() throws ClassNotFoundException, IOException {
+		/**
+ * Creates the and show gui.
+ *
+ * @throws ClassNotFoundException the class not found exception
+ * @throws IOException Signals that an I/O exception has occurred.
+ */
+private static void createAndShowGUI() throws ClassNotFoundException, IOException {
 			//Create and set up the window.
 //			JFrame frame = new JFrame("GameLogPanel");
 //			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

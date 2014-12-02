@@ -213,8 +213,9 @@ public class GamePlayPanel extends JPanel implements Observer, MapGridCoordinate
 	}
 	
 	/**
-	 * Transforms from grid coordinates to screen coordinates
-	 * @param x the grid coordinate
+	 * Transforms from grid coordinates to screen coordinates.
+	 *
+	 * @param point the point
 	 * @return the screen coordinate
 	 */
 	Point2f tileToScreen(Point2f point) {
