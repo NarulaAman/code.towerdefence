@@ -29,7 +29,7 @@ public class TowerLogFilter extends LogFilter {
 	
 	
 	/**
-	 * This method will filter the LogMessage
+	 * This method will filter the tower log messages
 	 */
 	public boolean filter(LogMessage logMessage) {
 		if (Tower.class.isAssignableFrom(logMessage.getSource().getClass())) {

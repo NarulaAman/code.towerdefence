@@ -22,9 +22,9 @@ public class AllTowersLogFilter extends LogFilter {
 
 	}
 	
-/**
- * This method will filter 
- */
+	/**
+	 * This method will filter all messages from towers
+	 */
 	public boolean filter(LogMessage logMessage) {
 		return logMessage.getSource() instanceof Tower;
 	}

@@ -19,7 +19,7 @@ public class GamePlayLogFilter extends LogFilter {
 	}
 	
 	/**
-	 * This method will filter 
+	 * This method will not filter anything
 	 */
 	public boolean filter(LogMessage logMessage) {
 		return true;
