@@ -2,9 +2,8 @@ package ca.concordia.soen6441.logic.tower;
 
 import java.util.Set;
 
-import ca.concordia.soen6441.logger.LogManager;
+import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logic.Enemy;
-import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
@@ -79,7 +78,7 @@ public class IceTower extends Tower {
 	 * @param towerFactory tower factory
 	 * @param logger the logger
 	 */
-	public IceTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, LogManager logger) {
+	public IceTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, GamePlayLogger logger) {
 		super(id, level, gridPosition, shootingStrategy, towerFactory, logger);
 	}
 

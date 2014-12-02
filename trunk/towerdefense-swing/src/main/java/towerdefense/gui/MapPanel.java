@@ -160,6 +160,12 @@ public class MapPanel extends JPanel implements Observer{
 		return y * getTileHeight();
 	}
 	
+	/**
+	 * Tile to screen.
+	 *
+	 * @param point the point
+	 * @return the point2f
+	 */
 	public Point2f tileToScreen(Point2f point) {
 		return new Point2f(point.x * getTileWidth(), point.y * getTileHeight());
 	}

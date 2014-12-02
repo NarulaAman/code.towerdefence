@@ -15,14 +15,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-import towerdefense.gui.actions.DisplayLogAction;
 import towerdefense.gui.actions.LoadGamePlayAction;
 import towerdefense.gui.actions.MapEditAction;
 import towerdefense.gui.actions.MapLogAction;
 import towerdefense.gui.actions.NewMapAction;
 import towerdefense.gui.actions.StartGamePlayAction;
+import ca.concordia.soen6441.dao.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GameMapDao;
 
 /**
  * This is the Dialog that will be displayed when the user starts our game application
@@ -50,12 +49,16 @@ public class StartGameDialog extends JDialog implements MapListPanel.MapSelectio
 	
 	private static final Icon MAP_LOG_ICON = new ImageIcon(Object.class.getResource("/icons/maplogbutton.png"));
 	private static final Icon EXIT_ICON = new ImageIcon(Object.class.getResource("/icons/exit.png"));
+	
 	/**
-	 * Creates a {@link StartGameDialog} with a given {@link GameMapDao}, {@link MapEditAction}, {@link StartGamePlayAction}
+	 * Creates a {@link StartGameDialog} with a given {@link GameMapDao}, {@link MapEditAction}, {@link StartGamePlayAction}.
+	 *
 	 * @param gameMapDao {@link GameMapDao} to be used
 	 * @param newMapAction {@link NewMapAction} to be used
 	 * @param mapEditAction {@link MapEditAction} to be used
 	 * @param startGamePlayAction {@link StartGamePlayAction} to be used
+	 * @param mapLogAction the map log action
+	 * @param loadGamePlayAction the load game play action
 	 */
 	@Inject
 	public StartGameDialog(GameMapDao gameMapDao, NewMapAction newMapAction, MapEditAction mapEditAction, StartGamePlayAction startGamePlayAction, MapLogAction mapLogAction, LoadGamePlayAction loadGamePlayAction) {

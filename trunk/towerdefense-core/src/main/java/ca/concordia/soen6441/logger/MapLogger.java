@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ca.concordia.soen6441.logic.MapLoggerDao;
+import ca.concordia.soen6441.dao.MapLoggerDao;
 
 
 

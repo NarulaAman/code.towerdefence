@@ -1,4 +1,4 @@
-package ca.concordia.soen6441.logic;
+package ca.concordia.soen6441.logic.tower;
 
 import java.io.Serializable;
 

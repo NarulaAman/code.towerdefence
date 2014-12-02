@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ca.concordia.soen6441.dao.HighScoresDao;
+
 /**
  * This class will maintain the high scores of the map
  * 

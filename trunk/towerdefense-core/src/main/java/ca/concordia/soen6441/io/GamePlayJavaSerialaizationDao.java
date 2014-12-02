@@ -9,8 +9,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.concordia.soen6441.dao.GamePlayDao;
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.GamePlayDao;
 
 /**
  * The Class GamePlayJavaSerialaizationDao.

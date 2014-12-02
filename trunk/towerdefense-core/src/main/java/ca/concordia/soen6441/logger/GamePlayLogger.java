@@ -14,7 +14,7 @@ import ca.concordia.soen6441.logic.tower.Tower;
 /**
  * The Class LogManager.
  */
-public class LogManager extends Observable implements Serializable {
+public class GamePlayLogger extends Observable implements Serializable {
 
 	/** The log messages. */
 	private List<LogMessage> logMessages = new ArrayList<>();
@@ -28,7 +28,7 @@ public class LogManager extends Observable implements Serializable {
 	/**
 	 * Instantiates a new log manager.
 	 */
-	public LogManager() {
+	public GamePlayLogger() {
 		logFilters.add(new AllMessagesFIlter());
 	}
 	

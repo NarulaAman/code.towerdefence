@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 
+/**
+ * The Class DisplayLogAction.
+ */
 public class DisplayLogAction extends AbstractAction{
 
 	

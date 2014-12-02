@@ -7,6 +7,9 @@ import javax.swing.table.AbstractTableModel;
 
 import ca.concordia.soen6441.logger.LogMessage;
 
+/**
+ * The Class LogMessageTableModel.
+ */
 public class LogMessageTableModel extends AbstractTableModel{
 	
 	
@@ -41,10 +44,20 @@ public class LogMessageTableModel extends AbstractTableModel{
 		}
 	}
 	
+	/**
+	 * Gets the log messages.
+	 *
+	 * @return the log messages
+	 */
 	public List<LogMessage> getLogMessages() {
 		return logMessages;
 	}
 
+	/**
+	 * Sets the log messages.
+	 *
+	 * @param logMessages the new log messages
+	 */
 	public void setLogMessages(List<LogMessage> logMessages) {
 		this.logMessages = logMessages;
 		fireTableDataChanged();

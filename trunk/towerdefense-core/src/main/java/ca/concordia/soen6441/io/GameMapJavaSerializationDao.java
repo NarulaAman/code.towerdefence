@@ -9,8 +9,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.concordia.soen6441.dao.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GameMapDao;
 
 /**
  * This class saves and loads the {@link GameMap} to a file given the

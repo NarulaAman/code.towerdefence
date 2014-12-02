@@ -8,9 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import ca.concordia.soen6441.logger.LogManager;
+import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logic.Enemy;
-import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.FireTower;
 
@@ -20,7 +19,7 @@ import ca.concordia.soen6441.logic.tower.FireTower;
  */
 public class FireTowerTest {
 
-	private final LogManager logger = mock(LogManager.class);
+	private final GamePlayLogger logger = mock(GamePlayLogger.class);
 	private final TowerFactory towerFactory = new TowerFactory(logger);
 	
 	private FireTower tower;

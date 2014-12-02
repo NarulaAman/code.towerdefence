@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 
+import ca.concordia.soen6441.dao.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GameMapDao;
 
 /**
  * This is a model to be used by the {@link MapListPanel}, to access the {@link GameMap}s already saved 

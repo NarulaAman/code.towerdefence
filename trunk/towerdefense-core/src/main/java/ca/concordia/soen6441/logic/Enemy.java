@@ -24,8 +24,10 @@ public class Enemy extends Observable implements Serializable{
 	private int health;
 
 	/**
-	 * Initialize the data members
+	 * Initialize the data members.
+	 *
 	 * @param gameMap The object {@link GameMap}
+	 * @param id the id
 	 * @param health The health of {@link Enemy}
 	 * @param currentPosition The position of {@link Enemy}
 	 */
