@@ -85,7 +85,6 @@ public class GamePlayLogger extends Observable implements Serializable {
 		setChanged();
 		notifyObservers();
 		
-		System.out.println("" + logMessage);
 		createLogFiltersFor(source);
 		setChanged();
 		notifyObservers(logMessage);
@@ -105,8 +104,8 @@ public class GamePlayLogger extends Observable implements Serializable {
 		if (currentWave != null) {
 			logMessage = new WaveLogMessage(source, currentWave, new Date(), String.format(format, args));
 		}
-		System.out.println("" + logMessage);
 		logMessages.add(logMessage);
+		
 		createLogFiltersFor(source);
 		setChanged();
 		notifyObservers(logMessage);
