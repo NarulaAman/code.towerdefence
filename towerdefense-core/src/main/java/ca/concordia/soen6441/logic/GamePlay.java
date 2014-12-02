@@ -487,9 +487,11 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	public int getNextEnemyId() {
 		return ++enemyId;
 	}
+	
 	/**
-	 * Return the level
-	 * @return 
+	 * Return the level.
+	 *
+	 * @return the next level id
 	 */
 	private int getNextLevelId() {
 		return ++level;

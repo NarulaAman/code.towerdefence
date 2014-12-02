@@ -44,11 +44,21 @@ public class SaveMapAction implements ActionListener{
 	}
 
 
+	/**
+	 * Gets the map edition dialog.
+	 *
+	 * @return the map edition dialog
+	 */
 	private MapEditionDialog getMapEditionDialog() {
 		return mapEditionDialogProvider.get();
 	}
 
 
+	/**
+	 * Gets the start game dialog.
+	 *
+	 * @return the start game dialog
+	 */
 	private StartGameDialog getStartGameDialog() {
 		return startGameDialogProvider.get();
 	}
