@@ -37,9 +37,9 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	}
 	
 	
-/**
- * This method will load the GamePlay
- */
+	/**
+	 * This method will load the GamePlay
+	 */
 	@Override
 	public GamePlay load(String gamePlayName) throws IOException, ClassNotFoundException {
 		File file = new File(String.format(GAMEFILENAME_STRING_FORMAT, gamePlayName));
@@ -51,9 +51,9 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 		return gamePlay;
 	}
 	
-/**
- * This method will list the name of all GamePlay
- */
+	/**
+	 * This method will list the name of all GamePlay
+	 */
 	@Override
 	public List<String> listAllNames() throws IOException {
 		File directory = new File(".");

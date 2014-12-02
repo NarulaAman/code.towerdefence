@@ -13,7 +13,7 @@ import ca.concordia.soen6441.logic.GamePlay;
 public interface GamePlayDao {
 	
 	/**
-	 * Save.
+	 * Save the game play.
 	 *
 	 * @param gamePlay the game play
 	 * @throws IOException Signals that an I/O exception has occurred.
@@ -22,7 +22,7 @@ public interface GamePlayDao {
 	
 	
 	/**
-	 * Load.
+	 * Load the game play.
 	 *
 	 * @param name the name
 	 * @return the game play
@@ -34,7 +34,7 @@ public interface GamePlayDao {
 	
 	
 	/**
-	 * List all names.
+	 * List all names of the saved gameplay.
 	 *
 	 * @return the list
 	 * @throws IOException Signals that an I/O exception has occurred.

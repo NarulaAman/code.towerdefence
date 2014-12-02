@@ -83,6 +83,9 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		LogFilter selected = (LogFilter) logFilterModel.getSelectedItem();
@@ -99,75 +102,55 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 
 
 
-//	private void showLogsFor(Object arg) {
-//		logMessageTableModel.setLogMessages(logManager.getLogsFor(displayed));
-//	}
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JComboBox<LogFilter> logFilters = (JComboBox<LogFilter>)e.getSource();
+        LogFilter logFilter = (LogFilter)logFilters.getSelectedItem();
+        if (logFilter != null) {
+        	List<LogMessage> logMessages = logManager.getLogsFor(logFilter);
+        	logMessageTableModel.setLogMessages(logMessages);
+        }
+        revalidate();
+        repaint();
+	}
+	
 
+	/**
+	 * Creates the and show gui.
+	 *
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
 	
-//	/**
-	//	 * Creates the GUI for testing purposes
-	//	 * @throws ClassNotFoundException
-	//	 * @throws IOException
-	//	 */
-		/**
- * Creates the and show gui.
- *
- * @throws ClassNotFoundException the class not found exception
- * @throws IOException Signals that an I/O exception has occurred.
- */
-private static void createAndShowGUI() throws ClassNotFoundException, IOException {
-			//Create and set up the window.
-//			JFrame frame = new JFrame("GameLogPanel");
-//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-			Injector injector = Guice.createInjector(new GuiModule());
-			GameLogDialog gameLogPanel = injector.getInstance(GameLogDialog.class);  
-			
-////			GameLogPanel gameLogPanel = new GameLogPanel();
-//			frame.setContentPane(gameLogPanel);
-	
-			//Display the window.
-//			frame.pack();
-//			frame.setVisible(true);
-	    }
-	//
-	//	/**
-	//	 * Main method used for testing the GUI
-	//	 * @param args arguments are ignored by this method
-	//	 */
-		/**
+		Injector injector = Guice.createInjector(new GuiModule());
+		GameLogDialog gameLogPanel = injector.getInstance(GameLogDialog.class);  
+
+    }
+		
+	/**
 	 * The main method.
 	 *
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-			javax.swing.SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						createAndShowGUI();
-					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					createAndShowGUI();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			});
-		}
-
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JComboBox<LogFilter> logFilters = (JComboBox<LogFilter>)e.getSource();
-	        LogFilter logFilter = (LogFilter)logFilters.getSelectedItem();
-	        if (logFilter != null) {
-	        	List<LogMessage> logMessages = logManager.getLogsFor(logFilter);
-	        	logMessageTableModel.setLogMessages(logMessages);
-	        }
-	        revalidate();
-	        repaint();
-		}
+			}
+		});
+	}
 
 	
 }
