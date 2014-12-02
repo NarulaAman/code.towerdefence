@@ -27,7 +27,7 @@ public class WaveLogFilter extends LogFilter {
 	}
 	
 	/**
-	 * This method will filter
+	 * This method will filter wave log messages
 	 */
 	@Override
 	public boolean filter(LogMessage logMessage) {
