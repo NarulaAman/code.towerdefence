@@ -31,7 +31,7 @@ public class HighScoresJavaSerializationDao implements HighScoresDao {
 
 	/**
 	 * Save to file a {@link HighScores} given a map name
-	 * @param gameMap {@link HighScores} to be saved
+	 * @param highScores {@link HighScores} to be saved
 	 */
 	@Override
 	public void save(HighScores highScores) { 

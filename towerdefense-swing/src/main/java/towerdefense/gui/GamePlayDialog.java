@@ -323,9 +323,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!gamePlay.tryToUpgrade(selectedTower)) {
-					towerInspectionPanel.getUpgradeBtn().setEnabled(false);
-				}
+				gamePlay.tryToUpgrade(selectedTower);
+				towerInspectionPanel.getUpgradeBtn().setEnabled(selectedTower.canUpgrade());
 			}
 		});
 		

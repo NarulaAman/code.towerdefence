@@ -20,16 +20,25 @@ public class LogMessageTableModel extends AbstractTableModel{
 	
 	private List<LogMessage> logMessages = new ArrayList<>();
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getRowCount()
+	 */
 	@Override
 	public int getRowCount() {
 		return getLogMessages().size();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getColumnCount()
+	 */
 	@Override
 	public int getColumnCount() {
 		return 2;
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getValueAt(int, int)
+	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		LogMessage logMessage = getLogMessages().get(rowIndex);
@@ -43,6 +52,22 @@ public class LogMessageTableModel extends AbstractTableModel{
 			return "NOT IMPLEMENTED";
 		}
 	}
+	
+	 /* (non-Javadoc)
+	 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
+	 */
+	@Override
+	 public String getColumnName(int columnIndex) {
+		if (columnIndex == 0) {
+			return "Time";
+		}
+		else if (columnIndex == 1) {
+			return "Log message";
+		}
+		else {
+			return "NOT IMPLEMENTED";
+		}
+	 }
 	
 	/**
 	 * Gets the log messages.

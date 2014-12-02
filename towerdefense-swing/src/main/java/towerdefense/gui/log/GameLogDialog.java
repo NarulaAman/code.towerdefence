@@ -59,12 +59,13 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		// scrollPane.add(table);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
+		scrollPane.setViewportView(table);
 		//logMessageTableModel.setLogMessages(logManager.getLogsFor(new LogFilter("sdf")));
         comboBox.addActionListener(this);
 		update(null, null);
 		logMessageTableModel.fireTableDataChanged();
 		add(comboBox,BorderLayout.NORTH);
-		add(table, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 		pack();
 		setVisible(true);
 	}
@@ -85,9 +86,10 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 	@Override
 	public void update(Observable o, Object arg) {
 		LogFilter selected = (LogFilter) logFilterModel.getSelectedItem();
-		logFilterModel.removeAllElements();
 		for (LogFilter filter : logManager.getLogFilters()) {
-			logFilterModel.addElement(filter);		
+			if (logFilterModel.getIndexOf(filter) == -1) {
+				logFilterModel.addElement(filter);
+			}		
 		}
 		if(selected!=null) {
 			logMessageTableModel.setLogMessages(logManager.getLogsFor(selected));
@@ -163,6 +165,8 @@ private static void createAndShowGUI() throws ClassNotFoundException, IOExceptio
 	        	List<LogMessage> logMessages = logManager.getLogsFor(logFilter);
 	        	logMessageTableModel.setLogMessages(logMessages);
 	        }
+	        revalidate();
+	        repaint();
 		}
 
 	
