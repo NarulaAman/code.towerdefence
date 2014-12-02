@@ -71,6 +71,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		 */
 		BUYING_TOWER
 	}
+	
+	/**
+	 * The Enum BuyingTower.
+	 */
 	private enum BuyingTower {
 
 		/**
@@ -567,7 +571,13 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	//	 * @throws ClassNotFoundException
 	//	 * @throws IOException
 	//	 */
-		private static void createAndShowGUI() throws ClassNotFoundException, IOException {
+		/**
+	 * Creates the and show gui.
+	 *
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
 			//Create and set up the window.
 //			JFrame frame = new JFrame("GamePlayPanel");
 //			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
