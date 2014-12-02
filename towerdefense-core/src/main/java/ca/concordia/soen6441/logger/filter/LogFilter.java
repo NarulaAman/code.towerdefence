@@ -44,12 +44,11 @@ public abstract class LogFilter implements Serializable, Comparable<LogFilter>{
 	 * @param logMessage the log message
 	 * @return true, if successful
 	 */
-	public boolean filter(LogMessage logMessage) {
-		return true;
-	}
+	public abstract boolean filter(LogMessage logMessage);
 
 	/**
-	 * This method will compare 
+	 * This method will compare  to other
+	 * @param other
 	 */
 	@Override
 	public int compareTo(LogFilter o) {
@@ -68,8 +67,6 @@ public abstract class LogFilter implements Serializable, Comparable<LogFilter>{
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
-
 
 	/**
 	 * This method will check if two objects are equal
@@ -90,8 +87,5 @@ public abstract class LogFilter implements Serializable, Comparable<LogFilter>{
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }
