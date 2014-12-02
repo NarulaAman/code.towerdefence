@@ -44,6 +44,7 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	/**
 	 * Load the {@link GamePlay} from the file.
 	 * @param gamePlayName {@link GamePlay} to be loaded
+	 * @return {@link GamePlay} read from file
 	 */
 	@Override
 	public GamePlay load(String gamePlayName) throws IOException, ClassNotFoundException {
