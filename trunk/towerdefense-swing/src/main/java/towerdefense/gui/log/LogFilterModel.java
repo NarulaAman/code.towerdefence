@@ -3,7 +3,7 @@ package towerdefense.gui.log;
 
 import javax.swing.DefaultComboBoxModel;
 
-import ca.concordia.soen6441.logger.LogFilter;
+import ca.concordia.soen6441.logger.filter.LogFilter;
 
 
 /**

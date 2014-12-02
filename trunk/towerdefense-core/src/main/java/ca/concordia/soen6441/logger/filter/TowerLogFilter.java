@@ -1,5 +1,6 @@
-package ca.concordia.soen6441.logger;
+package ca.concordia.soen6441.logger.filter;
 
+import ca.concordia.soen6441.logger.LogMessage;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 
@@ -8,6 +9,11 @@ import ca.concordia.soen6441.logic.tower.Tower;
  */
 public class TowerLogFilter extends LogFilter {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2264600681373814068L;
+	
 	/** The tower id. */
 	private final int towerId;
 	
@@ -25,7 +31,7 @@ public class TowerLogFilter extends LogFilter {
 	/**
 	 * This method will filter the LogMessage
 	 */
-	boolean filter(LogMessage logMessage) {
+	public boolean filter(LogMessage logMessage) {
 		if (Tower.class.isAssignableFrom(logMessage.getSource().getClass())) {
 			if (logMessage.getSource() instanceof Tower) {
 				Tower tower = (Tower) logMessage.getSource();

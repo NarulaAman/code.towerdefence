@@ -10,6 +10,11 @@ import java.util.Date;
 public class LogMessage implements Serializable, Comparable<LogMessage>{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -233093612939372784L;
+
 	/** The source. */
 	private final Object source;
 	

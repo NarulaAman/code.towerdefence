@@ -21,6 +21,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -127,6 +128,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private GamePlayDao gamePlayDao = new GamePlayJavaSerialaizationDao();
 
 	private MapLoggerDao mapLoggerDao = new MapLoggerJavaSerializationDao();
+	
+	private boolean showHighScoresEnd = true;
 
 	/**
 	 * Constructs a {@link GamePlayDialog} to play an instance of {@link GamePlay}
@@ -153,6 +156,10 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		//		startGamePlayUpdaateTimer();
 		pack();
 		setVisible(true);
+		
+		if (gamePlay.getLevel() == 1) {
+			showHighScores();
+		}
 	}
 
 	/**
@@ -478,15 +485,20 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 	private void readGamePlay() {
 		if (gamePlay.isStateGameOver() || gamePlay.isStateSetup()) {
 			gameplayUpdateTimer.cancel();
-			
 		}
-		
+
+
 		enableButtons();
 		disableButtons();
 		banksField.setText("" + gamePlay.getCurrency());
 		livesField.setText("" + gamePlay.getLives());
 		scoresField.setText("" + gamePlay.getScore());
 		levelsField.setText("" + gamePlay.getLevel());
+		
+		if (gamePlay.isStateGameOver() && showHighScoresEnd) {			
+			showHighScores();
+			showHighScoresEnd = false;
+		}
 	}
 
 	/**
@@ -499,8 +511,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			} 
 			startGameButton.setEnabled(false);
 			towerInspectionPanel.setEnabled(false);
+			saveGamePlayBtn.setEnabled(false);
 		}
-		
 	}
 
 	/**
@@ -513,8 +525,8 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 			}
 			startGameButton.setEnabled(true);
 			towerInspectionPanel.setEnabled(true);
+			saveGamePlayBtn.setEnabled(true);
 		}
-		
 	}
 
 	/**
@@ -536,6 +548,19 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 		gamePlayPanel.dispose();
 		super.dispose();
 	}
+	
+	
+	/**
+	 * Display the high scores
+	 */
+	private void showHighScores() {
+		String highScoresMessage = "High scores:\n";
+		for (Integer score : gamePlay.getHighScores().getScoreList()) {
+			highScoresMessage += "" + score + "\n";
+		}
+		JOptionPane.showMessageDialog(null,
+				highScoresMessage);
+	}	
 
 	//	/**
 	//	 * Creates the GUI for testing purposes
@@ -576,4 +601,6 @@ public class GamePlayDialog extends JDialog implements TowerSelectedListener, Ma
 				}
 			});
 		}
+		
+
 }

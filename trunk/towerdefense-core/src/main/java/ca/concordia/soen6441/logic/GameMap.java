@@ -12,6 +12,8 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import ca.concordia.soen6441.dao.HighScoresDao;
+import ca.concordia.soen6441.dao.MapLoggerDao;
+import ca.concordia.soen6441.logger.MapLogger;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
@@ -26,6 +28,7 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	private static final long serialVersionUID = 7943086470924125701L;
 	
 	@Inject static HighScoresDao highScoresDao;
+	@Inject static MapLoggerDao mapLoggerDao;
 
 	private final Tile grid[][];
 
@@ -346,6 +349,14 @@ public class GameMap extends Observable implements Serializable, Cloneable {
 	 */
 	public HighScores getHighScores() {
 		return highScoresDao.load(getName());
-		
+	}
+	
+	
+	/**
+	 * Returns the {@link MapLogger}
+	 * @return the {@link MapLogger}
+	 */
+	public MapLogger getMapLogger() {
+		return mapLoggerDao.load(getName());
 	}
 }

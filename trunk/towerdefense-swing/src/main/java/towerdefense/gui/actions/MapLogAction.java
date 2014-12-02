@@ -37,6 +37,7 @@ public class MapLogAction extends AbstractAction implements MapListPanel.MapSele
 	@Inject
 	public MapLogAction(MapLoggerDao mapLoggerDao) {
 		super(null,MAP_LOG_ICON);
+		setEnabled(false);
 		this.mapLoggerDao = mapLoggerDao;
 	}
 
@@ -65,7 +66,7 @@ public class MapLogAction extends AbstractAction implements MapListPanel.MapSele
 	 */
 	@Override
 	public void mapSelected(GameMap gameMap) {
-		setEnabled(selectedMap != null);
+		setEnabled(gameMap != null);
 		selectedMap = gameMap;
 	}
 	
