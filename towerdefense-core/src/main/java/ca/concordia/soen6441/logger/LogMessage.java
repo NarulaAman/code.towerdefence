@@ -3,12 +3,6 @@ package ca.concordia.soen6441.logger;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.inject.Inject;
-
-import ca.concordia.soen6441.guice.GamePlayFactory;
-import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GamePlay;
-
 
 /**
  * The Class LogMessage.

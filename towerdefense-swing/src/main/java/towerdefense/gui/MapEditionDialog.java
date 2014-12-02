@@ -19,8 +19,8 @@ import javax.swing.JTextField;
 
 import towerdefense.gui.MapPanel.MapGridCoordinateClickedListener;
 import towerdefense.gui.actions.SaveMapAction;
+import ca.concordia.soen6441.dao.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GameMapDao;
 import ca.concordia.soen6441.logic.MapValidator;
 import ca.concordia.soen6441.logic.Tile;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
@@ -107,6 +107,11 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		pack();
 	}
 	
+	/**
+	 * Sets the save map action.
+	 *
+	 * @param saveMapAction the new save map action
+	 */
 	@Inject
 	public void setSaveMapAction(SaveMapAction saveMapAction) {
 		getSaveButton().addActionListener(saveMapAction);
@@ -137,6 +142,11 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		saveButton.setVisible(true);
 	}
 
+	/**
+	 * Sets the start game dialog.
+	 *
+	 * @param startGameDialog the new start game dialog
+	 */
 	@Inject
 	public void setStartGameDialog(StartGameDialog startGameDialog) {
 		this.startGameDialog = startGameDialog;
@@ -254,6 +264,11 @@ public class MapEditionDialog extends JDialog implements MapGridCoordinateClicke
 		return saveButton;
 	}
 
+	/**
+	 * Gets the game map name.
+	 *
+	 * @return the game map name
+	 */
 	public String getGameMapName() {
 		return nameMapText.getText();
 	}

@@ -31,8 +31,7 @@ public class NewMapAction extends AbstractAction {
 	private Provider<MapEditionDialog> mapEditionDialog;
 
 	/**
-	 * Constructs a {@link NewMapAction} to edit a map o a given {@link MapEditionDialog}
-	 * @param mapEditionDialog {@link MapEditionDialog} to 
+	 * Constructs a {@link NewMapAction} to edit a map o a given {@link MapEditionDialog}.
 	 */
 	public NewMapAction() {
 		super(null, NEW_ICON);

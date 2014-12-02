@@ -9,10 +9,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.inject.Inject;
 
+import ca.concordia.soen6441.dao.HighScoresDao;
+import ca.concordia.soen6441.dao.MapLoggerDao;
+import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logger.Log;
-import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
+import ca.concordia.soen6441.logic.tower.TowerFactory;
 
 import com.google.inject.assistedinject.Assisted;
 
@@ -28,7 +31,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	@Inject static HighScoresDao highScoresDao;
 	@Inject static MapLoggerDao mapLoggerDao;
 
-	private final LogManager logManager = new LogManager();
+	private final GamePlayLogger logManager = new GamePlayLogger();
 	
 	private final GameMap gameMap;
 	
@@ -104,8 +107,8 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		
 		
 		// TODO: end of lines to be removed
-		logManager.log(this, "Game started");
 		createNextWave();
+		logManager.log(this, "Game started");
 		setState(State.SETUP);
 		
 		
@@ -140,7 +143,7 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 * Will Create NextWave
 	 */
 	private void createNextWave() {
-		currentWave = new EnemyWave(this, getNextWaveId(), 5.f/level, 5 * level);
+		currentWave = new EnemyWave(this, getNextLevelId(), 5.f/level, 5 * level);
 		logManager.log(this, "%1$s set-up", currentWave);
 	}
 	
@@ -475,44 +478,44 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	}
 /**
  * Return Score
- * @return
+ * @return the current score
  */
 	public int getScore() {
 		return score;
 	}
 /**
  * Return Level
- * @return
+ * @return the current level
  */
 	public int getLevel() {
 		return level;
 	}
 /**
  * Return enemyId
- * @return
+ * @return the enemy id
  */
 	public int getNextEnemyId() {
 		return ++enemyId;
 	}
 	/**
 	 * Return the level
-	 * @return
+	 * @return 
 	 */
-	private int getNextWaveId() {
+	private int getNextLevelId() {
 		return ++level;
 	}
 /**
  * Return Tower Factory
- * @return
+ * @return the {@link TowerFactory}
  */
 	public TowerFactory getTowerFactory() {
 		return towerFactory;
 	}
 /**
- * Return LogManager
- * @return
+ * Return LogManager {@link GamePlay} logger
+ * @return the logger
  */
-	public LogManager getLogger() {
+	public GamePlayLogger getLogger() {
 		return logManager;
 	}
 	

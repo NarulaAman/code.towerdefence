@@ -8,10 +8,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import ca.concordia.soen6441.logic.Enemy;
-import ca.concordia.soen6441.logic.TowerFactory;
-import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.primitives.TemporalEffect;
-import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
 
 /**

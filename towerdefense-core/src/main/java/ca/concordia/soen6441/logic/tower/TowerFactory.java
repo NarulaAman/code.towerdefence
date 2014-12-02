@@ -1,4 +1,4 @@
-package ca.concordia.soen6441.logic;
+package ca.concordia.soen6441.logic.tower;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
@@ -7,12 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ca.concordia.soen6441.logger.LogManager;
+import ca.concordia.soen6441.logger.GamePlayLogger;
+import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
-import ca.concordia.soen6441.logic.tower.CannonTower;
-import ca.concordia.soen6441.logic.tower.FireTower;
-import ca.concordia.soen6441.logic.tower.IceTower;
-import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootStrongestStrategy;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
@@ -24,15 +21,17 @@ public class TowerFactory implements Serializable {
 
 	private Map<Class<? extends Tower>, List<TowerLevelCharacteristic>> towerTypeInformation = new HashMap<>();
 
-	private final LogManager logger;
+	private final GamePlayLogger logger;
 	
 	private int towerId;
 	
 	
 	/**
-	 * Create a TowerFactory
+	 * Create a TowerFactory.
+	 *
+	 * @param logManager the log manager
 	 */
-	public TowerFactory(LogManager logManager) {
+	public TowerFactory(GamePlayLogger logManager) {
 		this.logger = logManager;
 		List<TowerLevelCharacteristic> fireTowerLevelCharacteristic = new ArrayList<>();
 		fireTowerLevelCharacteristic.add(new TowerLevelCharacteristic(10, 100, 75, 4, 0.9f));
@@ -90,7 +89,7 @@ public class TowerFactory implements Serializable {
 	public Tower towerOnCoordinate(Class<? extends Tower> type, GridPosition coordinate) {
 		try {
 			Constructor<? extends Tower> constructor = type.getConstructor(int.class, int.class, GridPosition.class,
-					ShootingStrategy.class, TowerFactory.class, LogManager.class);
+					ShootingStrategy.class, TowerFactory.class, GamePlayLogger.class);
 			return constructor.newInstance(getNextTowerId(), 1, coordinate, new ShootStrongestStrategy(), this, logger);
 		} catch (Exception exception) {
 			throw new RuntimeException(exception);

@@ -3,10 +3,9 @@ package ca.concordia.soen6441.logic.tower;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.concordia.soen6441.logger.LogManager;
+import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 /**
@@ -20,14 +19,18 @@ public class CannonTower extends Tower {
 	private static final float SPLASH_DAMAGE_RATIO = 0.3f;
 
 	private transient List<Enemy> enemies;
+	
 	/**
-	 * Create Cannon {@link Tower} with certain level
+	 * Create Cannon {@link Tower} with certain level.
+	 *
+	 * @param id the id
 	 * @param level The level of the game
 	 * @param gridPosition The position of the {@link Tower} on {@link GameMap}
 	 * @param shootingStrategy The object of {@link ShootingStrategy}
 	 * @param towerFactory The object of {@link TowerFactory}
+	 * @param logger the logger
 	 */
-	public CannonTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, LogManager logger) {
+	public CannonTower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, GamePlayLogger logger) {
 		super(id, level, gridPosition, shootingStrategy, towerFactory, logger);
 	}
 

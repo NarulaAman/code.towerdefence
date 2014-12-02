@@ -23,8 +23,9 @@ public class MapValidatorTest {
 
 
 	/**
-	 * Setup pre-condition for all the test
-	 * @throws Exception
+	 * Setup pre-condition for all the test.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {

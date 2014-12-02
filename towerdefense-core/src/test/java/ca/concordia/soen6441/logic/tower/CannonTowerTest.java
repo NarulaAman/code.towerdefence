@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.never;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +14,8 @@ import javax.vecmath.Point2f;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.concordia.soen6441.logger.LogManager;
+import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logic.Enemy;
-import ca.concordia.soen6441.logic.TowerFactory;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
@@ -26,7 +24,7 @@ import ca.concordia.soen6441.logic.primitives.GridPosition;
  */
 public class CannonTowerTest {
 
-	private final LogManager logger = mock(LogManager.class);
+	private final GamePlayLogger logger = mock(GamePlayLogger.class);
 	private final TowerFactory towerFactory = new TowerFactory(logger);
 	
 	private CannonTower tower;

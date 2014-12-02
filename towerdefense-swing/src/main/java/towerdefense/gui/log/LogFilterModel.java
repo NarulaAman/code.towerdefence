@@ -6,6 +6,9 @@ import javax.swing.DefaultComboBoxModel;
 import ca.concordia.soen6441.logger.LogFilter;
 
 
+/**
+ * The Class LogFilterModel.
+ */
 public class LogFilterModel extends DefaultComboBoxModel<LogFilter>  {
 
 	@Override

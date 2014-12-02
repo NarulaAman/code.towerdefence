@@ -7,12 +7,10 @@ import java.util.Observable;
 import javax.vecmath.Point2d;
 import javax.vecmath.Point2f;
 
+import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logger.Log;
-import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.TowerFactory;
-import ca.concordia.soen6441.logic.TowerLevelCharacteristic;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.shootingstrategy.ShootingStrategy;
 
@@ -48,7 +46,7 @@ public abstract class Tower extends Observable implements Serializable {
 	}
 	
 	/** The logger. */
-	private final LogManager logger;
+	private final GamePlayLogger logger;
 	
 	/** The id. */
 	private final int id;
@@ -78,7 +76,7 @@ public abstract class Tower extends Observable implements Serializable {
 	 * @param towerFactory tower factory
 	 * @param logger the logger
 	 */
-	public Tower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, LogManager logger) {
+	public Tower(int id, int level, GridPosition gridPosition, ShootingStrategy shootingStrategy, TowerFactory towerFactory, GamePlayLogger logger) {
 		super();
 		this.id = id;
 		this.logger = logger;

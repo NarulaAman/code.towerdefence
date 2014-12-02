@@ -7,14 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-import ca.concordia.soen6441.logger.MapLogger;
-import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GameMapDao;
+import ca.concordia.soen6441.dao.HighScoresDao;
 import ca.concordia.soen6441.logic.HighScores;
-import ca.concordia.soen6441.logic.HighScoresDao;
 
 /**
  * This class saves and loads the {@link HighScores} to a file given the

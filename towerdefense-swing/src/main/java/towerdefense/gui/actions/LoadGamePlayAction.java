@@ -8,11 +8,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import towerdefense.gui.GamePlayDialog;
-import towerdefense.gui.MapListPanel.MapSelectionListener;
+import ca.concordia.soen6441.dao.GamePlayDao;
 import ca.concordia.soen6441.io.GamePlayJavaSerialaizationDao;
-import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GamePlay;
-import ca.concordia.soen6441.logic.GamePlayDao;
 
 /**
  * Action to start playing the game on the {@link GamePlayDialog}

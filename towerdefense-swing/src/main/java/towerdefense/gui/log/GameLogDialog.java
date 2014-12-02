@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,13 +17,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import towerdefense.gui.guice.GuiModule;
+import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logger.LogFilter;
-import ca.concordia.soen6441.logger.LogManager;
 import ca.concordia.soen6441.logger.LogMessage;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * The Class GameLogDialog.
+ */
 public class GameLogDialog extends JDialog implements Observer,ActionListener {
 
 	private final JTable table = new JTable();
@@ -36,12 +38,17 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 	private DefaultComboBoxModel<LogFilter> logFilterModel = new DefaultComboBoxModel<LogFilter>();
 
 	private final JComboBox<LogFilter> comboBox = new JComboBox<LogFilter>(logFilterModel);
-	private final LogManager logManager;
+	private final GamePlayLogger logManager;
 	
 	private Object displayed = null;
 	
+	/**
+	 * Instantiates a new game log dialog.
+	 *
+	 * @param logManager the log manager
+	 */
 	@Inject
-	public GameLogDialog(LogManager logManager) {
+	public GameLogDialog(GamePlayLogger logManager) {
 		
 		setMaximumSize(new Dimension(600, 450));
 		setMinimumSize(new Dimension(600, 450));
@@ -59,10 +66,15 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		add(comboBox,BorderLayout.NORTH);
 		add(table, BorderLayout.CENTER);
 		pack();
-		setVisible(true);
+		setVisible(false);
 	}
 	
 	
+	/**
+	 * Display logs.
+	 *
+	 * @param object the object
+	 */
 	public void displayLogs(Object object) {
 		if (object != displayed) {
 			displayed = object;
@@ -115,7 +127,12 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 	//	 * Main method used for testing the GUI
 	//	 * @param args arguments are ignored by this method
 	//	 */
-		public static void main(String[] args) {
+		/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
+	public static void main(String[] args) {
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					try {

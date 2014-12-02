@@ -31,8 +31,7 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	private GameMap selectedMap = null;
 	
 	/**
-	 * Creates a {@link MapEditAction} to edit maps with the given {@link MapEditionDialog}
-	 * @param mapEditionDialog {@link MapEditionDialog} to work with this action
+	 * Creates a {@link MapEditAction} to edit maps with the given {@link MapEditionDialog}.
 	 */
 	public MapEditAction() {
 		super(null, EDIT_ICON);

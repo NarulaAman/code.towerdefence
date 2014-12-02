@@ -13,6 +13,9 @@ import ca.concordia.soen6441.guice.TowerDefenseModule;
 
 import com.google.inject.AbstractModule;
 
+/**
+ * The Class GuiModule.
+ */
 public class GuiModule extends AbstractModule {
 
 	@Override

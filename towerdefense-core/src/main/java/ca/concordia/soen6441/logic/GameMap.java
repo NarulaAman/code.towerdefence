@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import ca.concordia.soen6441.dao.HighScoresDao;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**

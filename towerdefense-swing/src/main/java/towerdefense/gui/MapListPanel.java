@@ -13,8 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ca.concordia.soen6441.dao.GameMapDao;
 import ca.concordia.soen6441.logic.GameMap;
-import ca.concordia.soen6441.logic.GameMapDao;
 
 /**
  * This Panel has a list the available {@link GameMap}s to play (if any)

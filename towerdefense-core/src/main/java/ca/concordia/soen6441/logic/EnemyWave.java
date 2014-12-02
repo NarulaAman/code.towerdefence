@@ -28,9 +28,12 @@ public class EnemyWave implements Serializable{
 	private int enemiesToSpawn;
 	
 	private float lastSpawnDeltaTime;
+	
 	/**
-	 * Initialize the data members
+	 * Initialize the data members.
+	 *
 	 * @param gamePlay The object of {@link GamePlay}
+	 * @param id the id
 	 * @param spawnEverySeconds After number of seconds the {@link Enemy} should be spawn in {@link GamePlay}
 	 * @param enemiesToSpawn Number of {@link Enemy} to be spawn
 	 */

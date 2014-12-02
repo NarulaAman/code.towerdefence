@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import ca.concordia.soen6441.dao.MapLoggerDao;
 import ca.concordia.soen6441.logger.MapLogger;
-import ca.concordia.soen6441.logic.MapLoggerDao;
 
 /**
  * This class saves and loads the {@link MapLogger} to a file given the
