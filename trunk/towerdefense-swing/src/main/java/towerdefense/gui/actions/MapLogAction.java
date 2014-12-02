@@ -3,6 +3,7 @@ package towerdefense.gui.actions;
 import java.awt.event.ActionEvent;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -28,7 +29,7 @@ public class MapLogAction extends AbstractAction implements MapListPanel.MapSele
 	private MapLoggerDao mapLoggerDao;
 	private static final Icon MAP_LOG_ICON = new ImageIcon(Object.class.getResource("/icons/maplogbutton.png"));
 	
-	@Inject MapLogDialog mapLogDialog;
+	@Inject Provider<MapLogDialog> mapLogDialogProvider;
 	
 	/**
 	 * Build a {@link MapLogAction} with a {@link MapLoggerDao}
@@ -48,9 +49,9 @@ public class MapLogAction extends AbstractAction implements MapListPanel.MapSele
 	public void actionPerformed(ActionEvent e) {
 		if(selectedMap != null) {
 			try {
-				System.out.println("in action map log");
 				MapLogger mapLogger = mapLoggerDao.load(selectedMap.getName());
 				System.out.println(mapLogger.getLogMessages());
+				MapLogDialog mapLogDialog = mapLogDialogProvider.get();
 				mapLogDialog.setMapLogs(mapLogger.getLogMessages());
 				mapLogDialog.setVisible(true);
 			}
@@ -69,6 +70,4 @@ public class MapLogAction extends AbstractAction implements MapListPanel.MapSele
 		setEnabled(gameMap != null);
 		selectedMap = gameMap;
 	}
-	
-	
 }
