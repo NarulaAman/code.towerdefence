@@ -39,7 +39,7 @@ public class SaveMapAction implements ActionListener{
 			else {
 				mapLogger.log("Map edited");
 			}
-			mapLoggerDao.save(mapLogger);
+//			mapLoggerDao.save(mapLogger);
 		}
 	}
 

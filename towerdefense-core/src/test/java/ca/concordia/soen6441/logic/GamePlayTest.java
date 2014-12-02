@@ -9,9 +9,14 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.jukito.JukitoModule;
+import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import ca.concordia.soen6441.guice.TowerDefenseModule;
+import ca.concordia.soen6441.logger.MapLogger;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
 
@@ -21,10 +26,20 @@ import ca.concordia.soen6441.logic.tower.Tower;
  * This class will do unit testing of GamePlay
  *
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes={TestConfig.class})
+@RunWith(JukitoRunner.class)
 public class GamePlayTest {
 	
+	
+	 /**
+	 * Guice module for the test
+	 *
+	 */
+	public static class Module extends JukitoModule {
+			/** configures the test */
+		    protected void configureTest() {
+		      install(new TowerDefenseModule());
+		  }
+	}
 	private static final int START_CURRENCY = 200;
 	private GameMap gameMap;
 	private Tower tower1;
@@ -42,6 +57,7 @@ public class GamePlayTest {
 		tower1 = mock(Tower.class);
 		tower2 = mock(Tower.class);
 		tower3 = mock(Tower.class);
+		when(gameMap.getMapLogger()).thenReturn(new MapLogger("test_map"));
 		gamePlay = new GamePlay(gameMap, 200);
 	}
 	

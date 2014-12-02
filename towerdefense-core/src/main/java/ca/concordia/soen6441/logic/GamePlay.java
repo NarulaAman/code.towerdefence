@@ -10,9 +10,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.inject.Inject;
 
 import ca.concordia.soen6441.dao.HighScoresDao;
-import ca.concordia.soen6441.dao.MapLoggerDao;
 import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logger.Log;
+import ca.concordia.soen6441.logger.MapLogger;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
 import ca.concordia.soen6441.logic.tower.Tower;
 import ca.concordia.soen6441.logic.tower.TowerFactory;
@@ -29,7 +29,6 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject static HighScoresDao highScoresDao;
-	@Inject static MapLoggerDao mapLoggerDao;
 
 	private final GamePlayLogger logManager = new GamePlayLogger();
 	
@@ -92,26 +91,12 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		this.gameMap = gameMap;
 		this.currency = currency;
 		this.lives = 10;
-		//this.name ="";
 		
 		
-		// TODO: remove the lines below, it is only for testing
-		
-//		for (int x = 0; x < gameMap.getWidth(); ++x) {
-//			for (int y = 0; y < gameMap.getHeight(); ++y) {
-//				if (x != y) continue;
-//				enemyPath.add(new GridPosition(x, y));
-//			}
-//		}
-//		addEnemy(new Enemy(this, 100, new Point2f(gameMap.getStartGridPosition().getX(), gameMap.getStartGridPosition().getY())));
-		
-		
-		// TODO: end of lines to be removed
 		createNextWave();
 		logManager.log(this, "Game started");
 		setState(State.SETUP);
-		
-		
+		getMapLogger().log("Map play started, highscores - " + getHighScores());
 		
 	}
 	
@@ -391,8 +376,13 @@ public class GamePlay extends Observable implements Serializable, Observer {
 	 */
 	private boolean detectGameOver() {
 		if(currency<0 || lives<=0) {
-			setState(State.GAMEOVER);
 			logManager.log(currentWave, "Game Over on %s", currentWave);
+			HighScores highScores = getHighScores();
+			highScores.addHighScore(getScore());
+			highScores.save();
+			getMapLogger().log("Game ended with score: " + getScore());
+			getMapLogger().log("Ended map GamePlay with highcores - " + highScores);
+			setState(State.GAMEOVER);
 			return isStateGameOver();
 		}
 		return false;
@@ -528,4 +518,12 @@ public class GamePlay extends Observable implements Serializable, Observer {
 		return gameMap.getHighScores();
 	}
 	
+	
+	/**
+	 * Returns the {@link MapLogger}
+	 * @return the {@link MapLogger}
+	 */
+	public MapLogger getMapLogger() {
+		return getMap().getMapLogger();
+	}
 }

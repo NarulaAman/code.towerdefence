@@ -10,9 +10,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
 import ca.concordia.soen6441.io.HighScoresJavaSerializationDao;
-import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
  * Test cases for the {@link HighScoresJavaSerializationDao}

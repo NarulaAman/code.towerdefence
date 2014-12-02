@@ -1,13 +1,20 @@
-package ca.concordia.soen6441.logger;
+package ca.concordia.soen6441.logger.filter;
 
 import java.io.Serializable;
+
+import ca.concordia.soen6441.logger.LogMessage;
 
 
 /**
  * The Class LogFilter.
  */
-public class LogFilter implements Serializable, Comparable<LogFilter>{
+public abstract class LogFilter implements Serializable, Comparable<LogFilter>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6804957712413471539L;
+	
 	/** The name. */
 	private String name;
 	
@@ -37,7 +44,7 @@ public class LogFilter implements Serializable, Comparable<LogFilter>{
 	 * @param logMessage the log message
 	 * @return true, if successful
 	 */
-	boolean filter(LogMessage logMessage) {
+	public boolean filter(LogMessage logMessage) {
 		return true;
 	}
 

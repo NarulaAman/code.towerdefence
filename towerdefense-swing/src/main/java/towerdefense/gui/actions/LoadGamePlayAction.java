@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import towerdefense.gui.GamePlayDialog;
 import ca.concordia.soen6441.dao.GamePlayDao;
@@ -42,9 +43,19 @@ public class LoadGamePlayAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
-			GamePlay loadedObj= gamePlayDao.load("gamePlay1");
-			GamePlayDialog gamePlayDialog = new GamePlayDialog(loadedObj);
-			gamePlayDialog.setVisible(true);
+			if (gamePlayDao.listAllNames().size() > 0 && gamePlayDao.listAllNames().contains("gamePlay1")) {
+				GamePlay loadedObj= gamePlayDao.load("gamePlay1");
+				GamePlayDialog gamePlayDialog = new GamePlayDialog(loadedObj);
+				gamePlayDialog.setVisible(true);
+			}
+			else {
+				JOptionPane.showMessageDialog(null,
+					    "There is no game saved!\n"
+					    + "I could have prevented you from making an error, but I didn't\n"
+					    + "This software was written with the programmer in mind and not the user",
+					    "No map to load error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

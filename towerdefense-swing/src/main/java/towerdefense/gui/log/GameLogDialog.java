@@ -18,8 +18,8 @@ import javax.swing.JTable;
 
 import towerdefense.gui.guice.GuiModule;
 import ca.concordia.soen6441.logger.GamePlayLogger;
-import ca.concordia.soen6441.logger.LogFilter;
 import ca.concordia.soen6441.logger.LogMessage;
+import ca.concordia.soen6441.logger.filter.LogFilter;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -50,8 +50,8 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 	@Inject
 	public GameLogDialog(GamePlayLogger logManager) {
 		
-		setMaximumSize(new Dimension(600, 450));
-		setMinimumSize(new Dimension(600, 450));
+		setMaximumSize(new Dimension(800, 450));
+		setMinimumSize(new Dimension(800, 450));
 		this.logManager = logManager;
         this.logManager.addObserver(this);
 		table.setModel(logMessageTableModel);
@@ -66,7 +66,7 @@ public class GameLogDialog extends JDialog implements Observer,ActionListener {
 		add(comboBox,BorderLayout.NORTH);
 		add(table, BorderLayout.CENTER);
 		pack();
-		setVisible(false);
+		setVisible(true);
 	}
 	
 	

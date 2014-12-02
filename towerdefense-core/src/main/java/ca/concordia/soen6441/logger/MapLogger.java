@@ -43,6 +43,7 @@ public class MapLogger implements Serializable{
 	 */
 	public void log(String message) {
 		logMessages.add(new LogMessage(this, new Date(), message));
+		save();
 	}
 
 	/**

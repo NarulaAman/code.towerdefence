@@ -55,10 +55,14 @@ public class MapEditAction extends AbstractAction implements MapSelectionListene
 	 */
 	@Override
 	public void mapSelected(GameMap gameMap) {
-		setEnabled(selectedMap != null);
+		setEnabled(gameMap != null);
 		selectedMap = gameMap;
 	}
 
+	/**
+	 * Gets the MapEditionDialog
+	 * @return MapEditionDialog
+	 */
 	private MapEditionDialog getMapEditionDialog() {
 		return mapEditionDialogProvider.get();
 	}

@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 import ca.concordia.soen6441.logger.GamePlayLogger;
 import ca.concordia.soen6441.logic.Enemy;
 import ca.concordia.soen6441.logic.primitives.GridPosition;
-import ca.concordia.soen6441.logic.tower.FireTower;
 
 /**
  * Tests the special effects of the {@link FireTower}

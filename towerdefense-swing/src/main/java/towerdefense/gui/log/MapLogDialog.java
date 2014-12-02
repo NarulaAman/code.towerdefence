@@ -29,7 +29,8 @@ public class MapLogDialog extends JDialog {
 	private final JTable table = new JTable();
 	
 	private final LogMessageTableModel logMessageTableModel;
-	private GameMap selectedMap;
+	
+	private GameMap selectedMap = null;
 	
 	/**
 	 * Instantiates a new map log dialog.
@@ -39,9 +40,9 @@ public class MapLogDialog extends JDialog {
 	@Inject
 	public MapLogDialog(LogMessageTableModel logMessageTableModel) {
 		
-		setMaximumSize(new Dimension(600, 450));
+		setMaximumSize(new Dimension(1200, 450));
 		
-		setMinimumSize(new Dimension(600, 450));
+		setMinimumSize(new Dimension(1200, 450));
 		this.logMessageTableModel = logMessageTableModel;
 
        
@@ -55,7 +56,7 @@ public class MapLogDialog extends JDialog {
 		
 		add(table, BorderLayout.CENTER);
 		pack();
-		setVisible(true);
+		setVisible(false);
 	}
 	
 	/**
@@ -67,32 +68,7 @@ public class MapLogDialog extends JDialog {
 		this.selectedMap = selectedMap;
 	}
 	
-	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
-		
-		Injector injector = Guice.createInjector(new GuiModule());
-		MapLogDialog mapLogPanel = injector.getInstance(MapLogDialog.class);  
-    }
-	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String args[]) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					createAndShowGUI();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 	
 	/**
 	 * Sets the map logs.
@@ -105,6 +81,30 @@ public class MapLogDialog extends JDialog {
 		logMessageTableModel.fireTableDataChanged();
 	}
 	
-	
+//	private static void createAndShowGUI() throws ClassNotFoundException, IOException {
+//		Injector injector = Guice.createInjector(new GuiModule());
+//		MapLogDialog mapLogPanel = injector.getInstance(MapLogDialog.class);  
+//    }
+//	
+//	/**
+//	 * The main method.
+//	 *
+//	 * @param args the arguments
+//	 */
+//	public static void main(String args[]) {
+//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					createAndShowGUI();
+//				} catch (ClassNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 }

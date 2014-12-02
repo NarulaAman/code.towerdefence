@@ -8,13 +8,23 @@ import java.util.Observable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import ca.concordia.soen6441.logger.filter.GamePlayLogFilter;
+import ca.concordia.soen6441.logger.filter.AllTowersLogFilter;
+import ca.concordia.soen6441.logger.filter.LogFilter;
+import ca.concordia.soen6441.logger.filter.TowerLogFilter;
+import ca.concordia.soen6441.logger.filter.WaveLogFilter;
 import ca.concordia.soen6441.logic.EnemyWave;
 import ca.concordia.soen6441.logic.tower.Tower;
 
 /**
- * The Class LogManager.
+ * The Class GamePlayLogger.
  */
 public class GamePlayLogger extends Observable implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5717998303500931498L;
 
 	/** The log messages. */
 	private List<LogMessage> logMessages = new ArrayList<>();
@@ -29,7 +39,7 @@ public class GamePlayLogger extends Observable implements Serializable {
 	 * Instantiates a new log manager.
 	 */
 	public GamePlayLogger() {
-		logFilters.add(new AllMessagesFIlter());
+		logFilters.add(new GamePlayLogFilter());
 	}
 	
 	/**
@@ -59,7 +69,7 @@ public class GamePlayLogger extends Observable implements Serializable {
 	}
 
 	/**
-	 * Log.
+	 * Log the message with a source
 	 *
 	 * @param source the source
 	 * @param format the format
@@ -84,7 +94,7 @@ public class GamePlayLogger extends Observable implements Serializable {
 
 
 	/**
-	 * Log.
+	 * Log the message with a source
 	 *
 	 * @param source the source
 	 * @param format the format

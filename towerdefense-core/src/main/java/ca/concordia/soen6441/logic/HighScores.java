@@ -20,7 +20,7 @@ public class HighScores implements Serializable, Cloneable {
 	@Inject static HighScoresDao highScoresDao; 
 
 	private String name;	
-	List<Integer> highScore= new  ArrayList<>();
+	private List<Integer> highScore = new  ArrayList<>();
 	
 	
 	/**
@@ -96,6 +96,13 @@ public class HighScores implements Serializable, Cloneable {
 		return str;
 	}
 
+	/**
+	 * Returns the list of high scores
+	 * @return the list of high scores
+	 */
+	public List<Integer> getScoreList() {
+		return new ArrayList<Integer>(highScore);
+	}
 	
 	/**
 	 * Save.

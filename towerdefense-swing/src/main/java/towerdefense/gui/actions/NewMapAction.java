@@ -67,6 +67,10 @@ public class NewMapAction extends AbstractAction {
     }
 	
 	
+	/**
+	 * Returns MapEditionDialog 
+	 * @return MapEditionDialog 
+	 */
 	private MapEditionDialog getMapEditionDialog() {
 		return mapEditionDialog.get();
 	}

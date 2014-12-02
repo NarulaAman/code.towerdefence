@@ -1,10 +1,12 @@
-package ca.concordia.soen6441.logger;
+package ca.concordia.soen6441.logger.filter;
+
+import ca.concordia.soen6441.logger.LogMessage;
 
 
 /**
- * The Class AllMessagesFIlter.
+ * The Class Game play log filter.
  */
-public class AllMessagesFIlter extends LogFilter {
+public class GamePlayLogFilter extends LogFilter {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 556940165605471976L;
@@ -12,14 +14,14 @@ public class AllMessagesFIlter extends LogFilter {
 	/**
 	 * Instantiates a new all messages filter.
 	 */
-	public AllMessagesFIlter() {
+	public GamePlayLogFilter() {
 		super("All Gameplay Log");
 	}
 	
 	/**
 	 * This method will filter 
 	 */
-	boolean filter(LogMessage logMessage) {
+	public boolean filter(LogMessage logMessage) {
 		return true;
 	}
 

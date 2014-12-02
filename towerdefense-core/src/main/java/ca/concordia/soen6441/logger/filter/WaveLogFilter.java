@@ -1,5 +1,7 @@
-package ca.concordia.soen6441.logger;
+package ca.concordia.soen6441.logger.filter;
 
+import ca.concordia.soen6441.logger.LogMessage;
+import ca.concordia.soen6441.logger.WaveLogMessage;
 import ca.concordia.soen6441.logic.EnemyWave;
 
 
@@ -28,7 +30,7 @@ public class WaveLogFilter extends LogFilter {
 	 * This method will filter
 	 */
 	@Override
-	boolean filter(LogMessage logMessage) {
+	public boolean filter(LogMessage logMessage) {
 		if (logMessage instanceof WaveLogMessage) {
 			WaveLogMessage waveLog = (WaveLogMessage) logMessage;
 			return waveLog.getEnemyWave().getId() == wave.getId();

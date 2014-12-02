@@ -1,20 +1,11 @@
 package ca.concordia.soen6441.logic;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import ca.concordia.soen6441.io.GameMapJavaSerializationDao;
-import ca.concordia.soen6441.io.HighScoresJavaSerializationDao;
-import ca.concordia.soen6441.logic.primitives.GridPosition;
 
 /**
  * Test cases for the {@link HighScores}
@@ -59,7 +50,7 @@ public class HighScoreTest {
 	public final void testAdd() {
 		HighScores highScore2=new HighScores(MAP_DATA_FILENAME);
 		highScore2.addHighScore(60);
-		Assert.assertTrue(highScore2.highScore.size()==1);
+		Assert.assertTrue(highScore2.getScoreList().size()==1);
 	}
 	
 	/**
@@ -82,7 +73,7 @@ public class HighScoreTest {
 	@Test
 	public final void testAddScore() {
 		highScore.addHighScore(60);
-		Assert.assertTrue(highScore.highScore.size()==5);
+		Assert.assertTrue(highScore.getScoreList().size()==5);
 	}
 	
 	/**
@@ -91,7 +82,7 @@ public class HighScoreTest {
 	@Test
 	public final void testHighScoreOrder() {
 		highScore.addHighScore(60);
-		Assert.assertTrue(highScore.highScore.get(0)==60);
+		Assert.assertTrue(highScore.getScoreList().get(0)==60);
 	}
 	
 	/**
@@ -100,7 +91,7 @@ public class HighScoreTest {
 	@Test
 	public final void testLowScoreOrder() {
 		highScore.addHighScore(5);		
-		Assert.assertTrue(highScore.highScore.get(4)==10);
+		Assert.assertTrue(highScore.getScoreList().get(4)==10);
 	}
 	
 	/**
@@ -109,7 +100,7 @@ public class HighScoreTest {
 	@Test
 	public final void testMidScoreOrder() {
 		highScore.addHighScore(35);		
-		Assert.assertTrue(highScore.highScore.get(2)==35);
+		Assert.assertTrue(highScore.getScoreList().get(2)==35);
 	}
 	
 	/**
@@ -117,9 +108,9 @@ public class HighScoreTest {
 	 */
 	@Test
 	public final void testcheckOrder() {
-		for(int i=0;i<highScore.highScore.size()-1;i++)
+		for(int i=0;i<highScore.getScoreList().size()-1;i++)
 		{
-		Assert.assertTrue(highScore.highScore.get(i)>highScore.highScore.get(i+1));
+		Assert.assertTrue(highScore.getScoreList().get(i)>highScore.getScoreList().get(i+1));
 		}
 	}
 
