@@ -18,6 +18,10 @@ import com.google.inject.AbstractModule;
  */
 public class GuiModule extends AbstractModule {
 
+	
+	/**
+	 * Configures the GUI mobule bindings
+	 */
 	@Override
 	protected void configure() {
 		install(new TowerDefenseModule());
