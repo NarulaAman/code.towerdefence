@@ -10,10 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.concordia.soen6441.dao.GamePlayDao;
+import ca.concordia.soen6441.logic.GameMap;
 import ca.concordia.soen6441.logic.GamePlay;
 
 /**
- * The Class GamePlayJavaSerialaizationDao.
+ * This class saves and loads the {@link GamePlay} to a file given the
+ * GamePlay1 name.
+ *
  */
 public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	
@@ -24,7 +27,8 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	public static final String GAMEFILENAME_STRING_FORMAT = "." + File.separator + "%s" + GAMEPLAY_FILENAME_EXTENSION;
 	
 	/**
-	 * This method will save the GamePlay
+	 * Save to file a {@link GamePlay} given a GamePlay name
+	 * @param gamePlay {@link GamePlay} to be saved
 	 */
 	@Override
 	public void save(GamePlay gamePlay) throws IOException {
@@ -38,7 +42,8 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	
 	
 	/**
-	 * This method will load the GamePlay
+	 * Load the {@link GamePlay} from the file.
+	 * @param gamePlayName {@link GamePlay} to be loaded
 	 */
 	@Override
 	public GamePlay load(String gamePlayName) throws IOException, ClassNotFoundException {
@@ -52,7 +57,8 @@ public class GamePlayJavaSerialaizationDao implements GamePlayDao {
 	}
 	
 	/**
-	 * This method will list the name of all GamePlay
+	 * List the name of all the saved {@link GamePlay}.
+	 * @return the list of all saved games names
 	 */
 	@Override
 	public List<String> listAllNames() throws IOException {
